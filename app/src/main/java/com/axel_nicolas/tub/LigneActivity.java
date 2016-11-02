@@ -1,0 +1,13 @@
+package com.axel_nicolas.tub;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+public class LigneActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_ligne);
+    }
+}
