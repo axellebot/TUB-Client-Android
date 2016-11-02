@@ -1,5 +1,6 @@
 package com.axel_nicolas.tub;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -85,7 +86,8 @@ public class MainActivity extends AppCompatActivity
 
                 break;
             case R.id.nav_lines:
-
+                Intent i = new Intent(this.getApplicationContext(), LigneActivity.class);
+                startActivity(i);
                 break;
             case R.id.nav_maps:
 
