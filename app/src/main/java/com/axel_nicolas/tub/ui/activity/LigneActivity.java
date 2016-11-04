@@ -1,10 +1,11 @@
-package com.axel_nicolas.tub;
+package com.axel_nicolas.tub.ui.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.GridView;
 
-import com.axel_nicolas.tub.adapters.LigneListAdapter;
+import com.axel_nicolas.tub.R;
+import com.axel_nicolas.tub.ui.adapters.LigneListAdapter;
 
 import java.util.ArrayList;
 
