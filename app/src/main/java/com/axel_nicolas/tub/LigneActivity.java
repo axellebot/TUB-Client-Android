@@ -25,6 +25,8 @@ public class LigneActivity extends AppCompatActivity {
         lignes.add("4");
         lignes.add("5");
         lignes.add("6");
+        lignes.add("7");
+        lignes.add("21");
 
 
         gv=(GridView) findViewById(R.id.gridview_ligne);
