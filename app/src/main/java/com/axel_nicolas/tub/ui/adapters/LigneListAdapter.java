@@ -1,7 +1,6 @@
-package com.axel_nicolas.tub.adapters;
+package com.axel_nicolas.tub.ui.adapters;
 
-import com.axel_nicolas.tub.LigneActivity;
-import com.axel_nicolas.tub.MainActivity;
+import com.axel_nicolas.tub.ui.activity.LigneActivity;
 import com.axel_nicolas.tub.R;
 /**
  * Created by iem on 02/11/2016.
@@ -14,12 +13,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.StringTokenizer;
 
 
 public class LigneListAdapter extends BaseAdapter{
