@@ -2,6 +2,7 @@ package com.axel_nicolas.tub.data.manager;
 
 
 import com.axel_nicolas.tub.data.entity.LineEntity;
+import com.axel_nicolas.tub.data.entity.StopEntity;
 
 import java.util.List;
 
@@ -16,4 +17,8 @@ public interface ApiManager {
     String API_DEV_URL = "http://dev.tub.lebot.xyz/api/";
 
     Observable<List<LineEntity>> getAllLines();
+    Observable<LineEntity> getLine(String id);
+
+    Observable<List<StopEntity>> getAllStops();
+    Observable<StopEntity> getStop(String id);
 }

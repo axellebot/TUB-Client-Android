@@ -1,4 +1,4 @@
-package com.axel_nicolas.tub.data.model;
+package com.axel_nicolas.tub.data.entity;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -6,11 +6,14 @@ import com.google.gson.annotations.SerializedName;
  * Created by axell on 04/11/2016.
  */
 
-public class StopModel {
-
+public class StopEntity {
+    @SerializedName("id")
     private String id;
+    @SerializedName("name")
     private String name;
+    @SerializedName("latitude")
     private String latitude;
+    @SerializedName("longitude")
     private String longitude;
 
     public String getId() {

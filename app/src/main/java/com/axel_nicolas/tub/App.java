@@ -3,6 +3,7 @@ package com.axel_nicolas.tub;
 import android.app.Application;
 
 import com.axel_nicolas.tub.data.entity.mapper.LineDataMapper;
+import com.axel_nicolas.tub.data.entity.mapper.StopDataMapper;
 import com.axel_nicolas.tub.data.manager.ApiManager;
 import com.axel_nicolas.tub.data.manager.ApiManagerImpl;
 import com.axel_nicolas.tub.data.manager.CacheManager;
@@ -36,8 +37,9 @@ public class App extends Application {
         ApiManager apiManager = new ApiManagerImpl();
         CacheManager cacheManager = new CacheManagerImpl();
         LineDataMapper lineDataMapper = new LineDataMapper();
+        StopDataMapper stopDataMapper = new StopDataMapper();
 
-        dataRepository = new DataRepositoryImpl(apiManager, cacheManager, lineDataMapper);
+        dataRepository = new DataRepositoryImpl(apiManager, cacheManager, lineDataMapper,stopDataMapper);
     }
 
 
