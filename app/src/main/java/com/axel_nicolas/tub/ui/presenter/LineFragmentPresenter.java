@@ -45,9 +45,5 @@ public class LineFragmentPresenter {
                         view.initList(lineModels);
                     }
                 });
-
-        ArrayList<LineModel> lineModels = new ArrayList<>();
-
-
     }
 }
