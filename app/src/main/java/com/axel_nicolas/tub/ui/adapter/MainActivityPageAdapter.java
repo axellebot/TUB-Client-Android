@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
 
 import com.axel_nicolas.tub.ui.fragment.LineFragment;
+import com.axel_nicolas.tub.ui.fragment.MapFragment;
 import com.axel_nicolas.tub.ui.fragment.StopFragment;
 
 /**
@@ -31,7 +32,7 @@ public class MainActivityPageAdapter extends FragmentPagerAdapter {
                 fragment = new StopFragment();
                 break;
             case 2:
-                fragment = new LineFragment();
+                fragment = new MapFragment();
                 break;
         }
         return fragment;
