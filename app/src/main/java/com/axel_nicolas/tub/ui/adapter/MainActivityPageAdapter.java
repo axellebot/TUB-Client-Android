@@ -26,10 +26,13 @@ public class MainActivityPageAdapter extends FragmentPagerAdapter {
         switch (position) {
             case 0:
                 fragment = new LineFragment();
+                break;
             case 1:
                 fragment = new StopFragment();
+                break;
             case 2:
                 fragment = new LineFragment();
+                break;
         }
         return fragment;
     }
