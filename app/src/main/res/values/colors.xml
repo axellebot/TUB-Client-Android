@@ -6,16 +6,4 @@
 
     <color name="white">#FFFFFF</color>
     <color name="grey">#d6d6d6</color>
-
-
-
-    <color name="ligne1_color">#11679F</color>
-    <color name="ligne2_color">#E03B36</color>
-    <color name="ligne3_color">#F9E954</color>
-    <color name="ligne4_color">#9BBF43</color>
-    <color name="ligne5_color">#38BEEC</color>
-    <color name="ligne6_color">#B273A8</color>
-    <color name="ligne7_color">#FDA130</color>
-    <color name="ligne21_color">#95C26E</color>
-
 </resources>
