@@ -26,6 +26,27 @@ public class StopFragmentPresenter {
 
     public StopFragmentPresenter(final StopFragment view) {
         this.view = view;
+
+
+        App.getInstance().getDataRepository().getAllStopsCall()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<List<StopModel>>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onNext(List<StopModel> stopModels) {
+                        Log.i(TAG, stopModels.toString());
+                        view.initList(stopModels);
+                    }
+                });
     }
 
 }
