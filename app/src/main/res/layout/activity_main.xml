@@ -1,25 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:design="http://schema.android.com/apk/res/android.support.design"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:openDrawer="start">
+    tools:context="com.axel_nicolas.tub.ui.activity.MainActivity">
 
-    <include
-        layout="@layout/app_bar_main"
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <android.support.design.widget.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/activity_main_drawer" />
+        android:id="@+id/activity_main_coordinator_layout"
+        android:layout_above="@+id/activity_main_bottom_navigation">
 
-</android.support.v4.widget.DrawerLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/activity_main_app_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/AppTheme.AppBarOverlay">
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/activity_main_app_bar_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/colorPrimary"
+                    app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+            </android.support.design.widget.AppBarLayout>
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/activity_main_view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+    </android.support.design.widget.CoordinatorLayout>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@id/activity_main_bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        app:itemBackground="@color/colorPrimary"
+        app:itemIconTint="@color/bottom_navigation_item_color"
+        app:itemTextColor="@color/bottom_navigation_item_color"
+        app:menu="@menu/activity_main_bottom_navigation"
+        design:menu="@menu/activity_main_bottom_navigation" />
+
+</RelativeLayout>
