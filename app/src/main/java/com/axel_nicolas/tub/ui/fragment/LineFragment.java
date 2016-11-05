@@ -37,7 +37,7 @@ public class LineFragment extends android.support.v4.app.Fragment {
         View view = inflater.inflate(R.layout.fragment_line, container, false);
         ButterKnife.bind(this, view);
 
-        GridAutofitLayoutManager layoutManager = new GridAutofitLayoutManager(this.getContext(),(int)getResources().getDimension(R.dimen.line_grid_item_size));
+        GridAutofitLayoutManager layoutManager = new GridAutofitLayoutManager(this.getContext(),(int)getResources().getDimension(R.dimen.item_grid_line_size));
         recyclerView.setLayoutManager(layoutManager);
 
         lineGridAdapter = new LineGridAdapter(this.getContext(), null);
