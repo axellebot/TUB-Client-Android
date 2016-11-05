@@ -33,9 +33,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
 
-
-
-
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
@@ -47,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.activity_main_bottom_navigation_line_action:
-                                  viewPager.setCurrentItem(0);
+                        viewPager.setCurrentItem(0);
                         break;
                     case R.id.activity_main_bottom_navigation_stop_action:
                         viewPager.setCurrentItem(1);

@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
 
 import com.axel_nicolas.tub.ui.fragment.LineFragment;
+import com.axel_nicolas.tub.ui.fragment.StopFragment;
 
 /**
  * Created by axell on 05/11/2016.
@@ -26,7 +27,7 @@ public class MainActivityPageAdapter extends FragmentPagerAdapter {
             case 0:
                 fragment = new LineFragment();
             case 1:
-                fragment = new LineFragment();
+                fragment = new StopFragment();
             case 2:
                 fragment = new LineFragment();
         }
