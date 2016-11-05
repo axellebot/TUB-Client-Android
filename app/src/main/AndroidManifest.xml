@@ -19,8 +19,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.LigneActivity" />
-        <activity android:name=".ui.activity.StopActivity"></activity>
     </application>
 
 </manifest>
