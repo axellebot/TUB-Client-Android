@@ -12,8 +12,6 @@ import android.widget.TextView;
 import com.axel_nicolas.tub.R;
 import com.axel_nicolas.tub.data.model.LineModel;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +42,7 @@ public class LineGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.grid_line_item, parent, false);
+        View view = inflater.inflate(R.layout.item_grid_line, parent, false);
         return new LineGridHolder(view);
     }
 
@@ -71,10 +69,10 @@ public class LineGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     public class LineGridHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.grid_line_item_label)
+        @BindView(R.id.item_grid_line_label)
         TextView tvLabel;
 
-        @BindView(R.id.grid_line_item_card)
+        @BindView(R.id.item_grid_line_card)
         CardView cardView;
 
         public LineGridHolder(View itemView) {

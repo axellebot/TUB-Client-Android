@@ -9,9 +9,9 @@
 
     <dimen name="fragment_line_margin">10dp</dimen>
 
-    <dimen name="line_grid_item_size">125dp</dimen>
-    <dimen name="line_grid_item_circle_size">100dp</dimen>
-    <dimen name="line_grid_item_label_size">75sp</dimen>
-    <dimen name="line_grid_item_padding">5dp</dimen>
+    <dimen name="item_grid_line_size">125dp</dimen>
+    <dimen name="item_grid_line_circle_size">100dp</dimen>
+    <dimen name="item_grid_line_label_size">75sp</dimen>
+    <dimen name="item_grid_line_padding">5dp</dimen>
 
 </resources>
