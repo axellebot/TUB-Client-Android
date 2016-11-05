@@ -16,6 +16,12 @@ public class CacheManagerImpl implements CacheManager {
     private HashMap<String, LineModel> lineModels;
     private HashMap<String, StopModel> stopModels;
 
+
+    public CacheManagerImpl() {
+        this.lineModels = new HashMap<>();
+        this.stopModels = new HashMap<>();
+    }
+
     @Override
     public List<LineModel> getLines() {
         List<LineModel> lineModels = new ArrayList<>();
