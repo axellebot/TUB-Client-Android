@@ -6,4 +6,19 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="fragment_line_margin">10dp</dimen>
+
+
+    <!--Item Grid Line-->
+    <dimen name="item_grid_line_size">125dp</dimen>
+    <dimen name="item_grid_line_circle_size">100dp</dimen>
+    <dimen name="item_grid_line_label_size">75sp</dimen>
+    <dimen name="item_grid_line_padding">5dp</dimen>
+
+    <!--Item Row Stop-->
+    <dimen name="item_row_stop_label_size">50sp</dimen>
+
+
+
 </resources>
