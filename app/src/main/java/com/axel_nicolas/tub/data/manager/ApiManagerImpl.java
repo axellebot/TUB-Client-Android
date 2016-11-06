@@ -2,7 +2,6 @@ package com.axel_nicolas.tub.data.manager;
 
 import com.axel_nicolas.tub.data.entity.LineEntity;
 import com.axel_nicolas.tub.data.entity.StopEntity;
-import com.axel_nicolas.tub.data.model.LineModel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -23,20 +22,6 @@ import rx.functions.Func1;
 public class ApiManagerImpl implements ApiManager {
 
     private ApiService apiService;
-
-    private interface ApiService {
-        @GET("lines")
-        Observable<LineListEnveloppe> getAllLines();
-
-        @GET("lines/{line}")
-        Observable<LineEnveloppe> getLine(@Path("line") String id);
-
-        @GET("stops")
-        Observable<StopListEnveloppe> getAllStops();
-
-        @GET("stops/{stop}")
-        Observable<StopEnveloppe> getStop(@Path("stop") String id);
-    }
 
     public ApiManagerImpl() {
         Gson gson = new GsonBuilder()
@@ -70,7 +55,6 @@ public class ApiManagerImpl implements ApiManager {
         });
     }
 
-
     @Override
     public Observable<List<StopEntity>> getAllStops() {
         return apiService.getAllStops().map(new Func1<StopListEnveloppe, List<StopEntity>>() {
@@ -89,6 +73,20 @@ public class ApiManagerImpl implements ApiManager {
                 return stopEnveloppe.stop;
             }
         });
+    }
+
+    private interface ApiService {
+        @GET("lines")
+        Observable<LineListEnveloppe> getAllLines();
+
+        @GET("lines/{line}")
+        Observable<LineEnveloppe> getLine(@Path("line") String id);
+
+        @GET("stops")
+        Observable<StopListEnveloppe> getAllStops();
+
+        @GET("stops/{stop}")
+        Observable<StopEnveloppe> getStop(@Path("stop") String id);
     }
 
     private class LineListEnveloppe {

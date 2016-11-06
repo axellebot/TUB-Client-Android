@@ -1,13 +1,11 @@
 package com.axel_nicolas.tub.ui.presenter;
 
 import android.util.Log;
-import android.view.View;
 
 import com.axel_nicolas.tub.App;
 import com.axel_nicolas.tub.data.model.LineModel;
 import com.axel_nicolas.tub.ui.fragment.LineFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observer;
@@ -18,14 +16,17 @@ import rx.schedulers.Schedulers;
  * Created by axell on 05/11/2016.
  */
 
-public class LineFragmentPresenter {
+public class LineFragmentPresenter implements Presenter {
     private static String TAG = "LineFragmentPresenter";
 
     private final LineFragment view;
 
     public LineFragmentPresenter(final LineFragment view) {
         this.view = view;
+    }
 
+    @Override
+    public void initialize() {
         App.getInstance().getDataRepository().getAllLinesCall()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -46,5 +47,15 @@ public class LineFragmentPresenter {
                         view.initList(lineModels);
                     }
                 });
+    }
+
+    @Override
+    public void resume() {
+
+    }
+
+    @Override
+    public void pause() {
+
     }
 }

@@ -20,13 +20,13 @@ public class App extends Application {
     private DataRepository dataRepository;
 
 
-    public static App getInstance() {
-        return ourInstance;
-    }
-
     public App() {
         ourInstance = this;
         injectDependencies();
+    }
+
+    public static App getInstance() {
+        return ourInstance;
     }
 
     public DataRepository getDataRepository() {
@@ -39,7 +39,7 @@ public class App extends Application {
         LineDataMapper lineDataMapper = new LineDataMapper();
         StopDataMapper stopDataMapper = new StopDataMapper();
 
-        dataRepository = new DataRepositoryImpl(apiManager, cacheManager, lineDataMapper,stopDataMapper);
+        dataRepository = new DataRepositoryImpl(apiManager, cacheManager, lineDataMapper, stopDataMapper);
     }
 
 

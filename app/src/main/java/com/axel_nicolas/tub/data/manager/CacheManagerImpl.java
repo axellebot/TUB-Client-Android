@@ -58,7 +58,7 @@ public class CacheManagerImpl implements CacheManager {
     @Override
     public void setStops(List<StopModel> stopModels) {
         for (StopModel stopModel : stopModels) {
-          setStop(stopModel);
+            setStop(stopModel);
         }
     }
 

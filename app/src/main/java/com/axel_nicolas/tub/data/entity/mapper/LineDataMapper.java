@@ -20,11 +20,11 @@ public class LineDataMapper {
         return lineModel;
     }
 
-    public List<LineModel>transform(List<LineEntity> lineEntities){
+    public List<LineModel> transform(List<LineEntity> lineEntities) {
         List<LineModel> listModels = new ArrayList<>();
-        for(LineEntity lineEntitie : lineEntities){
+        for (LineEntity lineEntitie : lineEntities) {
             listModels.add(transform(lineEntitie));
         }
-        return  listModels;
+        return listModels;
     }
 }

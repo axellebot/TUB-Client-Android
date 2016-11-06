@@ -11,12 +11,18 @@ import java.util.List;
 
 public interface CacheManager {
     List<LineModel> getLines();
+
     void setLines(List<LineModel> lineModels);
+
     LineModel getLine(String id);
+
     void setLine(LineModel lineModel);
 
     List<StopModel> getStops();
+
     void setStops(List<StopModel> stopModels);
+
     StopModel getStop(String id);
+
     void setStop(StopModel stopModel);
 }

@@ -17,14 +17,13 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static android.R.id.list;
-
 public class StopFragment extends android.support.v4.app.Fragment {
 
     @BindView(R.id.fragment_stop_recycler_view)
     RecyclerView recyclerView;
 
     private StopListAdapter stopListAdapter;
+    private StopFragmentPresenter presenter;
 
     public StopFragment() {
         // Required empty public constructor
@@ -41,9 +40,21 @@ public class StopFragment extends android.support.v4.app.Fragment {
         stopListAdapter = new StopListAdapter(this.getContext(), null);
         recyclerView.setAdapter(stopListAdapter);
 
-        new StopFragmentPresenter(this);
-
+        presenter = new StopFragmentPresenter(this);
+        presenter.initialize();
         return view;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        presenter.pause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.resume();
     }
 
     public void initList(List<StopModel> stopModels) {

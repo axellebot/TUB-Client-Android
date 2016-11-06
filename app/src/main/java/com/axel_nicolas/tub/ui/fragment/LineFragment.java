@@ -12,9 +12,7 @@ import com.axel_nicolas.tub.ui.adapter.LineGridAdapter;
 import com.axel_nicolas.tub.ui.manager.GridAutofitLayoutManager;
 import com.axel_nicolas.tub.ui.presenter.LineFragmentPresenter;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,7 +22,7 @@ public class LineFragment extends android.support.v4.app.Fragment {
     @BindView(R.id.fragment_line_recycler_view)
     RecyclerView recyclerView;
 
-
+    private LineFragmentPresenter presenter;
     private LineGridAdapter lineGridAdapter;
 
     public LineFragment() {
@@ -38,15 +36,27 @@ public class LineFragment extends android.support.v4.app.Fragment {
         View view = inflater.inflate(R.layout.fragment_line, container, false);
         ButterKnife.bind(this, view);
 
-        GridAutofitLayoutManager layoutManager = new GridAutofitLayoutManager(this.getContext(),(int)getResources().getDimension(R.dimen.item_grid_line_size));
+        GridAutofitLayoutManager layoutManager = new GridAutofitLayoutManager(this.getContext(), (int) getResources().getDimension(R.dimen.item_grid_line_size));
         recyclerView.setLayoutManager(layoutManager);
 
         lineGridAdapter = new LineGridAdapter(this.getContext(), null);
         recyclerView.setAdapter(lineGridAdapter);
 
-        new LineFragmentPresenter(this);
-
+        presenter = new LineFragmentPresenter(this);
+        presenter.initialize();
         return view;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        presenter.pause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.resume();
     }
 
     public void initList(List<LineModel> lineModels) {

@@ -17,8 +17,10 @@ public interface ApiManager {
     String API_DEV_URL = "http://dev.tub.lebot.xyz/api/";
 
     Observable<List<LineEntity>> getAllLines();
+
     Observable<LineEntity> getLine(String id);
 
     Observable<List<StopEntity>> getAllStops();
+
     Observable<StopEntity> getStop(String id);
 }
