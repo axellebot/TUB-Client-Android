@@ -1,5 +1,8 @@
 package xyz.lebot.tub.ui.presenter;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMapOptions;
+
 import xyz.lebot.tub.ui.fragment.MapFragment;
 
 /**
@@ -17,7 +20,7 @@ public class MapFragmentPresenter implements Presenter {
 
     @Override
     public void initialize() {
-
+        view.setMapType(GoogleMap.MAP_TYPE_NORMAL);
     }
 
     @Override

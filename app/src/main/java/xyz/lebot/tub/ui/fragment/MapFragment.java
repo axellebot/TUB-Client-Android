@@ -33,8 +33,10 @@ public class MapFragment extends android.support.v4.app.Fragment implements OnMa
         View view = inflater.inflate(R.layout.fragment_map, container, false);
         ButterKnife.bind(this, view);
 
+
         mMapView.onCreate(savedInstanceState);
         mMapView.getMapAsync(this);
+        mMapView.onResume();
 
         presenter = new MapFragmentPresenter(this);
         return view;
@@ -42,12 +44,10 @@ public class MapFragment extends android.support.v4.app.Fragment implements OnMa
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
-        googleMap.getUiSettings().setMyLocationButtonEnabled(true);
         this.googleMap = googleMap;
+        googleMap.getUiSettings().setMyLocationButtonEnabled(true);
 
         presenter.initialize();
-
     }
 
     @Override
@@ -60,5 +60,9 @@ public class MapFragment extends android.support.v4.app.Fragment implements OnMa
     public void onResume() {
         super.onResume();
         presenter.resume();
+    }
+
+    public void setMapType(int type){
+        googleMap.setMapType(type);
     }
 }
