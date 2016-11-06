@@ -11,9 +11,9 @@
         android:layout_height="@dimen/item_grid_line_size"
         android:layout_gravity="center"
         android:elevation="4dp"
+        card_view:cardBackgroundColor="@color/grey"
         card_view:cardCornerRadius="4dp"
-        card_view:cardUseCompatPadding="true"
-        card_view:cardBackgroundColor="@color/grey">
+        card_view:cardUseCompatPadding="true">
 
         <TextView
             android:id="@+id/item_grid_line_label"
@@ -22,11 +22,11 @@
             android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:background="@drawable/circle"
+            android:elevation="10dp"
             android:gravity="center"
             android:text="1"
             android:textColor="#FFF"
-            android:textSize="@dimen/item_grid_line_label_size"
-            android:elevation="10dp"/>
+            android:textSize="@dimen/item_grid_line_label_size" />
     </android.support.v7.widget.CardView>
 </RelativeLayout>
 

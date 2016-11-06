@@ -1,11 +1,11 @@
 package xyz.lebot.tub.data.manager;
 
-import xyz.lebot.tub.data.model.LineModel;
-import xyz.lebot.tub.data.model.StopModel;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import xyz.lebot.tub.data.model.LineModel;
+import xyz.lebot.tub.data.model.StopModel;
 
 /**
  * Created by axell on 04/11/2016.

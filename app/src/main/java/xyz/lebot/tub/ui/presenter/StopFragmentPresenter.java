@@ -2,15 +2,14 @@ package xyz.lebot.tub.ui.presenter;
 
 import android.util.Log;
 
-import xyz.lebot.tub.App;
-import xyz.lebot.tub.data.model.StopModel;
-import xyz.lebot.tub.ui.fragment.StopFragment;
-
 import java.util.List;
 
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import xyz.lebot.tub.App;
+import xyz.lebot.tub.data.model.StopModel;
+import xyz.lebot.tub.ui.fragment.StopFragment;
 
 /**
  * Created by axell on 05/11/2016.
