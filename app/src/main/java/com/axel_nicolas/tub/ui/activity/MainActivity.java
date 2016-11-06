@@ -6,11 +6,16 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.DragEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 
 import com.axel_nicolas.tub.R;
 import com.axel_nicolas.tub.ui.adapter.MainActivityPageAdapter;
+import com.axel_nicolas.tub.ui.view.CustomViewPager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,8 +28,10 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
 
     @BindView(R.id.activity_main_view_pager)
-    ViewPager viewPager;
+    CustomViewPager viewPager;
 
+    @BindView(R.id.activity_main_app_bar_toolbar)
+    Toolbar toolbar;
 
     private PagerAdapter mPagerAdapter;
 
@@ -38,18 +45,22 @@ public class MainActivity extends AppCompatActivity {
 
         mPagerAdapter = new MainActivityPageAdapter(getSupportFragmentManager());
         viewPager.setAdapter(mPagerAdapter);
+        viewPager.setPagingEnabled(false);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.activity_main_bottom_navigation_line_action:
+                        toolbar.setTitle(getResources().getString(R.string.navigation_part_line_name));
                         viewPager.setCurrentItem(0);
                         break;
                     case R.id.activity_main_bottom_navigation_stop_action:
+                        toolbar.setTitle(getResources().getString(R.string.navigation_part_stop_name));
                         viewPager.setCurrentItem(1);
                         break;
                     case R.id.activity_main_bottom_navigation_map_action:
+                        toolbar.setTitle(getResources().getString(R.string.navigation_part_map_name));
                         viewPager.setCurrentItem(2);
                         break;
                 }
