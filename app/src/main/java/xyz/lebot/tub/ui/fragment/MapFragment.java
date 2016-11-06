@@ -33,11 +33,10 @@ public class MapFragment extends android.support.v4.app.Fragment implements OnMa
         View view = inflater.inflate(R.layout.fragment_map, container, false);
         ButterKnife.bind(this, view);
 
+        mMapView.onCreate(savedInstanceState);
         mMapView.getMapAsync(this);
-        mMapView.setBackgroundColor(getResources().getColor(R.color.grey));
 
         presenter = new MapFragmentPresenter(this);
-        presenter.initialize();
         return view;
     }
 
@@ -46,6 +45,8 @@ public class MapFragment extends android.support.v4.app.Fragment implements OnMa
 
         googleMap.getUiSettings().setMyLocationButtonEnabled(true);
         this.googleMap = googleMap;
+
+        presenter.initialize();
 
     }
 
