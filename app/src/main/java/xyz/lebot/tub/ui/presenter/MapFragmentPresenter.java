@@ -1,8 +1,17 @@
 package xyz.lebot.tub.ui.presenter;
 
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.GoogleMapOptions;
+import android.util.Log;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+
+import java.util.List;
+
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+import xyz.lebot.tub.App;
+import xyz.lebot.tub.data.model.StopModel;
 import xyz.lebot.tub.ui.fragment.MapFragment;
 
 /**
@@ -21,6 +30,8 @@ public class MapFragmentPresenter implements Presenter {
     @Override
     public void initialize() {
         view.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        initMapWithStops();
+        view.moveCamera(new LatLng(46.205539, 5.227177), 13f);
     }
 
     @Override
@@ -32,4 +43,29 @@ public class MapFragmentPresenter implements Presenter {
     public void pause() {
 
     }
+
+    public void initMapWithStops() {
+        App.getInstance().getDataRepository().getAllStopsCall()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<List<StopModel>>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                        view.initMapWithStops(App.getInstance().getDataRepository().getAllStopsCache());
+                    }
+
+                    @Override
+                    public void onNext(List<StopModel> stopModels) {
+                        Log.i(TAG, stopModels.toString());
+                        view.initMapWithStops(stopModels);
+                    }
+                });
+    }
+
+
 }

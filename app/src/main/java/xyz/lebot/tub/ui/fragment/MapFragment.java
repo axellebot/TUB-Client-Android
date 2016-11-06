@@ -5,14 +5,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import xyz.lebot.tub.R;
-import xyz.lebot.tub.ui.presenter.MapFragmentPresenter;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import xyz.lebot.tub.R;
+import xyz.lebot.tub.data.model.StopModel;
+import xyz.lebot.tub.ui.presenter.MapFragmentPresenter;
 
 public class MapFragment extends android.support.v4.app.Fragment implements OnMapReadyCallback {
 
@@ -62,7 +69,29 @@ public class MapFragment extends android.support.v4.app.Fragment implements OnMa
         presenter.resume();
     }
 
-    public void setMapType(int type){
+    public void setMapType(int type) {
         googleMap.setMapType(type);
     }
+
+    public void initMapWithStops(List<StopModel> stopModels) {
+
+
+        for (StopModel stopModel : stopModels) {
+            googleMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(
+                            Double.parseDouble(stopModel.getLatitude()),
+                            Double.parseDouble(stopModel.getLongitude())))
+                    .title(stopModel.getLabel())
+                    .snippet(stopModel.getId() + "-" + stopModel.getLabel())
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_beenhere_color_accent_24dp))
+            );
+        }
+
+
+    }
+
+    public void moveCamera(LatLng latLng, float zoom) {
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
+    }
+
 }
