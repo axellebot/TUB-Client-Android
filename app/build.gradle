@@ -5,7 +5,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "23.0.2"
     defaultConfig {
-        applicationId "com.axel_nicolas.tub"
+        applicationId "xyz.lebot.tub"
         minSdkVersion 21
         targetSdkVersion 23
         versionCode 1
