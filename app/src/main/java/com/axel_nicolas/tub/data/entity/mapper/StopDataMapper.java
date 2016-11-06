@@ -1,8 +1,6 @@
 package com.axel_nicolas.tub.data.entity.mapper;
 
-import com.axel_nicolas.tub.data.entity.LineEntity;
 import com.axel_nicolas.tub.data.entity.StopEntity;
-import com.axel_nicolas.tub.data.model.LineModel;
 import com.axel_nicolas.tub.data.model.StopModel;
 
 import java.util.ArrayList;

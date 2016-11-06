@@ -3,7 +3,6 @@ package com.axel_nicolas.tub.ui.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.view.ViewGroup;
 
 import com.axel_nicolas.tub.ui.fragment.LineFragment;
 import com.axel_nicolas.tub.ui.fragment.MapFragment;
@@ -16,6 +15,7 @@ import com.axel_nicolas.tub.ui.fragment.StopFragment;
 public class MainActivityPageAdapter extends FragmentPagerAdapter {
 
     private static final int PAGES_COUNT = 3;
+
 
     public MainActivityPageAdapter(FragmentManager fm) {
         super(fm);

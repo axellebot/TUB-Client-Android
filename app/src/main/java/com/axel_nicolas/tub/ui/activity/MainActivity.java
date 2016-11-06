@@ -4,17 +4,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.DragEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
 
 import com.axel_nicolas.tub.R;
 import com.axel_nicolas.tub.ui.adapter.MainActivityPageAdapter;
+import com.axel_nicolas.tub.ui.presenter.MainActivityPresenter;
 import com.axel_nicolas.tub.ui.view.CustomViewPager;
 
 import butterknife.BindView;
@@ -22,7 +19,6 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
-
 
     @BindView(R.id.activity_main_bottom_navigation)
     BottomNavigationView bottomNavigationView;
@@ -34,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
 
     private PagerAdapter mPagerAdapter;
+    private MainActivityPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,26 +44,26 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(mPagerAdapter);
         viewPager.setPagingEnabled(false);
 
+        this.presenter = new MainActivityPresenter(this);
+
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.activity_main_bottom_navigation_line_action:
-                        toolbar.setTitle(getResources().getString(R.string.navigation_part_line_name));
-                        viewPager.setCurrentItem(0);
+                        presenter.onBottomNavigationClick(0);
                         break;
                     case R.id.activity_main_bottom_navigation_stop_action:
-                        toolbar.setTitle(getResources().getString(R.string.navigation_part_stop_name));
-                        viewPager.setCurrentItem(1);
+                        presenter.onBottomNavigationClick(1);
                         break;
                     case R.id.activity_main_bottom_navigation_map_action:
-                        toolbar.setTitle(getResources().getString(R.string.navigation_part_map_name));
-                        viewPager.setCurrentItem(2);
+                        presenter.onBottomNavigationClick(2);
                         break;
                 }
                 return true;
             }
         });
+        presenter.initialize();
     }
 
     @Override
@@ -90,4 +87,25 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        presenter.pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.resume();
+    }
+
+    public void setTitle(String title) {
+        toolbar.setTitle(title);
+    }
+
+    public void setCurrentItem(int position) {
+        viewPager.setCurrentItem(position);
+    }
+
 }

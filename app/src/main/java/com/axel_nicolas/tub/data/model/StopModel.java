@@ -1,7 +1,5 @@
 package com.axel_nicolas.tub.data.model;
 
-import com.google.gson.annotations.SerializedName;
-
 /**
  * Created by axell on 04/11/2016.
  */

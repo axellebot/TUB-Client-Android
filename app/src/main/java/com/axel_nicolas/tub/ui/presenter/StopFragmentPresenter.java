@@ -3,12 +3,9 @@ package com.axel_nicolas.tub.ui.presenter;
 import android.util.Log;
 
 import com.axel_nicolas.tub.App;
-import com.axel_nicolas.tub.data.model.LineModel;
 import com.axel_nicolas.tub.data.model.StopModel;
-import com.axel_nicolas.tub.ui.fragment.LineFragment;
 import com.axel_nicolas.tub.ui.fragment.StopFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observer;
@@ -19,15 +16,21 @@ import rx.schedulers.Schedulers;
  * Created by axell on 05/11/2016.
  */
 
-public class StopFragmentPresenter {
+public class StopFragmentPresenter implements Presenter {
     private static String TAG = "StopFragmentPresenter";
 
     private final StopFragment view;
 
+
+    private StopFragmentPresenter presenter;
+
     public StopFragmentPresenter(final StopFragment view) {
         this.view = view;
+    }
 
 
+    @Override
+    public void initialize() {
         App.getInstance().getDataRepository().getAllStopsCall()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -50,4 +53,13 @@ public class StopFragmentPresenter {
                 });
     }
 
+    @Override
+    public void resume() {
+
+    }
+
+    @Override
+    public void pause() {
+
+    }
 }
