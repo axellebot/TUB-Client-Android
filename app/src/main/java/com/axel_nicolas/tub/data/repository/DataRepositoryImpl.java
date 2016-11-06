@@ -79,4 +79,14 @@ public class DataRepositoryImpl implements DataRepository {
         });
     }
 
+    @Override
+    public List<LineModel> getAllLinesCache() {
+        return this.cacheManager.getLines();
+    }
+
+    @Override
+    public List<StopModel> getAllStopsCache() {
+        return this.cacheManager.getStops();
+    }
+
 }

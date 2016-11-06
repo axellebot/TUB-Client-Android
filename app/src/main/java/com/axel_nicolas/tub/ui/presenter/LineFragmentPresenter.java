@@ -37,6 +37,7 @@ public class LineFragmentPresenter {
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();
+                        view.initList(App.getInstance().getDataRepository().getAllLinesCache());
                     }
 
                     @Override

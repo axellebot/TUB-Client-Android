@@ -39,6 +39,7 @@ public class StopFragmentPresenter {
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();
+                        view.initList(App.getInstance().getDataRepository().getAllStopsCache());
                     }
 
                     @Override

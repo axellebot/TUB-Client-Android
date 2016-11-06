@@ -14,6 +14,7 @@ import com.axel_nicolas.tub.ui.presenter.LineFragmentPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

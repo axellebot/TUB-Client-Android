@@ -19,4 +19,8 @@ public interface DataRepository {
 
     Observable<List<StopModel>> getAllStopsCall();
     Observable<StopModel> getStopCall(String id);
+
+
+    List<LineModel> getAllLinesCache();
+    List<StopModel> getAllStopsCache();
 }
