@@ -55,6 +55,7 @@ public class LineGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
             tvLabel.setText(lineModel.getNumber());
             int color = Color.parseColor(lineModel.getColor().toString());
+            int color = Color.parseColor(lineModel.getColor());
             tvLabel.getBackground().setTint(color);
 
         }
