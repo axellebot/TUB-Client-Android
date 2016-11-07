@@ -11,7 +11,6 @@ import android.view.MenuItem;
 
 import xyz.lebot.tub.R;
 import xyz.lebot.tub.ui.adapter.MainActivityPageAdapter;
-import xyz.lebot.tub.ui.presenter.MainActivityPresenter;
 import xyz.lebot.tub.ui.view.CustomViewPager;
 
 import butterknife.BindView;
@@ -30,12 +29,10 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
 
     private PagerAdapter mPagerAdapter;
-    private MainActivityPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
@@ -44,26 +41,26 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(mPagerAdapter);
         viewPager.setPagingEnabled(false);
 
-        this.presenter = new MainActivityPresenter(this);
-
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.activity_main_bottom_navigation_line_action:
-                        presenter.onBottomNavigationClick(0);
+                        setTitle(getResources().getString(R.string.navigation_part_line_name));
+                        setCurrentItem(0);
                         break;
                     case R.id.activity_main_bottom_navigation_stop_action:
-                        presenter.onBottomNavigationClick(1);
+                        setTitle(getResources().getString(R.string.navigation_part_stop_name));
+                        setCurrentItem(1);
                         break;
                     case R.id.activity_main_bottom_navigation_map_action:
-                        presenter.onBottomNavigationClick(2);
+                        setTitle(getResources().getString(R.string.navigation_part_map_name));
+                        setCurrentItem(2);
                         break;
                 }
                 return true;
             }
         });
-        presenter.initialize();
     }
 
     @Override
@@ -86,18 +83,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        presenter.pause();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        presenter.resume();
     }
 
     public void setTitle(String title) {
