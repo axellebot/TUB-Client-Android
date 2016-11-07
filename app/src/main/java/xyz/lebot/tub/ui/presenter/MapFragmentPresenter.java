@@ -30,21 +30,9 @@ public class MapFragmentPresenter implements Presenter {
     @Override
     public void initialize() {
         view.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        initMapWithStops();
         view.moveCamera(new LatLng(46.205539, 5.227177), 13f);
-    }
 
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    public void initMapWithStops() {
+        //initMapWithStopsCLuster
         App.getInstance().getDataRepository().getAllStopsCall()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -56,16 +44,22 @@ public class MapFragmentPresenter implements Presenter {
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();
-                        view.initMapWithStops(App.getInstance().getDataRepository().getAllStopsCache());
+                        view.addStopsToMapWithCluster(App.getInstance().getDataRepository().getAllStopsCache());
                     }
 
                     @Override
                     public void onNext(List<StopModel> stopModels) {
                         Log.i(TAG, stopModels.toString());
-                        view.initMapWithStops(stopModels);
+                        view.addStopsToMapWithCluster(stopModels);
                     }
                 });
     }
 
+    @Override
+    public void resume() {
+    }
 
+    @Override
+    public void pause() {
+    }
 }
