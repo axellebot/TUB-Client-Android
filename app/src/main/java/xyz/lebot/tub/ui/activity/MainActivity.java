@@ -9,13 +9,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import xyz.lebot.tub.R;
-import xyz.lebot.tub.ui.adapter.MainActivityPageAdapter;
-import xyz.lebot.tub.ui.navigator.Navigator;
-import xyz.lebot.tub.ui.view.CustomViewPager;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import xyz.lebot.tub.R;
+import xyz.lebot.tub.ui.adapter.MainActivityFragmentPagerAdapter;
+import xyz.lebot.tub.ui.navigator.Navigator;
+import xyz.lebot.tub.ui.navigator.NavigatorImpl;
+import xyz.lebot.tub.ui.view.CustomViewPager;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -39,30 +39,32 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        mPagerAdapter = new MainActivityPageAdapter(getSupportFragmentManager());
+        mPagerAdapter = new MainActivityFragmentPagerAdapter(getSupportFragmentManager());
+
+
         viewPager.setAdapter(mPagerAdapter);
         viewPager.setPagingEnabled(false);
+
+        navigator = new NavigatorImpl(this, viewPager, (MainActivityFragmentPagerAdapter) mPagerAdapter);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.activity_main_bottom_navigation_line_action:
-                        setTitle(getResources().getString(R.string.navigation_part_line_name));
-                        setCurrentItem(0);
+                        navigator.navigateToPartLine();
                         break;
                     case R.id.activity_main_bottom_navigation_stop_action:
-                        setTitle(getResources().getString(R.string.navigation_part_stop_name));
-                        setCurrentItem(1);
+                        navigator.navigateToPartStop();
                         break;
                     case R.id.activity_main_bottom_navigation_map_action:
-                        setTitle(getResources().getString(R.string.navigation_part_map_name));
-                        setCurrentItem(2);
+                        navigator.navigateToPartMap();
                         break;
                 }
                 return true;
             }
         });
+        navigator.navigateToPartLine();
     }
 
     @Override
@@ -83,18 +85,10 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
     public void setTitle(String title) {
         toolbar.setTitle(title);
     }
-
-    public void setCurrentItem(int position) {
-        viewPager.setCurrentItem(position);
-    }
-
-
-
 }
