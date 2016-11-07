@@ -1,9 +1,9 @@
 package xyz.lebot.tub.data.manager;
 
+import java.util.List;
+
 import xyz.lebot.tub.data.model.LineModel;
 import xyz.lebot.tub.data.model.StopModel;
-
-import java.util.List;
 
 /**
  * Created by axell on 04/11/2016.

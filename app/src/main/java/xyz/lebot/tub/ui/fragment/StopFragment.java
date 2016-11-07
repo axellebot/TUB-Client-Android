@@ -7,15 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import xyz.lebot.tub.R;
-import xyz.lebot.tub.data.model.StopModel;
-import xyz.lebot.tub.ui.adapter.StopListAdapter;
-import xyz.lebot.tub.ui.presenter.StopFragmentPresenter;
-
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import xyz.lebot.tub.R;
+import xyz.lebot.tub.data.model.StopModel;
+import xyz.lebot.tub.ui.adapter.StopListAdapter;
+import xyz.lebot.tub.ui.presenter.StopFragmentPresenter;
 
 public class StopFragment extends android.support.v4.app.Fragment {
 

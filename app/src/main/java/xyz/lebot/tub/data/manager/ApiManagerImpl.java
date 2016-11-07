@@ -1,7 +1,5 @@
 package xyz.lebot.tub.data.manager;
 
-import xyz.lebot.tub.data.entity.LineEntity;
-import xyz.lebot.tub.data.entity.StopEntity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -14,6 +12,8 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 import rx.Observable;
 import rx.functions.Func1;
+import xyz.lebot.tub.data.entity.LineEntity;
+import xyz.lebot.tub.data.entity.StopEntity;
 
 /**
  * Created by axell on 04/11/2016.

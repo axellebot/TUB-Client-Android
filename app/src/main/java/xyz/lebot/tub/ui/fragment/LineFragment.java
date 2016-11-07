@@ -6,16 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import xyz.lebot.tub.R;
 import xyz.lebot.tub.data.model.LineModel;
 import xyz.lebot.tub.ui.adapter.LineGridAdapter;
 import xyz.lebot.tub.ui.manager.GridAutofitLayoutManager;
 import xyz.lebot.tub.ui.presenter.LineFragmentPresenter;
-
-import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class LineFragment extends android.support.v4.app.Fragment {
 

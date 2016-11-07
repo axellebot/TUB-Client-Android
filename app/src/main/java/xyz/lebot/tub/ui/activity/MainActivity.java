@@ -9,13 +9,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import xyz.lebot.tub.R;
 import xyz.lebot.tub.ui.adapter.MainActivityPageAdapter;
 import xyz.lebot.tub.ui.presenter.MainActivityPresenter;
 import xyz.lebot.tub.ui.view.CustomViewPager;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";

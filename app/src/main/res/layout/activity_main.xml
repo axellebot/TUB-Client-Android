@@ -8,9 +8,9 @@
     tools:context="com.axel_nicolas.tub.xyz.axel_nicolas.tub.ui.activity.MainActivity">
 
     <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/activity_main_coordinator_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/activity_main_coordinator_layout"
         android:layout_above="@+id/activity_main_bottom_navigation">
 
 

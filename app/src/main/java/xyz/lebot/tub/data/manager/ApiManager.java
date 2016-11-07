@@ -1,12 +1,11 @@
 package xyz.lebot.tub.data.manager;
 
 
-import xyz.lebot.tub.data.entity.LineEntity;
-import xyz.lebot.tub.data.entity.StopEntity;
-
 import java.util.List;
 
 import rx.Observable;
+import xyz.lebot.tub.data.entity.LineEntity;
+import xyz.lebot.tub.data.entity.StopEntity;
 
 /**
  * Created by axell on 04/11/2016.

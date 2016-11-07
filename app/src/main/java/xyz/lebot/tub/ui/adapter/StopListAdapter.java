@@ -8,14 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import xyz.lebot.tub.R;
-import xyz.lebot.tub.data.model.StopModel;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import xyz.lebot.tub.R;
+import xyz.lebot.tub.data.model.StopModel;
 
 /**
  * Created by axell on 05/11/2016.
@@ -52,7 +51,7 @@ public class StopListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         if (holder instanceof StopLineHolder) {
             StopLineHolder stopLineHolder = (StopLineHolder) holder;
             TextView tvLabel = stopLineHolder.getTvLabel();
-            tvLabel.setText(stopModel.getName());
+            tvLabel.setText(stopModel.getLabel());
         }
     }
 
