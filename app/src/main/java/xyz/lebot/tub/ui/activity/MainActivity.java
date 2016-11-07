@@ -11,6 +11,7 @@ import android.view.MenuItem;
 
 import xyz.lebot.tub.R;
 import xyz.lebot.tub.ui.adapter.MainActivityPageAdapter;
+import xyz.lebot.tub.ui.navigator.Navigator;
 import xyz.lebot.tub.ui.view.CustomViewPager;
 
 import butterknife.BindView;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
 
     private PagerAdapter mPagerAdapter;
+    private Navigator navigator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,5 +94,7 @@ public class MainActivity extends AppCompatActivity {
     public void setCurrentItem(int position) {
         viewPager.setCurrentItem(position);
     }
+
+
 
 }
