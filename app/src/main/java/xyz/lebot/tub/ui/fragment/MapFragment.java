@@ -26,8 +26,10 @@ import xyz.lebot.tub.ui.adapter.StopMapClusterItemInfoWindowAdapter;
 import xyz.lebot.tub.ui.presenter.MapFragmentPresenter;
 import xyz.lebot.tub.ui.renderer.StopClusterRenderer;
 import xyz.lebot.tub.ui.view.StopMapClusterItem;
+import android.support.v4.app.Fragment;
 
-public class MapFragment extends android.support.v4.app.Fragment implements OnMapReadyCallback {
+
+public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     @BindView(R.id.fragment_map_map_view)
     MapView mMapView;

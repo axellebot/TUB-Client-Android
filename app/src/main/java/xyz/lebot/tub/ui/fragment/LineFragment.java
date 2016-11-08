@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.support.v4.app.Fragment;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ import xyz.lebot.tub.ui.adapter.LineGridAdapter;
 import xyz.lebot.tub.ui.manager.GridAutofitLayoutManager;
 import xyz.lebot.tub.ui.presenter.LineFragmentPresenter;
 
-public class LineFragment extends android.support.v4.app.Fragment {
+public class LineFragment extends Fragment {
 
     @BindView(R.id.fragment_line_recycler_view)
     RecyclerView recyclerView;
