@@ -15,13 +15,14 @@ import xyz.lebot.tub.R;
 import xyz.lebot.tub.ui.adapter.MainActivityFragmentPagerAdapter;
 import xyz.lebot.tub.ui.navigator.Navigator;
 import xyz.lebot.tub.ui.navigator.NavigatorImpl;
+import xyz.lebot.tub.ui.view.CustomBottomNavigationView;
 import xyz.lebot.tub.ui.view.CustomViewPager;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
     @BindView(R.id.activity_main_bottom_navigation)
-    BottomNavigationView bottomNavigationView;
+    CustomBottomNavigationView bottomNavigationView;
 
     @BindView(R.id.activity_main_view_pager)
     CustomViewPager viewPager;
@@ -32,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private PagerAdapter mPagerAdapter;
     private Navigator navigator;
 
+    private int SELECTED_PART;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,8 +43,6 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         mPagerAdapter = new MainActivityFragmentPagerAdapter(getSupportFragmentManager());
-
-
         viewPager.setAdapter(mPagerAdapter);
         viewPager.setPagingEnabled(false);
 
@@ -52,19 +53,25 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.activity_main_bottom_navigation_line_action:
+                        SELECTED_PART = 0;
                         navigator.navigateToPartLine();
                         break;
                     case R.id.activity_main_bottom_navigation_stop_action:
+                        SELECTED_PART=1;
                         navigator.navigateToPartStop();
                         break;
                     case R.id.activity_main_bottom_navigation_map_action:
+                        SELECTED_PART=2;
                         navigator.navigateToPartMap();
                         break;
                 }
                 return true;
             }
         });
-        navigator.navigateToPartLine();
+
+
+        setSupportActionBar(toolbar);
+
     }
 
     @Override
@@ -82,13 +89,31 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+
+        switch (id) {
+            case R.id.activity_main_manu_action_settings:
+                break;
+            case R.id.activity_main_menu_action_test:
+                navigator.navigateToLineDetail();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
 
     public void setTitle(String title) {
         toolbar.setTitle(title);
+    }
+
+    public void setSelecteBottomNavigation(int i){
+        bottomNavigationView.setSelected(i);
+    }
+
+    public int getSelectedBottomNavigation(){
+        return SELECTED_PART;
+    }
+
+    @Override
+    public void onBackPressed() {
+        navigator.navigateBack();
     }
 }

@@ -10,4 +10,8 @@ public interface Navigator {
     void navigateToPartStop();
 
     void navigateToPartMap();
+
+    void navigateBack();
+
+    void navigateToLineDetail();
 }

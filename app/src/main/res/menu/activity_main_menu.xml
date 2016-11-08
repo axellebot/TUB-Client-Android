@@ -2,7 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/activity_main_menu_action_test"
+        android:icon="@drawable/ic_cast_white"
+        app:showAsAction="ifRoom"
+        android:title="Test">
+    </item>
+    <item
+        android:id="@+id/activity_main_manu_action_settings"
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
