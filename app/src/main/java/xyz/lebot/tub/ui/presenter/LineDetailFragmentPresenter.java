@@ -1,0 +1,61 @@
+package xyz.lebot.tub.ui.presenter;
+
+import android.util.Log;
+
+import java.util.List;
+
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+import xyz.lebot.tub.App;
+import xyz.lebot.tub.data.model.LineModel;
+import xyz.lebot.tub.ui.fragment.LineDetailFragment;
+import xyz.lebot.tub.ui.fragment.LineFragment;
+
+/**
+ * Created by axell on 05/11/2016.
+ */
+
+public class LineDetailFragmentPresenter implements Presenter {
+    private static String TAG = "LineDetailPresenter";
+
+    private final LineDetailFragment view;
+
+    public LineDetailFragmentPresenter(final LineDetailFragment view) {
+        this.view = view;
+    }
+
+    @Override
+    public void initialize() {
+        App.getInstance().getDataRepository().getLineCall("1")
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<LineModel>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+
+                    }
+
+                    @Override
+                    public void onNext(LineModel lineModel) {
+                        Log.i(TAG, lineModel.toString());
+                        view.initView(lineModel);
+                    }
+                });
+    }
+
+    @Override
+    public void resume() {
+
+    }
+
+    @Override
+    public void pause() {
+
+    }
+}
