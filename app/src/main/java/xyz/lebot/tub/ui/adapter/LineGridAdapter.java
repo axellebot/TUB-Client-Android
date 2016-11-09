@@ -2,6 +2,8 @@ package xyz.lebot.tub.ui.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -54,7 +56,12 @@ public class LineGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
             tvLabel.setText(lineModel.getNumber());
             int color = Color.parseColor(lineModel.getColor());
-            tvLabel.getBackground().setTint(color);
+
+            
+                GradientDrawable bgShape = (GradientDrawable) tvLabel.getBackground();
+                bgShape.setColor(color);
+
+             //   tvLabel.getBackground().setTint(color);
 
         }
     }
