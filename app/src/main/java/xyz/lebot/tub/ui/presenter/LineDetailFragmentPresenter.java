@@ -27,7 +27,20 @@ public class LineDetailFragmentPresenter implements Presenter {
 
     @Override
     public void initialize() {
-        App.getInstance().getDataRepository().getLineCall("1")
+
+    }
+
+    @Override
+    public void resume() {
+
+    }
+
+    @Override
+    public void pause() {
+
+    }
+    public void initView(String lineId){
+        App.getInstance().getDataRepository().getLineCall(lineId)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<LineModel>() {
@@ -47,15 +60,5 @@ public class LineDetailFragmentPresenter implements Presenter {
                         view.initView(lineModel);
                     }
                 });
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void pause() {
-
     }
 }
