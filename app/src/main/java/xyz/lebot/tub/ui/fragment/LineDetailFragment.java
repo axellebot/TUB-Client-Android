@@ -1,11 +1,16 @@
 package xyz.lebot.tub.ui.fragment;
 
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import xyz.lebot.tub.R;
 import xyz.lebot.tub.data.model.LineModel;
@@ -14,7 +19,19 @@ import xyz.lebot.tub.ui.presenter.LineDetailFragmentPresenter;
 
 public class LineDetailFragment extends Fragment {
 
+
+    @BindView(R.id.fragment_line_detail_layout)
+    LinearLayoutCompat linearLayout;
+
+    @BindView(R.id.fragment_line_detail_number)
+    TextView tvNumber;
+
+    @BindView(R.id.fragment_line_detail_label)
+    TextView tvLabel;
+
+
     private Navigator navigator;
+    private String lineId;
     private LineDetailFragmentPresenter presenter;
 
 
@@ -26,6 +43,7 @@ public class LineDetailFragment extends Fragment {
     @Override
     public void setArguments(Bundle args) {
         this.navigator = (Navigator) args.get("NAVIGATOR");
+        this.lineId=(String) args.get("LINE_ID");
     }
 
     @Override
@@ -36,6 +54,7 @@ public class LineDetailFragment extends Fragment {
 
         presenter = new LineDetailFragmentPresenter(this, navigator);
         presenter.initialize();
+        presenter.initView(this.lineId);
         return view;
     }
 
@@ -52,7 +71,13 @@ public class LineDetailFragment extends Fragment {
     }
 
     public void initView(LineModel lineModel) {
-        //lineGridAdapter.swap(lineModels);
+        int color = Color.parseColor(lineModel.getColor());
+
+        GradientDrawable bgShape = (GradientDrawable) tvNumber.getBackground();
+        bgShape.setColor(color);
+
+        tvNumber.setText(lineModel.getNumber());
+        tvLabel.setText(lineModel.getLabel());
     }
 }
 
