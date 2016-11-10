@@ -15,7 +15,7 @@ public class MapFragmentPresenter implements Presenter {
 
     public MapFragmentPresenter(final MapFragment view, final Navigator navigator) {
         this.view = view;
-        this.navigator=navigator;
+        this.navigator = navigator;
     }
 
     @Override

@@ -2,15 +2,14 @@ package xyz.lebot.tub.ui.presenter;
 
 import android.util.Log;
 
-import xyz.lebot.tub.App;
-import xyz.lebot.tub.data.model.StopModel;
-import xyz.lebot.tub.ui.fragment.StopFragment;
-
 import java.util.List;
 
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import xyz.lebot.tub.App;
+import xyz.lebot.tub.data.model.StopModel;
+import xyz.lebot.tub.ui.fragment.StopFragment;
 import xyz.lebot.tub.ui.navigator.Navigator;
 
 /**
@@ -23,9 +22,9 @@ public class StopFragmentPresenter implements Presenter {
     private final StopFragment view;
     private final Navigator navigator;
 
-    public StopFragmentPresenter(final StopFragment view,final Navigator navigator) {
+    public StopFragmentPresenter(final StopFragment view, final Navigator navigator) {
         this.view = view;
-        this.navigator=navigator;
+        this.navigator = navigator;
     }
 
 

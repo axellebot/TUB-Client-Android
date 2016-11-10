@@ -1,23 +1,18 @@
 package xyz.lebot.tub.ui.fragment;
 
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.List;
-
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import xyz.lebot.tub.R;
 import xyz.lebot.tub.data.model.LineModel;
-import xyz.lebot.tub.ui.manager.GridAutofitLayoutManager;
 import xyz.lebot.tub.ui.navigator.Navigator;
 import xyz.lebot.tub.ui.presenter.LineDetailFragmentPresenter;
-import xyz.lebot.tub.ui.presenter.LineFragmentPresenter;
 
-public class LineDetailFragment extends android.support.v4.app.Fragment {
+public class LineDetailFragment extends Fragment {
 
     private Navigator navigator;
     private LineDetailFragmentPresenter presenter;
@@ -30,7 +25,7 @@ public class LineDetailFragment extends android.support.v4.app.Fragment {
 
     @Override
     public void setArguments(Bundle args) {
-        this.navigator=(Navigator) args.get("NAVIGATOR");
+        this.navigator = (Navigator) args.get("NAVIGATOR");
     }
 
     @Override
@@ -39,7 +34,7 @@ public class LineDetailFragment extends android.support.v4.app.Fragment {
         View view = inflater.inflate(R.layout.fragment_line_detail, container, false);
         ButterKnife.bind(this, view);
 
-        presenter = new LineDetailFragmentPresenter(this,navigator);
+        presenter = new LineDetailFragmentPresenter(this, navigator);
         presenter.initialize();
         return view;
     }

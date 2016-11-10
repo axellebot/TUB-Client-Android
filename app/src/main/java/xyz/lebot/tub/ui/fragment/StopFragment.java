@@ -1,6 +1,7 @@
 package xyz.lebot.tub.ui.fragment;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,7 +18,7 @@ import xyz.lebot.tub.ui.adapter.StopListAdapter;
 import xyz.lebot.tub.ui.navigator.Navigator;
 import xyz.lebot.tub.ui.presenter.StopFragmentPresenter;
 
-public class StopFragment extends android.support.v4.app.Fragment {
+public class StopFragment extends Fragment {
 
     @BindView(R.id.fragment_stop_recycler_view)
     RecyclerView recyclerView;

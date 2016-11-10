@@ -1,5 +1,9 @@
 package xyz.lebot.tub.data.repository;
 
+import java.util.List;
+
+import rx.Observable;
+import rx.functions.Func1;
 import xyz.lebot.tub.data.entity.LineEntity;
 import xyz.lebot.tub.data.entity.StopEntity;
 import xyz.lebot.tub.data.entity.mapper.LineDataMapper;
@@ -8,11 +12,6 @@ import xyz.lebot.tub.data.manager.ApiManager;
 import xyz.lebot.tub.data.manager.CacheManager;
 import xyz.lebot.tub.data.model.LineModel;
 import xyz.lebot.tub.data.model.StopModel;
-
-import java.util.List;
-
-import rx.Observable;
-import rx.functions.Func1;
 
 /**
  * Created by axell on 04/11/2016.

@@ -1,10 +1,10 @@
 package xyz.lebot.tub.data.entity.mapper;
 
-import xyz.lebot.tub.data.entity.LineEntity;
-import xyz.lebot.tub.data.model.LineModel;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import xyz.lebot.tub.data.entity.LineEntity;
+import xyz.lebot.tub.data.model.LineModel;
 
 /**
  * Created by axell on 04/11/2016.

@@ -9,9 +9,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import xyz.lebot.tub.ui.fragment.LineFragment;
-import xyz.lebot.tub.ui.fragment.MapFragment;
-import xyz.lebot.tub.ui.fragment.StopFragment;
 import xyz.lebot.tub.ui.navigator.Navigator;
 
 /**

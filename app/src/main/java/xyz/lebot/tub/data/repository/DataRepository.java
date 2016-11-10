@@ -1,11 +1,10 @@
 package xyz.lebot.tub.data.repository;
 
-import xyz.lebot.tub.data.model.LineModel;
-import xyz.lebot.tub.data.model.StopModel;
-
 import java.util.List;
 
 import rx.Observable;
+import xyz.lebot.tub.data.model.LineModel;
+import xyz.lebot.tub.data.model.StopModel;
 
 /**
  * Created by axell on 04/11/2016.

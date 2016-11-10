@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(mPagerAdapter);
         viewPager.setPagingEnabled(false);
 
-        navigator = new NavigatorImpl(this,navigator, viewPager, (MainActivityFragmentPagerAdapter) mPagerAdapter);
+        navigator = new NavigatorImpl(this, navigator, viewPager, (MainActivityFragmentPagerAdapter) mPagerAdapter);
         navigator.initLinePart();
         navigator.initStopPart();
         navigator.initMapPart();
@@ -60,11 +60,11 @@ public class MainActivity extends AppCompatActivity {
                         navigator.navigateToPartLine();
                         break;
                     case R.id.activity_main_bottom_navigation_stop_action:
-                        SELECTED_PART=1;
+                        SELECTED_PART = 1;
                         navigator.navigateToPartStop();
                         break;
                     case R.id.activity_main_bottom_navigation_map_action:
-                        SELECTED_PART=2;
+                        SELECTED_PART = 2;
                         navigator.navigateToPartMap();
                         break;
                 }
@@ -109,11 +109,11 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitle(title);
     }
 
-    public void setSelecteBottomNavigation(int i){
+    public void setSelecteBottomNavigation(int i) {
         bottomNavigationView.setSelected(i);
     }
 
-    public int getSelectedBottomNavigation(){
+    public int getSelectedBottomNavigation() {
         return SELECTED_PART;
     }
 

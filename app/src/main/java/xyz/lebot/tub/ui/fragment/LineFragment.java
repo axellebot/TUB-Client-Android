@@ -1,6 +1,7 @@
 package xyz.lebot.tub.ui.fragment;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +18,7 @@ import xyz.lebot.tub.ui.manager.GridAutofitLayoutManager;
 import xyz.lebot.tub.ui.navigator.Navigator;
 import xyz.lebot.tub.ui.presenter.LineFragmentPresenter;
 
-public class LineFragment extends android.support.v4.app.Fragment {
+public class LineFragment extends Fragment {
 
     @BindView(R.id.fragment_line_recycler_view)
     RecyclerView recyclerView;

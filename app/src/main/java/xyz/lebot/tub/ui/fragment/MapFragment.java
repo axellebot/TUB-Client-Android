@@ -1,6 +1,7 @@
 package xyz.lebot.tub.ui.fragment;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,7 @@ import xyz.lebot.tub.R;
 import xyz.lebot.tub.ui.navigator.Navigator;
 import xyz.lebot.tub.ui.presenter.MapFragmentPresenter;
 
-public class MapFragment extends android.support.v4.app.Fragment implements OnMapReadyCallback {
+public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     @BindView(R.id.fragment_map_map_view)
     MapView mMapView;

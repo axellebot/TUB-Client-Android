@@ -1,10 +1,10 @@
 package xyz.lebot.tub.data.entity.mapper;
 
-import xyz.lebot.tub.data.entity.StopEntity;
-import xyz.lebot.tub.data.model.StopModel;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import xyz.lebot.tub.data.entity.StopEntity;
+import xyz.lebot.tub.data.model.StopModel;
 
 /**
  * Created by axell on 04/11/2016.
