@@ -16,10 +16,11 @@ public class NavigatorImpl implements Navigator {
     private ViewPager viewPager;
     private MainActivityFragmentPagerAdapter pagerAdapter;
 
-    public NavigatorImpl(MainActivity mainActivity, ViewPager viewPager, MainActivityFragmentPagerAdapter pagerAdapter) {
+    public NavigatorImpl(MainActivity mainActivity,Navigator navigator, ViewPager viewPager, MainActivityFragmentPagerAdapter pagerAdapter) {
         this.mainActivity = mainActivity;
         this.viewPager = viewPager;
         this.pagerAdapter = pagerAdapter;
+        this.pagerAdapter.setNavigator(navigator);
     }
 
     @Override
@@ -56,7 +57,7 @@ public class NavigatorImpl implements Navigator {
         }
     }
 
-    public void navigateToLineDetail(){
+    public void navigateToLineDetail(String lineId){
         navigateToPartLine();
         pagerAdapter.addFragmentClassToStackForPosition(LineDetailFragment.class,0);
     }

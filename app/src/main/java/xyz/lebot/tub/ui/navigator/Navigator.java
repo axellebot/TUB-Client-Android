@@ -13,5 +13,5 @@ public interface Navigator {
 
     void navigateBack();
 
-    void navigateToLineDetail();
+    void navigateToLineDetail(String lineId);
 }
