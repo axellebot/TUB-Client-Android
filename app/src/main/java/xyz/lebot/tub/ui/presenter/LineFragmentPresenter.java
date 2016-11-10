@@ -23,7 +23,7 @@ public class LineFragmentPresenter implements Presenter {
     private final LineFragment view;
     private final Navigator navigator;
 
-    public LineFragmentPresenter(final LineFragment view,final Navigator navigator) {
+    public LineFragmentPresenter(final LineFragment view, final Navigator navigator) {
         this.view = view;
         this.navigator = navigator;
     }
@@ -60,5 +60,9 @@ public class LineFragmentPresenter implements Presenter {
     @Override
     public void pause() {
 
+    }
+
+    public void onLineItemClick(String lineId) {
+        navigator.navigateToLineDetail(lineId);
     }
 }

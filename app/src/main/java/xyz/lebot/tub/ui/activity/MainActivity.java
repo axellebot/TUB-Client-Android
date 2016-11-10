@@ -46,7 +46,10 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(mPagerAdapter);
         viewPager.setPagingEnabled(false);
 
-        navigator = new NavigatorImpl(this, viewPager, (MainActivityFragmentPagerAdapter) mPagerAdapter);
+        navigator = new NavigatorImpl(this,navigator, viewPager, (MainActivityFragmentPagerAdapter) mPagerAdapter);
+        navigator.initLinePart();
+        navigator.initStopPart();
+        navigator.initMapPart();
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -93,11 +96,13 @@ public class MainActivity extends AppCompatActivity {
         switch (id) {
             case R.id.activity_main_manu_action_settings:
                 break;
-            case R.id.activity_main_menu_action_test:
-                navigator.navigateToLineDetail();
-                break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        navigator.navigateBack();
     }
 
     public void setTitle(String title) {
@@ -112,8 +117,5 @@ public class MainActivity extends AppCompatActivity {
         return SELECTED_PART;
     }
 
-    @Override
-    public void onBackPressed() {
-        navigator.navigateBack();
-    }
+
 }
