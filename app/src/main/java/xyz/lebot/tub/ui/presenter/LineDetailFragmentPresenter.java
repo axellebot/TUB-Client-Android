@@ -2,38 +2,35 @@ package xyz.lebot.tub.ui.presenter;
 
 import android.util.Log;
 
-import java.util.List;
-
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import xyz.lebot.tub.App;
-import xyz.lebot.tub.data.model.StopModel;
-import xyz.lebot.tub.ui.fragment.StopFragment;
+import xyz.lebot.tub.data.model.LineModel;
+import xyz.lebot.tub.ui.fragment.LineDetailFragment;
 import xyz.lebot.tub.ui.navigator.Navigator;
 
 /**
  * Created by axell on 05/11/2016.
  */
 
-public class StopFragmentPresenter implements Presenter {
-    private static String TAG = "StopFragmentPresenter";
+public class LineDetailFragmentPresenter implements Presenter {
+    private static String TAG = "LineDetailPresenter";
 
-    private final StopFragment view;
+    private final LineDetailFragment view;
     private final Navigator navigator;
 
-    public StopFragmentPresenter(final StopFragment view, final Navigator navigator) {
+    public LineDetailFragmentPresenter(final LineDetailFragment view, final Navigator navigator) {
         this.view = view;
         this.navigator = navigator;
     }
 
-
     @Override
     public void initialize() {
-        App.getInstance().getDataRepository().getAllStopsCall()
+        App.getInstance().getDataRepository().getLineCall("1")
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<StopModel>>() {
+                .subscribe(new Observer<LineModel>() {
                     @Override
                     public void onCompleted() {
                     }
@@ -41,13 +38,13 @@ public class StopFragmentPresenter implements Presenter {
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();
-                        view.initList(App.getInstance().getDataRepository().getAllStopsCache());
+
                     }
 
                     @Override
-                    public void onNext(List<StopModel> stopModels) {
-                        Log.i(TAG, stopModels.toString());
-                        view.initList(stopModels);
+                    public void onNext(LineModel lineModel) {
+                        Log.i(TAG, lineModel.toString());
+                        view.initView(lineModel);
                     }
                 });
     }

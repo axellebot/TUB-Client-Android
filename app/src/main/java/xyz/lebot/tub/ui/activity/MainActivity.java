@@ -12,15 +12,17 @@ import android.view.MenuItem;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import xyz.lebot.tub.R;
-import xyz.lebot.tub.ui.adapter.MainActivityPageAdapter;
-import xyz.lebot.tub.ui.presenter.MainActivityPresenter;
+import xyz.lebot.tub.ui.adapter.MainActivityFragmentPagerAdapter;
+import xyz.lebot.tub.ui.navigator.Navigator;
+import xyz.lebot.tub.ui.navigator.NavigatorImpl;
+import xyz.lebot.tub.ui.view.CustomBottomNavigationView;
 import xyz.lebot.tub.ui.view.CustomViewPager;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
     @BindView(R.id.activity_main_bottom_navigation)
-    BottomNavigationView bottomNavigationView;
+    CustomBottomNavigationView bottomNavigationView;
 
     @BindView(R.id.activity_main_view_pager)
     CustomViewPager viewPager;
@@ -29,40 +31,50 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
 
     private PagerAdapter mPagerAdapter;
-    private MainActivityPresenter presenter;
+    private Navigator navigator;
+
+    private int SELECTED_PART;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        mPagerAdapter = new MainActivityPageAdapter(getSupportFragmentManager());
+        mPagerAdapter = new MainActivityFragmentPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(mPagerAdapter);
         viewPager.setPagingEnabled(false);
 
-        this.presenter = new MainActivityPresenter(this);
+        navigator = new NavigatorImpl(this, navigator, viewPager, (MainActivityFragmentPagerAdapter) mPagerAdapter);
+        navigator.initLinePart();
+        navigator.initStopPart();
+        navigator.initMapPart();
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.activity_main_bottom_navigation_line_action:
-                        presenter.onBottomNavigationClick(0);
+                        SELECTED_PART = 0;
+                        navigator.navigateToPartLine();
                         break;
                     case R.id.activity_main_bottom_navigation_stop_action:
-                        presenter.onBottomNavigationClick(1);
+                        SELECTED_PART = 1;
+                        navigator.navigateToPartStop();
                         break;
                     case R.id.activity_main_bottom_navigation_map_action:
-                        presenter.onBottomNavigationClick(2);
+                        SELECTED_PART = 2;
+                        navigator.navigateToPartMap();
                         break;
                 }
                 return true;
             }
         });
-        presenter.initialize();
+
+
+        setSupportActionBar(toolbar);
+
     }
 
     @Override
@@ -80,31 +92,30 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
+        switch (id) {
+            case R.id.activity_main_manu_action_settings:
+                break;
+        }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-        presenter.pause();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        presenter.resume();
+    public void onBackPressed() {
+        navigator.navigateBack();
     }
 
     public void setTitle(String title) {
         toolbar.setTitle(title);
     }
 
-    public void setCurrentItem(int position) {
-        viewPager.setCurrentItem(position);
+    public void setSelecteBottomNavigation(int i) {
+        bottomNavigationView.setSelected(i);
     }
+
+    public int getSelectedBottomNavigation() {
+        return SELECTED_PART;
+    }
+
 
 }

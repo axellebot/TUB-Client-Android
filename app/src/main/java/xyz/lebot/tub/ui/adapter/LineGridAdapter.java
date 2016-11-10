@@ -1,6 +1,5 @@
 package xyz.lebot.tub.ui.adapter;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
@@ -18,6 +17,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import xyz.lebot.tub.R;
 import xyz.lebot.tub.data.model.LineModel;
+import xyz.lebot.tub.ui.fragment.LineFragment;
+import xyz.lebot.tub.ui.presenter.LineFragmentPresenter;
+import xyz.lebot.tub.R;
+import xyz.lebot.tub.data.model.LineModel;
 
 /**
  * Created by axell on 05/11/2016.
@@ -25,10 +28,12 @@ import xyz.lebot.tub.data.model.LineModel;
 
 public class LineGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private LayoutInflater inflater;
+    private LineFragmentPresenter presenter;
     private List<LineModel> lineModels;
 
-    public LineGridAdapter(Context context, List<LineModel> lineModels) {
-        this.inflater = LayoutInflater.from(context);
+    public LineGridAdapter(LineFragment fragment, LineFragmentPresenter presenter, List<LineModel> lineModels) {
+        this.inflater = LayoutInflater.from(fragment.getContext());
+        this.presenter = presenter;
         if (lineModels == null) {
             this.lineModels = new ArrayList<>();
         } else {
@@ -44,24 +49,32 @@ public class LineGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.item_grid_line, parent, false);
-        return new LineGridHolder(view);
+        return new LineGridViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         LineModel lineModel = lineModels.get(position);
-        if (holder instanceof LineGridHolder) {
-            LineGridHolder lineGridHolder = (LineGridHolder) holder;
-            TextView tvLabel = lineGridHolder.getTvLabel();
+        if (holder instanceof LineGridViewHolder) {
+            LineGridViewHolder lineGridViewHolder = (LineGridViewHolder) holder;
+            TextView tvLabel = lineGridViewHolder.getTvLabel();
 
             tvLabel.setText(lineModel.getNumber());
             int color = Color.parseColor(lineModel.getColor());
 
-            
+
                 GradientDrawable bgShape = (GradientDrawable) tvLabel.getBackground();
                 bgShape.setColor(color);
 
              //   tvLabel.getBackground().setTint(color);
+
+            lineGridViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String lineId = lineModels.get(position).getId();
+                    presenter.onLineItemClick(lineId);
+                }
+            });
 
         }
     }
@@ -73,7 +86,7 @@ public class LineGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
 
-    public class LineGridHolder extends RecyclerView.ViewHolder {
+    public class LineGridViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.item_grid_line_label)
         TextView tvLabel;
@@ -81,7 +94,7 @@ public class LineGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         @BindView(R.id.item_grid_line_card)
         CardView cardView;
 
-        public LineGridHolder(View itemView) {
+        public LineGridViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }

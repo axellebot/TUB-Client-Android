@@ -41,7 +41,7 @@
         </LinearLayout>
     </android.support.design.widget.CoordinatorLayout>
 
-    <android.support.design.widget.BottomNavigationView
+    <xyz.lebot.tub.ui.view.CustomBottomNavigationView
         android:id="@id/activity_main_bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

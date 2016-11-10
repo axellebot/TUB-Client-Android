@@ -10,6 +10,7 @@ import rx.schedulers.Schedulers;
 import xyz.lebot.tub.App;
 import xyz.lebot.tub.data.model.LineModel;
 import xyz.lebot.tub.ui.fragment.LineFragment;
+import xyz.lebot.tub.ui.navigator.Navigator;
 
 /**
  * Created by axell on 05/11/2016.
@@ -19,9 +20,11 @@ public class LineFragmentPresenter implements Presenter {
     private static String TAG = "LineFragmentPresenter";
 
     private final LineFragment view;
+    private final Navigator navigator;
 
-    public LineFragmentPresenter(final LineFragment view) {
+    public LineFragmentPresenter(final LineFragment view, final Navigator navigator) {
         this.view = view;
+        this.navigator = navigator;
     }
 
     @Override
@@ -56,5 +59,9 @@ public class LineFragmentPresenter implements Presenter {
     @Override
     public void pause() {
 
+    }
+
+    public void onLineItemClick(String lineId) {
+        navigator.navigateToLineDetail(lineId);
     }
 }
