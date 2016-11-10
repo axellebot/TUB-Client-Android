@@ -2,7 +2,6 @@ package xyz.lebot.tub.ui.adapter;
 
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
-import android.os.Build;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,8 +18,6 @@ import xyz.lebot.tub.R;
 import xyz.lebot.tub.data.model.LineModel;
 import xyz.lebot.tub.ui.fragment.LineFragment;
 import xyz.lebot.tub.ui.presenter.LineFragmentPresenter;
-import xyz.lebot.tub.R;
-import xyz.lebot.tub.data.model.LineModel;
 
 /**
  * Created by axell on 05/11/2016.
@@ -63,10 +60,10 @@ public class LineGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             int color = Color.parseColor(lineModel.getColor());
 
 
-                GradientDrawable bgShape = (GradientDrawable) tvLabel.getBackground();
-                bgShape.setColor(color);
+            GradientDrawable bgShape = (GradientDrawable) tvLabel.getBackground();
+            bgShape.setColor(color);
 
-             //   tvLabel.getBackground().setTint(color);
+            //   tvLabel.getBackground().setTint(color);
 
             lineGridViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
                 @Override

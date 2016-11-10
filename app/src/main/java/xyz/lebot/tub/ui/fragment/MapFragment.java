@@ -22,15 +22,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import xyz.lebot.tub.R;
-import xyz.lebot.tub.ui.navigator.Navigator;
-import xyz.lebot.tub.ui.presenter.MapFragmentPresenter;
-import xyz.lebot.tub.R;
 import xyz.lebot.tub.data.model.StopModel;
 import xyz.lebot.tub.ui.adapter.StopMapClusterItemInfoWindowAdapter;
+import xyz.lebot.tub.ui.navigator.Navigator;
 import xyz.lebot.tub.ui.presenter.MapFragmentPresenter;
 import xyz.lebot.tub.ui.renderer.StopClusterRenderer;
 import xyz.lebot.tub.ui.view.StopMapClusterItem;
-import android.support.v4.app.Fragment;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 
@@ -119,10 +116,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             public boolean onClusterClick(Cluster<StopMapClusterItem> cluster) {
                 String title = "";
                 Collection<StopMapClusterItem> clusters = cluster.getItems();
-                for (StopMapClusterItem clusterX :clusters){
-                    title+=clusterX.getTitle()+"\n";
+                for (StopMapClusterItem clusterX : clusters) {
+                    title += clusterX.getTitle() + "\n";
                 }
-                StopMapClusterItem stopMapClusterItem =  new StopMapClusterItem(cluster.getPosition(),title);
+                StopMapClusterItem stopMapClusterItem = new StopMapClusterItem(cluster.getPosition(), title);
                 mClusterAdapter.setCurrentClusterItem(stopMapClusterItem);
                 return false;
             }

@@ -24,14 +24,13 @@ import xyz.lebot.tub.ui.view.StopMapClusterItem;
 public class StopClusterRenderer extends DefaultClusterRenderer<StopMapClusterItem> {
 
 
-
     private Context context;
     private IconGenerator mClusterIconGenerator;
 
     public StopClusterRenderer(Context context, GoogleMap map,
                                ClusterManager<StopMapClusterItem> clusterManager) {
         super(context, map, clusterManager);
-        this.context=context;
+        this.context = context;
         this.mClusterIconGenerator = new IconGenerator(context.getApplicationContext());
     }
 

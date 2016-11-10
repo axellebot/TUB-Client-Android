@@ -21,11 +21,9 @@ public class StopMapClusterItemInfoWindowAdapter implements GoogleMap.InfoWindow
 
 
     private final View view;
-
-    private ClusterItem currentClusterItem;
-
     @BindView(R.id.item_map_window_stop_info_title)
     TextView tvTitle;
+    private ClusterItem currentClusterItem;
 
     public StopMapClusterItemInfoWindowAdapter(LayoutInflater layoutInflater) {
         view = layoutInflater.inflate(R.layout.item_map_window_stop_info, null);
