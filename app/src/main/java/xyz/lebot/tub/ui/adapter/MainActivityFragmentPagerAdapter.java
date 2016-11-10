@@ -1,5 +1,6 @@
 package xyz.lebot.tub.ui.adapter;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -13,6 +14,7 @@ import java.util.StringTokenizer;
 import xyz.lebot.tub.ui.fragment.LineFragment;
 import xyz.lebot.tub.ui.fragment.MapFragment;
 import xyz.lebot.tub.ui.fragment.StopFragment;
+import xyz.lebot.tub.ui.navigator.Navigator;
 
 /**
  * Created by axell on 05/11/2016.
@@ -23,6 +25,8 @@ public class MainActivityFragmentPagerAdapter extends FragmentPagerAdapter {
     private static final int PAGES_COUNT = 3;
 
     private List<LinkedList<Class<?>>> stackFragmentList;
+    private Navigator navigator;
+    private Bundle bundle;
 
     private long baseId = 0;
 
@@ -39,7 +43,9 @@ public class MainActivityFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return getFragmentForPosition(position);
+        Fragment fragment=  getFragmentForPosition(position);
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @Override
@@ -98,5 +104,13 @@ public class MainActivityFragmentPagerAdapter extends FragmentPagerAdapter {
     public void notifyChangeInPosition(int n) {
         baseId += getCount() + n;
         notifyDataSetChanged();
+    }
+
+    public void setNavigator(Navigator navigator){
+        this.navigator = navigator;
+    }
+
+    public void setBundle(Bundle bundle){
+        this.bundle = bundle;
     }
 }

@@ -11,6 +11,7 @@ import xyz.lebot.tub.App;
 import xyz.lebot.tub.data.model.LineModel;
 import xyz.lebot.tub.ui.fragment.LineDetailFragment;
 import xyz.lebot.tub.ui.fragment.LineFragment;
+import xyz.lebot.tub.ui.navigator.Navigator;
 
 /**
  * Created by axell on 05/11/2016.
@@ -20,9 +21,11 @@ public class LineDetailFragmentPresenter implements Presenter {
     private static String TAG = "LineDetailPresenter";
 
     private final LineDetailFragment view;
+    private final Navigator navigator;
 
-    public LineDetailFragmentPresenter(final LineDetailFragment view) {
+    public LineDetailFragmentPresenter(final LineDetailFragment view, final Navigator navigator) {
         this.view = view;
+        this.navigator = navigator;
     }
 
     @Override

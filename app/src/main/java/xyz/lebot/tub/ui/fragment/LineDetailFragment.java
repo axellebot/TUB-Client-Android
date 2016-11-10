@@ -13,16 +13,24 @@ import butterknife.ButterKnife;
 import xyz.lebot.tub.R;
 import xyz.lebot.tub.data.model.LineModel;
 import xyz.lebot.tub.ui.manager.GridAutofitLayoutManager;
+import xyz.lebot.tub.ui.navigator.Navigator;
 import xyz.lebot.tub.ui.presenter.LineDetailFragmentPresenter;
 import xyz.lebot.tub.ui.presenter.LineFragmentPresenter;
 
 public class LineDetailFragment extends android.support.v4.app.Fragment {
 
+    private Navigator navigator;
     private LineDetailFragmentPresenter presenter;
 
 
     public LineDetailFragment() {
         // Required empty public constructor
+    }
+
+
+    @Override
+    public void setArguments(Bundle args) {
+        this.navigator=(Navigator) args.get("NAVIGATOR");
     }
 
     @Override
@@ -31,7 +39,7 @@ public class LineDetailFragment extends android.support.v4.app.Fragment {
         View view = inflater.inflate(R.layout.fragment_line_detail, container, false);
         ButterKnife.bind(this, view);
 
-        presenter = new LineDetailFragmentPresenter(this);
+        presenter = new LineDetailFragmentPresenter(this,navigator);
         presenter.initialize();
         return view;
     }

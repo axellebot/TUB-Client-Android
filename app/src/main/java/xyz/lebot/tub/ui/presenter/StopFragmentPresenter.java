@@ -11,6 +11,7 @@ import java.util.List;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import xyz.lebot.tub.ui.navigator.Navigator;
 
 /**
  * Created by axell on 05/11/2016.
@@ -20,12 +21,11 @@ public class StopFragmentPresenter implements Presenter {
     private static String TAG = "StopFragmentPresenter";
 
     private final StopFragment view;
+    private final Navigator navigator;
 
-
-    private StopFragmentPresenter presenter;
-
-    public StopFragmentPresenter(final StopFragment view) {
+    public StopFragmentPresenter(final StopFragment view,final Navigator navigator) {
         this.view = view;
+        this.navigator=navigator;
     }
 
 

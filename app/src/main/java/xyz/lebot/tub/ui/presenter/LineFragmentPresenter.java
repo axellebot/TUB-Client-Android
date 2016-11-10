@@ -11,6 +11,7 @@ import java.util.List;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import xyz.lebot.tub.ui.navigator.Navigator;
 
 /**
  * Created by axell on 05/11/2016.
@@ -20,9 +21,11 @@ public class LineFragmentPresenter implements Presenter {
     private static String TAG = "LineFragmentPresenter";
 
     private final LineFragment view;
+    private final Navigator navigator;
 
-    public LineFragmentPresenter(final LineFragment view) {
+    public LineFragmentPresenter(final LineFragment view,final Navigator navigator) {
         this.view = view;
+        this.navigator = navigator;
     }
 
     @Override
