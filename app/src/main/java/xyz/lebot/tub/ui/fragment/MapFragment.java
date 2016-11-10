@@ -70,8 +70,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         mMapView.getMapAsync(this);
 
         presenter = new MapFragmentPresenter(this, navigator);
-        presenter.initialize();
-        presenter = new MapFragmentPresenter(this);
         return view;
     }
 
