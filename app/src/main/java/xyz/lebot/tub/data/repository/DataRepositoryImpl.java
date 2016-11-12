@@ -1,7 +1,9 @@
 package xyz.lebot.tub.data.repository;
 
+import java.io.InputStream;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import rx.Observable;
 import rx.functions.Func1;
 import xyz.lebot.tub.data.entity.LineEntity;
@@ -10,6 +12,7 @@ import xyz.lebot.tub.data.entity.mapper.LineDataMapper;
 import xyz.lebot.tub.data.entity.mapper.StopDataMapper;
 import xyz.lebot.tub.data.manager.ApiManager;
 import xyz.lebot.tub.data.manager.CacheManager;
+import xyz.lebot.tub.data.manager.DownloadManager;
 import xyz.lebot.tub.data.model.LineModel;
 import xyz.lebot.tub.data.model.StopModel;
 
@@ -20,12 +23,14 @@ import xyz.lebot.tub.data.model.StopModel;
 public class DataRepositoryImpl implements DataRepository {
     private ApiManager apiManager;
     private CacheManager cacheManager;
+    private DownloadManager downloadManager;
     private LineDataMapper lineDataMapper;
     private StopDataMapper stopDataMapper;
 
-    public DataRepositoryImpl(ApiManager apiManager, CacheManager cacheManager, LineDataMapper lineDataMapper, StopDataMapper stopDataMapper) {
+    public DataRepositoryImpl(ApiManager apiManager, CacheManager cacheManager, DownloadManager downloadManager, LineDataMapper lineDataMapper, StopDataMapper stopDataMapper) {
         this.apiManager = apiManager;
         this.cacheManager = cacheManager;
+        this.downloadManager = downloadManager;
         this.lineDataMapper = lineDataMapper;
         this.stopDataMapper = stopDataMapper;
     }
@@ -86,6 +91,16 @@ public class DataRepositoryImpl implements DataRepository {
     @Override
     public List<StopModel> getAllStopsCache() {
         return this.cacheManager.getStops();
+    }
+
+    @Override
+    public Observable<InputStream> getLineKMLCall(String id) {
+        return this.downloadManager.getLineKmlFile(id).map(new Func1<ResponseBody, InputStream>() {
+            @Override
+            public InputStream call(ResponseBody responseBody) {
+                return responseBody.byteStream();
+            }
+        });
     }
 
 }

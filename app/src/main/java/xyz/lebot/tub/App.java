@@ -8,6 +8,8 @@ import xyz.lebot.tub.data.manager.ApiManager;
 import xyz.lebot.tub.data.manager.ApiManagerImpl;
 import xyz.lebot.tub.data.manager.CacheManager;
 import xyz.lebot.tub.data.manager.CacheManagerImpl;
+import xyz.lebot.tub.data.manager.DownloadManager;
+import xyz.lebot.tub.data.manager.DownloadManagerImpl;
 import xyz.lebot.tub.data.repository.DataRepository;
 import xyz.lebot.tub.data.repository.DataRepositoryImpl;
 
@@ -36,10 +38,11 @@ public class App extends Application {
     private void injectDependencies() {
         ApiManager apiManager = new ApiManagerImpl();
         CacheManager cacheManager = new CacheManagerImpl();
+        DownloadManager downloadManager = new DownloadManagerImpl();
         LineDataMapper lineDataMapper = new LineDataMapper();
         StopDataMapper stopDataMapper = new StopDataMapper();
 
-        dataRepository = new DataRepositoryImpl(apiManager, cacheManager, lineDataMapper, stopDataMapper);
+        dataRepository = new DataRepositoryImpl(apiManager, cacheManager, downloadManager, lineDataMapper, stopDataMapper);
     }
 
 
