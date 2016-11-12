@@ -34,7 +34,10 @@ public class MapFragmentPresenter implements Presenter {
     public void initialize() {
         view.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         view.moveCamera(new LatLng(46.205539, 5.227177), 13f);
+        addStopsClusterToMap();
+    }
 
+    private void addStopsClusterToMap() {
         //initMapWithStopsCLuster
         App.getInstance().getDataRepository().getAllStopsCall()
                 .subscribeOn(Schedulers.newThread())
