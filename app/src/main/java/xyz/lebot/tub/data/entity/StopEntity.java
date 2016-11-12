@@ -9,8 +9,8 @@ import com.google.gson.annotations.SerializedName;
 public class StopEntity {
     @SerializedName("id")
     private String id;
-    @SerializedName("name")
-    private String name;
+    @SerializedName("label")
+    private String label;
     @SerializedName("latitude")
     private String latitude;
     @SerializedName("longitude")
@@ -24,12 +24,12 @@ public class StopEntity {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getLabel() {
+        return label;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLabel(String label) {
+        this.label = label;
     }
 
     public String getLatitude() {
