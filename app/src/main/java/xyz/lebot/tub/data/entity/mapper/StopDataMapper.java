@@ -14,7 +14,7 @@ public class StopDataMapper {
     public StopModel transform(StopEntity stopEntity) {
         StopModel stopModel = new StopModel();
         stopModel.setId(stopEntity.getId());
-        stopModel.setLabel(stopEntity.getName());
+        stopModel.setLabel(stopEntity.getLabel());
         stopModel.setLatitude(stopEntity.getLatitude());
         stopModel.setLongitude(stopEntity.getLongitude());
         return stopModel;
