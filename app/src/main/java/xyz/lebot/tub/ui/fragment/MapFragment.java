@@ -15,13 +15,20 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.clustering.Cluster;
 import com.google.maps.android.clustering.ClusterManager;
+import com.google.maps.android.kml.KmlLayer;
 
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collection;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import xyz.lebot.tub.R;
+import xyz.lebot.tub.data.model.LineModel;
 import xyz.lebot.tub.data.model.StopModel;
 import xyz.lebot.tub.ui.adapter.StopMapClusterItemInfoWindowAdapter;
 import xyz.lebot.tub.ui.navigator.Navigator;
@@ -93,6 +100,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         presenter.resume();
     }
 
+    public void moveCamera(LatLng latLng, float zoom) {
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
+    }
+
     public void setMapType(int type) {
         googleMap.setMapType(type);
     }
@@ -150,7 +161,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         }
     }
 
-    public void moveCamera(LatLng latLng, float zoom) {
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
+    public void addLineKMLToMap(InputStream inputStream) {
+        try {
+            KmlLayer layer = new KmlLayer(googleMap, inputStream, getContext().getApplicationContext());
+            layer.addLayerToMap();
+        } catch (IOException | XmlPullParserException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -1,16 +1,17 @@
 package xyz.lebot.tub.ui.presenter;
 
-import android.util.Log;
-
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 
+import java.io.InputStream;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import xyz.lebot.tub.App;
+import xyz.lebot.tub.data.model.LineModel;
 import xyz.lebot.tub.data.model.StopModel;
 import xyz.lebot.tub.ui.fragment.MapFragment;
 import xyz.lebot.tub.ui.navigator.Navigator;
@@ -35,6 +36,15 @@ public class MapFragmentPresenter implements Presenter {
         view.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         view.moveCamera(new LatLng(46.205539, 5.227177), 13f);
         addStopsClusterToMap();
+        addLinesKMLToMap();
+    }
+
+    @Override
+    public void resume() {
+    }
+
+    @Override
+    public void pause() {
     }
 
     private void addStopsClusterToMap() {
@@ -55,17 +65,54 @@ public class MapFragmentPresenter implements Presenter {
 
                     @Override
                     public void onNext(List<StopModel> stopModels) {
-                        Log.i(TAG, stopModels.toString());
                         view.addStopsToMapWithCluster(stopModels);
                     }
                 });
     }
 
-    @Override
-    public void resume() {
+    private void addLinesKMLToMap() {
+        App.getInstance().getDataRepository().getAllLinesCall()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<List<LineModel>>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onNext(List<LineModel> lineModels) {
+
+                        for (LineModel lineModel : lineModels) {
+                            addLineKMLToMap(lineModel.getId());
+                        }
+                    }
+                });
     }
 
-    @Override
-    public void pause() {
+    private void addLineKMLToMap(String id){
+        App.getInstance().getDataRepository().getLineKMLCall(id)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<InputStream>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(InputStream inputStream) {
+                        view.addLineKMLToMap(inputStream);
+                    }
+                });
     }
 }
