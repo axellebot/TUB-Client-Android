@@ -9,6 +9,7 @@ public class LineModel {
     private String number;
     private String label;
     private String color;
+    private String kmlPath;
 
     public String getId() {
         return id;
@@ -40,5 +41,13 @@ public class LineModel {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public String getKmlPath() {
+        return kmlPath;
+    }
+
+    public void setKmlPath(String kmlPath) {
+        this.kmlPath = kmlPath;
     }
 }

@@ -17,6 +17,7 @@ public class LineDataMapper {
         lineModel.setLabel(lineEntity.getLabel());
         lineModel.setNumber(lineEntity.getNumber());
         lineModel.setColor(lineEntity.getColor());
+        lineModel.setKmlPath(lineEntity.getKmlPath());
         return lineModel;
     }
 
