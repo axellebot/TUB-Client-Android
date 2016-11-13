@@ -36,7 +36,7 @@ public class NavigatorImpl implements Navigator, Serializable {
         Bundle args = new Bundle();
         args.putSerializable("NAVIGATOR", this);
 
-        pagerAdapter.addFragmentClassWithBundleToStackForPosition(fragmentClass, args, 0);
+        addFragmentClassWithBundleToLinePart(fragmentClass,args);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class NavigatorImpl implements Navigator, Serializable {
         Bundle args = new Bundle();
         args.putSerializable("NAVIGATOR", this);
 
-        pagerAdapter.addFragmentClassWithBundleToStackForPosition(fragmentClass, args, 1);
+        addFragmentClassWithBundleToStopPart(fragmentClass,args);
     }
 
     @Override
@@ -56,7 +56,7 @@ public class NavigatorImpl implements Navigator, Serializable {
         Bundle args = new Bundle();
         args.putSerializable("NAVIGATOR", this);
 
-        pagerAdapter.addFragmentClassWithBundleToStackForPosition(fragmentClass, args, 2);
+        addFragmentClassWithBundleToMapPart(fragmentClass,args);
     }
 
     @Override
@@ -82,13 +82,13 @@ public class NavigatorImpl implements Navigator, Serializable {
     public void navigateBack() {
         switch (mainActivity.getSelectedBottomNavigation()) {
             case 0:
-                pagerAdapter.dequeueFragmentClassStackForPosition(0);
+                navigateBackLinePart();
                 break;
             case 1:
-                pagerAdapter.dequeueFragmentClassStackForPosition(1);
+                navigateBackStopPart();
                 break;
             case 2:
-                pagerAdapter.dequeueFragmentClassStackForPosition(2);
+                navigateBackMapPart();
                 break;
         }
     }
@@ -102,6 +102,28 @@ public class NavigatorImpl implements Navigator, Serializable {
         args.putSerializable("NAVIGATOR", this);
         args.putString("LINE_ID", lineId);
 
+        addFragmentClassWithBundleToLinePart(fragmentClass,args);
+    }
+
+    private void addFragmentClassWithBundleToLinePart(Class<?> fragmentClass,Bundle args){
         pagerAdapter.addFragmentClassWithBundleToStackForPosition(fragmentClass, args, 0);
+    }
+
+    private void addFragmentClassWithBundleToStopPart(Class<?> fragmentClass,Bundle args){
+        pagerAdapter.addFragmentClassWithBundleToStackForPosition(fragmentClass, args, 1);
+    }
+
+    private void addFragmentClassWithBundleToMapPart(Class<?> fragmentClass,Bundle args){
+        pagerAdapter.addFragmentClassWithBundleToStackForPosition(fragmentClass, args, 0);
+    }
+
+    private void navigateBackLinePart(){
+        pagerAdapter.dequeueFragmentClassStackForPosition(0);
+    }
+    private void navigateBackStopPart(){
+        pagerAdapter.dequeueFragmentClassStackForPosition(1);
+    }
+    private void navigateBackMapPart(){
+        pagerAdapter.dequeueFragmentClassStackForPosition(2);
     }
 }
