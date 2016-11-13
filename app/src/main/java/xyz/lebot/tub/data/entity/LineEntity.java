@@ -17,6 +17,8 @@ public class LineEntity {
     private String color;
     @SerializedName("order")
     private String order;
+    @SerializedName("kml_path")
+    private String kmlPath;
 
     public String getId() {
         return id;
@@ -56,5 +58,13 @@ public class LineEntity {
 
     public void setOrder(String order) {
         this.order = order;
+    }
+
+    public String getKmlPath() {
+        return kmlPath;
+    }
+
+    public void setKmlPath(String kmlPath) {
+        this.kmlPath = kmlPath;
     }
 }
