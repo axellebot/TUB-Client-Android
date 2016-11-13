@@ -6,7 +6,6 @@ import com.google.android.gms.maps.model.LatLng;
 import java.io.InputStream;
 import java.util.List;
 
-import okhttp3.ResponseBody;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -15,6 +14,7 @@ import xyz.lebot.tub.data.model.LineModel;
 import xyz.lebot.tub.data.model.StopModel;
 import xyz.lebot.tub.ui.fragment.MapFragment;
 import xyz.lebot.tub.ui.navigator.Navigator;
+import xyz.lebot.tub.ui.view.StopMapClusterItem;
 
 /**
  * Created by axell on 05/11/2016.
@@ -45,6 +45,51 @@ public class MapFragmentPresenter implements Presenter {
 
     @Override
     public void pause() {
+    }
+
+    public void onStopClusterItemClicked(final StopMapClusterItem clusterItem) {
+        final String stopId = clusterItem.getId();
+        App.getInstance().getDataRepository().getStopCall(clusterItem.getId())
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<StopModel>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onNext(final StopModel stopModel) {
+                        App.getInstance().getDataRepository().getLinesFromStop(stopModel.getId())
+                                .subscribeOn(Schedulers.newThread())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(new Observer<List<LineModel>>() {
+                                    @Override
+                                    public void onCompleted() {
+
+                                    }
+
+                                    @Override
+                                    public void onError(Throwable e) {
+                                        e.printStackTrace();
+                                    }
+
+                                    @Override
+                                    public void onNext(List<LineModel> lineModels) {
+                                        view.displayStopDetail(stopModel, lineModels);
+                                    }
+                                });
+                    }
+                });
+    }
+
+    public void onStopDetailCardClicked() {
+        view.animationCustomCardDown();
     }
 
     private void addStopsClusterToMap() {
@@ -94,7 +139,7 @@ public class MapFragmentPresenter implements Presenter {
                 });
     }
 
-    private void addLineKMLToMap(String id){
+    private void addLineKMLToMap(String id) {
         App.getInstance().getDataRepository().getLineKMLCall(id)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -115,4 +160,5 @@ public class MapFragmentPresenter implements Presenter {
                     }
                 });
     }
+
 }

@@ -28,7 +28,7 @@ public class ApiManagerImpl implements ApiManager {
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
                 .create();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(API_PROD_URL)
+                .baseUrl(API_DEV_URL)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -46,11 +46,21 @@ public class ApiManagerImpl implements ApiManager {
     }
 
     @Override
-    public Observable<LineEntity> getLine(String id) {
-        return apiService.getLine(id).map(new Func1<LineEnveloppe, LineEntity>() {
+    public Observable<LineEntity> getLine(String line_id) {
+        return apiService.getLine(line_id).map(new Func1<LineEnveloppe, LineEntity>() {
             @Override
             public LineEntity call(LineEnveloppe lineEnveloppe) {
                 return lineEnveloppe.line;
+            }
+        });
+    }
+
+    @Override
+    public Observable<List<LineEntity>> getLinesFromStop(String stop_id) {
+        return apiService.getLinesFromStop(stop_id).map(new Func1<LineListEnveloppe, List<LineEntity>>() {
+            @Override
+            public List<LineEntity> call(LineListEnveloppe lineEnveloppe) {
+                return lineEnveloppe.lines;
             }
         });
     }
@@ -66,11 +76,21 @@ public class ApiManagerImpl implements ApiManager {
     }
 
     @Override
-    public Observable<StopEntity> getStop(String id) {
-        return apiService.getStop(id).map(new Func1<StopEnveloppe, StopEntity>() {
+    public Observable<StopEntity> getStop(String stop_id) {
+        return apiService.getStop(stop_id).map(new Func1<StopEnveloppe, StopEntity>() {
             @Override
             public StopEntity call(StopEnveloppe stopEnveloppe) {
                 return stopEnveloppe.stop;
+            }
+        });
+    }
+
+    @Override
+    public Observable<List<StopEntity>> getStopsFromLine(String line_id) {
+        return apiService.getStopsFromLine(line_id).map(new Func1<StopListEnveloppe, List<StopEntity>>() {
+            @Override
+            public List<StopEntity> call(StopListEnveloppe stopListEnveloppe) {
+                return stopListEnveloppe.stops;
             }
         });
     }
@@ -79,14 +99,20 @@ public class ApiManagerImpl implements ApiManager {
         @GET("lines")
         Observable<LineListEnveloppe> getAllLines();
 
-        @GET("lines/{line}")
-        Observable<LineEnveloppe> getLine(@Path("line") String id);
+        @GET("lines/{line_id}")
+        Observable<LineEnveloppe> getLine(@Path("line_id") String line_id);
+
+        @GET("lines/{line_id}/stops")
+        Observable<StopListEnveloppe> getStopsFromLine(@Path("line_id") String line_id);
 
         @GET("stops")
         Observable<StopListEnveloppe> getAllStops();
 
-        @GET("stops/{stop}")
-        Observable<StopEnveloppe> getStop(@Path("stop") String id);
+        @GET("stops/{stop_id}")
+        Observable<StopEnveloppe> getStop(@Path("stop_id") String stop_id);
+
+        @GET("stops/{stop_id}/lines")
+        Observable<LineListEnveloppe> getLinesFromStop(@Path("stop_id") String stop_id);
     }
 
     private class LineListEnveloppe {

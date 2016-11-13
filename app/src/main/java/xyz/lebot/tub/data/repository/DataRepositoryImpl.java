@@ -48,13 +48,25 @@ public class DataRepositoryImpl implements DataRepository {
     }
 
     @Override
-    public Observable<LineModel> getLineCall(String id) {
-        return apiManager.getLine(id).map(new Func1<LineEntity, LineModel>() {
+    public Observable<LineModel> getLineCall(String line_id) {
+        return apiManager.getLine(line_id).map(new Func1<LineEntity, LineModel>() {
             @Override
             public LineModel call(LineEntity lineEntity) {
                 LineModel lineModel = lineDataMapper.transform(lineEntity);
                 cacheManager.setLine(lineModel);
                 return lineModel;
+            }
+        });
+    }
+
+    @Override
+    public Observable<List<LineModel>> getLinesFromStop(String stop_id) {
+        return apiManager.getLinesFromStop(stop_id).map(new Func1<List<LineEntity>, List<LineModel>>() {
+            @Override
+            public List<LineModel> call(List<LineEntity> lineEntities) {
+                List<LineModel> lineModels = lineDataMapper.transform(lineEntities);
+                cacheManager.setLines(lineModels);
+                return lineModels;
             }
         });
     }
@@ -72,13 +84,25 @@ public class DataRepositoryImpl implements DataRepository {
     }
 
     @Override
-    public Observable<StopModel> getStopCall(String id) {
-        return apiManager.getStop(id).map(new Func1<StopEntity, StopModel>() {
+    public Observable<StopModel> getStopCall(String stop_id) {
+        return apiManager.getStop(stop_id).map(new Func1<StopEntity, StopModel>() {
             @Override
             public StopModel call(StopEntity stopEntity) {
                 StopModel stopModel = stopDataMapper.transform(stopEntity);
                 cacheManager.setStop(stopModel);
                 return stopModel;
+            }
+        });
+    }
+
+    @Override
+    public Observable<List<StopModel>> getStopsFromLine(String line_id) {
+        return apiManager.getStopsFromLine(line_id).map(new Func1<List<StopEntity>, List<StopModel>>() {
+            @Override
+            public List<StopModel> call(List<StopEntity> stopEntities) {
+                List<StopModel> stopModels = stopDataMapper.transform(stopEntities);
+                cacheManager.setStops(stopModels);
+                return stopModels;
             }
         });
     }

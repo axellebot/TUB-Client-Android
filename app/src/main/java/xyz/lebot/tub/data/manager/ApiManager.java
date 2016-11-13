@@ -17,9 +17,14 @@ public interface ApiManager {
 
     Observable<List<LineEntity>> getAllLines();
 
-    Observable<LineEntity> getLine(String id);
+    Observable<LineEntity> getLine(String line_id);
+
+    Observable<List<LineEntity>> getLinesFromStop(String stop_id);
 
     Observable<List<StopEntity>> getAllStops();
 
-    Observable<StopEntity> getStop(String id);
+    Observable<StopEntity> getStop(String stop_id);
+
+    Observable<List<StopEntity>> getStopsFromLine(String line_id);
+
 }

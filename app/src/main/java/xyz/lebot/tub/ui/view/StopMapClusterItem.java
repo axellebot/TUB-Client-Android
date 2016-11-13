@@ -9,17 +9,23 @@ import com.google.maps.android.clustering.ClusterItem;
 
 public class StopMapClusterItem implements ClusterItem {
 
-    private final LatLng mPosition;
+    private final LatLng position;
+    private final String id;
     private final String title;
 
-    public StopMapClusterItem(LatLng mPosition, String title) {
-        this.mPosition = mPosition;
+    public StopMapClusterItem(LatLng position, String id,String title) {
+        this.position = position;
+        this.id=id;
         this.title = title;
     }
 
     @Override
     public LatLng getPosition() {
-        return mPosition;
+        return position;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getTitle() {

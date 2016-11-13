@@ -9,4 +9,7 @@
     <string name="navigation_part_line_name">Lines</string>
     <string name="navigation_part_stop_name">Stops</string>
     <string name="navigation_part_map_name">Map</string>
+
+    <string name="card_stop_detail_default_title">Stop Label</string>
+    <string name="card_stop_detail_default_description">This is a CardView that has a fully customizable layout, in a nutshell, you can create your Card View and make it animated by the library!!</string>
 </resources>
