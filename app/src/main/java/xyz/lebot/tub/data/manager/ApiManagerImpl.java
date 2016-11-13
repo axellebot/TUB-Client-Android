@@ -28,7 +28,7 @@ public class ApiManagerImpl implements ApiManager {
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
                 .create();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(API_PROD_URL)
+                .baseUrl(API_DEV_URL)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
