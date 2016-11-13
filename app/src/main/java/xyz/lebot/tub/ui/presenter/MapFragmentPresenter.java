@@ -2,12 +2,10 @@ package xyz.lebot.tub.ui.presenter;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.maps.android.clustering.Cluster;
 
 import java.io.InputStream;
 import java.util.List;
 
-import okhttp3.ResponseBody;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -49,15 +47,50 @@ public class MapFragmentPresenter implements Presenter {
     public void pause() {
     }
 
-    public void onClusterItemClick(StopMapClusterItem clusterItem){
+    public void onStopClusterItemClicked(final StopMapClusterItem clusterItem) {
+        final String stopId = clusterItem.getId();
+        App.getInstance().getDataRepository().getStopCall(clusterItem.getId())
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<StopModel>() {
+                    @Override
+                    public void onCompleted() {
 
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onNext(final StopModel stopModel) {
+                        App.getInstance().getDataRepository().getLinesFromStop(stopModel.getId())
+                                .subscribeOn(Schedulers.newThread())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(new Observer<List<LineModel>>() {
+                                    @Override
+                                    public void onCompleted() {
+
+                                    }
+
+                                    @Override
+                                    public void onError(Throwable e) {
+                                        e.printStackTrace();
+                                    }
+
+                                    @Override
+                                    public void onNext(List<LineModel> lineModels) {
+                                        view.displayStopDetail(stopModel, lineModels);
+                                    }
+                                });
+                    }
+                });
     }
 
-    public void onClusterClick(Cluster<StopMapClusterItem> cluster){
-
+    public void onStopDetailCardClicked() {
+        view.animationCustomCardDown();
     }
-
-
 
     private void addStopsClusterToMap() {
         //initMapWithStopsCLuster
@@ -106,7 +139,7 @@ public class MapFragmentPresenter implements Presenter {
                 });
     }
 
-    private void addLineKMLToMap(String id){
+    private void addLineKMLToMap(String id) {
         App.getInstance().getDataRepository().getLineKMLCall(id)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())

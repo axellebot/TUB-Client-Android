@@ -24,5 +24,7 @@
     <!-- Stop Item Row -->
     <dimen name="item_row_stop_label_size">40sp</dimen>
 
-
+    <!-- Line From Stop Detail -->
+    <dimen name="item_row_line_stop_detail_circle_size">60dp</dimen>
+    <dimen name="item_row_line_stop_detail_number_size">40sp</dimen>
 </resources>

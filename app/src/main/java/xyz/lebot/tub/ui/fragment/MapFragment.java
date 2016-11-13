@@ -2,35 +2,36 @@ package xyz.lebot.tub.ui.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.clustering.Cluster;
 import com.google.maps.android.clustering.ClusterManager;
 import com.google.maps.android.kml.KmlLayer;
 
 import org.xmlpull.v1.XmlPullParserException;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collection;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import it.michelelacorte.swipeablecard.CustomCardAnimation;
 import xyz.lebot.tub.R;
 import xyz.lebot.tub.data.model.LineModel;
 import xyz.lebot.tub.data.model.StopModel;
-import xyz.lebot.tub.ui.adapter.StopMapClusterItemInfoWindowAdapter;
+import xyz.lebot.tub.ui.adapter.StopDetailLineListAdapter;
 import xyz.lebot.tub.ui.navigator.Navigator;
 import xyz.lebot.tub.ui.presenter.MapFragmentPresenter;
 import xyz.lebot.tub.ui.renderer.StopClusterRenderer;
@@ -41,16 +42,24 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     @BindView(R.id.fragment_map_map_view)
     MapView mMapView;
 
+
+    @BindView(R.id.card_stop_detail)
+    CardView cardStopDetail;
+    @BindView(R.id.card_stop_detail_title)
+    TextView tvTitle;
+    @BindView(R.id.card_stop_detail_recycler_view)
+    RecyclerView recyclerView;
+
     private Navigator navigator;
 
     private GoogleMap googleMap;
     private LayoutInflater inflater;
     private MapFragmentPresenter presenter;
 
+    private CustomCardAnimation cardAnim;
 
-    private ClusterManager<StopMapClusterItem> mClusterManager;
-    private StopMapClusterItemInfoWindowAdapter mClusterAdapter;
-    private StopClusterRenderer mClusterRenderer;
+
+    private StopDetailLineListAdapter adapter;
 
     public MapFragment() {
         // Required empty public constructor
@@ -73,15 +82,31 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         mMapView.onCreate(savedInstanceState);
         mMapView.getMapAsync(this);
 
+        cardAnim = new CustomCardAnimation(getContext(), cardStopDetail, 400);
+        cardStopDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.onStopDetailCardClicked();
+            }
+        });
         presenter = new MapFragmentPresenter(this, navigator);
+
+        //Adapter
+        this.adapter = new StopDetailLineListAdapter(this.getContext(),  null);
+
+        //RcyclerView
+        this.recyclerView.setAdapter(adapter);
+        this.recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+
         return view;
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
+
         googleMap.getUiSettings().setMyLocationButtonEnabled(true);
-        googleMap.getUiSettings().setZoomControlsEnabled(true);
+        googleMap.getUiSettings().setCompassEnabled(true);
 
         mMapView.onResume();
 
@@ -110,30 +135,19 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     public void addStopsToMapWithCluster(List<StopModel> stopModels) {
         final ClusterManager<StopMapClusterItem> mClusterManager = new ClusterManager<>(this.getContext(), googleMap);
-        final StopMapClusterItemInfoWindowAdapter mClusterAdapter = new StopMapClusterItemInfoWindowAdapter(this.inflater);
         final StopClusterRenderer mClusterRenderer = new StopClusterRenderer(this.getContext(), googleMap, mClusterManager);
 
         mClusterManager.setRenderer(mClusterRenderer);
-        mClusterManager.getMarkerCollection().setOnInfoWindowAdapter(mClusterAdapter);
         mClusterManager.setOnClusterItemClickListener(new ClusterManager.OnClusterItemClickListener<StopMapClusterItem>() {
             @Override
             public boolean onClusterItemClick(StopMapClusterItem stopMapClusterItem) {
-                presenter.onClusterItemClick(stopMapClusterItem);
-                mClusterAdapter.setCurrentClusterItem(stopMapClusterItem);
+                presenter.onStopClusterItemClicked(stopMapClusterItem);
                 return false;
             }
         });
         mClusterManager.setOnClusterClickListener(new ClusterManager.OnClusterClickListener<StopMapClusterItem>() {
             @Override
             public boolean onClusterClick(Cluster<StopMapClusterItem> cluster) {
-                presenter.onClusterClick(cluster);
-                String title = "";
-                Collection<StopMapClusterItem> clusters = cluster.getItems();
-                for (StopMapClusterItem clusterX : clusters) {
-                    title += clusterX.getTitle() + "\n";
-                }
-                StopMapClusterItem stopMapClusterItem = new StopMapClusterItem(cluster.getPosition(), title);
-                mClusterAdapter.setCurrentClusterItem(stopMapClusterItem);
                 return false;
             }
         });
@@ -141,26 +155,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         for (StopModel stopModel : stopModels) {
             mClusterManager.addItem(new StopMapClusterItem(
                     new LatLng(Double.parseDouble(stopModel.getLatitude()), Double.parseDouble(stopModel.getLongitude())),
+                    stopModel.getId(),
                     stopModel.getLabel()
             ));
         }
 
-        googleMap.setInfoWindowAdapter(mClusterAdapter);
         googleMap.setOnCameraIdleListener(mClusterManager);
         googleMap.setOnMarkerClickListener(mClusterManager);
-    }
-
-    public void addStopsToMap(List<StopModel> stopModels) {
-        for (StopModel stopModel : stopModels) {
-            googleMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(
-                            Double.parseDouble(stopModel.getLatitude()),
-                            Double.parseDouble(stopModel.getLongitude())))
-                    .title(stopModel.getLabel())
-                    .snippet(stopModel.getId() + "-" + stopModel.getLabel())
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_beenhere_color_accent_24dp))
-            );
-        }
     }
 
     public void addLineKMLToMap(InputStream inputStream) {
@@ -171,4 +172,19 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             e.printStackTrace();
         }
     }
+
+    public void displayStopDetail(StopModel stopModel, List<LineModel> lineModels) {
+        this.tvTitle.setText(stopModel.getLabel());
+        this.initList(lineModels);
+        this.cardAnim.animationCustomCardUp();
+    }
+
+    public void animationCustomCardDown() {
+        this.cardAnim.animationCustomCardDown();
+    }
+
+    public void initList(List<LineModel> lineModels) {
+        adapter.swap(lineModels);
+    }
+
 }
