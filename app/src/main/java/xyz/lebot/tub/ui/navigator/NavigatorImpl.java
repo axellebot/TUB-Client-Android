@@ -114,7 +114,7 @@ public class NavigatorImpl implements Navigator, Serializable {
     }
 
     private void addFragmentClassWithBundleToMapPart(Class<?> fragmentClass,Bundle args){
-        pagerAdapter.addFragmentClassWithBundleToStackForPosition(fragmentClass, args, 0);
+        pagerAdapter.addFragmentClassWithBundleToStackForPosition(fragmentClass, args, 2);
     }
 
     private void navigateBackLinePart(){
