@@ -15,11 +15,15 @@ public interface DataRepository {
     //Api
     Observable<List<LineModel>> getAllLinesCall();
 
-    Observable<LineModel> getLineCall(String id);
+    Observable<LineModel> getLineCall(String line_id);
+
+    Observable<List<LineModel>> getLinesFromStop(String stop_id);
 
     Observable<List<StopModel>> getAllStopsCall();
 
-    Observable<StopModel> getStopCall(String id);
+    Observable<StopModel> getStopCall(String stop_id);
+
+    Observable<List<StopModel>> getStopsFromLine(String line_id);
 
     //Cache
     List<LineModel> getAllLinesCache();
