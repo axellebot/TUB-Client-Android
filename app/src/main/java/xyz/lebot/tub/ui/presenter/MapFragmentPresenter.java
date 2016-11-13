@@ -2,6 +2,7 @@ package xyz.lebot.tub.ui.presenter;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.maps.android.clustering.Cluster;
 
 import java.io.InputStream;
 import java.util.List;
@@ -15,6 +16,7 @@ import xyz.lebot.tub.data.model.LineModel;
 import xyz.lebot.tub.data.model.StopModel;
 import xyz.lebot.tub.ui.fragment.MapFragment;
 import xyz.lebot.tub.ui.navigator.Navigator;
+import xyz.lebot.tub.ui.view.StopMapClusterItem;
 
 /**
  * Created by axell on 05/11/2016.
@@ -46,6 +48,16 @@ public class MapFragmentPresenter implements Presenter {
     @Override
     public void pause() {
     }
+
+    public void onClusterItemClick(StopMapClusterItem clusterItem){
+
+    }
+
+    public void onClusterClick(Cluster<StopMapClusterItem> cluster){
+
+    }
+
+
 
     private void addStopsClusterToMap() {
         //initMapWithStopsCLuster
@@ -115,4 +127,5 @@ public class MapFragmentPresenter implements Presenter {
                     }
                 });
     }
+
 }

@@ -118,6 +118,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         mClusterManager.setOnClusterItemClickListener(new ClusterManager.OnClusterItemClickListener<StopMapClusterItem>() {
             @Override
             public boolean onClusterItemClick(StopMapClusterItem stopMapClusterItem) {
+                presenter.onClusterItemClick(stopMapClusterItem);
                 mClusterAdapter.setCurrentClusterItem(stopMapClusterItem);
                 return false;
             }
@@ -125,6 +126,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         mClusterManager.setOnClusterClickListener(new ClusterManager.OnClusterClickListener<StopMapClusterItem>() {
             @Override
             public boolean onClusterClick(Cluster<StopMapClusterItem> cluster) {
+                presenter.onClusterClick(cluster);
                 String title = "";
                 Collection<StopMapClusterItem> clusters = cluster.getItems();
                 for (StopMapClusterItem clusterX : clusters) {
