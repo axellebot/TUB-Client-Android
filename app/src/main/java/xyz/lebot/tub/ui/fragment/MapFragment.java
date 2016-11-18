@@ -32,6 +32,7 @@ import xyz.lebot.tub.R;
 import xyz.lebot.tub.data.model.LineModel;
 import xyz.lebot.tub.data.model.StopModel;
 import xyz.lebot.tub.ui.adapter.StopDetailLineListAdapter;
+import xyz.lebot.tub.ui.adapter.StopMapClusterItemInfoWindowAdapter;
 import xyz.lebot.tub.ui.navigator.Navigator;
 import xyz.lebot.tub.ui.presenter.MapFragmentPresenter;
 import xyz.lebot.tub.ui.renderer.StopClusterRenderer;
@@ -58,8 +59,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     private CustomCardAnimation cardAnim;
 
-
     private StopDetailLineListAdapter adapter;
+
+
+    private ClusterManager<StopMapClusterItem> mClusterManager;
+    private StopMapClusterItemInfoWindowAdapter mClusterAdapter;
+    private StopClusterRenderer mClusterRenderer;
 
     public MapFragment() {
         // Required empty public constructor
@@ -135,19 +140,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     public void addStopsToMapWithCluster(List<StopModel> stopModels) {
         final ClusterManager<StopMapClusterItem> mClusterManager = new ClusterManager<>(this.getContext(), googleMap);
+        final StopMapClusterItemInfoWindowAdapter mClusterAdapter = new StopMapClusterItemInfoWindowAdapter(this.inflater);
         final StopClusterRenderer mClusterRenderer = new StopClusterRenderer(this.getContext(), googleMap, mClusterManager);
 
         mClusterManager.setRenderer(mClusterRenderer);
+        mClusterManager.getMarkerCollection().setOnInfoWindowAdapter(mClusterAdapter);
         mClusterManager.setOnClusterItemClickListener(new ClusterManager.OnClusterItemClickListener<StopMapClusterItem>() {
             @Override
             public boolean onClusterItemClick(StopMapClusterItem stopMapClusterItem) {
-                presenter.onStopClusterItemClicked(stopMapClusterItem);
-                return false;
-            }
-        });
-        mClusterManager.setOnClusterClickListener(new ClusterManager.OnClusterClickListener<StopMapClusterItem>() {
-            @Override
-            public boolean onClusterClick(Cluster<StopMapClusterItem> cluster) {
+                mClusterAdapter.setCurrentClusterItem(stopMapClusterItem);
                 return false;
             }
         });
@@ -160,6 +161,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             ));
         }
 
+        googleMap.setInfoWindowAdapter(mClusterAdapter);
         googleMap.setOnCameraIdleListener(mClusterManager);
         googleMap.setOnMarkerClickListener(mClusterManager);
     }
