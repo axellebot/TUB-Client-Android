@@ -40,7 +40,11 @@
                 android:layout_height="match_parent" />
         </LinearLayout>
     </android.support.design.widget.CoordinatorLayout>
-
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:src="@drawable/shadow_top"
+        android:layout_above="@id/activity_main_bottom_navigation"/>
     <xyz.lebot.tub.ui.view.CustomBottomNavigationView
         android:id="@id/activity_main_bottom_navigation"
         android:layout_width="match_parent"
@@ -51,6 +55,7 @@
         app:itemIconTint="@color/bottom_navigation_item_color"
         app:itemTextColor="@color/bottom_navigation_item_color"
         app:menu="@menu/activity_main_bottom_navigation"
-        design:menu="@menu/activity_main_bottom_navigation" />
+        design:menu="@menu/activity_main_bottom_navigation"
+        />
 
 </RelativeLayout>
