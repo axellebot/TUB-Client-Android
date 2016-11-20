@@ -8,7 +8,7 @@
 
     <string name="navigation_part_line_name">Lines</string>
     <string name="navigation_part_stop_name">Stops</string>
-    <string name="navigation_part_map_name">Map</string>
+    <string name="navigation_part_home_name">Home</string>
 
     <string name="window_map_stop_info_default_title">Stop Label</string>
     <string name="window_map_stop_info_default_description">Description</string>
