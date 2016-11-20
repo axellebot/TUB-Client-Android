@@ -24,6 +24,6 @@
         </LinearLayout>
     </ScrollView>
 
-    <include layout="@layout/bottom_sheet_journey_search"/>
+    <include layout="@layout/bottom_sheet_overview"/>
 
 </android.support.design.widget.CoordinatorLayout>

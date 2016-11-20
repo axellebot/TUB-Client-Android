@@ -14,7 +14,7 @@
         android:orientation="vertical">
 
         <android.support.v7.widget.LinearLayoutCompat
-            android:id="@+id/bottom_sheet_journey_search_top_bar"
+            android:id="@+id/bottom_sheet_overview_top_bar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/bottom_sheet_journey_search_top_bar_height"
             android:gravity="center"
@@ -30,7 +30,7 @@
                 android:drawableTop="@drawable/ic_star_border"
                 android:foreground="?attr/selectableItemBackground"
                 android:padding="5dp"
-                android:text="@string/bottom_sheet_journey_search_button_fav"
+                android:text="@string/bottom_sheet_overview_btn_fav"
                 android:textColor="@color/white" />
 
 
@@ -44,15 +44,12 @@
                 android:drawableTop="@drawable/ic_directions_bus_24dp"
                 android:foreground="?attr/selectableItemBackground"
                 android:padding="5dp"
-                android:text="@string/bottom_sheet_journey_search_button_bus"
+                android:text="@string/bottom_sheet_overview_btn_bus"
                 android:textColor="@color/white" />
 
 
         </android.support.v7.widget.LinearLayoutCompat>
 
-        <me.grantland.widget.AutofitTextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="TEST" />
+       
     </android.support.v7.widget.LinearLayoutCompat>
 </android.support.v4.widget.NestedScrollView>
