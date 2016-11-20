@@ -1,16 +1,27 @@
 package xyz.lebot.tub.ui.adapter;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
-import com.google.maps.android.clustering.ClusterItem;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+import xyz.lebot.tub.App;
 import xyz.lebot.tub.R;
+import xyz.lebot.tub.data.model.LineModel;
 import xyz.lebot.tub.ui.view.StopMapClusterItem;
 
 /**
@@ -21,12 +32,21 @@ public class StopMapClusterItemInfoWindowAdapter implements GoogleMap.InfoWindow
 
 
     private final View view;
-    @BindView(R.id.item_map_window_stop_info_title)
-    TextView tvTitle;
-    private ClusterItem currentClusterItem;
+    private final Context context;
+    private final LayoutInflater layoutInflater;
+    private boolean ready;
+    @BindView(R.id.window_map_stop_info_title)
+    TextView windowTitle;
 
-    public StopMapClusterItemInfoWindowAdapter(LayoutInflater layoutInflater) {
-        view = layoutInflater.inflate(R.layout.item_map_window_stop_info, null);
+    @BindView(R.id.window_map_stop_info_content)
+    LinearLayoutCompat contentView;
+
+    private StopMapClusterItem currentClusterItem;
+
+    public StopMapClusterItemInfoWindowAdapter(Context context) {
+        this.context = context;
+        this.layoutInflater = LayoutInflater.from(context);
+        this.view = this.layoutInflater.inflate(R.layout.window_map_stop_info, null);
         ButterKnife.bind(this, view);
     }
 
@@ -37,14 +57,46 @@ public class StopMapClusterItemInfoWindowAdapter implements GoogleMap.InfoWindow
 
     @Override
     public View getInfoContents(Marker marker) {
-        if (currentClusterItem instanceof StopMapClusterItem) {
-            StopMapClusterItem stopMapClusterItem = (StopMapClusterItem) currentClusterItem;
-            tvTitle.setText(stopMapClusterItem.getTitle());
-        }
+        this.windowTitle.setText(currentClusterItem.getTitle());
+        ready = false;
+        App.getInstance().getDataRepository().getLinesFromStop(this.currentClusterItem.getId())
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<List<LineModel>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onNext(List<LineModel> lineModels) {
+                        addLineDetail(lineModels);
+                    }
+                });
+
         return view;
     }
 
-    public void setCurrentClusterItem(ClusterItem currentClusterItem) {
+    public void setCurrentClusterItem(StopMapClusterItem currentClusterItem) {
         this.currentClusterItem = currentClusterItem;
+    }
+
+    private void addLineDetail(List<LineModel> lineModels) {
+        for (LineModel lineModel : lineModels) {
+            View itemView = this.layoutInflater.inflate(R.layout.item_row_line_stop_detail, null);
+            TextView tv = (TextView) itemView.findViewById(R.id.item_row_line_stop_detail_number);
+            tv.setText(lineModel.getNumber());
+
+            int color = Color.parseColor(lineModel.getColor());
+
+            GradientDrawable bgShape = (GradientDrawable) tv.getBackground();
+            bgShape.setColor(color);
+            this.contentView.addView(itemView);
+        }
     }
 }

@@ -27,7 +27,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import it.michelelacorte.swipeablecard.CustomCardAnimation;
 import xyz.lebot.tub.R;
 import xyz.lebot.tub.data.model.LineModel;
 import xyz.lebot.tub.data.model.StopModel;
@@ -43,21 +42,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     @BindView(R.id.fragment_map_map_view)
     MapView mMapView;
 
-
-    @BindView(R.id.card_stop_detail)
-    CardView cardStopDetail;
-    @BindView(R.id.card_stop_detail_title)
-    TextView tvTitle;
-    @BindView(R.id.card_stop_detail_recycler_view)
-    RecyclerView recyclerView;
-
     private Navigator navigator;
 
     private GoogleMap googleMap;
     private LayoutInflater inflater;
     private MapFragmentPresenter presenter;
-
-    private CustomCardAnimation cardAnim;
 
     private StopDetailLineListAdapter adapter;
 
@@ -87,21 +76,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         mMapView.onCreate(savedInstanceState);
         mMapView.getMapAsync(this);
 
-        cardAnim = new CustomCardAnimation(getContext(), cardStopDetail, 400);
-        cardStopDetail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                presenter.onStopDetailCardClicked();
-            }
-        });
         presenter = new MapFragmentPresenter(this, navigator);
-
-        //Adapter
-        this.adapter = new StopDetailLineListAdapter(this.getContext(),  null);
-
-        //RcyclerView
-        this.recyclerView.setAdapter(adapter);
-        this.recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         return view;
     }
@@ -111,10 +86,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         this.googleMap = googleMap;
 
         googleMap.getUiSettings().setMyLocationButtonEnabled(true);
-        googleMap.getUiSettings().setCompassEnabled(true);
 
         mMapView.onResume();
-
         presenter.initialize();
     }
 
@@ -139,17 +112,23 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     }
 
     public void addStopsToMapWithCluster(List<StopModel> stopModels) {
-        final ClusterManager<StopMapClusterItem> mClusterManager = new ClusterManager<>(this.getContext(), googleMap);
-        final StopMapClusterItemInfoWindowAdapter mClusterAdapter = new StopMapClusterItemInfoWindowAdapter(this.inflater);
-        final StopClusterRenderer mClusterRenderer = new StopClusterRenderer(this.getContext(), googleMap, mClusterManager);
+        this.mClusterManager = new ClusterManager<>(this.getContext(), googleMap);
+        this.mClusterAdapter = new StopMapClusterItemInfoWindowAdapter(this.getContext());
+        this.mClusterRenderer = new StopClusterRenderer(this.getContext(), googleMap, mClusterManager);
 
         mClusterManager.setRenderer(mClusterRenderer);
         mClusterManager.getMarkerCollection().setOnInfoWindowAdapter(mClusterAdapter);
         mClusterManager.setOnClusterItemClickListener(new ClusterManager.OnClusterItemClickListener<StopMapClusterItem>() {
             @Override
             public boolean onClusterItemClick(StopMapClusterItem stopMapClusterItem) {
-                mClusterAdapter.setCurrentClusterItem(stopMapClusterItem);
+                presenter.onStopClusterItemClicked(stopMapClusterItem);
                 return false;
+            }
+        });
+        mClusterManager.setOnClusterClickListener(new ClusterManager.OnClusterClickListener<StopMapClusterItem>() {
+            @Override
+            public boolean onClusterClick(Cluster<StopMapClusterItem> cluster) {
+                return true;
             }
         });
 
@@ -175,18 +154,16 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         }
     }
 
-    public void displayStopDetail(StopModel stopModel, List<LineModel> lineModels) {
-        this.tvTitle.setText(stopModel.getLabel());
-        this.initList(lineModels);
-        this.cardAnim.animationCustomCardUp();
+
+    public ClusterManager<StopMapClusterItem> getmClusterManager() {
+        return mClusterManager;
     }
 
-    public void animationCustomCardDown() {
-        this.cardAnim.animationCustomCardDown();
+    public StopMapClusterItemInfoWindowAdapter getmClusterAdapter() {
+        return mClusterAdapter;
     }
 
-    public void initList(List<LineModel> lineModels) {
-        adapter.swap(lineModels);
+    public StopClusterRenderer getmClusterRenderer() {
+        return mClusterRenderer;
     }
-
 }

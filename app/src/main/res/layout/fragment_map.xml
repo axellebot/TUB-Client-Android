@@ -4,8 +4,6 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:orientation="vertical">
 
-<include layout="@layout/card_stop_info" />
-
 <com.google.android.gms.maps.MapView
     android:id="@+id/fragment_map_map_view"
     android:layout_width="match_parent"
