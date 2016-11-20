@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:fillViewport="true"
-        app:layout_anchor="@id/bottom_sheet">
+        app:layout_anchor="@id/bottom_sheet_overview">
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -70,7 +70,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         ButterKnife.bind(this, view);
 
 
-        View bottomSheetDialog = view.findViewById(R.id.bottom_sheet);
+        View bottomSheetDialog = view.findViewById(R.id.bottom_sheet_overview);
         this.mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheetDialog);
 
         mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
