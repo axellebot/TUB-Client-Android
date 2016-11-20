@@ -47,49 +47,8 @@ public class MapFragmentPresenter implements Presenter {
     public void pause() {
     }
 
-    public void onStopClusterItemClicked(final StopMapClusterItem clusterItem) {
-        final String stopId = clusterItem.getId();
-        App.getInstance().getDataRepository().getStopCall(clusterItem.getId())
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<StopModel>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        e.printStackTrace();
-                    }
-
-                    @Override
-                    public void onNext(final StopModel stopModel) {
-                        App.getInstance().getDataRepository().getLinesFromStop(stopModel.getId())
-                                .subscribeOn(Schedulers.newThread())
-                                .observeOn(AndroidSchedulers.mainThread())
-                                .subscribe(new Observer<List<LineModel>>() {
-                                    @Override
-                                    public void onCompleted() {
-
-                                    }
-
-                                    @Override
-                                    public void onError(Throwable e) {
-                                        e.printStackTrace();
-                                    }
-
-                                    @Override
-                                    public void onNext(List<LineModel> lineModels) {
-                                        view.displayStopDetail(stopModel, lineModels);
-                                    }
-                                });
-                    }
-                });
-    }
-
-    public void onStopDetailCardClicked() {
-        view.animationCustomCardDown();
+    public void onStopClusterItemClicked(final StopMapClusterItem stopMapClusterItem) {
+        view.getmClusterAdapter().setCurrentClusterItem(stopMapClusterItem);
     }
 
     private void addStopsClusterToMap() {

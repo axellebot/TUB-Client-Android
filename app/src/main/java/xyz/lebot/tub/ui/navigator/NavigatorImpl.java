@@ -8,6 +8,7 @@ import java.io.Serializable;
 import xyz.lebot.tub.R;
 import xyz.lebot.tub.ui.activity.MainActivity;
 import xyz.lebot.tub.ui.adapter.MainActivityFragmentPagerAdapter;
+import xyz.lebot.tub.ui.fragment.JourneySearchBottomSheetDialogFragment;
 import xyz.lebot.tub.ui.fragment.LineDetailFragment;
 import xyz.lebot.tub.ui.fragment.LineFragment;
 import xyz.lebot.tub.ui.fragment.MapFragment;
@@ -30,13 +31,23 @@ public class NavigatorImpl implements Navigator, Serializable {
     }
 
     @Override
+    public void initMapPart() {
+        Class<?> fragmentClass = MapFragment.class;
+
+        Bundle args = new Bundle();
+        args.putSerializable("NAVIGATOR", this);
+
+        addFragmentClassWithBundleToMapPart(fragmentClass, args);
+    }
+
+    @Override
     public void initLinePart() {
         Class<?> fragmentClass = LineFragment.class;
 
         Bundle args = new Bundle();
         args.putSerializable("NAVIGATOR", this);
 
-        addFragmentClassWithBundleToLinePart(fragmentClass,args);
+        addFragmentClassWithBundleToLinePart(fragmentClass, args);
     }
 
     @Override
@@ -46,49 +57,41 @@ public class NavigatorImpl implements Navigator, Serializable {
         Bundle args = new Bundle();
         args.putSerializable("NAVIGATOR", this);
 
-        addFragmentClassWithBundleToStopPart(fragmentClass,args);
+        addFragmentClassWithBundleToStopPart(fragmentClass, args);
     }
 
     @Override
-    public void initMapPart() {
-        Class<?> fragmentClass = MapFragment.class;
-
-        Bundle args = new Bundle();
-        args.putSerializable("NAVIGATOR", this);
-
-        addFragmentClassWithBundleToMapPart(fragmentClass,args);
+    public void navigateToPartMap() {
+        viewPager.setCurrentItem(0);
+        mainActivity.setSelecteBottomNavigation(0);
+        mainActivity.setTitle(mainActivity.getResources().getString(R.string.navigation_part_map_name));
     }
 
     @Override
     public void navigateToPartLine() {
-        viewPager.setCurrentItem(0);
-        mainActivity.setSelecteBottomNavigation(0);
+        viewPager.setCurrentItem(1);
+        mainActivity.setSelecteBottomNavigation(1);
         mainActivity.setTitle(mainActivity.getResources().getString(R.string.navigation_part_line_name));
     }
 
     @Override
     public void navigateToPartStop() {
-        viewPager.setCurrentItem(1);
-        mainActivity.setTitle(mainActivity.getResources().getString(R.string.navigation_part_stop_name));
-    }
-
-    @Override
-    public void navigateToPartMap() {
         viewPager.setCurrentItem(2);
-        mainActivity.setTitle(mainActivity.getResources().getString(R.string.navigation_part_map_name));
+        mainActivity.setSelecteBottomNavigation(2);
+        mainActivity.setTitle(mainActivity.getResources().getString(R.string.navigation_part_stop_name));
     }
 
     @Override
     public void navigateBack() {
         switch (mainActivity.getSelectedBottomNavigation()) {
             case 0:
-                navigateBackLinePart();
+                navigateBackMapPart();
                 break;
             case 1:
-                navigateBackStopPart();
+                navigateBackLinePart();
                 break;
             case 2:
-                navigateBackMapPart();
+                navigateBackStopPart();
                 break;
         }
     }
@@ -102,28 +105,32 @@ public class NavigatorImpl implements Navigator, Serializable {
         args.putSerializable("NAVIGATOR", this);
         args.putString("LINE_ID", lineId);
 
-        addFragmentClassWithBundleToLinePart(fragmentClass,args);
+        addFragmentClassWithBundleToLinePart(fragmentClass, args);
     }
 
-    private void addFragmentClassWithBundleToLinePart(Class<?> fragmentClass,Bundle args){
+    private void addFragmentClassWithBundleToMapPart(Class<?> fragmentClass, Bundle args) {
         pagerAdapter.addFragmentClassWithBundleToStackForPosition(fragmentClass, args, 0);
     }
 
-    private void addFragmentClassWithBundleToStopPart(Class<?> fragmentClass,Bundle args){
+    private void addFragmentClassWithBundleToLinePart(Class<?> fragmentClass, Bundle args) {
         pagerAdapter.addFragmentClassWithBundleToStackForPosition(fragmentClass, args, 1);
     }
 
-    private void addFragmentClassWithBundleToMapPart(Class<?> fragmentClass,Bundle args){
+    private void addFragmentClassWithBundleToStopPart(Class<?> fragmentClass, Bundle args) {
         pagerAdapter.addFragmentClassWithBundleToStackForPosition(fragmentClass, args, 2);
     }
 
-    private void navigateBackLinePart(){
+
+    private void navigateBackMapPart() {
         pagerAdapter.dequeueFragmentClassStackForPosition(0);
     }
-    private void navigateBackStopPart(){
+
+    private void navigateBackLinePart() {
         pagerAdapter.dequeueFragmentClassStackForPosition(1);
     }
-    private void navigateBackMapPart(){
+
+    private void navigateBackStopPart() {
         pagerAdapter.dequeueFragmentClassStackForPosition(2);
     }
+
 }

@@ -1,14 +1,11 @@
 package xyz.lebot.tub.ui.fragment;
 
 import android.os.Bundle;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -27,11 +24,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import it.michelelacorte.swipeablecard.CustomCardAnimation;
 import xyz.lebot.tub.R;
-import xyz.lebot.tub.data.model.LineModel;
 import xyz.lebot.tub.data.model.StopModel;
-import xyz.lebot.tub.ui.adapter.StopDetailLineListAdapter;
+import xyz.lebot.tub.ui.adapter.StopMapClusterItemInfoWindowAdapter;
 import xyz.lebot.tub.ui.navigator.Navigator;
 import xyz.lebot.tub.ui.presenter.MapFragmentPresenter;
 import xyz.lebot.tub.ui.renderer.StopClusterRenderer;
@@ -42,24 +37,20 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     @BindView(R.id.fragment_map_map_view)
     MapView mMapView;
 
-
-    @BindView(R.id.card_stop_detail)
-    CardView cardStopDetail;
-    @BindView(R.id.card_stop_detail_title)
-    TextView tvTitle;
-    @BindView(R.id.card_stop_detail_recycler_view)
-    RecyclerView recyclerView;
-
     private Navigator navigator;
 
-    private GoogleMap googleMap;
     private LayoutInflater inflater;
     private MapFragmentPresenter presenter;
 
-    private CustomCardAnimation cardAnim;
 
+    //GoogleMap
+    private GoogleMap googleMap;
+    private ClusterManager<StopMapClusterItem> mClusterManager;
+    private StopMapClusterItemInfoWindowAdapter mClusterAdapter;
+    private StopClusterRenderer mClusterRenderer;
 
-    private StopDetailLineListAdapter adapter;
+    //BottomSheet
+    private BottomSheetBehavior mBottomSheetBehavior;
 
     public MapFragment() {
         // Required empty public constructor
@@ -79,24 +70,16 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         ButterKnife.bind(this, view);
 
 
+        View bottomSheetDialog = view.findViewById(R.id.bottom_sheet);
+        this.mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheetDialog);
+
+        mBottomSheetBehavior.setPeekHeight(300);
+        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+
         mMapView.onCreate(savedInstanceState);
         mMapView.getMapAsync(this);
 
-        cardAnim = new CustomCardAnimation(getContext(), cardStopDetail, 400);
-        cardStopDetail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                presenter.onStopDetailCardClicked();
-            }
-        });
         presenter = new MapFragmentPresenter(this, navigator);
-
-        //Adapter
-        this.adapter = new StopDetailLineListAdapter(this.getContext(),  null);
-
-        //RcyclerView
-        this.recyclerView.setAdapter(adapter);
-        this.recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         return view;
     }
@@ -106,10 +89,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         this.googleMap = googleMap;
 
         googleMap.getUiSettings().setMyLocationButtonEnabled(true);
-        googleMap.getUiSettings().setCompassEnabled(true);
 
         mMapView.onResume();
-
         presenter.initialize();
     }
 
@@ -134,10 +115,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     }
 
     public void addStopsToMapWithCluster(List<StopModel> stopModels) {
-        final ClusterManager<StopMapClusterItem> mClusterManager = new ClusterManager<>(this.getContext(), googleMap);
-        final StopClusterRenderer mClusterRenderer = new StopClusterRenderer(this.getContext(), googleMap, mClusterManager);
+        this.mClusterManager = new ClusterManager<>(this.getContext(), googleMap);
+        this.mClusterAdapter = new StopMapClusterItemInfoWindowAdapter(this.getContext());
+        this.mClusterRenderer = new StopClusterRenderer(this.getContext(), googleMap, mClusterManager);
 
         mClusterManager.setRenderer(mClusterRenderer);
+        mClusterManager.getMarkerCollection().setOnInfoWindowAdapter(mClusterAdapter);
         mClusterManager.setOnClusterItemClickListener(new ClusterManager.OnClusterItemClickListener<StopMapClusterItem>() {
             @Override
             public boolean onClusterItemClick(StopMapClusterItem stopMapClusterItem) {
@@ -148,7 +131,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         mClusterManager.setOnClusterClickListener(new ClusterManager.OnClusterClickListener<StopMapClusterItem>() {
             @Override
             public boolean onClusterClick(Cluster<StopMapClusterItem> cluster) {
-                return false;
+                return true;
             }
         });
 
@@ -160,6 +143,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             ));
         }
 
+        googleMap.setInfoWindowAdapter(mClusterAdapter);
         googleMap.setOnCameraIdleListener(mClusterManager);
         googleMap.setOnMarkerClickListener(mClusterManager);
     }
@@ -173,18 +157,16 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         }
     }
 
-    public void displayStopDetail(StopModel stopModel, List<LineModel> lineModels) {
-        this.tvTitle.setText(stopModel.getLabel());
-        this.initList(lineModels);
-        this.cardAnim.animationCustomCardUp();
+
+    public ClusterManager<StopMapClusterItem> getmClusterManager() {
+        return mClusterManager;
     }
 
-    public void animationCustomCardDown() {
-        this.cardAnim.animationCustomCardDown();
+    public StopMapClusterItemInfoWindowAdapter getmClusterAdapter() {
+        return mClusterAdapter;
     }
 
-    public void initList(List<LineModel> lineModels) {
-        adapter.swap(lineModels);
+    public StopClusterRenderer getmClusterRenderer() {
+        return mClusterRenderer;
     }
-
 }
