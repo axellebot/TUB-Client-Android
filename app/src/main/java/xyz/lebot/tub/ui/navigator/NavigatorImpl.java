@@ -8,10 +8,9 @@ import java.io.Serializable;
 import xyz.lebot.tub.R;
 import xyz.lebot.tub.ui.activity.MainActivity;
 import xyz.lebot.tub.ui.adapter.MainActivityFragmentPagerAdapter;
-import xyz.lebot.tub.ui.fragment.JourneySearchBottomSheetDialogFragment;
+import xyz.lebot.tub.ui.fragment.HomeFragment;
 import xyz.lebot.tub.ui.fragment.LineDetailFragment;
 import xyz.lebot.tub.ui.fragment.LineFragment;
-import xyz.lebot.tub.ui.fragment.MapFragment;
 import xyz.lebot.tub.ui.fragment.StopFragment;
 
 /**
@@ -31,8 +30,8 @@ public class NavigatorImpl implements Navigator, Serializable {
     }
 
     @Override
-    public void initMapPart() {
-        Class<?> fragmentClass = MapFragment.class;
+    public void initHomePart() {
+        Class<?> fragmentClass = HomeFragment.class;
 
         Bundle args = new Bundle();
         args.putSerializable("NAVIGATOR", this);
@@ -61,31 +60,37 @@ public class NavigatorImpl implements Navigator, Serializable {
     }
 
     @Override
-    public void navigateToPartMap() {
+    public void navigateToPartHome() {
         viewPager.setCurrentItem(0);
         mainActivity.setSelecteBottomNavigation(0);
-        mainActivity.setTitle(mainActivity.getResources().getString(R.string.navigation_part_map_name));
+        mainActivity.setToolbarTitle(mainActivity.getResources().getString(R.string.navigation_part_map_name));
+        int res = R.color.colorPrimaryBlue;
+        changeColor(res);
     }
 
     @Override
     public void navigateToPartLine() {
         viewPager.setCurrentItem(1);
         mainActivity.setSelecteBottomNavigation(1);
-        mainActivity.setTitle(mainActivity.getResources().getString(R.string.navigation_part_line_name));
+        mainActivity.setToolbarTitle(mainActivity.getResources().getString(R.string.navigation_part_line_name));
+        int res = R.color.colorPrimaryGreen;
+        changeColor(res);
     }
 
     @Override
     public void navigateToPartStop() {
         viewPager.setCurrentItem(2);
         mainActivity.setSelecteBottomNavigation(2);
-        mainActivity.setTitle(mainActivity.getResources().getString(R.string.navigation_part_stop_name));
+        mainActivity.setToolbarTitle(mainActivity.getResources().getString(R.string.navigation_part_stop_name));
+        int res = R.color.colorPrimaryRed;
+        changeColor(res);
     }
 
     @Override
     public void navigateBack() {
         switch (mainActivity.getSelectedBottomNavigation()) {
             case 0:
-                navigateBackMapPart();
+                navigateBackHomePart();
                 break;
             case 1:
                 navigateBackLinePart();
@@ -121,7 +126,7 @@ public class NavigatorImpl implements Navigator, Serializable {
     }
 
 
-    private void navigateBackMapPart() {
+    private void navigateBackHomePart() {
         pagerAdapter.dequeueFragmentClassStackForPosition(0);
     }
 
@@ -133,4 +138,10 @@ public class NavigatorImpl implements Navigator, Serializable {
         pagerAdapter.dequeueFragmentClassStackForPosition(2);
     }
 
+
+    private void changeColor(int res) {
+        int color = mainActivity.getResources().getColor(res);
+        mainActivity.setToolbarColor(color);
+        mainActivity.setBottomNavigationColor(res);
+    }
 }

@@ -49,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
         navigator = new NavigatorImpl(this, navigator, viewPager, (MainActivityFragmentPagerAdapter) mPagerAdapter);
         navigator.initLinePart();
         navigator.initStopPart();
-        navigator.initMapPart();
+        navigator.initHomePart();
+        navigator.navigateToPartHome();
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.activity_main_bottom_navigation_map_action:
                         SELECTED_PART = 2;
-                        navigator.navigateToPartMap();
+                        navigator.navigateToPartHome();
                         break;
                 }
                 return true;
@@ -105,8 +106,15 @@ public class MainActivity extends AppCompatActivity {
         navigator.navigateBack();
     }
 
-    public void setTitle(String title) {
+    public void setToolbarTitle(String title) {
         toolbar.setTitle(title);
+    }
+
+    public void setToolbarColor(int color) {
+        toolbar.setBackgroundColor(color);
+    }
+    public  void setBottomNavigationColor(int res){
+        bottomNavigationView.setItemBackgroundResource(res);
     }
 
     public void setSelecteBottomNavigation(int i) {
