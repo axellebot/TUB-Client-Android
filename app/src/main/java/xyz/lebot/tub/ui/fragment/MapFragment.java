@@ -1,14 +1,11 @@
 package xyz.lebot.tub.ui.fragment;
 
 import android.os.Bundle;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -28,9 +25,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import xyz.lebot.tub.R;
-import xyz.lebot.tub.data.model.LineModel;
 import xyz.lebot.tub.data.model.StopModel;
-import xyz.lebot.tub.ui.adapter.StopDetailLineListAdapter;
 import xyz.lebot.tub.ui.adapter.StopMapClusterItemInfoWindowAdapter;
 import xyz.lebot.tub.ui.navigator.Navigator;
 import xyz.lebot.tub.ui.presenter.MapFragmentPresenter;
@@ -44,16 +39,18 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     private Navigator navigator;
 
-    private GoogleMap googleMap;
     private LayoutInflater inflater;
     private MapFragmentPresenter presenter;
 
-    private StopDetailLineListAdapter adapter;
 
-
+    //GoogleMap
+    private GoogleMap googleMap;
     private ClusterManager<StopMapClusterItem> mClusterManager;
     private StopMapClusterItemInfoWindowAdapter mClusterAdapter;
     private StopClusterRenderer mClusterRenderer;
+
+    //BottomSheet
+    private BottomSheetBehavior mBottomSheetBehavior;
 
     public MapFragment() {
         // Required empty public constructor
@@ -72,6 +69,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         View view = inflater.inflate(R.layout.fragment_map, container, false);
         ButterKnife.bind(this, view);
 
+
+        View bottomSheetDialog = view.findViewById(R.id.bottom_sheet);
+        this.mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheetDialog);
+
+        mBottomSheetBehavior.setPeekHeight(300);
+        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
 
         mMapView.onCreate(savedInstanceState);
         mMapView.getMapAsync(this);
