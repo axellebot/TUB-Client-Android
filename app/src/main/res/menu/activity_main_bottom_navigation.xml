@@ -4,19 +4,19 @@
     <item
         android:id="@+id/activity_main_bottom_navigation_map_action"
         android:enabled="true"
-        android:icon="@drawable/map_icon"
+        android:icon="@drawable/ic_map_icon_24dp"
         android:title="@string/navigation_part_map_name"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/activity_main_bottom_navigation_line_action"
         android:enabled="true"
-        android:icon="@drawable/directions_bus_icon"
+        android:icon="@drawable/ic_directions_bus"
         android:title="@string/navigation_part_line_name"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/activity_main_bottom_navigation_stop_action"
         android:enabled="true"
-        android:icon="@drawable/stop_icon"
+        android:icon="@drawable/ic_stop_24dp"
         android:title="@string/navigation_part_stop_name"
         app:showAsAction="ifRoom" />
 </menu>
