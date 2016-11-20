@@ -21,7 +21,8 @@ public class NavigatorImpl implements Navigator, Serializable {
     private MainActivity mainActivity;
     private ViewPager viewPager;
     private MainActivityFragmentPagerAdapter pagerAdapter;
-    private int SELECTED_PART;
+    private PART SELECTED_PART;
+
     public NavigatorImpl(MainActivity mainActivity, Navigator navigator, ViewPager viewPager, MainActivityFragmentPagerAdapter pagerAdapter) {
         this.mainActivity = mainActivity;
         this.viewPager = viewPager;
@@ -30,40 +31,39 @@ public class NavigatorImpl implements Navigator, Serializable {
     }
 
     @Override
-    public void initHomePart() {
+    public void initPartHome() {
         Class<?> fragmentClass = HomeFragment.class;
 
         Bundle args = new Bundle();
         args.putSerializable("NAVIGATOR", this);
 
-        addFragmentClassWithBundleToMapPart(fragmentClass, args);
+        addFragmentClassWithBundleToPart(PART.HOME, fragmentClass, args);
     }
 
     @Override
-    public void initLinePart() {
+    public void initPartLine() {
         Class<?> fragmentClass = LineFragment.class;
 
         Bundle args = new Bundle();
         args.putSerializable("NAVIGATOR", this);
 
-        addFragmentClassWithBundleToLinePart(fragmentClass, args);
+        addFragmentClassWithBundleToPart(PART.LINE, fragmentClass, args);
     }
 
     @Override
-    public void initStopPart() {
+    public void initPartStop() {
         Class<?> fragmentClass = StopFragment.class;
 
         Bundle args = new Bundle();
         args.putSerializable("NAVIGATOR", this);
 
-        addFragmentClassWithBundleToStopPart(fragmentClass, args);
+        addFragmentClassWithBundleToPart(PART.STOP, fragmentClass, args);
     }
 
     @Override
     public void navigateToPartHome() {
-        SELECTED_PART = 0;
-        viewPager.setCurrentItem(0);
-        mainActivity.setSelecteBottomNavigation(0);
+        SELECTED_PART = PART.HOME;
+        switchPart(SELECTED_PART);
         mainActivity.setToolbarTitle(mainActivity.getResources().getString(R.string.navigation_part_map_name));
         int res = R.color.colorPrimaryBlue;
         changeColor(res);
@@ -71,9 +71,8 @@ public class NavigatorImpl implements Navigator, Serializable {
 
     @Override
     public void navigateToPartLine() {
-        SELECTED_PART = 1;
-        viewPager.setCurrentItem(1);
-        mainActivity.setSelecteBottomNavigation(1);
+        SELECTED_PART = PART.LINE;
+        switchPart(SELECTED_PART);
         mainActivity.setToolbarTitle(mainActivity.getResources().getString(R.string.navigation_part_line_name));
         int res = R.color.colorPrimaryGreen;
         changeColor(res);
@@ -81,9 +80,8 @@ public class NavigatorImpl implements Navigator, Serializable {
 
     @Override
     public void navigateToPartStop() {
-        SELECTED_PART = 2;
-        viewPager.setCurrentItem(2);
-        mainActivity.setSelecteBottomNavigation(2);
+        SELECTED_PART = PART.STOP;
+        switchPart(SELECTED_PART);
         mainActivity.setToolbarTitle(mainActivity.getResources().getString(R.string.navigation_part_stop_name));
         int res = R.color.colorPrimaryRed;
         changeColor(res);
@@ -91,17 +89,7 @@ public class NavigatorImpl implements Navigator, Serializable {
 
     @Override
     public void navigateBack() {
-        switch (SELECTED_PART) {
-            case 0:
-                navigateBackHomePart();
-                break;
-            case 1:
-                navigateBackLinePart();
-                break;
-            case 2:
-                navigateBackStopPart();
-                break;
-        }
+        navigateBackFromPart();
     }
 
     public void navigateToLineDetail(String lineId) {
@@ -113,38 +101,31 @@ public class NavigatorImpl implements Navigator, Serializable {
         args.putSerializable("NAVIGATOR", this);
         args.putString("LINE_ID", lineId);
 
-        addFragmentClassWithBundleToLinePart(fragmentClass, args);
+        addFragmentClassWithBundleToPart(PART.LINE, fragmentClass, args);
     }
 
-    private void addFragmentClassWithBundleToMapPart(Class<?> fragmentClass, Bundle args) {
-        pagerAdapter.addFragmentClassWithBundleToStackForPosition(fragmentClass, args, 0);
+    private void addFragmentClassWithBundleToPart(PART part, Class<?> fragmentClass, Bundle args) {
+        pagerAdapter.addFragmentClassWithBundleToStackForPosition(fragmentClass, args, part.ordinal());
     }
 
-    private void addFragmentClassWithBundleToLinePart(Class<?> fragmentClass, Bundle args) {
-        pagerAdapter.addFragmentClassWithBundleToStackForPosition(fragmentClass, args, 1);
+    private void navigateBackFromPart() {
+        pagerAdapter.dequeueFragmentClassStackForPosition(SELECTED_PART.ordinal());
     }
-
-    private void addFragmentClassWithBundleToStopPart(Class<?> fragmentClass, Bundle args) {
-        pagerAdapter.addFragmentClassWithBundleToStackForPosition(fragmentClass, args, 2);
-    }
-
-
-    private void navigateBackHomePart() {
-        pagerAdapter.dequeueFragmentClassStackForPosition(0);
-    }
-
-    private void navigateBackLinePart() {
-        pagerAdapter.dequeueFragmentClassStackForPosition(1);
-    }
-
-    private void navigateBackStopPart() {
-        pagerAdapter.dequeueFragmentClassStackForPosition(2);
-    }
-
 
     private void changeColor(int res) {
         int color = mainActivity.getResources().getColor(res);
         mainActivity.setToolbarColor(color);
         mainActivity.setBottomNavigationColor(res);
+    }
+
+    private void switchPart(PART part) {
+        viewPager.setCurrentItem(part.ordinal());
+        mainActivity.setSelecteBottomNavigation(part.ordinal());
+    }
+
+    private enum PART {
+        HOME,
+        LINE,
+        STOP
     }
 }

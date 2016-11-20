@@ -45,9 +45,9 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setPagingEnabled(false);
 
         navigator = new NavigatorImpl(this, navigator, viewPager, (MainActivityFragmentPagerAdapter) mPagerAdapter);
-        navigator.initLinePart();
-        navigator.initStopPart();
-        navigator.initHomePart();
+        navigator.initPartLine();
+        navigator.initPartStop();
+        navigator.initPartHome();
         navigator.navigateToPartHome();
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
