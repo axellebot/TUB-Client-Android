@@ -12,4 +12,7 @@
 
     <string name="window_map_stop_info_default_title">Stop Label</string>
     <string name="window_map_stop_info_default_description">Description</string>
+    
+    <string name="bottom_sheet_journey_search_button_fav">0 Stops</string>
+    <string name="bottom_sheet_journey_search_button_bus">Bus</string>
 </resources>

@@ -6,17 +6,53 @@
     android:layout_height="350dp"
     android:background="@color/colorPrimaryBlue"
     android:clipToPadding="true"
-    app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
-    >
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:id="@+id/bottom_sheet_journey_search_top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bottom_sheet_journey_search_top_bar_height"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="1dp"
+                android:layout_weight="1"
+                android:background="@color/colorPrimaryBlueDark"
+                android:drawableTint="@color/white"
+                android:drawableTop="@drawable/ic_star_border"
+                android:foreground="?attr/selectableItemBackground"
+                android:padding="5dp"
+                android:text="@string/bottom_sheet_journey_search_button_fav"
+                android:textColor="@color/white" />
+
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1dp"
+                android:layout_weight="1"
+                android:background="@color/colorPrimaryBlueDark"
+                android:drawableTint="@color/white"
+                android:drawableTop="@drawable/ic_directions_bus_24dp"
+                android:foreground="?attr/selectableItemBackground"
+                android:padding="5dp"
+                android:text="@string/bottom_sheet_journey_search_button_bus"
+                android:textColor="@color/white" />
+
+
+        </android.support.v7.widget.LinearLayoutCompat>
 
         <me.grantland.widget.AutofitTextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="TEST" />
-    </LinearLayout>
+    </android.support.v7.widget.LinearLayoutCompat>
 </android.support.v4.widget.NestedScrollView>
