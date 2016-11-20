@@ -54,6 +54,6 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
 
-    //SwipeableCard
-    compile 'it.michelelacorte.swipeablecard:library:2.3.0'
+    //AutoFitTextView
+    compile 'me.grantland:autofittextview:0.2.1'
 }
