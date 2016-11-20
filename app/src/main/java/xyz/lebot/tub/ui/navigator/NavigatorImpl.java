@@ -21,7 +21,7 @@ public class NavigatorImpl implements Navigator, Serializable {
     private MainActivity mainActivity;
     private ViewPager viewPager;
     private MainActivityFragmentPagerAdapter pagerAdapter;
-
+    private int SELECTED_PART;
     public NavigatorImpl(MainActivity mainActivity, Navigator navigator, ViewPager viewPager, MainActivityFragmentPagerAdapter pagerAdapter) {
         this.mainActivity = mainActivity;
         this.viewPager = viewPager;
@@ -61,6 +61,7 @@ public class NavigatorImpl implements Navigator, Serializable {
 
     @Override
     public void navigateToPartHome() {
+        SELECTED_PART = 0;
         viewPager.setCurrentItem(0);
         mainActivity.setSelecteBottomNavigation(0);
         mainActivity.setToolbarTitle(mainActivity.getResources().getString(R.string.navigation_part_map_name));
@@ -70,6 +71,7 @@ public class NavigatorImpl implements Navigator, Serializable {
 
     @Override
     public void navigateToPartLine() {
+        SELECTED_PART = 1;
         viewPager.setCurrentItem(1);
         mainActivity.setSelecteBottomNavigation(1);
         mainActivity.setToolbarTitle(mainActivity.getResources().getString(R.string.navigation_part_line_name));
@@ -79,6 +81,7 @@ public class NavigatorImpl implements Navigator, Serializable {
 
     @Override
     public void navigateToPartStop() {
+        SELECTED_PART = 2;
         viewPager.setCurrentItem(2);
         mainActivity.setSelecteBottomNavigation(2);
         mainActivity.setToolbarTitle(mainActivity.getResources().getString(R.string.navigation_part_stop_name));
@@ -88,7 +91,7 @@ public class NavigatorImpl implements Navigator, Serializable {
 
     @Override
     public void navigateBack() {
-        switch (mainActivity.getSelectedBottomNavigation()) {
+        switch (SELECTED_PART) {
             case 0:
                 navigateBackHomePart();
                 break;
