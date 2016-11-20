@@ -28,11 +28,11 @@ import xyz.lebot.tub.R;
 import xyz.lebot.tub.data.model.StopModel;
 import xyz.lebot.tub.ui.adapter.StopMapClusterItemInfoWindowAdapter;
 import xyz.lebot.tub.ui.navigator.Navigator;
-import xyz.lebot.tub.ui.presenter.MapFragmentPresenter;
+import xyz.lebot.tub.ui.presenter.HomeFragmentPresenter;
 import xyz.lebot.tub.ui.renderer.StopClusterRenderer;
 import xyz.lebot.tub.ui.view.StopMapClusterItem;
 
-public class MapFragment extends Fragment implements OnMapReadyCallback {
+public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
     @BindView(R.id.fragment_map_map_view)
     MapView mMapView;
@@ -40,7 +40,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private Navigator navigator;
 
     private LayoutInflater inflater;
-    private MapFragmentPresenter presenter;
+    private HomeFragmentPresenter presenter;
 
 
     //GoogleMap
@@ -52,7 +52,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     //BottomSheet
     private BottomSheetBehavior mBottomSheetBehavior;
 
-    public MapFragment() {
+    public HomeFragment() {
         // Required empty public constructor
     }
 
@@ -79,7 +79,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         mMapView.onCreate(savedInstanceState);
         mMapView.getMapAsync(this);
 
-        presenter = new MapFragmentPresenter(this, navigator);
+        presenter = new HomeFragmentPresenter(this, navigator);
 
         return view;
     }

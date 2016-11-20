@@ -8,10 +8,9 @@ import java.io.Serializable;
 import xyz.lebot.tub.R;
 import xyz.lebot.tub.ui.activity.MainActivity;
 import xyz.lebot.tub.ui.adapter.MainActivityFragmentPagerAdapter;
-import xyz.lebot.tub.ui.fragment.JourneySearchBottomSheetDialogFragment;
+import xyz.lebot.tub.ui.fragment.HomeFragment;
 import xyz.lebot.tub.ui.fragment.LineDetailFragment;
 import xyz.lebot.tub.ui.fragment.LineFragment;
-import xyz.lebot.tub.ui.fragment.MapFragment;
 import xyz.lebot.tub.ui.fragment.StopFragment;
 
 /**
@@ -22,6 +21,7 @@ public class NavigatorImpl implements Navigator, Serializable {
     private MainActivity mainActivity;
     private ViewPager viewPager;
     private MainActivityFragmentPagerAdapter pagerAdapter;
+    private PART SELECTED_PART;
 
     public NavigatorImpl(MainActivity mainActivity, Navigator navigator, ViewPager viewPager, MainActivityFragmentPagerAdapter pagerAdapter) {
         this.mainActivity = mainActivity;
@@ -31,69 +31,65 @@ public class NavigatorImpl implements Navigator, Serializable {
     }
 
     @Override
-    public void initMapPart() {
-        Class<?> fragmentClass = MapFragment.class;
+    public void initPartHome() {
+        Class<?> fragmentClass = HomeFragment.class;
 
         Bundle args = new Bundle();
         args.putSerializable("NAVIGATOR", this);
 
-        addFragmentClassWithBundleToMapPart(fragmentClass, args);
+        addFragmentClassWithBundleToPart(PART.HOME, fragmentClass, args);
     }
 
     @Override
-    public void initLinePart() {
+    public void initPartLine() {
         Class<?> fragmentClass = LineFragment.class;
 
         Bundle args = new Bundle();
         args.putSerializable("NAVIGATOR", this);
 
-        addFragmentClassWithBundleToLinePart(fragmentClass, args);
+        addFragmentClassWithBundleToPart(PART.LINE, fragmentClass, args);
     }
 
     @Override
-    public void initStopPart() {
+    public void initPartStop() {
         Class<?> fragmentClass = StopFragment.class;
 
         Bundle args = new Bundle();
         args.putSerializable("NAVIGATOR", this);
 
-        addFragmentClassWithBundleToStopPart(fragmentClass, args);
+        addFragmentClassWithBundleToPart(PART.STOP, fragmentClass, args);
     }
 
     @Override
-    public void navigateToPartMap() {
-        viewPager.setCurrentItem(0);
-        mainActivity.setSelecteBottomNavigation(0);
-        mainActivity.setTitle(mainActivity.getResources().getString(R.string.navigation_part_map_name));
+    public void navigateToPartHome() {
+        SELECTED_PART = PART.HOME;
+        switchPart(SELECTED_PART);
+        mainActivity.setToolbarTitle(mainActivity.getResources().getString(R.string.navigation_part_map_name));
+        int res = R.color.colorPrimaryBlue;
+        changeColor(res);
     }
 
     @Override
     public void navigateToPartLine() {
-        viewPager.setCurrentItem(1);
-        mainActivity.setSelecteBottomNavigation(1);
-        mainActivity.setTitle(mainActivity.getResources().getString(R.string.navigation_part_line_name));
+        SELECTED_PART = PART.LINE;
+        switchPart(SELECTED_PART);
+        mainActivity.setToolbarTitle(mainActivity.getResources().getString(R.string.navigation_part_line_name));
+        int res = R.color.colorPrimaryGreen;
+        changeColor(res);
     }
 
     @Override
     public void navigateToPartStop() {
-        viewPager.setCurrentItem(2);
-        mainActivity.setSelecteBottomNavigation(2);
-        mainActivity.setTitle(mainActivity.getResources().getString(R.string.navigation_part_stop_name));
+        SELECTED_PART = PART.STOP;
+        switchPart(SELECTED_PART);
+        mainActivity.setToolbarTitle(mainActivity.getResources().getString(R.string.navigation_part_stop_name));
+        int res = R.color.colorPrimaryRed;
+        changeColor(res);
     }
 
     @Override
     public void navigateBack() {
-        switch (mainActivity.getSelectedBottomNavigation()) {
-            case 0:
-                navigateBackMapPart();
-                break;
-            case 1:
-                navigateBackLinePart();
-                break;
-            case 2:
-                navigateBackStopPart();
-                break;
-        }
+        navigateBackFromPart();
     }
 
     public void navigateToLineDetail(String lineId) {
@@ -105,32 +101,31 @@ public class NavigatorImpl implements Navigator, Serializable {
         args.putSerializable("NAVIGATOR", this);
         args.putString("LINE_ID", lineId);
 
-        addFragmentClassWithBundleToLinePart(fragmentClass, args);
+        addFragmentClassWithBundleToPart(PART.LINE, fragmentClass, args);
     }
 
-    private void addFragmentClassWithBundleToMapPart(Class<?> fragmentClass, Bundle args) {
-        pagerAdapter.addFragmentClassWithBundleToStackForPosition(fragmentClass, args, 0);
+    private void addFragmentClassWithBundleToPart(PART part, Class<?> fragmentClass, Bundle args) {
+        pagerAdapter.addFragmentClassWithBundleToStackForPosition(fragmentClass, args, part.ordinal());
     }
 
-    private void addFragmentClassWithBundleToLinePart(Class<?> fragmentClass, Bundle args) {
-        pagerAdapter.addFragmentClassWithBundleToStackForPosition(fragmentClass, args, 1);
+    private void navigateBackFromPart() {
+        pagerAdapter.dequeueFragmentClassStackForPosition(SELECTED_PART.ordinal());
     }
 
-    private void addFragmentClassWithBundleToStopPart(Class<?> fragmentClass, Bundle args) {
-        pagerAdapter.addFragmentClassWithBundleToStackForPosition(fragmentClass, args, 2);
+    private void changeColor(int res) {
+        int color = mainActivity.getResources().getColor(res);
+        mainActivity.setToolbarColor(color);
+        mainActivity.setBottomNavigationColor(res);
     }
 
-
-    private void navigateBackMapPart() {
-        pagerAdapter.dequeueFragmentClassStackForPosition(0);
+    private void switchPart(PART part) {
+        viewPager.setCurrentItem(part.ordinal());
+        mainActivity.setSelecteBottomNavigation(part.ordinal());
     }
 
-    private void navigateBackLinePart() {
-        pagerAdapter.dequeueFragmentClassStackForPosition(1);
+    private enum PART {
+        HOME,
+        LINE,
+        STOP
     }
-
-    private void navigateBackStopPart() {
-        pagerAdapter.dequeueFragmentClassStackForPosition(2);
-    }
-
 }

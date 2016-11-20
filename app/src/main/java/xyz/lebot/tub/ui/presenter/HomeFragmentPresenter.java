@@ -12,7 +12,7 @@ import rx.schedulers.Schedulers;
 import xyz.lebot.tub.App;
 import xyz.lebot.tub.data.model.LineModel;
 import xyz.lebot.tub.data.model.StopModel;
-import xyz.lebot.tub.ui.fragment.MapFragment;
+import xyz.lebot.tub.ui.fragment.HomeFragment;
 import xyz.lebot.tub.ui.navigator.Navigator;
 import xyz.lebot.tub.ui.view.StopMapClusterItem;
 
@@ -20,13 +20,13 @@ import xyz.lebot.tub.ui.view.StopMapClusterItem;
  * Created by axell on 05/11/2016.
  */
 
-public class MapFragmentPresenter implements Presenter {
-    private static String TAG = "MapFragmentPresenter";
+public class HomeFragmentPresenter implements Presenter {
+    private static String TAG = "HomeFragmentPresenter";
 
-    private final MapFragment view;
+    private final HomeFragment view;
     private final Navigator navigator;
 
-    public MapFragmentPresenter(final MapFragment view, final Navigator navigator) {
+    public HomeFragmentPresenter(final HomeFragment view, final Navigator navigator) {
         this.view = view;
         this.navigator = navigator;
     }

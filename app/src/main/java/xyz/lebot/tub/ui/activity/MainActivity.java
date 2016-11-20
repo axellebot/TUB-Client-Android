@@ -33,8 +33,6 @@ public class MainActivity extends AppCompatActivity {
     private PagerAdapter mPagerAdapter;
     private Navigator navigator;
 
-    private int SELECTED_PART;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,25 +45,23 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setPagingEnabled(false);
 
         navigator = new NavigatorImpl(this, navigator, viewPager, (MainActivityFragmentPagerAdapter) mPagerAdapter);
-        navigator.initLinePart();
-        navigator.initStopPart();
-        navigator.initMapPart();
+        navigator.initPartLine();
+        navigator.initPartStop();
+        navigator.initPartHome();
+        navigator.navigateToPartHome();
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
+                    case R.id.activity_main_bottom_navigation_home_action:
+                        navigator.navigateToPartHome();
+                        break;
                     case R.id.activity_main_bottom_navigation_line_action:
-                        SELECTED_PART = 0;
                         navigator.navigateToPartLine();
                         break;
                     case R.id.activity_main_bottom_navigation_stop_action:
-                        SELECTED_PART = 1;
                         navigator.navigateToPartStop();
-                        break;
-                    case R.id.activity_main_bottom_navigation_map_action:
-                        SELECTED_PART = 2;
-                        navigator.navigateToPartMap();
                         break;
                 }
                 return true;
@@ -105,17 +101,19 @@ public class MainActivity extends AppCompatActivity {
         navigator.navigateBack();
     }
 
-    public void setTitle(String title) {
+    public void setToolbarTitle(String title) {
         toolbar.setTitle(title);
+    }
+
+    public void setToolbarColor(int color) {
+        toolbar.setBackgroundColor(color);
+    }
+
+    public void setBottomNavigationColor(int res) {
+        bottomNavigationView.setItemBackgroundResource(res);
     }
 
     public void setSelecteBottomNavigation(int i) {
         bottomNavigationView.setSelected(i);
     }
-
-    public int getSelectedBottomNavigation() {
-        return SELECTED_PART;
-    }
-
-
 }

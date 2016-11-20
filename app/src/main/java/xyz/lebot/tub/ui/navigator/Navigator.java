@@ -5,13 +5,13 @@ package xyz.lebot.tub.ui.navigator;
  */
 
 public interface Navigator {
-    void initMapPart();
+    void initPartHome();
 
-    void initLinePart();
+    void initPartLine();
 
-    void initStopPart();
+    void initPartStop();
 
-    void navigateToPartMap();
+    void navigateToPartHome();
 
     void navigateToPartLine();
 
