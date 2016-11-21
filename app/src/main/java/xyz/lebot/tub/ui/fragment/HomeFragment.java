@@ -70,16 +70,15 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         ButterKnife.bind(this, view);
 
 
-        View bottomSheetDialog = view.findViewById(R.id.bottom_sheet);
+        View bottomSheetDialog = view.findViewById(R.id.bottom_sheet_overview);
         this.mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheetDialog);
 
-        mBottomSheetBehavior.setPeekHeight(300);
-        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+
+        presenter = new HomeFragmentPresenter(this, navigator);
 
         mMapView.onCreate(savedInstanceState);
         mMapView.getMapAsync(this);
-
-        presenter = new HomeFragmentPresenter(this, navigator);
 
         return view;
     }
@@ -88,7 +87,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
 
-        googleMap.getUiSettings().setMyLocationButtonEnabled(true);
 
         mMapView.onResume();
         presenter.initialize();
@@ -168,5 +166,13 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
     public StopClusterRenderer getmClusterRenderer() {
         return mClusterRenderer;
+    }
+
+    public BottomSheetBehavior getmBottomSheetBehavior() {
+        return mBottomSheetBehavior;
+    }
+
+    public GoogleMap getGoogleMap() {
+        return googleMap;
     }
 }

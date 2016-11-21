@@ -64,7 +64,7 @@ public class NavigatorImpl implements Navigator, Serializable {
     public void navigateToPartHome() {
         SELECTED_PART = PART.HOME;
         switchPart(SELECTED_PART);
-        mainActivity.setToolbarTitle(mainActivity.getResources().getString(R.string.navigation_part_map_name));
+        mainActivity.setToolbarTitle(mainActivity.getResources().getString(R.string.navigation_part_home_name));
         int res = R.color.colorPrimaryBlue;
         changeColor(res);
     }

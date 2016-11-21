@@ -4,8 +4,8 @@
     <item
         android:id="@+id/activity_main_bottom_navigation_home_action"
         android:enabled="true"
-        android:icon="@drawable/ic_map_icon_24dp"
-        android:title="@string/navigation_part_map_name"
+        android:icon="@drawable/ic_home_24dp"
+        android:title="@string/navigation_part_home_name"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/activity_main_bottom_navigation_line_action"

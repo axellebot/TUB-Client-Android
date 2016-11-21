@@ -8,8 +8,16 @@
 
     <string name="navigation_part_line_name">Lines</string>
     <string name="navigation_part_stop_name">Stops</string>
-    <string name="navigation_part_map_name">Map</string>
+    <string name="navigation_part_home_name">Home</string>
 
     <string name="window_map_stop_info_default_title">Stop Label</string>
     <string name="window_map_stop_info_default_description">Description</string>
+    
+    <string name="bottom_sheet_overview_content_default_btn_fav">0 Stops</string>
+    <string name="bottom_sheet_overview_content_default_btn_bus">Bus</string>
+    <string name="bottom_sheet_overview_content_default_btn_search">Get Me Somewhere</string>
+    <string name="bottom_sheet_overview_content_default_btn_home">Get Me Home</string>
+    <string name="bottom_sheet_overview_content_default_btn_work">Get Me To Work</string>
+
+
 </resources>

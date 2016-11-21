@@ -1,5 +1,7 @@
 package xyz.lebot.tub.ui.presenter;
 
+import android.support.design.widget.BottomSheetBehavior;
+
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -10,6 +12,7 @@ import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import xyz.lebot.tub.App;
+import xyz.lebot.tub.R;
 import xyz.lebot.tub.data.model.LineModel;
 import xyz.lebot.tub.data.model.StopModel;
 import xyz.lebot.tub.ui.fragment.HomeFragment;
@@ -33,6 +36,25 @@ public class HomeFragmentPresenter implements Presenter {
 
     @Override
     public void initialize() {
+
+        view.getGoogleMap().getUiSettings().setMyLocationButtonEnabled(true);
+        view.getGoogleMap().setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                onMapClicked(latLng);
+            }
+        });
+        view.getGoogleMap().setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
+            @Override
+            public void onCameraMove() {
+                onMapDraged();
+            }
+        });
+
+        int peekHeight = (int) view.getResources().getDimension(R.dimen.bottom_sheet_journey_search_top_bar_height);
+        view.getmBottomSheetBehavior().setPeekHeight(peekHeight);
+        view.getmBottomSheetBehavior().setState(BottomSheetBehavior.STATE_EXPANDED);
+
         view.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         view.moveCamera(new LatLng(46.205539, 5.227177), 13f);
         addStopsClusterToMap();
@@ -49,6 +71,14 @@ public class HomeFragmentPresenter implements Presenter {
 
     public void onStopClusterItemClicked(final StopMapClusterItem stopMapClusterItem) {
         view.getmClusterAdapter().setCurrentClusterItem(stopMapClusterItem);
+    }
+
+    public void onMapClicked(LatLng latLng) {
+        this.view.getmBottomSheetBehavior().setState(BottomSheetBehavior.STATE_COLLAPSED);
+    }
+
+    public void onMapDraged() {
+        this.view.getmBottomSheetBehavior().setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 
     private void addStopsClusterToMap() {
