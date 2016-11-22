@@ -9,6 +9,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import xyz.lebot.tub.ui.activity.MainActivity;
+
 /**
  * Created by axellebot on 08/11/2016.
  */
@@ -46,5 +48,6 @@ public class CustomBottomNavigationView extends BottomNavigationView {
             e.printStackTrace();
         }
     }
+
 
 }

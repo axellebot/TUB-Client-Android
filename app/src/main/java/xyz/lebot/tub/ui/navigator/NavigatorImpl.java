@@ -66,7 +66,7 @@ public class NavigatorImpl implements Navigator, Serializable {
         switchPart(SELECTED_PART);
         mainActivity.setToolbarTitle(mainActivity.getResources().getString(R.string.navigation_part_home_name));
         int res = R.color.colorPrimaryBlue;
-        changeColor(res);
+        mainActivity.setContextColor(res);
     }
 
     @Override
@@ -75,7 +75,7 @@ public class NavigatorImpl implements Navigator, Serializable {
         switchPart(SELECTED_PART);
         mainActivity.setToolbarTitle(mainActivity.getResources().getString(R.string.navigation_part_line_name));
         int res = R.color.colorPrimaryGreen;
-        changeColor(res);
+        mainActivity.setContextColor(res);
     }
 
     @Override
@@ -84,7 +84,7 @@ public class NavigatorImpl implements Navigator, Serializable {
         switchPart(SELECTED_PART);
         mainActivity.setToolbarTitle(mainActivity.getResources().getString(R.string.navigation_part_stop_name));
         int res = R.color.colorPrimaryRed;
-        changeColor(res);
+        mainActivity.setContextColor(res);
     }
 
     @Override
@@ -110,12 +110,6 @@ public class NavigatorImpl implements Navigator, Serializable {
 
     private void navigateBackFromPart() {
         pagerAdapter.dequeueFragmentClassStackForPosition(SELECTED_PART.ordinal());
-    }
-
-    private void changeColor(int res) {
-        int color = mainActivity.getResources().getColor(res);
-        mainActivity.setToolbarColor(color);
-        mainActivity.setBottomNavigationColor(res);
     }
 
     private void switchPart(PART part) {
