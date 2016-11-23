@@ -3,7 +3,7 @@
     android:id="@+id/fragment_ligne"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryGreen">
+    android:background="@color/green">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/fragment_line_recycler_view"

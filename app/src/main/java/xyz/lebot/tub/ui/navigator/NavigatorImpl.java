@@ -65,7 +65,7 @@ public class NavigatorImpl implements Navigator, Serializable {
         SELECTED_PART = PART.HOME;
         switchPart(SELECTED_PART);
         mainActivity.setToolbarTitle(mainActivity.getResources().getString(R.string.navigation_part_home_name));
-        int res = R.color.colorPrimaryBlue;
+        int res = R.color.colorPartHome;
         mainActivity.setContextColor(res);
     }
 
@@ -74,7 +74,7 @@ public class NavigatorImpl implements Navigator, Serializable {
         SELECTED_PART = PART.LINE;
         switchPart(SELECTED_PART);
         mainActivity.setToolbarTitle(mainActivity.getResources().getString(R.string.navigation_part_line_name));
-        int res = R.color.colorPrimaryGreen;
+        int res = R.color.colorPartLine;
         mainActivity.setContextColor(res);
     }
 
@@ -83,7 +83,7 @@ public class NavigatorImpl implements Navigator, Serializable {
         SELECTED_PART = PART.STOP;
         switchPart(SELECTED_PART);
         mainActivity.setToolbarTitle(mainActivity.getResources().getString(R.string.navigation_part_stop_name));
-        int res = R.color.colorPrimaryRed;
+        int res = R.color.colorPartStop;
         mainActivity.setContextColor(res);
     }
 
