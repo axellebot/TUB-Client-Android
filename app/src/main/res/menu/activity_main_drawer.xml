@@ -24,7 +24,7 @@
         <menu>
             <item
                 android:id="@+id/nav_share"
-                android:icon="@drawable/ic_audiotrack"
+                android:icon="@drawable/ic_email_black_24dp"
                 android:title="Share" />
             <item
                 android:id="@+id/nav_send"

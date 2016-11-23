@@ -4,19 +4,19 @@
     <item
         android:id="@+id/activity_main_bottom_navigation_home_action"
         android:enabled="true"
-        android:icon="@drawable/ic_home_24dp"
+        android:icon="@drawable/ic_home_black_24dp"
         android:title="@string/navigation_part_home_name"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/activity_main_bottom_navigation_line_action"
         android:enabled="true"
-        android:icon="@drawable/ic_directions_bus_24dp"
+        android:icon="@drawable/ic_directions_bus_black_24dp"
         android:title="@string/navigation_part_line_name"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/activity_main_bottom_navigation_stop_action"
         android:enabled="true"
-        android:icon="@drawable/ic_stop_24dp"
+        android:icon="@drawable/ic_stop_black_24dp"
         android:title="@string/navigation_part_stop_name"
         app:showAsAction="ifRoom" />
 </menu>

@@ -6,7 +6,7 @@
     <color name="colorPrimaryGreen">#43a047</color>
     <color name="colorPrimaryRed">#f44336</color>
 
-    <color name="colorAccentPink">#EC407A</color>
+    <color name="colorAccent">#EC407A</color>
 
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
