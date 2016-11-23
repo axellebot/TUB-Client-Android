@@ -20,7 +20,7 @@
             android:title="Tools" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/navigation_drawer_navigation_submenu_communication_title">
         <menu>
             <item
                 android:id="@+id/nav_drawer_contact_us"
@@ -28,7 +28,7 @@
                 android:title="@string/navigation_drawer_contact_us" />
             <item
                 android:id="@+id/nav_send"
-                android:icon="@drawable/"
+                android:icon="@drawable/ic_share_white_24dp"
                 android:title="Send" />
         </menu>
     </item>

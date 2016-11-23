@@ -20,4 +20,5 @@
     <string name="bottom_sheet_overview_content_default_btn_work">Get Me To Work</string>
 
     <string name="navigation_drawer_contact_us">Contact us</string>
+    <string name="navigation_drawer_navigation_submenu_communication_title">Communication</string>
 </resources>
