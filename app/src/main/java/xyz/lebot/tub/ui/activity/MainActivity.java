@@ -1,8 +1,9 @@
 package xyz.lebot.tub.ui.activity;
 
-import android.content.Context;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.content.ContextCompat;
@@ -13,7 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.view.Window;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,6 +54,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        initStatusBar();
+
         mPagerAdapter = new MainActivityFragmentPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(mPagerAdapter);
         viewPager.setPagingEnabled(false);
@@ -77,6 +80,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         setSupportActionBar(toolbar);
+    }
+
+    private void initStatusBar() {
+        //get statusBar height
+        int statusBarHeight = 0;
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            statusBarHeight = getResources().getDimensionPixelSize(resourceId);
+        }
+
+        AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) toolbar.getLayoutParams();
+        params.height = params.height + statusBarHeight;
+        toolbar.setLayoutParams(params);
     }
 
     @Override
