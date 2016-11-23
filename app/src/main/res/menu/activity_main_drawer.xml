@@ -23,12 +23,12 @@
     <item android:title="Communicate">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_email_black_24dp"
-                android:title="Share" />
+                android:id="@+id/nav_drawer_contact_us"
+                android:icon="@drawable/ic_email_white_24dp"
+                android:title="@string/navigation_drawer_contact_us" />
             <item
                 android:id="@+id/nav_send"
-                android:icon="@drawable/ic_audiotrack"
+                android:icon="@drawable/"
                 android:title="Send" />
         </menu>
     </item>
