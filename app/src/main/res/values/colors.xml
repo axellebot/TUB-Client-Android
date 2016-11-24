@@ -10,7 +10,7 @@
     <color name="colorPartStop">@color/red</color>
 
     <!-- Navigation Drawer -->
-    <color name="colorNavigationDrawer">@color/orangeDark</color>
+    <color name="colorNavigationDrawer">@color/orangeDeep</color>
     <color name="colorNavigationDrawerItem">@color/white</color>
 
     <color name="white">#FFFFFF</color>
@@ -23,5 +23,5 @@
     <color name="blueDark">#1565C0</color>
     <color name="pink">#EC407A</color>
     <color name="orange">#F4A212</color>
-    <color name="orangeDark">#EF5316</color>
+    <color name="orangeDeep">#FF5722</color>
 </resources>
