@@ -3,33 +3,23 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_audiotrack"
-            android:title="Import" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_audiotrack"
-            android:title="Gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_audiotrack"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_audiotrack"
-            android:title="Tools" />
+            android:id="@+id/user_log_in"
+            android:icon="@drawable/ic_lock_white_24dp"
+            android:title="@string/user_log_in" />
     </group>
 
     <item android:title="@string/navigation_drawer_navigation_submenu_communication_title">
         <menu>
-            <item
-                android:id="@+id/nav_drawer_contact_us"
-                android:icon="@drawable/ic_email_white_24dp"
-                android:title="@string/navigation_drawer_contact_us" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_share_white_24dp"
-                android:title="Send" />
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_drawer_contact_us"
+                    android:icon="@drawable/ic_email_white_24dp"
+                    android:title="@string/navigation_drawer_contact_us" />
+                <item
+                    android:id="@+id/nav_drawer_share"
+                    android:icon="@drawable/ic_share_white_24dp"
+                    android:title="@string/navigation_drawer_share" />
+            </group>
         </menu>
     </item>
 
