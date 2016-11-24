@@ -32,9 +32,9 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         app:itemBackground="@color/white"
-        app:itemIconTint="@color/bottom_navigation_item_color"
-        app:itemTextColor="@color/bottom_navigation_item_color"
-        app:menu="@menu/activity_main_bottom_navigation"
+        app:itemIconTint="@color/navigation_bottom_item_color"
+        app:itemTextColor="@color/navigation_bottom_item_color"
+        app:menu="@menu/activity_main_navigation_bottom"
         design:menu="@menu/activity_main_bottom_navigation"
         />
 </android.support.v7.widget.LinearLayoutCompat>
