@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimaryBlue">#2196F3</color>
-    <color name="colorPrimaryBlueDark">#1565C0</color>
+    <color name="colorPrimary">@color/blue</color>
+    <color name="colorPrimaryDark">@color/blueDark</color>
+    <color name="colorAccent">@color/pink</color>
 
-    <color name="colorPrimaryGreen">#43a047</color>
-    <color name="colorPrimaryRed">#f44336</color>
+    <!-- Color Part  -->
+    <color name="colorPartHome">@color/colorPrimary</color>
+    <color name="colorPartLine">@color/green</color>
+    <color name="colorPartStop">@color/red</color>
 
-    <color name="colorAccentPink">#EC407A</color>
+    <color name="colorNavigationDrawer">@color/blueDark</color>
 
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="greyDark">#7f7f7f</color>
     <color name="grey">#EEEEEE</color>
-
+    <color name="green">#43a047</color>
+    <color name="red">#f44336</color>
+    <color name="blue">#2196F3</color>
+    <color name="blueDark">#1565C0</color>
+    <color name="pink">#EC407A</color>
 </resources>
