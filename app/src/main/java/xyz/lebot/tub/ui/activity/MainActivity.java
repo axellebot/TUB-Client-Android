@@ -1,6 +1,6 @@
 package xyz.lebot.tub.ui.activity;
 
-import android.graphics.Rect;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
@@ -14,12 +14,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
+
+import com.facebook.CallbackManager;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.widget.LoginButton;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import xyz.lebot.tub.R;
 import xyz.lebot.tub.ui.adapter.MainActivityFragmentPagerAdapter;
+import xyz.lebot.tub.ui.composition.ConnectionDialog;
+import xyz.lebot.tub.ui.composition.ConnectionModule;
 import xyz.lebot.tub.ui.navigator.Navigator;
 import xyz.lebot.tub.ui.navigator.NavigatorImpl;
 import xyz.lebot.tub.ui.view.CustomBottomNavigationView;
@@ -43,6 +49,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @BindView(R.id.activity_main_app_bar_toolbar)
     Toolbar toolbar;
 
+    //Facebook
+    LoginButton facebookLoginButton;
+    CallbackManager facebookCallbackManager;
+
     private PagerAdapter mPagerAdapter;
     private Navigator navigator;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -50,6 +60,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        initFacebook();
 
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
@@ -80,6 +92,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         setSupportActionBar(toolbar);
+    }
+
+    private void initFacebook() {
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(getApplication());
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        this.facebookCallbackManager = CallbackManager.Factory.create();
     }
 
     private void initStatusBar() {
@@ -163,7 +182,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.activity_main_bottom_navigation_stop_action:
                 navigator.navigateToPartStop();
                 break;
+            case R.id.navigation_drawer_log_in:
+                ConnectionModule connectionModule = new ConnectionDialog(this);
+                connectionModule.display();
         }
         return false;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        //Facebook
+//        this.facebookCallbackManager.onActivityResult(requestCode, resultCode, data);
     }
 }
