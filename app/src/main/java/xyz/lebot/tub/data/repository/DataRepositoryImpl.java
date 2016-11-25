@@ -13,6 +13,7 @@ import xyz.lebot.tub.data.entity.mapper.StopDataMapper;
 import xyz.lebot.tub.data.manager.ApiManager;
 import xyz.lebot.tub.data.manager.CacheManager;
 import xyz.lebot.tub.data.manager.DownloadManager;
+import xyz.lebot.tub.data.manager.UserManager;
 import xyz.lebot.tub.data.model.LineModel;
 import xyz.lebot.tub.data.model.StopModel;
 
@@ -24,13 +25,15 @@ public class DataRepositoryImpl implements DataRepository {
     private ApiManager apiManager;
     private CacheManager cacheManager;
     private DownloadManager downloadManager;
+    private UserManager userManager;
     private LineDataMapper lineDataMapper;
     private StopDataMapper stopDataMapper;
 
-    public DataRepositoryImpl(ApiManager apiManager, CacheManager cacheManager, DownloadManager downloadManager, LineDataMapper lineDataMapper, StopDataMapper stopDataMapper) {
+    public DataRepositoryImpl(ApiManager apiManager, CacheManager cacheManager, DownloadManager downloadManager, UserManager userManager, LineDataMapper lineDataMapper, StopDataMapper stopDataMapper) {
         this.apiManager = apiManager;
         this.cacheManager = cacheManager;
         this.downloadManager = downloadManager;
+        this.userManager = userManager;
         this.lineDataMapper = lineDataMapper;
         this.stopDataMapper = stopDataMapper;
     }

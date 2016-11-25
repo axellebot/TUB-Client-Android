@@ -10,6 +10,8 @@ import xyz.lebot.tub.data.manager.CacheManager;
 import xyz.lebot.tub.data.manager.CacheManagerImpl;
 import xyz.lebot.tub.data.manager.DownloadManager;
 import xyz.lebot.tub.data.manager.DownloadManagerImpl;
+import xyz.lebot.tub.data.manager.UserManager;
+import xyz.lebot.tub.data.manager.UserManagerImpl;
 import xyz.lebot.tub.data.repository.DataRepository;
 import xyz.lebot.tub.data.repository.DataRepositoryImpl;
 
@@ -39,10 +41,11 @@ public class App extends Application {
         ApiManager apiManager = new ApiManagerImpl();
         CacheManager cacheManager = new CacheManagerImpl();
         DownloadManager downloadManager = new DownloadManagerImpl();
+        UserManager userManager = new UserManagerImpl(this);
         LineDataMapper lineDataMapper = new LineDataMapper();
         StopDataMapper stopDataMapper = new StopDataMapper();
 
-        dataRepository = new DataRepositoryImpl(apiManager, cacheManager, downloadManager, lineDataMapper, stopDataMapper);
+        dataRepository = new DataRepositoryImpl(apiManager, cacheManager, downloadManager, userManager, lineDataMapper, stopDataMapper);
     }
 
 
