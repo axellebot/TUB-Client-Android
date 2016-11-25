@@ -22,6 +22,7 @@ import com.facebook.login.widget.LoginButton;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import xyz.lebot.tub.App;
 import xyz.lebot.tub.R;
 import xyz.lebot.tub.ui.adapter.MainActivityFragmentPagerAdapter;
 import xyz.lebot.tub.ui.composition.ConnectionDialog;
@@ -194,6 +195,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onActivityResult(requestCode, resultCode, data);
 
         //Facebook
-//        this.facebookCallbackManager.onActivityResult(requestCode, resultCode, data);
+        App.getInstance().getDataRepository().getFacebookCallBackManager().onActivityResult(requestCode, resultCode, data);
     }
 }

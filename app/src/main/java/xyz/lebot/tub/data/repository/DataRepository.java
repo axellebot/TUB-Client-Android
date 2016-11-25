@@ -1,10 +1,14 @@
 package xyz.lebot.tub.data.repository;
 
+import com.facebook.CallbackManager;
+import com.facebook.Profile;
+
 import java.io.InputStream;
 import java.util.List;
 
 import rx.Observable;
 import xyz.lebot.tub.data.model.LineModel;
+import xyz.lebot.tub.data.model.ProfileModel;
 import xyz.lebot.tub.data.model.StopModel;
 
 /**
@@ -32,4 +36,10 @@ public interface DataRepository {
 
     //Download
     Observable<InputStream> getLineKMLCall(String id);
+
+    //Facebook
+    CallbackManager getFacebookCallBackManager();
+
+    //UserProfile
+    Observable<ProfileModel> getProfil();
 }

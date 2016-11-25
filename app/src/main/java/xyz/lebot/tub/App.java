@@ -3,6 +3,7 @@ package xyz.lebot.tub;
 import android.app.Application;
 
 import xyz.lebot.tub.data.entity.mapper.LineDataMapper;
+import xyz.lebot.tub.data.entity.mapper.ProfileDataMapper;
 import xyz.lebot.tub.data.entity.mapper.StopDataMapper;
 import xyz.lebot.tub.data.manager.ApiManager;
 import xyz.lebot.tub.data.manager.ApiManagerImpl;
@@ -23,14 +24,15 @@ public class App extends Application {
 
     private DataRepository dataRepository;
 
-
-    public App() {
-        ourInstance = this;
-        injectDependencies();
-    }
-
     public static App getInstance() {
         return ourInstance;
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        ourInstance = this;
+        injectDependencies();
     }
 
     public DataRepository getDataRepository() {
@@ -44,8 +46,9 @@ public class App extends Application {
         UserManager userManager = new UserManagerImpl(this);
         LineDataMapper lineDataMapper = new LineDataMapper();
         StopDataMapper stopDataMapper = new StopDataMapper();
+        ProfileDataMapper profileDataMapper = new ProfileDataMapper();
 
-        dataRepository = new DataRepositoryImpl(apiManager, cacheManager, downloadManager, userManager, lineDataMapper, stopDataMapper);
+        dataRepository = new DataRepositoryImpl(apiManager, cacheManager, downloadManager, userManager, lineDataMapper, stopDataMapper,profileDataMapper);
     }
 
 
