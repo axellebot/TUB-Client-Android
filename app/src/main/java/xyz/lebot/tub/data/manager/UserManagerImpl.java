@@ -27,7 +27,7 @@ public class UserManagerImpl implements UserManager {
     private CallbackManager facebookCallbackManager;
     private AccessTokenTracker facebookAccessTokenTracker;
     private AccessToken facebookAccessToken;
-    private ProfileTracker facebbokProfileTracker;
+    private ProfileTracker facebookProfileTracker;
     private Profile facebookProfile;
 
     public UserManagerImpl(Application application) {
@@ -70,7 +70,7 @@ public class UserManagerImpl implements UserManager {
         facebookAccessToken = AccessToken.getCurrentAccessToken();
 
         //Facebook Profile
-        facebbokProfileTracker = new ProfileTracker() {
+        facebookProfileTracker = new ProfileTracker() {
             @Override
             protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
                 facebookProfile = currentProfile;

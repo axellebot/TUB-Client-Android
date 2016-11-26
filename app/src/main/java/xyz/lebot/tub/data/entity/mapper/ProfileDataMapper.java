@@ -12,6 +12,8 @@ public class ProfileDataMapper {
     public ProfileModel transform(Profile profile) {
         ProfileModel profileModel = new ProfileModel();
         profileModel.setName(profile.getName());
+        profileModel.setProfileUri(profile.getLinkUri());
+        profileModel.setProfilePictureUri(profile.getProfilePictureUri(200,200));
         return profileModel;
     }
 }
