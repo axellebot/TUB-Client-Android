@@ -9,6 +9,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import xyz.lebot.tub.App;
 import xyz.lebot.tub.data.model.LineModel;
+import xyz.lebot.tub.data.repository.DataRepository;
 import xyz.lebot.tub.ui.fragment.LineFragment;
 import xyz.lebot.tub.ui.navigator.Navigator;
 
@@ -21,6 +22,7 @@ public class LineFragmentPresenter implements Presenter {
 
     private final LineFragment view;
     private final Navigator navigator;
+    private DataRepository dataRepository;
 
     public LineFragmentPresenter(final LineFragment view, final Navigator navigator) {
         this.view = view;
@@ -29,7 +31,9 @@ public class LineFragmentPresenter implements Presenter {
 
     @Override
     public void initialize() {
-        App.getInstance().getDataRepository().getAllLinesCall()
+        this.dataRepository= App.getInstance().getDataRepository();
+
+        this.dataRepository.getAllLinesCall()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<LineModel>>() {
