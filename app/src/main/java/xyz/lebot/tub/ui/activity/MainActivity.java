@@ -163,6 +163,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.activity_main_bottom_navigation_stop_action:
                 navigator.navigateToPartStop();
                 break;
+            case R.id.navigation_drawer_log_in:
+                break;
         }
         return false;
     }
