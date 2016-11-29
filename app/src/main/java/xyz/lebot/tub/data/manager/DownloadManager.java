@@ -8,8 +8,8 @@ import rx.Observable;
  */
 
 public interface DownloadManager {
-    String DOWNLOAD_PROD_URL = "http://tub.lebot.xyz/download/";
-    String DOWNLOAD_DEV_URL = "http://dev.tub.lebot.xyz/download/";
+    String DOWNLOAD_PROD_URL = "https://tub.bourgmapper.fr/download/";
+    String DOWNLOAD_DEV_URL = "https://dev.tub.bourgmapper.fr/download/";
 
     Observable<ResponseBody> getLineKmlFile(String id);
 }
