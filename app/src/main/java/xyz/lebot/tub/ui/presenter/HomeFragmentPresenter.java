@@ -15,6 +15,7 @@ import xyz.lebot.tub.App;
 import xyz.lebot.tub.R;
 import xyz.lebot.tub.data.model.LineModel;
 import xyz.lebot.tub.data.model.StopModel;
+import xyz.lebot.tub.data.repository.DataRepository;
 import xyz.lebot.tub.ui.fragment.HomeFragment;
 import xyz.lebot.tub.ui.navigator.Navigator;
 import xyz.lebot.tub.ui.view.StopMapClusterItem;
@@ -28,6 +29,7 @@ public class HomeFragmentPresenter implements Presenter {
 
     private final HomeFragment view;
     private final Navigator navigator;
+    private DataRepository dataRepository;
 
     public HomeFragmentPresenter(final HomeFragment view, final Navigator navigator) {
         this.view = view;
@@ -36,6 +38,7 @@ public class HomeFragmentPresenter implements Presenter {
 
     @Override
     public void initialize() {
+        this.dataRepository = App.getInstance().getDataRepository();
 
         view.getGoogleMap().getUiSettings().setMyLocationButtonEnabled(true);
         view.getGoogleMap().setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -83,7 +86,7 @@ public class HomeFragmentPresenter implements Presenter {
 
     private void addStopsClusterToMap() {
         //initMapWithStopsCLuster
-        App.getInstance().getDataRepository().getAllStopsCall()
+        this.dataRepository.getAllStopsCall()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<StopModel>>() {
@@ -105,7 +108,7 @@ public class HomeFragmentPresenter implements Presenter {
     }
 
     private void addLinesKMLToMap() {
-        App.getInstance().getDataRepository().getAllLinesCall()
+        this.dataRepository.getAllLinesCall()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<LineModel>>() {
@@ -129,7 +132,7 @@ public class HomeFragmentPresenter implements Presenter {
     }
 
     private void addLineKMLToMap(String id) {
-        App.getInstance().getDataRepository().getLineKMLCall(id)
+        this.dataRepository.getLineKMLCall(id)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<InputStream>() {

@@ -12,8 +12,8 @@ import xyz.lebot.tub.data.entity.StopEntity;
  */
 
 public interface ApiManager {
-    String API_PROD_URL = "http://tub.lebot.xyz/api/";
-    String API_DEV_URL = "http://dev.tub.lebot.xyz/api/";
+    String API_PROD_URL = "https://tub.bourgmapper.fr/api/";
+    String API_DEV_URL = "https://dev.tub.bourgmapper.fr/api/";
 
     Observable<List<LineEntity>> getAllLines();
 

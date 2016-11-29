@@ -9,6 +9,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import xyz.lebot.tub.App;
 import xyz.lebot.tub.data.model.StopModel;
+import xyz.lebot.tub.data.repository.DataRepository;
 import xyz.lebot.tub.ui.fragment.StopFragment;
 import xyz.lebot.tub.ui.navigator.Navigator;
 
@@ -21,6 +22,7 @@ public class StopFragmentPresenter implements Presenter {
 
     private final StopFragment view;
     private final Navigator navigator;
+    private DataRepository dataRepository;
 
     public StopFragmentPresenter(final StopFragment view, final Navigator navigator) {
         this.view = view;
@@ -30,7 +32,10 @@ public class StopFragmentPresenter implements Presenter {
 
     @Override
     public void initialize() {
-        App.getInstance().getDataRepository().getAllStopsCall()
+
+        this.dataRepository = App.getInstance().getDataRepository();
+
+        this.dataRepository.getAllStopsCall()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<StopModel>>() {
