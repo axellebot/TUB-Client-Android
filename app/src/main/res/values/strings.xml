@@ -24,4 +24,13 @@
     <string name="navigation_drawer_navigation_submenu_communication_title">Communication</string>
     <string name="navigation_drawer_share">Share</string>
     <string name="user_log_in">Log in</string>
+
+    <!-- Dialog Connection -->
+    <string name="dialog_connection_title">Connection</string>
+    <string name="dialog_connection_positive_text">Connect</string>
+    <string name="dialog_connection_negative_text">Close</string>
+
+    <!-- Hints -->
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
 </resources>

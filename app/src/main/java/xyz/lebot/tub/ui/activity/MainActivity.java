@@ -20,6 +20,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import xyz.lebot.tub.R;
 import xyz.lebot.tub.ui.adapter.MainActivityFragmentPagerAdapter;
+import xyz.lebot.tub.ui.composition.ConnectionDialog;
+import xyz.lebot.tub.ui.composition.ConnectionModule;
 import xyz.lebot.tub.ui.navigator.Navigator;
 import xyz.lebot.tub.ui.navigator.NavigatorImpl;
 import xyz.lebot.tub.ui.view.CustomBottomNavigationView;
@@ -164,6 +166,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 navigator.navigateToPartStop();
                 break;
             case R.id.navigation_drawer_log_in:
+                ConnectionModule connectionModule = new ConnectionDialog(this);
+                connectionModule.display();
                 break;
         }
         return false;
