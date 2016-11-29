@@ -56,4 +56,7 @@ dependencies {
 
     //AutoFitTextView
     compile 'me.grantland:autofittextview:0.2.1'
+
+    //Dialog
+    compile 'com.afollestad.material-dialogs:core:0.9.0.2'
 }
