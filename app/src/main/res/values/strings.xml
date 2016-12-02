@@ -10,7 +10,7 @@
 
     <string name="window_map_stop_info_default_title">Stop Label</string>
     <string name="window_map_stop_info_default_description">Description</string>
-    
+
     <string name="bottom_sheet_overview_content_default_btn_fav">0 Stops</string>
     <string name="bottom_sheet_overview_content_default_btn_bus">Bus</string>
     <string name="bottom_sheet_overview_content_default_btn_search">Get Me Somewhere</string>

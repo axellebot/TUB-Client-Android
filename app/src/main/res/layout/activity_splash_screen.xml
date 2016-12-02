@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_splash_screen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="xyz.lebot.tub.ui.activity.SplashScreen">
+
+    <ImageView
+        android:src="@drawable/ic_directions_bus_black_24dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/splash_imageView"
+        android:tint="@color/blue"
+        android:scaleType="fitXY"/>
+
+    <LinearLayout
+        android:id="@+id/left_splash_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        >
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/blue"
+            >
+
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:src="@drawable/ic_phone_android_black_24dp"
+                android:scaleType="fitXY"
+                android:tint="@color/white"/>
+            <ImageView
+                android:id="@+id/splachScreen_shadow"
+                android:layout_centerVertical="true"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/shadow_right"
+                android:scaleType="fitXY"
+                android:tint="@color/black"
+                android:visibility="invisible"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>
