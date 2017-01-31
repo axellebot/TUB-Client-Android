@@ -3,7 +3,7 @@ package fr.bourgmapper.tub.data.entity.mapper;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.bourgmapper.tub.data.model.LineModel;
+import fr.bourgmapper.tub.presentation.model.LineModel;
 import fr.bourgmapper.tub.data.entity.LineEntity;
 
 /**

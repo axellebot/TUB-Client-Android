@@ -3,8 +3,8 @@ package fr.bourgmapper.tub.data.repository;
 import java.io.InputStream;
 import java.util.List;
 
-import fr.bourgmapper.tub.data.model.LineModel;
-import fr.bourgmapper.tub.data.model.StopModel;
+import fr.bourgmapper.tub.presentation.model.LineModel;
+import fr.bourgmapper.tub.presentation.model.StopModel;
 import rx.Observable;
 
 /**

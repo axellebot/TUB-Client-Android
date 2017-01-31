@@ -2,8 +2,8 @@ package fr.bourgmapper.tub.data.manager;
 
 import java.util.List;
 
-import fr.bourgmapper.tub.data.model.LineModel;
-import fr.bourgmapper.tub.data.model.StopModel;
+import fr.bourgmapper.tub.presentation.model.LineModel;
+import fr.bourgmapper.tub.presentation.model.StopModel;
 
 /**
  * Created by axell on 04/11/2016.
