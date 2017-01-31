@@ -1,6 +1,8 @@
 package fr.bourgmapper.tub.data.manager;
 
 
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+
 import java.util.List;
 
 import rx.Observable;
@@ -12,9 +14,6 @@ import fr.bourgmapper.tub.data.entity.StopEntity;
  */
 
 public interface ApiManager {
-    String API_PROD_URL = "https://tub.bourgmapper.fr/api/";
-    String API_DEV_URL = "https://dev.tub.bourgmapper.fr/api/";
-
     Observable<List<LineEntity>> getAllLines();
 
     Observable<LineEntity> getLine(String line_id);

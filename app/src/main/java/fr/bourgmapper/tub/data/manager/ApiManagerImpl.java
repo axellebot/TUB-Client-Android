@@ -1,10 +1,12 @@
 package fr.bourgmapper.tub.data.manager;
 
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.List;
 
+import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.data.entity.LineEntity;
 import fr.bourgmapper.tub.data.entity.StopEntity;
 import retrofit2.Retrofit;
@@ -23,12 +25,24 @@ public class ApiManagerImpl implements ApiManager {
 
     private ApiService apiService;
 
+    // Remote Config keys
+    private static final String TUB_API_URL_KEY = "tub_api_url";
+
+    private FirebaseRemoteConfig mFirebaseRemoteConfig;
+
+
     public ApiManagerImpl() {
+        mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
+
+        mFirebaseRemoteConfig.setDefaults(R.xml.remote_config_default);
+
+        String TUB_API_URL = mFirebaseRemoteConfig.getString(TUB_API_URL_KEY);
+
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
                 .create();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(API_PROD_URL)
+                .baseUrl(TUB_API_URL)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
