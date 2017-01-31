@@ -16,18 +16,18 @@ import fr.bourgmapper.tub.data.repository.DataRepositoryImpl;
 /**
  * Created by axell on 04/11/2016.
  */
-public class App extends Application {
-    private static App ourInstance;
+public class TubApp extends Application {
+    private static TubApp ourInstance;
 
     private DataRepository dataRepository;
 
 
-    public App() {
+    public TubApp() {
         ourInstance = this;
         injectDependencies();
     }
 
-    public static App getInstance() {
+    public static TubApp getInstance() {
         return ourInstance;
     }
 

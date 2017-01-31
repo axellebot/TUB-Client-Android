@@ -8,7 +8,7 @@ import com.google.android.gms.maps.model.LatLng;
 import java.io.InputStream;
 import java.util.List;
 
-import fr.bourgmapper.tub.App;
+import fr.bourgmapper.tub.TubApp;
 import fr.bourgmapper.tub.data.model.LineModel;
 import fr.bourgmapper.tub.data.model.StopModel;
 import fr.bourgmapper.tub.data.repository.DataRepository;
@@ -38,7 +38,7 @@ public class HomeFragmentPresenter implements Presenter {
 
     @Override
     public void initialize() {
-        this.dataRepository = App.getInstance().getDataRepository();
+        this.dataRepository = TubApp.getInstance().getDataRepository();
 
         view.getGoogleMap().getUiSettings().setMyLocationButtonEnabled(true);
         view.getGoogleMap().setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -97,7 +97,7 @@ public class HomeFragmentPresenter implements Presenter {
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();
-                        view.addStopsToMapWithCluster(App.getInstance().getDataRepository().getAllStopsCache());
+                        view.addStopsToMapWithCluster(TubApp.getInstance().getDataRepository().getAllStopsCache());
                     }
 
                     @Override

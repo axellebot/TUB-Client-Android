@@ -2,7 +2,7 @@ package fr.bourgmapper.tub.ui.presenter;
 
 import android.util.Log;
 
-import fr.bourgmapper.tub.App;
+import fr.bourgmapper.tub.TubApp;
 import fr.bourgmapper.tub.data.model.LineModel;
 import fr.bourgmapper.tub.data.repository.DataRepository;
 import fr.bourgmapper.tub.ui.fragment.LineDetailFragment;
@@ -24,7 +24,7 @@ public class LineDetailFragmentPresenter implements Presenter {
 
     public LineDetailFragmentPresenter(final LineDetailFragment view, final Navigator navigator) {
 
-        this.dataRepository = App.getInstance().getDataRepository();
+        this.dataRepository = TubApp.getInstance().getDataRepository();
 
         this.view = view;
         this.navigator = navigator;

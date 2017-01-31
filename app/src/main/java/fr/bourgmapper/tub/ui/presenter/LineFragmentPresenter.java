@@ -4,11 +4,11 @@ import android.util.Log;
 
 import java.util.List;
 
+import fr.bourgmapper.tub.TubApp;
 import fr.bourgmapper.tub.data.model.LineModel;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-import fr.bourgmapper.tub.App;
 import fr.bourgmapper.tub.data.repository.DataRepository;
 import fr.bourgmapper.tub.ui.fragment.LineFragment;
 import fr.bourgmapper.tub.ui.navigator.Navigator;
@@ -31,7 +31,7 @@ public class LineFragmentPresenter implements Presenter {
 
     @Override
     public void initialize() {
-        this.dataRepository= App.getInstance().getDataRepository();
+        this.dataRepository= TubApp.getInstance().getDataRepository();
 
         this.dataRepository.getAllLinesCall()
                 .subscribeOn(Schedulers.newThread())
@@ -44,7 +44,7 @@ public class LineFragmentPresenter implements Presenter {
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();
-                        view.initList(App.getInstance().getDataRepository().getAllLinesCache());
+                        view.initList(TubApp.getInstance().getDataRepository().getAllLinesCache());
                     }
 
                     @Override

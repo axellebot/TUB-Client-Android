@@ -15,11 +15,11 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import fr.bourgmapper.tub.TubApp;
 import fr.bourgmapper.tub.data.model.LineModel;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-import fr.bourgmapper.tub.App;
 import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.ui.view.StopMapClusterItem;
 
@@ -58,7 +58,7 @@ public class StopMapClusterItemInfoWindowAdapter implements GoogleMap.InfoWindow
     public View getInfoContents(Marker marker) {
         this.windowTitle.setText(currentClusterItem.getTitle());
         ready = false;
-        App.getInstance().getDataRepository().getLinesFromStop(this.currentClusterItem.getId())
+        TubApp.getInstance().getDataRepository().getLinesFromStop(this.currentClusterItem.getId())
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<LineModel>>() {

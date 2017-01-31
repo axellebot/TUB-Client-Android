@@ -10,7 +10,7 @@ import fr.bourgmapper.tub.ui.navigator.Navigator;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-import fr.bourgmapper.tub.App;
+import fr.bourgmapper.tub.TubApp;
 import fr.bourgmapper.tub.data.repository.DataRepository;
 
 /**
@@ -33,7 +33,7 @@ public class StopFragmentPresenter implements Presenter {
     @Override
     public void initialize() {
 
-        this.dataRepository = App.getInstance().getDataRepository();
+        this.dataRepository = TubApp.getInstance().getDataRepository();
 
         this.dataRepository.getAllStopsCall()
                 .subscribeOn(Schedulers.newThread())
@@ -46,7 +46,7 @@ public class StopFragmentPresenter implements Presenter {
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();
-                        view.initList(App.getInstance().getDataRepository().getAllStopsCache());
+                        view.initList(TubApp.getInstance().getDataRepository().getAllStopsCache());
                     }
 
                     @Override
