@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    design:context=".ui.activity.MainActivity"
+    design:context="fr.bourgmapper.tub.presentation.ui.activity.MainActivity"
     design:showIn="@layout/app_bar_main">
 
     <RelativeLayout
@@ -15,7 +15,7 @@
         android:layout_weight="1"
         >
 
-        <xyz.lebot.tub.ui.view.CustomViewPager
+        <fr.bourgmapper.tub.presentation.ui.view.CustomViewPager
             android:id="@+id/activity_main_view_pager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -27,7 +27,7 @@
             android:layout_alignParentBottom="true"/>
     </RelativeLayout>
 
-    <xyz.lebot.tub.ui.view.CustomBottomNavigationView
+    <fr.bourgmapper.tub.presentation.ui.view.CustomBottomNavigationView
         android:id="@id/activity_main_bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="56dp"
