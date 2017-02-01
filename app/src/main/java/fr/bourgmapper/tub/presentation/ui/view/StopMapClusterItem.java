@@ -13,9 +13,9 @@ public class StopMapClusterItem implements ClusterItem {
     private final String id;
     private final String title;
 
-    public StopMapClusterItem(LatLng position, String id,String title) {
+    public StopMapClusterItem(LatLng position, String id, String title) {
         this.position = position;
-        this.id=id;
+        this.id = id;
         this.title = title;
     }
 

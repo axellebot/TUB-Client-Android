@@ -17,7 +17,7 @@ import rx.Observable;
 
 public class DownloadManagerImpl implements DownloadManager {
 
-    private  DownloadService downloadService;
+    private DownloadService downloadService;
 
     public DownloadManagerImpl() {
         Gson gson = new GsonBuilder()
@@ -30,6 +30,7 @@ public class DownloadManagerImpl implements DownloadManager {
                 .build();
         downloadService = retrofit.create(DownloadService.class);
     }
+
     @Override
     public Observable<ResponseBody> getLineKmlFile(String id) {
         return downloadService.getLineKMLFile(id);

@@ -15,13 +15,13 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.TubApp;
 import fr.bourgmapper.tub.presentation.model.LineModel;
+import fr.bourgmapper.tub.presentation.ui.view.StopMapClusterItem;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-import fr.bourgmapper.tub.R;
-import fr.bourgmapper.tub.presentation.ui.view.StopMapClusterItem;
 
 /**
  * Created by axell on 06/11/2016.
@@ -33,13 +33,11 @@ public class StopMapClusterItemInfoWindowAdapter implements GoogleMap.InfoWindow
     private final View view;
     private final Context context;
     private final LayoutInflater layoutInflater;
-    private boolean ready;
     @BindView(R.id.window_map_stop_info_title)
     TextView windowTitle;
-
     @BindView(R.id.window_map_stop_info_content)
     LinearLayoutCompat contentView;
-
+    private boolean ready;
     private StopMapClusterItem currentClusterItem;
 
     public StopMapClusterItemInfoWindowAdapter(Context context) {

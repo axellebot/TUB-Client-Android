@@ -13,8 +13,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import fr.bourgmapper.tub.presentation.model.StopModel;
 import fr.bourgmapper.tub.R;
+import fr.bourgmapper.tub.presentation.model.StopModel;
 
 /**
  * Created by axell on 05/11/2016.

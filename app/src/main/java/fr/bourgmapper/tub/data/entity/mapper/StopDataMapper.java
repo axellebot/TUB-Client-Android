@@ -3,8 +3,8 @@ package fr.bourgmapper.tub.data.entity.mapper;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.bourgmapper.tub.presentation.model.StopModel;
 import fr.bourgmapper.tub.data.entity.StopEntity;
+import fr.bourgmapper.tub.presentation.model.StopModel;
 
 /**
  * Created by axell on 04/11/2016.

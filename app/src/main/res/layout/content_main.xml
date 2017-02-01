@@ -15,10 +15,10 @@
         android:layout_weight="1"
         >
 
-        <fr.bourgmapper.tub.presentation.ui.view.CustomViewPager
-            android:id="@+id/activity_main_view_pager"
+        <FrameLayout
+            android:id="@+id/main_activity_fragment_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent" />
 
         <android.support.v7.widget.AppCompatImageView
             android:layout_width="match_parent"

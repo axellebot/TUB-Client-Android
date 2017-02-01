@@ -3,9 +3,9 @@ package fr.bourgmapper.tub.data.manager;
 
 import java.util.List;
 
-import rx.Observable;
 import fr.bourgmapper.tub.data.entity.LineEntity;
 import fr.bourgmapper.tub.data.entity.StopEntity;
+import rx.Observable;
 
 /**
  * Created by axell on 04/11/2016.

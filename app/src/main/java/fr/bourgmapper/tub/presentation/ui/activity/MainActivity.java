@@ -6,7 +6,6 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,14 +15,11 @@ import android.view.MenuItem;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import fr.bourgmapper.tub.presentation.ui.composition.ConnectionDialogModuleImpl;
-import fr.bourgmapper.tub.presentation.navigator.Navigator;
 import fr.bourgmapper.tub.R;
-import fr.bourgmapper.tub.presentation.ui.adapter.MainActivityFragmentPagerAdapter;
+import fr.bourgmapper.tub.presentation.navigator.MainNavigator;
 import fr.bourgmapper.tub.presentation.ui.composition.ConnectionDialogModule;
-import fr.bourgmapper.tub.presentation.navigator.NavigatorImpl;
+import fr.bourgmapper.tub.presentation.ui.composition.ConnectionDialogModuleImpl;
 import fr.bourgmapper.tub.presentation.ui.view.CustomBottomNavigationView;
-import fr.bourgmapper.tub.presentation.ui.view.CustomViewPager;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "MainActivity";
@@ -37,14 +33,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @BindView(R.id.activity_main_bottom_navigation)
     CustomBottomNavigationView bottomNavigationView;
 
-    @BindView(R.id.activity_main_view_pager)
-    CustomViewPager viewPager;
 
     @BindView(R.id.activity_main_app_bar_toolbar)
     Toolbar toolbar;
 
-    private PagerAdapter mPagerAdapter;
-    private Navigator navigator;
+    private MainNavigator navigator;
     private ActionBarDrawerToggle mDrawerToggle;
 
     @Override
@@ -53,24 +46,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        navigator = new MainNavigator(this);
 
         initStatusBar();
 
-        mPagerAdapter = new MainActivityFragmentPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(mPagerAdapter);
-        viewPager.setPagingEnabled(false);
-
-        navigator = new NavigatorImpl(this, navigator, viewPager, (MainActivityFragmentPagerAdapter) mPagerAdapter);
-        navigator.initPartLine();
-        navigator.initPartStop();
-        navigator.initPartHome();
-        navigator.navigateToPartHome();
 
         //Navigation Drawer
         this.mDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
-
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);
@@ -80,6 +64,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         setSupportActionBar(toolbar);
+
+        navigator.displayHomeMapFragment();
     }
 
     private void initStatusBar() {
@@ -126,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
-        navigator.navigateBack();
+        navigator.onBackPressed();
     }
 
     public void setContextColor(int res) {
@@ -154,14 +140,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.activity_main_bottom_navigation_home_action:
-                navigator.navigateToPartHome();
+            case R.id.activity_main_bottom_navigation_home_map_action:
+                navigator.displayHomeMapFragment();
                 break;
-            case R.id.activity_main_bottom_navigation_line_action:
-                navigator.navigateToPartLine();
+            case R.id.activity_main_bottom_navigation_line_list_action:
+                navigator.displayLineListFragment();
                 break;
-            case R.id.activity_main_bottom_navigation_stop_action:
-                navigator.navigateToPartStop();
+            case R.id.activity_main_bottom_navigation_stop_list_action:
+                navigator.displayStopListFragment();
                 break;
             case R.id.navigation_drawer_log_in:
                 ConnectionDialogModule connectionDialogModule = new ConnectionDialogModuleImpl(this);

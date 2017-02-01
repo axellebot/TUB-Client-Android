@@ -24,23 +24,20 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import fr.bourgmapper.tub.presentation.model.StopModel;
-import fr.bourgmapper.tub.presentation.ui.adapter.StopMapClusterItemInfoWindowAdapter;
-import fr.bourgmapper.tub.presentation.navigator.Navigator;
 import fr.bourgmapper.tub.R;
-import fr.bourgmapper.tub.presentation.presenter.HomeFragmentPresenter;
+import fr.bourgmapper.tub.presentation.model.StopModel;
+import fr.bourgmapper.tub.presentation.presenter.HomeMapFragmentPresenter;
 import fr.bourgmapper.tub.presentation.renderer.StopClusterRenderer;
+import fr.bourgmapper.tub.presentation.ui.adapter.StopMapClusterItemInfoWindowAdapter;
 import fr.bourgmapper.tub.presentation.ui.view.StopMapClusterItem;
 
-public class HomeFragment extends Fragment implements OnMapReadyCallback {
+public class HomeMapFragment extends Fragment implements OnMapReadyCallback {
 
     @BindView(R.id.fragment_map_map_view)
     MapView mMapView;
 
-    private Navigator navigator;
-
     private LayoutInflater inflater;
-    private HomeFragmentPresenter presenter;
+    private HomeMapFragmentPresenter presenter;
 
 
     //GoogleMap
@@ -52,14 +49,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     //BottomSheet
     private BottomSheetBehavior mBottomSheetBehavior;
 
-    public HomeFragment() {
-        // Required empty public constructor
-    }
-
-    @Override
-    public void setArguments(Bundle args) {
-        super.setArguments(args);
-        this.navigator = (Navigator) args.get("NAVIGATOR");
+    public static HomeMapFragment newInstance() {
+        HomeMapFragment fragment = new HomeMapFragment();
+        return fragment;
     }
 
     @Override
@@ -75,7 +67,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
         mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 
-        presenter = new HomeFragmentPresenter(this, navigator);
+        presenter = new HomeMapFragmentPresenter(this);
 
         mMapView.onCreate(savedInstanceState);
         mMapView.getMapAsync(this);
@@ -87,9 +79,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
 
-
         mMapView.onResume();
-        presenter.initialize();
+        presenter.start();
     }
 
     @Override
