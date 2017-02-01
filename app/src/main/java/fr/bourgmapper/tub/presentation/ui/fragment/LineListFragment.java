@@ -34,7 +34,7 @@ public class LineListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_line, container, false);
+        View view = inflater.inflate(R.layout.fragment_line_list, container, false);
         ButterKnife.bind(this, view);
 
         //Presenter

@@ -35,7 +35,7 @@ public class StopListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_stop, container, false);
+        View view = inflater.inflate(R.layout.fragment_stop_list, container, false);
         ButterKnife.bind(this, view);
 
         //Presenter

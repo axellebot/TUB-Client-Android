@@ -18,7 +18,7 @@ import rx.schedulers.Schedulers;
  */
 
 public class LineListFragmentPresenter implements BaseActivityLifeCycle {
-    private static String TAG = "LineFragmentPresenter";
+    private static String TAG = "LineListFragmentPrstr";
 
     private final LineListFragment view;
     private DataRepository dataRepository;

@@ -1,5 +1,6 @@
 package fr.bourgmapper.tub.presentation.navigator;
 
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -7,8 +8,9 @@ import android.support.v4.app.FragmentTransaction;
 import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.presentation.ui.activity.BaseActivityLifeCycle;
 import fr.bourgmapper.tub.presentation.ui.activity.MainActivity;
-import fr.bourgmapper.tub.presentation.ui.fragment.HomeMapFragment;
 import fr.bourgmapper.tub.presentation.ui.fragment.LineListFragment;
+import fr.bourgmapper.tub.presentation.ui.fragment.MapFragment;
+import fr.bourgmapper.tub.presentation.ui.fragment.MapOverviewFragment;
 import fr.bourgmapper.tub.presentation.ui.fragment.StopListFragment;
 
 /**
@@ -18,11 +20,15 @@ import fr.bourgmapper.tub.presentation.ui.fragment.StopListFragment;
 public class MainNavigator implements BaseActivityLifeCycle {
 
     private FRAGMENT currentFragment;
+    private FRAGMENT currentFragmentOverview;
     private FragmentManager fragmentManager;
     private MainActivity activity;
-    private HomeMapFragment homeMapFragment;
+
+    private MapFragment mapFragment;
+    private MapOverviewFragment mapOverviewFragment;
     private LineListFragment lineListFragment;
     private StopListFragment stopListFragment;
+
     public MainNavigator(MainActivity activity) {
         this.activity = activity;
         this.fragmentManager = ((MainActivity) activity).getSupportFragmentManager();
@@ -56,7 +62,8 @@ public class MainNavigator implements BaseActivityLifeCycle {
     public void onBackPressed() {
         switch (currentFragment) {
             case HOME_MAP:
-
+                break;
+            case MAP_OVERVIEW:
                 break;
             case LINE_LIST:
                 break;
@@ -65,63 +72,79 @@ public class MainNavigator implements BaseActivityLifeCycle {
         }
     }
 
+
     public void displayHomeMapFragment() {
         if (currentFragment != FRAGMENT.HOME_MAP) {
-            if (homeMapFragment == null) {
-                homeMapFragment = HomeMapFragment.newInstance();
+            if (this.mapFragment == null) {
+                this.mapFragment = MapFragment.newInstance();
             }
-            HomeMapFragment homeMapFragment = new HomeMapFragment();
-            fragmentTransactionReplace(homeMapFragment);
+            MapFragment mapFragment = new MapFragment();
+            fragmentTransactionReplace(mapFragment);
             currentFragment = FRAGMENT.HOME_MAP;
-
-            activity.setToolbarTitle(activity.getResources().getString(R.string.navigation_part_home_name));
-            int res = R.color.colorPartHome;
-            activity.setContextColor(res);
         }
+
+        displayMapOverlayFragmentOverview();
     }
 
-    public void displayLineListFragment() {
-        if (currentFragment != FRAGMENT.LINE_LIST) {
+    public void displayMapOverlayFragmentOverview() {
+        if (currentFragmentOverview != FRAGMENT.MAP_OVERVIEW) {
+            if (mapOverviewFragment == null) {
+                mapOverviewFragment = MapOverviewFragment.newInstance();
+            }
+            fragmentTransactionReplaceBottomSheet(mapOverviewFragment);
+            currentFragmentOverview = FRAGMENT.MAP_OVERVIEW;
+        }
+        activity.getBottomSheetBehavior().setState(BottomSheetBehavior.STATE_EXPANDED);
+    }
+
+    public void displayLineListFragmentOverview() {
+        if (currentFragmentOverview != FRAGMENT.LINE_LIST) {
             if (lineListFragment == null) {
                 lineListFragment = lineListFragment.newInstance();
             }
-            fragmentTransactionReplace(lineListFragment);
-            currentFragment = FRAGMENT.LINE_LIST;
-
-            activity.setToolbarTitle(activity.getResources().getString(R.string.navigation_part_line_name));
-            int res = R.color.colorPartLine;
-            activity.setContextColor(res);
+            fragmentTransactionReplaceBottomSheet(lineListFragment);
+            currentFragmentOverview = FRAGMENT.LINE_LIST;
         }
     }
 
-    public void displayStopListFragment() {
-        if (currentFragment != FRAGMENT.STOP_LIST) {
+    public void displayStopListFragmentOverview() {
+        if (currentFragmentOverview != FRAGMENT.STOP_LIST) {
             if (stopListFragment == null) {
                 stopListFragment = StopListFragment.newInstance();
             }
             StopListFragment stopListFragment = new StopListFragment();
-            fragmentTransactionReplace(stopListFragment);
-            currentFragment = FRAGMENT.STOP_LIST;
-
-            activity.setToolbarTitle(activity.getResources().getString(R.string.navigation_part_stop_name));
-            int res = R.color.colorPartStop;
-            activity.setContextColor(res);
+            fragmentTransactionReplaceBottomSheet(stopListFragment);
+            currentFragmentOverview = FRAGMENT.STOP_LIST;
         }
     }
 
     private Fragment getCurrentFragment() {
-        return fragmentManager.findFragmentById(R.id.main_activity_fragment_container);
+        return fragmentManager.findFragmentById(R.id.content_main_fragment_container);
     }
 
     private void fragmentTransactionReplace(Fragment fragment) {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.main_activity_fragment_container, fragment, fragment.getClass().getName());
+        fragmentTransaction.replace(R.id.content_main_fragment_container, fragment, fragment.getClass().getName());
         fragmentTransaction.commit();
     }
 
     private void fragmentTransactionAdd(Fragment fragment) {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.main_activity_fragment_container, fragment, fragment.getClass().getName());
+        fragmentTransaction.add(R.id.content_main_fragment_container, fragment, fragment.getClass().getName());
+        fragmentTransaction.addToBackStack(fragment.getClass().getName());
+        fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+        fragmentTransaction.commit();
+    }
+
+    private void fragmentTransactionReplaceBottomSheet(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.bottom_sheet_main_fragment_container, fragment, fragment.getClass().getName());
+        fragmentTransaction.commit();
+    }
+
+    private void fragmentTransactionAddBottomSheet(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.bottom_sheet_main_fragment_container, fragment, fragment.getClass().getName());
         fragmentTransaction.addToBackStack(fragment.getClass().getName());
         fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         fragmentTransaction.commit();
@@ -129,6 +152,7 @@ public class MainNavigator implements BaseActivityLifeCycle {
 
     public static enum FRAGMENT {
         HOME_MAP,
+        MAP_OVERVIEW,
         LINE_LIST,
         STOP_LIST
     }

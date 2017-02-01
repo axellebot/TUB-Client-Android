@@ -18,7 +18,7 @@ import rx.schedulers.Schedulers;
  */
 
 public class StopListFragmentPresenter implements BaseActivityLifeCycle {
-    private static String TAG = "StopFragmentPresenter";
+    private static String TAG = "StopListFragmentPrstr";
 
     private final StopListFragment view;
     private DataRepository dataRepository;

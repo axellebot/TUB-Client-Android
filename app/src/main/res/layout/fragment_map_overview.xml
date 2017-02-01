@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorPrimary">
 
-    <android.support.v7.widget.LinearLayoutCompat
+    <LinearLayout
         android:id="@+id/bottom_sheet_overview_top_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/bottom_sheet_journey_search_top_bar_height"
@@ -39,9 +40,9 @@
             android:textColor="@color/white" />
 
 
-    </android.support.v7.widget.LinearLayoutCompat>
+    </LinearLayout>
 
-    <android.support.v7.widget.LinearLayoutCompat
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -49,9 +50,9 @@
 
         <include layout="@layout/list_item_search" />
 
-    </android.support.v7.widget.LinearLayoutCompat>
+    </LinearLayout>
 
-    <android.support.v7.widget.LinearLayoutCompat
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -66,5 +67,5 @@
 
         <include layout="@layout/list_item_get_me_to_work" />
 
-    </android.support.v7.widget.LinearLayoutCompat>
-</android.support.v7.widget.LinearLayoutCompat>
+    </LinearLayout>
+</LinearLayout>
