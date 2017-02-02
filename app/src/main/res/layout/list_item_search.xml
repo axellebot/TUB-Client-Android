@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:textAlignment="center"
-            android:text="@string/bottom_sheet_overview_content_default_btn_search"
+            android:text="@string/fragment_info_btn_search_default"
             android:textSize="@dimen/list_item_text_size"/>
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/list_item_get_me_home_icon_more"

@@ -8,6 +8,11 @@
     <dimen name="fab_margin">16dp</dimen>
 
 
+    <!--Activity Main-->
+
+    <!--Bottom Sheet Main-->
+    <dimen name="bottom_sheet_main_peek_height_default">90dp</dimen>
+
     <!-- Fragment Info -->
     <dimen name="fragment_info_journey_search_top_bar_height">50dp</dimen>
 

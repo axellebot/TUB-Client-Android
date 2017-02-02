@@ -29,6 +29,16 @@
                 android:drawableTop="@drawable/ic_directions_bus_white_24dp"
                 android:text="@string/fragment_info_btn_bus_default"
                 android:textColor="@color/white" />
+            <Space
+                android:layout_width="5dp"
+                android:layout_height="0dp"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_rounded_bg"
+                android:drawableTop="@drawable/ic_beenhere_white_24dp"
+                android:text="@string/fragment_info_btn_stop_default"
+                android:textColor="@color/white" />
 
 
         </LinearLayout>
