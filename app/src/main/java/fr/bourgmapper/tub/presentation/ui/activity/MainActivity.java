@@ -20,8 +20,9 @@ import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.presentation.navigator.MainNavigator;
 import fr.bourgmapper.tub.presentation.ui.composition.ConnectionDialogModule;
 import fr.bourgmapper.tub.presentation.ui.composition.ConnectionDialogModuleImpl;
+import fr.bourgmapper.tub.presentation.ui.listener.NavigationListener;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener, NavigationListener {
     private static final String TAG = "MainActivity";
 
     @BindView(R.id.drawer_layout)
@@ -85,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void initBottomSheet() {
         this.bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetDialog);
-        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        bottomSheetBehavior.setState(BottomSheetBehavior.PEEK_HEIGHT_AUTO);
     }
 
     @Override
@@ -144,5 +145,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public BottomSheetBehavior getBottomSheetBehavior() {
         return bottomSheetBehavior;
+    }
+
+    @Override
+    public void onStopsButtonSelected() {
+        navigator.displayStopListFragmentOverview();
+    }
+
+    @Override
+    public void onBusButtonSelected() {
+        navigator.displayLineListFragmentOverview();
     }
 }

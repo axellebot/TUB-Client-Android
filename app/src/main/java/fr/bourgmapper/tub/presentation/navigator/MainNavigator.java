@@ -4,6 +4,7 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 
 import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.presentation.ui.activity.BaseActivityLifeCycle;
@@ -18,6 +19,7 @@ import fr.bourgmapper.tub.presentation.ui.fragment.StopListFragment;
  */
 
 public class MainNavigator implements BaseActivityLifeCycle {
+    private static String TAG = "MainNavigator";
 
     private FRAGMENT currentFragment;
     private FRAGMENT currentFragmentOverview;
@@ -60,14 +62,22 @@ public class MainNavigator implements BaseActivityLifeCycle {
     }
 
     public void onBackPressed() {
+        Log.i(TAG, "Back pressed");
         switch (currentFragment) {
             case HOME_MAP:
-                break;
-            case INFO:
-                break;
-            case LINE_LIST:
-                break;
-            case STOP_LIST:
+                switch (currentFragmentOverview) {
+                    case INFO:
+                        activity.getBottomSheetBehavior().setState(BottomSheetBehavior.STATE_COLLAPSED);
+                        break;
+                    case LINE_LIST:
+                        fragmentTransactionPopOverview();
+                        currentFragmentOverview = FRAGMENT.INFO;
+                        break;
+                    case STOP_LIST:
+                        fragmentTransactionPopOverview();
+                        currentFragmentOverview = FRAGMENT.INFO;
+                        break;
+                }
                 break;
         }
     }
@@ -102,7 +112,7 @@ public class MainNavigator implements BaseActivityLifeCycle {
             if (lineListFragment == null) {
                 lineListFragment = lineListFragment.newInstance();
             }
-            fragmentTransactionReplaceOverview(lineListFragment);
+            fragmentTransactionAddOverview(lineListFragment);
             currentFragmentOverview = FRAGMENT.LINE_LIST;
         }
     }
@@ -113,7 +123,7 @@ public class MainNavigator implements BaseActivityLifeCycle {
                 stopListFragment = StopListFragment.newInstance();
             }
             StopListFragment stopListFragment = new StopListFragment();
-            fragmentTransactionReplaceOverview(stopListFragment);
+            fragmentTransactionAddOverview(stopListFragment);
             currentFragmentOverview = FRAGMENT.STOP_LIST;
         }
     }
@@ -132,7 +142,14 @@ public class MainNavigator implements BaseActivityLifeCycle {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.content_main_fragment_container, fragment, fragment.getClass().getName());
         fragmentTransaction.addToBackStack(fragment.getClass().getName());
-        fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+        fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+        fragmentTransaction.commit();
+    }
+
+    private void fragmentTransactionPop() {
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentManager.popBackStack();
+        fragmentTransaction.setCustomAnimations(android.R.anim.fade_out, android.R.anim.fade_in);
         fragmentTransaction.commit();
     }
 
@@ -146,7 +163,14 @@ public class MainNavigator implements BaseActivityLifeCycle {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.bottom_sheet_main_fragment_container, fragment, fragment.getClass().getName());
         fragmentTransaction.addToBackStack(fragment.getClass().getName());
-        fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+        fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+        fragmentTransaction.commit();
+    }
+
+    private void fragmentTransactionPopOverview() {
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentManager.popBackStack();
+        fragmentTransaction.setCustomAnimations(android.R.anim.fade_out, android.R.anim.fade_in);
         fragmentTransaction.commit();
     }
 
