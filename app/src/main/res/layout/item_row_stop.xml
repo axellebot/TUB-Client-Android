@@ -1,33 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_row_stop"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="@dimen/item_row_stop_label_padding">
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/item_row_stop_card"
+    <TextView
+        android:id="@+id/item_row_stop_label"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:elevation="4dp"
-        card_view:cardCornerRadius="4dp"
-        card_view:cardUseCompatPadding="true"
-        card_view:cardBackgroundColor="@color/white">
-
-        <TextView
-            android:id="@+id/item_row_stop_label"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center"
-            android:layout_marginStart="10dp"
-            android:elevation="10dp"
-            android:gravity="left"
-            android:text="Stop Label"
-            android:textColor="@color/black"
-            android:textSize="@dimen/item_row_stop_label_size" />
-    </android.support.v7.widget.CardView>
-</RelativeLayout>
+        android:layout_marginStart="10dp"
+        android:gravity="left"
+        android:text="@string/item_row_stop_tv_default"
+        android:textColor="@color/black"
+        android:textSize="@dimen/item_row_stop_label_size" />
+</LinearLayout>
 
 

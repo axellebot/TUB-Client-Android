@@ -1,7 +1,6 @@
 package fr.bourgmapper.tub.presentation.ui.fragment;
 
 import android.os.Bundle;
-import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,23 +23,20 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import fr.bourgmapper.tub.presentation.model.StopModel;
-import fr.bourgmapper.tub.presentation.ui.adapter.StopMapClusterItemInfoWindowAdapter;
-import fr.bourgmapper.tub.presentation.navigator.Navigator;
 import fr.bourgmapper.tub.R;
-import fr.bourgmapper.tub.presentation.presenter.HomeFragmentPresenter;
+import fr.bourgmapper.tub.presentation.model.StopModel;
+import fr.bourgmapper.tub.presentation.presenter.MapFragmentPresenter;
 import fr.bourgmapper.tub.presentation.renderer.StopClusterRenderer;
+import fr.bourgmapper.tub.presentation.ui.adapter.StopMapClusterItemInfoWindowAdapter;
 import fr.bourgmapper.tub.presentation.ui.view.StopMapClusterItem;
 
-public class HomeFragment extends Fragment implements OnMapReadyCallback {
+public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     @BindView(R.id.fragment_map_map_view)
     MapView mMapView;
 
-    private Navigator navigator;
-
     private LayoutInflater inflater;
-    private HomeFragmentPresenter presenter;
+    private MapFragmentPresenter presenter;
 
 
     //GoogleMap
@@ -49,17 +45,10 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     private StopMapClusterItemInfoWindowAdapter mClusterAdapter;
     private StopClusterRenderer mClusterRenderer;
 
-    //BottomSheet
-    private BottomSheetBehavior mBottomSheetBehavior;
 
-    public HomeFragment() {
-        // Required empty public constructor
-    }
-
-    @Override
-    public void setArguments(Bundle args) {
-        super.setArguments(args);
-        this.navigator = (Navigator) args.get("NAVIGATOR");
+    public static MapFragment newInstance() {
+        MapFragment fragment = new MapFragment();
+        return fragment;
     }
 
     @Override
@@ -69,13 +58,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         View view = inflater.inflate(R.layout.fragment_map, container, false);
         ButterKnife.bind(this, view);
 
-
-        View bottomSheetDialog = view.findViewById(R.id.bottom_sheet_overview);
-        this.mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheetDialog);
-
-        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-
-        presenter = new HomeFragmentPresenter(this, navigator);
+        presenter = new MapFragmentPresenter(this);
 
         mMapView.onCreate(savedInstanceState);
         mMapView.getMapAsync(this);
@@ -87,9 +70,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
 
-
         mMapView.onResume();
-        presenter.initialize();
+        presenter.start();
     }
 
     @Override
@@ -155,21 +137,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         }
     }
 
-
-    public ClusterManager<StopMapClusterItem> getmClusterManager() {
-        return mClusterManager;
-    }
-
     public StopMapClusterItemInfoWindowAdapter getmClusterAdapter() {
         return mClusterAdapter;
-    }
-
-    public StopClusterRenderer getmClusterRenderer() {
-        return mClusterRenderer;
-    }
-
-    public BottomSheetBehavior getmBottomSheetBehavior() {
-        return mBottomSheetBehavior;
     }
 
     public GoogleMap getGoogleMap() {

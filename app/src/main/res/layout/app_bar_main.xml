@@ -1,27 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:design="http://schemas.android.com/tools"
     android:id="@+id/activity_main_coordinator_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_above="@+id/activity_main_bottom_navigation"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    design:context="fr.bourgmapper.tub.presentation.ui.activity.MainActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/activity_main_app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+    <!-- include app bar -->
+    <include layout="@layout/app_bar" />
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/activity_main_app_bar_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-    </android.support.design.widget.AppBarLayout>
-
+    <!-- include main content -->
     <include layout="@layout/content_main" />
+
+    <!-- include bottom sheet -->
+    <include layout="@layout/bottom_sheet_main" />
 
 </android.support.design.widget.CoordinatorLayout>

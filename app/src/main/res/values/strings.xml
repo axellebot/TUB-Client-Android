@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Tub</string>
 
-    <string name="action_settings">Settings</string>
+    <!--Action Bar-->
+    <string name="action_bar_settings">Settings</string>
 
     <!-- Navigation Bottom -->
     <string name="navigation_part_line_name">Lines</string>
@@ -10,12 +11,14 @@
 
     <string name="window_map_stop_info_default_title">Stop Label</string>
     <string name="window_map_stop_info_default_description">Description</string>
-    
-    <string name="bottom_sheet_overview_content_default_btn_fav">0 Stops</string>
-    <string name="bottom_sheet_overview_content_default_btn_bus">Bus</string>
-    <string name="bottom_sheet_overview_content_default_btn_search">Get Me Somewhere</string>
-    <string name="bottom_sheet_overview_content_default_btn_home">Get Me Home</string>
-    <string name="bottom_sheet_overview_content_default_btn_work">Get Me To Work</string>
+
+    <!--Fragment Info-->
+    <string name="fragment_info_btn_fav_default">0 Stops</string>
+    <string name="fragment_info_btn_bus_default">Bus</string>
+    <string name="fragment_info_btn_stop_default">Stops</string>
+    <string name="fragment_info_btn_search_default">Get Me Somewhere</string>
+    <string name="fragment_info_btn_home_default">Get Me Home</string>
+    <string name="fragment_info_btn_work_default">Get Me To Work</string>
 
     <!-- Navigation Drawer -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -23,14 +26,15 @@
     <string name="navigation_drawer_contact_us">Contact us</string>
     <string name="navigation_drawer_navigation_submenu_communication_title">Communication</string>
     <string name="navigation_drawer_share">Share</string>
-    <string name="user_log_in">Log in</string>
+    <string name="navigation_drawer_user_log_in">Log in</string>
 
     <!-- Dialog Connection -->
     <string name="dialog_connection_title">Connection</string>
     <string name="dialog_connection_positive_text">Connect</string>
     <string name="dialog_connection_negative_text">Close</string>
+    <string name="dialog_conection_email_hint">Email</string>
+    <string name="dialog_conection_password_hint">Password</string>
 
-    <!-- Hints -->
-    <string name="hint_email">Email</string>
-    <string name="hint_password">Password</string>
+    <!--Item Row Stop-->
+    <string name="item_row_stop_tv_default">Stop Label</string>
 </resources>

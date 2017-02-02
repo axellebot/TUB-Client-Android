@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/fragment_line_detail_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="@dimen/line_detail_padding">
+    android:layout_height="wrap_content"
+    android:background="@drawable/bottom_sheet_main_overview_bg_default"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/fragment_line_detail_number"
-        android:layout_width="@dimen/line_detail_circle_size"
-        android:layout_height="@dimen/line_detail_circle_size"
+        android:layout_width="@dimen/fragment_line_circle_size"
+        android:layout_height="@dimen/fragment_line_circle_size"
         android:layout_gravity="center"
         android:background="@drawable/circle"
         android:gravity="center"
         android:text="Line number"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="@dimen/line_detail_number_number" />
+        android:textSize="@dimen/fragment_line_number_number" />
 
     <TextView
         android:id="@+id/fragment_line_detail_label"
@@ -25,6 +26,6 @@
         android:text="Line label"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="@dimen/line_detail_number_label" />
+        android:textSize="@dimen/fragment_line_number_label" />
 
-</android.support.v7.widget.LinearLayoutCompat>
+</LinearLayout>

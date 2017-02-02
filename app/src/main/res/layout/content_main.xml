@@ -1,40 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:design="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    design:context="fr.bourgmapper.tub.presentation.ui.activity.MainActivity"
-    design:showIn="@layout/app_bar_main">
+    android:fillViewport="true"
+    app:layout_anchor="@id/bottom_sheet_main"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <RelativeLayout
+    <FrameLayout
+        android:id="@+id/content_main_fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        >
-
-        <fr.bourgmapper.tub.presentation.ui.view.CustomViewPager
-            android:id="@+id/activity_main_view_pager"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <android.support.v7.widget.AppCompatImageView
-            android:layout_width="match_parent"
-            android:layout_height="15dp"
-            android:src="@drawable/shadow_top"
-            android:layout_alignParentBottom="true"/>
-    </RelativeLayout>
-
-    <fr.bourgmapper.tub.presentation.ui.view.CustomBottomNavigationView
-        android:id="@id/activity_main_bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        app:itemBackground="@color/white"
-        app:itemIconTint="@color/navigation_bottom_item_color"
-        app:itemTextColor="@color/navigation_bottom_item_color"
-        app:menu="@menu/activity_main_navigation_bottom"
-        design:menu="@menu/activity_main_bottom_navigation"
-        />
-</android.support.v7.widget.LinearLayoutCompat>
+        android:layout_height="match_parent"
+        android:orientation="vertical" />
+</ScrollView>

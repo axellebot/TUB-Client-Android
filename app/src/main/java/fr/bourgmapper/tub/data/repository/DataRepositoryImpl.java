@@ -3,18 +3,18 @@ package fr.bourgmapper.tub.data.repository;
 import java.io.InputStream;
 import java.util.List;
 
+import fr.bourgmapper.tub.data.entity.LineEntity;
 import fr.bourgmapper.tub.data.entity.StopEntity;
 import fr.bourgmapper.tub.data.entity.mapper.LineDataMapper;
 import fr.bourgmapper.tub.data.entity.mapper.StopDataMapper;
 import fr.bourgmapper.tub.data.manager.ApiManager;
 import fr.bourgmapper.tub.data.manager.CacheManager;
+import fr.bourgmapper.tub.data.manager.DownloadManager;
 import fr.bourgmapper.tub.presentation.model.LineModel;
 import fr.bourgmapper.tub.presentation.model.StopModel;
 import okhttp3.ResponseBody;
 import rx.Observable;
 import rx.functions.Func1;
-import fr.bourgmapper.tub.data.entity.LineEntity;
-import fr.bourgmapper.tub.data.manager.DownloadManager;
 
 /**
  * Created by axell on 04/11/2016.

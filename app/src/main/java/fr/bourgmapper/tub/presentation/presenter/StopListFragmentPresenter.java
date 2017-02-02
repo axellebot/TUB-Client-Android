@@ -4,35 +4,31 @@ import android.util.Log;
 
 import java.util.List;
 
+import fr.bourgmapper.tub.TubApp;
+import fr.bourgmapper.tub.data.repository.DataRepository;
 import fr.bourgmapper.tub.presentation.model.StopModel;
-import fr.bourgmapper.tub.presentation.ui.fragment.StopFragment;
-import fr.bourgmapper.tub.presentation.navigator.Navigator;
+import fr.bourgmapper.tub.presentation.ui.activity.BaseActivityLifeCycle;
+import fr.bourgmapper.tub.presentation.ui.fragment.StopListFragment;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-import fr.bourgmapper.tub.TubApp;
-import fr.bourgmapper.tub.data.repository.DataRepository;
 
 /**
  * Created by axell on 05/11/2016.
  */
 
-public class StopFragmentPresenter implements Presenter {
-    private static String TAG = "StopFragmentPresenter";
+public class StopListFragmentPresenter implements BaseActivityLifeCycle {
+    private static String TAG = "StopListFragmentPrstr";
 
-    private final StopFragment view;
-    private final Navigator navigator;
+    private final StopListFragment view;
     private DataRepository dataRepository;
 
-    public StopFragmentPresenter(final StopFragment view, final Navigator navigator) {
+    public StopListFragmentPresenter(final StopListFragment view) {
         this.view = view;
-        this.navigator = navigator;
     }
 
-
     @Override
-    public void initialize() {
-
+    public void start() {
         this.dataRepository = TubApp.getInstance().getDataRepository();
 
         this.dataRepository.getAllStopsCall()
@@ -64,6 +60,16 @@ public class StopFragmentPresenter implements Presenter {
 
     @Override
     public void pause() {
+
+    }
+
+    @Override
+    public void stop() {
+
+    }
+
+    @Override
+    public void destroy() {
 
     }
 }

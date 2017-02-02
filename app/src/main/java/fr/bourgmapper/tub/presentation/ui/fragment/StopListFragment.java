@@ -14,39 +14,32 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.presentation.model.StopModel;
+import fr.bourgmapper.tub.presentation.presenter.StopListFragmentPresenter;
 import fr.bourgmapper.tub.presentation.ui.adapter.StopListAdapter;
-import fr.bourgmapper.tub.presentation.navigator.Navigator;
-import fr.bourgmapper.tub.presentation.presenter.StopFragmentPresenter;
 
-public class StopFragment extends Fragment {
+public class StopListFragment extends Fragment {
 
     @BindView(R.id.fragment_stop_recycler_view)
     RecyclerView recyclerView;
 
-    private Navigator navigator;
     private StopListAdapter stopListAdapter;
-    private StopFragmentPresenter presenter;
+    private StopListFragmentPresenter presenter;
 
-    public StopFragment() {
-        // Required empty public constructor
+    public static StopListFragment newInstance() {
+        StopListFragment fragment = new StopListFragment();
+        return fragment;
     }
 
-
-    @Override
-    public void setArguments(Bundle args) {
-        super.setArguments(args);
-        this.navigator = (Navigator) args.get("NAVIGATOR");
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_stop, container, false);
+        View view = inflater.inflate(R.layout.fragment_stop_list, container, false);
         ButterKnife.bind(this, view);
 
         //Presenter
-        presenter = new StopFragmentPresenter(this, navigator);
+        presenter = new StopListFragmentPresenter(this);
 
         //Adapter
         stopListAdapter = new StopListAdapter(this.getContext(), null);
@@ -55,7 +48,7 @@ public class StopFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         recyclerView.setAdapter(stopListAdapter);
 
-        presenter.initialize();
+        presenter.start();
         return view;
     }
 

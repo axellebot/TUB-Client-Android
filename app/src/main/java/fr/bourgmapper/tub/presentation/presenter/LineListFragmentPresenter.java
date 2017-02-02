@@ -5,33 +5,31 @@ import android.util.Log;
 import java.util.List;
 
 import fr.bourgmapper.tub.TubApp;
+import fr.bourgmapper.tub.data.repository.DataRepository;
 import fr.bourgmapper.tub.presentation.model.LineModel;
+import fr.bourgmapper.tub.presentation.ui.activity.BaseActivityLifeCycle;
+import fr.bourgmapper.tub.presentation.ui.fragment.LineListFragment;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-import fr.bourgmapper.tub.data.repository.DataRepository;
-import fr.bourgmapper.tub.presentation.ui.fragment.LineFragment;
-import fr.bourgmapper.tub.presentation.navigator.Navigator;
 
 /**
  * Created by axell on 05/11/2016.
  */
 
-public class LineFragmentPresenter implements Presenter {
-    private static String TAG = "LineFragmentPresenter";
+public class LineListFragmentPresenter implements BaseActivityLifeCycle {
+    private static String TAG = "LineListFragmentPrstr";
 
-    private final LineFragment view;
-    private final Navigator navigator;
+    private final LineListFragment view;
     private DataRepository dataRepository;
 
-    public LineFragmentPresenter(final LineFragment view, final Navigator navigator) {
+    public LineListFragmentPresenter(final LineListFragment view) {
         this.view = view;
-        this.navigator = navigator;
     }
 
     @Override
-    public void initialize() {
-        this.dataRepository= TubApp.getInstance().getDataRepository();
+    public void start() {
+        this.dataRepository = TubApp.getInstance().getDataRepository();
 
         this.dataRepository.getAllLinesCall()
                 .subscribeOn(Schedulers.newThread())
@@ -65,7 +63,17 @@ public class LineFragmentPresenter implements Presenter {
 
     }
 
+    @Override
+    public void stop() {
+
+    }
+
+    @Override
+    public void destroy() {
+
+    }
+
     public void onLineItemClick(String lineId) {
-        navigator.navigateToLineDetail(lineId);
+        //TODO display line detail
     }
 }

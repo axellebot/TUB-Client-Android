@@ -12,9 +12,8 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import fr.bourgmapper.tub.presentation.model.LineModel;
-import fr.bourgmapper.tub.presentation.navigator.Navigator;
 import fr.bourgmapper.tub.R;
+import fr.bourgmapper.tub.presentation.model.LineModel;
 import fr.bourgmapper.tub.presentation.presenter.LineDetailFragmentPresenter;
 
 public class LineDetailFragment extends Fragment {
@@ -30,20 +29,12 @@ public class LineDetailFragment extends Fragment {
     TextView tvLabel;
 
 
-    private Navigator navigator;
     private String lineId;
     private LineDetailFragmentPresenter presenter;
 
-
-    public LineDetailFragment() {
-        // Required empty public constructor
-    }
-
-
-    @Override
-    public void setArguments(Bundle args) {
-        this.navigator = (Navigator) args.get("NAVIGATOR");
-        this.lineId=(String) args.get("LINE_ID");
+    public static LineDetailFragment newInstance() {
+        LineDetailFragment fragment = new LineDetailFragment();
+        return fragment;
     }
 
     @Override
@@ -52,8 +43,8 @@ public class LineDetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_line_detail, container, false);
         ButterKnife.bind(this, view);
 
-        presenter = new LineDetailFragmentPresenter(this, navigator);
-        presenter.initialize();
+        presenter = new LineDetailFragmentPresenter(this);
+        presenter.start();
         presenter.initView(this.lineId);
         return view;
     }

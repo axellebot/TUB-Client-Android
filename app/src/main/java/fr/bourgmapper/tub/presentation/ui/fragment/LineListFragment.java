@@ -11,41 +11,34 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import fr.bourgmapper.tub.presentation.model.LineModel;
-import fr.bourgmapper.tub.presentation.navigator.Navigator;
-import fr.bourgmapper.tub.presentation.presenter.LineFragmentPresenter;
 import fr.bourgmapper.tub.R;
+import fr.bourgmapper.tub.presentation.model.LineModel;
+import fr.bourgmapper.tub.presentation.presenter.LineListFragmentPresenter;
 import fr.bourgmapper.tub.presentation.ui.adapter.LineGridAdapter;
 import fr.bourgmapper.tub.presentation.ui.manager.GridAutofitLayoutManager;
 
-public class LineFragment extends Fragment {
+public class LineListFragment extends Fragment {
 
     @BindView(R.id.fragment_line_recycler_view)
     RecyclerView recyclerView;
 
-    private Navigator navigator;
-    private LineFragmentPresenter presenter;
+    private LineListFragmentPresenter presenter;
     private LineGridAdapter lineGridAdapter;
 
-    public LineFragment() {
-        // Required empty public constructor
-    }
-
-    @Override
-    public void setArguments(Bundle args) {
-        super.setArguments(args);
-        this.navigator = (Navigator) args.get("NAVIGATOR");
+    public static LineListFragment newInstance() {
+        LineListFragment fragment = new LineListFragment();
+        return fragment;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_line, container, false);
+        View view = inflater.inflate(R.layout.fragment_line_list, container, false);
         ButterKnife.bind(this, view);
 
         //Presenter
-        this.presenter = new LineFragmentPresenter(this, navigator);
+        this.presenter = new LineListFragmentPresenter(this);
 
         //Adapter
         this.lineGridAdapter = new LineGridAdapter(this, presenter, null);
@@ -55,7 +48,7 @@ public class LineFragment extends Fragment {
         GridAutofitLayoutManager layoutManager = new GridAutofitLayoutManager(this.getContext(), (int) getResources().getDimension(R.dimen.item_grid_line_size));
         this.recyclerView.setLayoutManager(layoutManager);
 
-        presenter.initialize();
+        presenter.start();
         return view;
     }
 
