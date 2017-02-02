@@ -1,7 +1,6 @@
 package fr.bourgmapper.tub.presentation.ui.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,8 +65,8 @@ public class StopListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         @BindView(R.id.item_row_stop_label)
         TextView tvLabel;
 
-        @BindView(R.id.item_row_stop_card)
-        CardView cardView;
+        @BindView(R.id.item_row_stop)
+        View itemContainer;
 
         public StopLineHolder(View itemView) {
             super(itemView);
@@ -78,8 +77,5 @@ public class StopListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             return tvLabel;
         }
 
-        public CardView getCardView() {
-            return cardView;
-        }
     }
 }

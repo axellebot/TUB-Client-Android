@@ -35,4 +35,6 @@
     <string name="dialog_conection_email_hint">Email</string>
     <string name="dialog_conection_password_hint">Password</string>
 
+    <!--Item Row Stop-->
+    <string name="item_row_stop_tv_default">Stop Label</string>
 </resources>
