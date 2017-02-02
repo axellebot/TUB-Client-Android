@@ -8,20 +8,20 @@ import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
 import fr.bourgmapper.tub.R;
-import fr.bourgmapper.tub.presentation.presenter.MapOverviewFragmentPresenter;
+import fr.bourgmapper.tub.presentation.presenter.InfoFragmentPresenter;
 
 /**
  * Created by axell on 01/02/2017.
  */
 
-public class MapOverviewFragment extends Fragment {
+public class InfoFragment extends Fragment {
 
 
     private LayoutInflater inflater;
-    private MapOverviewFragmentPresenter presenter;
+    private InfoFragmentPresenter presenter;
 
-    public static MapOverviewFragment newInstance() {
-        MapOverviewFragment fragment = new MapOverviewFragment();
+    public static InfoFragment newInstance() {
+        InfoFragment fragment = new InfoFragment();
         return fragment;
     }
 
@@ -29,10 +29,10 @@ public class MapOverviewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         this.inflater = inflater;
-        View view = inflater.inflate(R.layout.fragment_map_overview, container, false);
+        View view = inflater.inflate(R.layout.fragment_info, container, false);
         ButterKnife.bind(this, view);
 
-        presenter = new MapOverviewFragmentPresenter(this);
+        presenter = new InfoFragmentPresenter(this);
         presenter.start();
         return view;
     }

@@ -1,18 +1,18 @@
 package fr.bourgmapper.tub.presentation.presenter;
 
 import fr.bourgmapper.tub.presentation.ui.activity.BaseActivityLifeCycle;
-import fr.bourgmapper.tub.presentation.ui.fragment.MapOverviewFragment;
+import fr.bourgmapper.tub.presentation.ui.fragment.InfoFragment;
 
 /**
  * Created by axell on 05/11/2016.
  */
 
-public class MapOverviewFragmentPresenter implements BaseActivityLifeCycle {
+public class InfoFragmentPresenter implements BaseActivityLifeCycle {
     private static String TAG = "MapOverviewFragmentPrstr";
 
-    private final MapOverviewFragment view;
+    private final InfoFragment view;
 
-    public MapOverviewFragmentPresenter(final MapOverviewFragment view) {
+    public InfoFragmentPresenter(final InfoFragment view) {
         this.view = view;
     }
 

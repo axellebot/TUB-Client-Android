@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bottom_sheet_main_overview_bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+
+        <!--Top Menu-->
+        <LinearLayout
+            android:id="@+id/fragment_info_top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/fragment_info_journey_search_top_bar_height"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_rounded_bg"
+                android:drawableTop="@drawable/ic_directions_bus_white_24dp"
+                android:text="@string/fragment_info_btn_bus_default"
+                android:textColor="@color/white" />
+
+
+        </LinearLayout>
+
+        <!--Search Bar-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <include layout="@layout/list_item_search" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <include layout="@layout/list_item_get_me_home" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+
+            <include layout="@layout/list_item_get_me_to_work" />
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
