@@ -1,6 +1,6 @@
 package fr.bourgmapper.tub;
 
-import android.app.Application;
+import android.support.multidex.MultiDexApplication;
 
 import fr.bourgmapper.tub.data.entity.mapper.LineDataMapper;
 import fr.bourgmapper.tub.data.entity.mapper.StopDataMapper;
@@ -16,7 +16,7 @@ import fr.bourgmapper.tub.data.repository.DataRepositoryImpl;
 /**
  * Created by axell on 04/11/2016.
  */
-public class TubApp extends Application {
+public class TubApp extends MultiDexApplication {
     private static TubApp ourInstance;
 
     private DataRepository dataRepository;
