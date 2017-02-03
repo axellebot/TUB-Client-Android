@@ -17,25 +17,23 @@ import fr.bourgmapper.tub.data.repository.DataRepositoryImpl;
  * Created by axell on 04/11/2016.
  */
 public class TubApp extends MultiDexApplication {
-    private static TubApp ourInstance;
-
+    private static TubApp application;
     private DataRepository dataRepository;
 
-
     public TubApp() {
-        ourInstance = this;
-        injectDependencies();
+        application = this;
+        initInjection();
     }
 
-    public static TubApp getInstance() {
-        return ourInstance;
+    public static TubApp app() {
+        return application;
     }
 
     public DataRepository getDataRepository() {
         return dataRepository;
     }
 
-    private void injectDependencies() {
+    private void initInjection() {
         ApiManager apiManager = new ApiManagerImpl();
         CacheManager cacheManager = new CacheManagerImpl();
         DownloadManager downloadManager = new DownloadManagerImpl();
@@ -44,6 +42,5 @@ public class TubApp extends MultiDexApplication {
 
         dataRepository = new DataRepositoryImpl(apiManager, cacheManager, downloadManager, lineDataMapper, stopDataMapper);
     }
-
 
 }

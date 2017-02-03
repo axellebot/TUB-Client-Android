@@ -56,7 +56,7 @@ public class StopMapClusterItemInfoWindowAdapter implements GoogleMap.InfoWindow
     public View getInfoContents(Marker marker) {
         this.windowTitle.setText(currentClusterItem.getTitle());
         ready = false;
-        TubApp.getInstance().getDataRepository().getLinesFromStop(this.currentClusterItem.getId())
+        TubApp.app().getDataRepository().getLinesFromStop(this.currentClusterItem.getId())
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<LineModel>>() {

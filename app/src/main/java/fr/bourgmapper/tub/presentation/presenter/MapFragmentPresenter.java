@@ -33,7 +33,7 @@ public class MapFragmentPresenter implements BaseActivityLifeCycle {
 
     @Override
     public void start() {
-        this.dataRepository = TubApp.getInstance().getDataRepository();
+        this.dataRepository = TubApp.app().getDataRepository();
 
         view.getGoogleMap().getUiSettings().setMyLocationButtonEnabled(true);
         view.getGoogleMap().setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -89,7 +89,7 @@ public class MapFragmentPresenter implements BaseActivityLifeCycle {
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();
-                        view.addStopsToMapWithCluster(TubApp.getInstance().getDataRepository().getAllStopsCache());
+                        view.addStopsToMapWithCluster(TubApp.app().getDataRepository().getAllStopsCache());
                     }
 
                     @Override

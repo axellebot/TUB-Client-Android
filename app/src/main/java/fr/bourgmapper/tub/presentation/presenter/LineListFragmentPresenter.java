@@ -29,7 +29,7 @@ public class LineListFragmentPresenter implements BaseActivityLifeCycle {
 
     @Override
     public void start() {
-        this.dataRepository = TubApp.getInstance().getDataRepository();
+        this.dataRepository = TubApp.app().getDataRepository();
 
         this.dataRepository.getAllLinesCall()
                 .subscribeOn(Schedulers.newThread())
@@ -42,7 +42,7 @@ public class LineListFragmentPresenter implements BaseActivityLifeCycle {
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();
-                        view.initList(TubApp.getInstance().getDataRepository().getAllLinesCache());
+                        view.initList(TubApp.app().getDataRepository().getAllLinesCache());
                     }
 
                     @Override
