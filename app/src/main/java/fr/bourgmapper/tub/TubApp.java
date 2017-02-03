@@ -2,6 +2,9 @@ package fr.bourgmapper.tub;
 
 import android.support.multidex.MultiDexApplication;
 
+import com.raizlabs.android.dbflow.config.FlowConfig;
+import com.raizlabs.android.dbflow.config.FlowManager;
+
 import fr.bourgmapper.tub.data.entity.mapper.LineDataMapper;
 import fr.bourgmapper.tub.data.entity.mapper.StopDataMapper;
 import fr.bourgmapper.tub.data.manager.ApiManager;
@@ -20,13 +23,15 @@ public class TubApp extends MultiDexApplication {
     private static TubApp application;
     private DataRepository dataRepository;
 
-    public TubApp() {
-        application = this;
-        initInjection();
-    }
-
     public static TubApp app() {
         return application;
+    }
+
+    @Override
+    public void onCreate() {
+        application = this;
+        initInjection();
+        initDBFlow();
     }
 
     public DataRepository getDataRepository() {
@@ -43,4 +48,10 @@ public class TubApp extends MultiDexApplication {
         dataRepository = new DataRepositoryImpl(apiManager, cacheManager, downloadManager, lineDataMapper, stopDataMapper);
     }
 
+    private void initDBFlow() {
+        // This instantiates DBFlow
+        FlowManager.init(new FlowConfig.Builder(this).build());
+        // add for verbose logging
+        // FlowLog.setMinimumLoggingLevel(FlowLog.Level.V);
+    }
 }

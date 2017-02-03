@@ -1,70 +1,40 @@
 package fr.bourgmapper.tub.data.entity;
 
+
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by axell on 04/11/2016.
  */
 
-public class LineEntity {
+@Table(database = MyDatabase.class)
+public class LineEntity extends BaseModel {
     @SerializedName("id")
-    private String id;
+    @Column
+    @PrimaryKey
+    public String id;
+
     @SerializedName("number")
-    private String number;
+    @Column
+    public String number;
+
     @SerializedName("label")
-    private String label;
+    @Column
+    public String label;
+
     @SerializedName("color")
-    private String color;
+    @Column
+    public String color;
+
     @SerializedName("order")
-    private String order;
+    @Column
+    public String order;
+
     @SerializedName("kml_path")
-    private String kmlPath;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
-    public String getLabel() {
-        return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public String getOrder() {
-        return order;
-    }
-
-    public void setOrder(String order) {
-        this.order = order;
-    }
-
-    public String getKmlPath() {
-        return kmlPath;
-    }
-
-    public void setKmlPath(String kmlPath) {
-        this.kmlPath = kmlPath;
-    }
+    @Column
+    public String kmlPath;
 }

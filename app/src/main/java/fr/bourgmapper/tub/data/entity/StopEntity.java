@@ -1,50 +1,31 @@
 package fr.bourgmapper.tub.data.entity;
 
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by axell on 04/11/2016.
  */
 
-public class StopEntity {
+@Table(database = MyDatabase.class)
+public class StopEntity extends BaseModel{
     @SerializedName("id")
-    private String id;
+    @Column
+    @PrimaryKey
+    public String id;
+
     @SerializedName("label")
-    private String label;
+    @Column
+    public String label;
+
     @SerializedName("latitude")
-    private String latitude;
+    @Column
+    public String latitude;
+
     @SerializedName("longitude")
-    private String longitude;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getLabel() {
-        return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
-    public String getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
-
-    public String getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(String longitude) {
-        this.longitude = longitude;
-    }
+    @Column
+    public String longitude;
 }

@@ -13,11 +13,11 @@ import fr.bourgmapper.tub.presentation.model.LineModel;
 public class LineDataMapper {
     public LineModel transform(LineEntity lineEntity) {
         LineModel lineModel = new LineModel();
-        lineModel.setId(lineEntity.getId());
-        lineModel.setLabel(lineEntity.getLabel());
-        lineModel.setNumber(lineEntity.getNumber());
-        lineModel.setColor(lineEntity.getColor());
-        lineModel.setKmlPath(lineEntity.getKmlPath());
+        lineModel.setId(lineEntity.id);
+        lineModel.setLabel(lineEntity.label);
+        lineModel.setNumber(lineEntity.number);
+        lineModel.setColor(lineEntity.color);
+        lineModel.setKmlPath(lineEntity.kmlPath);
         return lineModel;
     }
 
