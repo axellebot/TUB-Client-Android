@@ -10,7 +10,6 @@ import fr.bourgmapper.tub.data.entity.StopEntity;
  */
 
 public interface CacheManager {
-
     /***************************
      * SELECT
      **************************/
@@ -32,7 +31,6 @@ public interface CacheManager {
     void saveStopEntityList(List<StopEntity> stopEntityList);
 
     void saveStopEntity(StopEntity stopEntity);
-
 
     /***************************
      * DELETE

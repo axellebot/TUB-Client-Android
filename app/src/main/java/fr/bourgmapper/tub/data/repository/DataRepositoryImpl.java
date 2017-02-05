@@ -21,6 +21,8 @@ import rx.functions.Func1;
  * Created by axell on 04/11/2016.
  */
 
+//TODO : Add TTL to cache
+
 public class DataRepositoryImpl implements DataRepository {
     private ApiManager apiManager;
     private CacheManager cacheManager;
@@ -133,7 +135,7 @@ public class DataRepositoryImpl implements DataRepository {
     }
 
     @Override
-    public Observable<List<StopModel>> getStopsFromLine(String lineId) {
+    public Observable<List<StopModel>> getStopListFromLine(String lineId) {
         return apiManager.getStopsFromLine(lineId).map(new Func1<List<StopEntity>, List<StopModel>>() {
             @Override
             public List<StopModel> call(List<StopEntity> stopEntities) {
@@ -145,8 +147,8 @@ public class DataRepositoryImpl implements DataRepository {
     }
 
     @Override
-    public Observable<InputStream> getLineKMLCall(String id) {
-        return this.downloadManager.getLineKmlFile(id).map(new Func1<ResponseBody, InputStream>() {
+    public Observable<InputStream> getLineKMLCall(String lineId) {
+        return this.downloadManager.getLineKmlFile(lineId).map(new Func1<ResponseBody, InputStream>() {
             @Override
             public InputStream call(ResponseBody responseBody) {
                 return responseBody.byteStream();
