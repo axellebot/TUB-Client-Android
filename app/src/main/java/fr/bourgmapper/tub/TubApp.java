@@ -12,8 +12,8 @@ import fr.bourgmapper.tub.data.entity.mapper.LineDataMapper;
 import fr.bourgmapper.tub.data.entity.mapper.StopDataMapper;
 import fr.bourgmapper.tub.data.manager.ApiManager;
 import fr.bourgmapper.tub.data.manager.ApiManagerImpl;
-import fr.bourgmapper.tub.data.manager.CacheManager;
 import fr.bourgmapper.tub.data.manager.DBFlowManager;
+import fr.bourgmapper.tub.data.manager.DBFlowManagerImpl;
 import fr.bourgmapper.tub.data.manager.DownloadManager;
 import fr.bourgmapper.tub.data.manager.DownloadManagerImpl;
 import fr.bourgmapper.tub.data.repository.DataRepository;
@@ -43,12 +43,12 @@ public class TubApp extends MultiDexApplication {
 
     private void initInjection() {
         ApiManager apiManager = new ApiManagerImpl();
-        CacheManager cacheManager = new DBFlowManager();
+        DBFlowManager dbFlowManager = new DBFlowManagerImpl();
         DownloadManager downloadManager = new DownloadManagerImpl();
         LineDataMapper lineDataMapper = new LineDataMapper();
         StopDataMapper stopDataMapper = new StopDataMapper();
 
-        dataRepository = new DataRepositoryImpl(apiManager, cacheManager, downloadManager, lineDataMapper, stopDataMapper);
+        dataRepository = new DataRepositoryImpl(apiManager, dbFlowManager, downloadManager, lineDataMapper, stopDataMapper);
     }
 
     private void initDBFlow() {
