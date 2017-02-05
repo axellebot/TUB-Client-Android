@@ -33,7 +33,7 @@ public class MapFragmentPresenter implements BaseActivityLifeCycle {
 
     @Override
     public void start() {
-        this.dataRepository = TubApp.getInstance().getDataRepository();
+        this.dataRepository = TubApp.app().getDataRepository();
 
         view.getGoogleMap().getUiSettings().setMyLocationButtonEnabled(true);
         view.getGoogleMap().setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -78,7 +78,7 @@ public class MapFragmentPresenter implements BaseActivityLifeCycle {
 
     private void addStopsClusterToMap() {
         //initMapWithStopsCLuster
-        this.dataRepository.getAllStopsCall()
+        this.dataRepository.getStopListCall()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<StopModel>>() {
@@ -89,7 +89,6 @@ public class MapFragmentPresenter implements BaseActivityLifeCycle {
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();
-                        view.addStopsToMapWithCluster(TubApp.getInstance().getDataRepository().getAllStopsCache());
                     }
 
                     @Override
@@ -100,7 +99,7 @@ public class MapFragmentPresenter implements BaseActivityLifeCycle {
     }
 
     private void addLinesKMLToMap() {
-        this.dataRepository.getAllLinesCall()
+        this.dataRepository.getLineListCall()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<LineModel>>() {

@@ -22,7 +22,7 @@ public class LineDetailFragmentPresenter implements BaseActivityLifeCycle {
     private DataRepository dataRepository;
 
     public LineDetailFragmentPresenter(final LineDetailFragment view) {
-        this.dataRepository = TubApp.getInstance().getDataRepository();
+        this.dataRepository = TubApp.app().getDataRepository();
         this.view = view;
     }
 

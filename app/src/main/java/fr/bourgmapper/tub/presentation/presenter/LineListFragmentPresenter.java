@@ -29,9 +29,9 @@ public class LineListFragmentPresenter implements BaseActivityLifeCycle {
 
     @Override
     public void start() {
-        this.dataRepository = TubApp.getInstance().getDataRepository();
+        this.dataRepository = TubApp.app().getDataRepository();
 
-        this.dataRepository.getAllLinesCall()
+        this.dataRepository.getLineListCall()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<LineModel>>() {
@@ -42,7 +42,6 @@ public class LineListFragmentPresenter implements BaseActivityLifeCycle {
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();
-                        view.initList(TubApp.getInstance().getDataRepository().getAllLinesCache());
                     }
 
                     @Override
