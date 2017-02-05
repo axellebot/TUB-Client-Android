@@ -26,7 +26,7 @@ import rx.functions.Func1;
 public class DataRepositoryImpl implements DataRepository {
 
 
-    private final long ttl_incrementation = 60000;
+    private final long ttl_incrementation = 60; // secondes
     private long TTL_STOP;
     private long TTL_LINE;
 
