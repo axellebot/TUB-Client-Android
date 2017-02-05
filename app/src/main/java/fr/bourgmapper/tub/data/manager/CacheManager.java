@@ -2,27 +2,47 @@ package fr.bourgmapper.tub.data.manager;
 
 import java.util.List;
 
-import fr.bourgmapper.tub.presentation.model.LineModel;
-import fr.bourgmapper.tub.presentation.model.StopModel;
+import fr.bourgmapper.tub.data.entity.LineEntity;
+import fr.bourgmapper.tub.data.entity.StopEntity;
 
 /**
  * Created by axell on 04/11/2016.
  */
 
 public interface CacheManager {
-    List<LineModel> getLines();
 
-    void setLines(List<LineModel> lineModels);
+    /***************************
+     * SELECT
+     **************************/
+    List<LineEntity> getLineEntityList();
 
-    LineModel getLine(String id);
+    LineEntity getLineEntity(String lineEntityId);
 
-    void setLine(LineModel lineModel);
+    List<StopEntity> getStopEntityList();
 
-    List<StopModel> getStops();
+    StopEntity getStopEntity(String stopEntityId);
 
-    void setStops(List<StopModel> stopModels);
+    /***************************
+     * SAVE
+     **************************/
+    void saveLineEntityList(List<LineEntity> lineEntityList);
 
-    StopModel getStop(String id);
+    void saveLineEntity(LineEntity lineEntity);
 
-    void setStop(StopModel stopModel);
+    void saveStopEntityList(List<StopEntity> stopEntityList);
+
+    void saveStopEntity(StopEntity stopEntity);
+
+
+    /***************************
+     * DELETE
+     **************************/
+    void deleteLineEntityList(List<LineEntity> lineEntityList);
+
+    void deleteLineEntity(LineEntity lineEntity);
+
+    void deleteStopEntityList(List<StopEntity> stopEntityList);
+
+    void deleteStopEntity(StopEntity stopEntity);
 }
+

@@ -13,22 +13,17 @@ import rx.Observable;
 
 public interface DataRepository {
     //Api
-    Observable<List<LineModel>> getAllLinesCall();
+    Observable<List<LineModel>> getLineListCall();
 
     Observable<LineModel> getLineCall(String line_id);
 
-    Observable<List<LineModel>> getLinesFromStop(String stop_id);
+    Observable<List<LineModel>> getLineListFromStop(String stop_id);
 
-    Observable<List<StopModel>> getAllStopsCall();
+    Observable<List<StopModel>> getStopListCall();
 
     Observable<StopModel> getStopCall(String stop_id);
 
     Observable<List<StopModel>> getStopsFromLine(String line_id);
-
-    //Cache
-    List<LineModel> getAllLinesCache();
-
-    List<StopModel> getAllStopsCache();
 
     //Download
     Observable<InputStream> getLineKMLCall(String id);

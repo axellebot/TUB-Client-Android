@@ -56,7 +56,7 @@ public class ApiManagerImpl implements ApiManager {
     }
 
     @Override
-    public Observable<List<LineEntity>> getLinesFromStop(String stop_id) {
+    public Observable<List<LineEntity>> getLineListFromStop(String stop_id) {
         return apiService.getLinesFromStop(stop_id).map(new Func1<LineListEnveloppe, List<LineEntity>>() {
             @Override
             public List<LineEntity> call(LineListEnveloppe lineEnveloppe) {

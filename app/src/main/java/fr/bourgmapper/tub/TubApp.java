@@ -1,5 +1,8 @@
 package fr.bourgmapper.tub;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.multidex.MultiDexApplication;
 
 import com.raizlabs.android.dbflow.config.FlowConfig;
@@ -10,7 +13,7 @@ import fr.bourgmapper.tub.data.entity.mapper.StopDataMapper;
 import fr.bourgmapper.tub.data.manager.ApiManager;
 import fr.bourgmapper.tub.data.manager.ApiManagerImpl;
 import fr.bourgmapper.tub.data.manager.CacheManager;
-import fr.bourgmapper.tub.data.manager.CacheManagerImpl;
+import fr.bourgmapper.tub.data.manager.DBFlowManager;
 import fr.bourgmapper.tub.data.manager.DownloadManager;
 import fr.bourgmapper.tub.data.manager.DownloadManagerImpl;
 import fr.bourgmapper.tub.data.repository.DataRepository;
@@ -40,7 +43,7 @@ public class TubApp extends MultiDexApplication {
 
     private void initInjection() {
         ApiManager apiManager = new ApiManagerImpl();
-        CacheManager cacheManager = new CacheManagerImpl();
+        CacheManager cacheManager = new DBFlowManager();
         DownloadManager downloadManager = new DownloadManagerImpl();
         LineDataMapper lineDataMapper = new LineDataMapper();
         StopDataMapper stopDataMapper = new StopDataMapper();
@@ -53,5 +56,12 @@ public class TubApp extends MultiDexApplication {
         FlowManager.init(new FlowConfig.Builder(this).build());
         // add for verbose logging
         // FlowLog.setMinimumLoggingLevel(FlowLog.Level.V);
+    }
+
+    public boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }
