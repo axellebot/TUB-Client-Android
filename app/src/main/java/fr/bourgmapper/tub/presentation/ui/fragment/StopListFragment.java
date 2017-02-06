@@ -19,7 +19,7 @@ import fr.bourgmapper.tub.presentation.ui.adapter.StopListAdapter;
 
 public class StopListFragment extends Fragment {
 
-    @BindView(R.id.fragment_stop_recycler_view)
+    @BindView(R.id.list_stop_recycler_view)
     RecyclerView recyclerView;
 
     private StopListAdapter stopListAdapter;

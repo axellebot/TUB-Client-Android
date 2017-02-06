@@ -19,7 +19,7 @@ import fr.bourgmapper.tub.presentation.ui.manager.GridAutofitLayoutManager;
 
 public class LineListFragment extends Fragment {
 
-    @BindView(R.id.fragment_line_recycler_view)
+    @BindView(R.id.list_bus_recycler_view)
     RecyclerView recyclerView;
 
     private LineListFragmentPresenter presenter;
@@ -34,7 +34,7 @@ public class LineListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_line_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_list_bus, container, false);
         ButterKnife.bind(this, view);
 
         //Presenter

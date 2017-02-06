@@ -45,7 +45,7 @@ public class LineGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.item_grid_line, parent, false);
+        View view = inflater.inflate(R.layout.grid_item_bus, parent, false);
         return new LineGridViewHolder(view);
     }
 

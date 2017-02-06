@@ -40,7 +40,7 @@ public class StopListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.item_row_stop, parent, false);
+        View view = inflater.inflate(R.layout.list_item_stop, parent, false);
         return new StopLineHolder(view);
     }
 

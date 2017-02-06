@@ -5,6 +5,5 @@
     android:background="@drawable/bottom_sheet_default_bg"
     android:orientation="vertical">
 
-    <include layout="@layout/list_stop" />
-
+    <include layout="@layout/list_line" />
 </LinearLayout>

@@ -10,8 +10,8 @@
         android:layout_width="@dimen/item_grid_line_size"
         android:layout_height="@dimen/item_grid_line_size"
         android:layout_gravity="center"
-        android:elevation="4dp"
         android:background="@drawable/ripple"
+        android:elevation="4dp"
         card_view:cardUseCompatPadding="true">
 
         <TextView

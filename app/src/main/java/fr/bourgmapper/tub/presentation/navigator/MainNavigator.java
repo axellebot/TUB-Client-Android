@@ -70,12 +70,10 @@ public class MainNavigator implements BaseActivityLifeCycle {
                         activity.getBottomSheetBehavior().setState(BottomSheetBehavior.STATE_COLLAPSED);
                         break;
                     case LINE_LIST:
-                        fragmentTransactionPopOverview();
-                        currentFragmentOverview = FRAGMENT.INFO;
+                        displayInfoFragmentOverview();
                         break;
                     case STOP_LIST:
-                        fragmentTransactionPopOverview();
-                        currentFragmentOverview = FRAGMENT.INFO;
+                        displayInfoFragmentOverview();
                         break;
                 }
                 break;
@@ -112,7 +110,7 @@ public class MainNavigator implements BaseActivityLifeCycle {
             if (lineListFragment == null) {
                 lineListFragment = lineListFragment.newInstance();
             }
-            fragmentTransactionAddOverview(lineListFragment);
+            fragmentTransactionReplaceOverview(lineListFragment);
             currentFragmentOverview = FRAGMENT.LINE_LIST;
         }
     }
@@ -123,7 +121,7 @@ public class MainNavigator implements BaseActivityLifeCycle {
                 stopListFragment = StopListFragment.newInstance();
             }
             StopListFragment stopListFragment = new StopListFragment();
-            fragmentTransactionAddOverview(stopListFragment);
+            fragmentTransactionReplaceOverview(stopListFragment);
             currentFragmentOverview = FRAGMENT.STOP_LIST;
         }
     }

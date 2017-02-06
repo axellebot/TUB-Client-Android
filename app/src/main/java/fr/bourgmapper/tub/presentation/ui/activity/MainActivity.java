@@ -126,15 +126,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.activity_main_bottom_navigation_home_map_action:
-                navigator.displayHomeMapFragment();
-                break;
-            case R.id.activity_main_bottom_navigation_line_list_action:
-                navigator.displayLineListFragmentOverview();
-                break;
-            case R.id.activity_main_bottom_navigation_stop_list_action:
-                navigator.displayStopListFragmentOverview();
-                break;
             case R.id.navigation_drawer_log_in:
                 ConnectionDialogModule connectionDialogModule = new ConnectionDialogModuleImpl(this);
                 connectionDialogModule.display();

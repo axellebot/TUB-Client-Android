@@ -4,11 +4,7 @@
     <!--Action Bar-->
     <string name="action_bar_settings">Settings</string>
 
-    <!-- Navigation Bottom -->
-    <string name="navigation_part_line_name">Lines</string>
-    <string name="navigation_part_stop_name">Stops</string>
-    <string name="navigation_part_home_name">Home</string>
-
+    <!--Window-->
     <string name="window_map_stop_info_default_title">Stop Label</string>
     <string name="window_map_stop_info_default_description">Description</string>
 
@@ -27,6 +23,7 @@
     <string name="navigation_drawer_navigation_submenu_communication_title">Communication</string>
     <string name="navigation_drawer_share">Share</string>
     <string name="navigation_drawer_user_log_in">Log in</string>
+    <string name="default_username">android.studio@android.com</string>
 
     <!-- Dialog Connection -->
     <string name="dialog_connection_title">Connection</string>
@@ -35,6 +32,6 @@
     <string name="dialog_conection_email_hint">Email</string>
     <string name="dialog_conection_password_hint">Password</string>
 
-    <!--Item Row Stop-->
+    <!-- List Item Stop-->
     <string name="item_row_stop_tv_default">Stop Label</string>
 </resources>
