@@ -13,20 +13,20 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.presentation.model.LineModel;
-import fr.bourgmapper.tub.presentation.presenter.LineListFragmentPresenter;
+import fr.bourgmapper.tub.presentation.presenter.BusListFragmentPresenter;
 import fr.bourgmapper.tub.presentation.ui.adapter.LineGridAdapter;
 import fr.bourgmapper.tub.presentation.ui.manager.GridAutofitLayoutManager;
 
-public class LineListFragment extends Fragment {
+public class BusListFragment extends Fragment {
 
-    @BindView(R.id.fragment_line_recycler_view)
+    @BindView(R.id.list_bus_recycler_view)
     RecyclerView recyclerView;
 
-    private LineListFragmentPresenter presenter;
+    private BusListFragmentPresenter presenter;
     private LineGridAdapter lineGridAdapter;
 
-    public static LineListFragment newInstance() {
-        LineListFragment fragment = new LineListFragment();
+    public static BusListFragment newInstance() {
+        BusListFragment fragment = new BusListFragment();
         return fragment;
     }
 
@@ -34,16 +34,16 @@ public class LineListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_line_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_bus_list, container, false);
         ButterKnife.bind(this, view);
 
         //Presenter
-        this.presenter = new LineListFragmentPresenter(this);
+        this.presenter = new BusListFragmentPresenter(this);
 
         //Adapter
         this.lineGridAdapter = new LineGridAdapter(this, presenter, null);
 
-        //RcyclerView
+        //RecyclerView
         this.recyclerView.setAdapter(lineGridAdapter);
         GridAutofitLayoutManager layoutManager = new GridAutofitLayoutManager(this.getContext(), (int) getResources().getDimension(R.dimen.item_grid_line_size));
         this.recyclerView.setLayoutManager(layoutManager);

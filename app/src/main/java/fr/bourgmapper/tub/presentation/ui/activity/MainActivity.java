@@ -1,28 +1,31 @@
 package fr.bourgmapper.tub.presentation.ui.activity;
 
+import android.graphics.Color;
+import android.graphics.Rect;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.presentation.navigator.MainNavigator;
 import fr.bourgmapper.tub.presentation.ui.composition.ConnectionDialogModule;
 import fr.bourgmapper.tub.presentation.ui.composition.ConnectionDialogModuleImpl;
 import fr.bourgmapper.tub.presentation.ui.listener.NavigationListener;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener, NavigationListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, NavigationListener {
     private static final String TAG = "MainActivity";
 
     @BindView(R.id.drawer_layout)
@@ -31,12 +34,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @BindView(R.id.activity_main_navigation_drawer)
     NavigationView navigationView;
 
-    @BindView(R.id.app_bar_main_toolbar)
-    Toolbar toolbar;
-
     //BottomSheet
     @BindView(R.id.bottom_sheet_main)
-    View bottomSheetDialog;
+    View bottomSheet;
+
+    @BindView(R.id.activity_main_fab_menu)
+    FloatingActionButton menuFloatingActionButton;
 
     private MainNavigator navigator;
     private ActionBarDrawerToggle drawerToggle;
@@ -50,73 +53,104 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ButterKnife.bind(this);
         navigator = new MainNavigator(this);
 
-        initStatusBar();
         initNavigationDrawer();
         initBottomSheet();
 
         navigationView.setNavigationItemSelectedListener(this);
 
-        setSupportActionBar(toolbar);
-
         navigator.displayHomeMapFragment();
     }
 
-    private void initStatusBar() {
-        //get statusBar height
-        int statusBarHeight = 0;
-        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
-        if (resourceId > 0) {
-            statusBarHeight = getResources().getDimensionPixelSize(resourceId);
-        }
-
-        AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) toolbar.getLayoutParams();
-        params.height = params.height + statusBarHeight;
-        toolbar.setLayoutParams(params);
-    }
-
     private void initNavigationDrawer() {
-        this.drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawerLayout.addDrawerListener(drawerToggle);
-        drawerToggle.syncState();
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setHomeButtonEnabled(true);
-        }
+        this.menuFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+
+        this.drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        this.drawerLayout.addDrawerListener(drawerToggle);
+        this.drawerToggle.syncState();
     }
 
     private void initBottomSheet() {
-        this.bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetDialog);
+        this.bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
         bottomSheetBehavior.setState(BottomSheetBehavior.PEEK_HEIGHT_AUTO);
+        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                checkFABMenu();
+                checkStatusBarDim();
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+                checkFABMenu();
+                checkStatusBarDim();
+            }
+        });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.activity_main_menu, menu);
-        return true;
-    }
+    private void checkStatusBarDim() {
+        int diff = getStatusBarHeight() - getBottomSheetPosition();
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Pass the event to ActionBarDrawerToggle, if it returns
-        // true, then it has handled the app icon touch event
-        if (this.drawerToggle.onOptionsItemSelected(item)) {
-            return true;
+        if (diff >= 0) {
+            setStatusBarDim(false);
+        } else {
+            setStatusBarDim(true);
         }
-
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-
-        switch (id) {
-            case R.id.activity_main_manu_action_settings:
-                break;
-        }
-        return super.onOptionsItemSelected(item);
     }
+
+    private void checkFABMenu() {
+        int diff = (getFABMenuPosition() + this.menuFloatingActionButton.getHeight()) - getBottomSheetPosition();
+
+        if (diff >= 0) {
+            menuFloatingActionButton.hide();
+        } else {
+            menuFloatingActionButton.show();
+        }
+    }
+
+    private int getStatusBarHeight() {
+        Rect rect = new Rect();
+        this.getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);
+        return rect.top;
+    }
+
+    private int getBottomSheetPosition() {
+        int[] location = new int[2];
+        this.bottomSheet.getLocationOnScreen(location);
+        int bottomSheetPositionX = location[0];
+        int bottomSheetPositionY = location[1];
+        return bottomSheetPositionY;
+    }
+
+    private int getFABMenuPosition() {
+        int[] location = new int[2];
+        this.menuFloatingActionButton.getLocationOnScreen(location);
+        int menuFloatingActionButtonPositionX = location[0];
+        int menuFloatingActionButtonPositionY = location[1];
+        return menuFloatingActionButtonPositionY;
+    }
+
+    private void setStatusBarDim(boolean dim) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(
+                    dim ? Color.TRANSPARENT : ContextCompat.getColor(this, R.color.colorPrimary)
+            );
+        }
+    }
+
+    @OnClick(R.id.activity_main_fab_close)
+    public void onCloseFABClicked(View view) {
+        navigator.onBackPressed();
+    }
+
+    public BottomSheetBehavior getBottomSheetBehavior() {
+        return bottomSheetBehavior;
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -126,15 +160,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.activity_main_bottom_navigation_home_map_action:
-                navigator.displayHomeMapFragment();
-                break;
-            case R.id.activity_main_bottom_navigation_line_list_action:
-                navigator.displayLineListFragmentOverview();
-                break;
-            case R.id.activity_main_bottom_navigation_stop_list_action:
-                navigator.displayStopListFragmentOverview();
-                break;
             case R.id.navigation_drawer_log_in:
                 ConnectionDialogModule connectionDialogModule = new ConnectionDialogModuleImpl(this);
                 connectionDialogModule.display();
@@ -143,9 +168,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return false;
     }
 
-    public BottomSheetBehavior getBottomSheetBehavior() {
-        return bottomSheetBehavior;
-    }
 
     @Override
     public void onStopsButtonSelected() {
@@ -156,4 +178,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onBusButtonSelected() {
         navigator.displayLineListFragmentOverview();
     }
+
+
 }

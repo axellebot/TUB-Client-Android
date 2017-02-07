@@ -2,11 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bottom_sheet_main_overview_bg_default"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/stop_list_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/list_stop_title"
+        android:textAllCaps="true" />
+
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/fragment_line_recycler_view"
+        android:id="@+id/list_bus_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

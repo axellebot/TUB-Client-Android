@@ -16,8 +16,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.presentation.model.LineModel;
-import fr.bourgmapper.tub.presentation.presenter.LineListFragmentPresenter;
-import fr.bourgmapper.tub.presentation.ui.fragment.LineListFragment;
+import fr.bourgmapper.tub.presentation.presenter.BusListFragmentPresenter;
+import fr.bourgmapper.tub.presentation.ui.fragment.BusListFragment;
 
 /**
  * Created by axell on 05/11/2016.
@@ -25,10 +25,10 @@ import fr.bourgmapper.tub.presentation.ui.fragment.LineListFragment;
 
 public class LineGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private LayoutInflater inflater;
-    private LineListFragmentPresenter presenter;
+    private BusListFragmentPresenter presenter;
     private List<LineModel> lineModels;
 
-    public LineGridAdapter(LineListFragment fragment, LineListFragmentPresenter presenter, List<LineModel> lineModels) {
+    public LineGridAdapter(BusListFragment fragment, BusListFragmentPresenter presenter, List<LineModel> lineModels) {
         this.inflater = LayoutInflater.from(fragment.getContext());
         this.presenter = presenter;
         if (lineModels == null) {
@@ -45,7 +45,7 @@ public class LineGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.item_grid_line, parent, false);
+        View view = inflater.inflate(R.layout.grid_item_bus, parent, false);
         return new LineGridViewHolder(view);
     }
 
