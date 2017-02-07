@@ -32,6 +32,8 @@
 
 
     <!--Activity Main-->
+    <dimen name="fab_margin_top_from_status">@dimen/default_material_margin_huge</dimen>
+
 
     <!--Bottom Sheet Main -->
     <dimen name="bottom_sheet_main_peek_height_default">90dp</dimen>

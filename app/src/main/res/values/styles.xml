@@ -28,4 +28,13 @@
         <item name="android:background">@drawable/container_rounded</item>
     </style>
 
+    <style name="FloatingActionButton" parent="Widget.Design.FloatingActionButton">
+        <item name="android:layout_marginTop">@dimen/default_material_fab_margin</item>
+        <item name="android:layout_marginBottom">@dimen/default_material_fab_margin</item>
+        <item name="android:layout_marginStart">@dimen/default_material_fab_margin</item>
+        <item name="android:layout_marginEnd">@dimen/default_material_fab_margin</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
 </resources>
