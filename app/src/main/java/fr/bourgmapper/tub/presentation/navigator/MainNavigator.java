@@ -9,8 +9,8 @@ import android.util.Log;
 import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.presentation.ui.activity.BaseActivityLifeCycle;
 import fr.bourgmapper.tub.presentation.ui.activity.MainActivity;
+import fr.bourgmapper.tub.presentation.ui.fragment.BusListFragment;
 import fr.bourgmapper.tub.presentation.ui.fragment.InfoFragment;
-import fr.bourgmapper.tub.presentation.ui.fragment.LineListFragment;
 import fr.bourgmapper.tub.presentation.ui.fragment.MapFragment;
 import fr.bourgmapper.tub.presentation.ui.fragment.StopListFragment;
 
@@ -28,7 +28,7 @@ public class MainNavigator implements BaseActivityLifeCycle {
 
     private MapFragment mapFragment;
     private InfoFragment infoFragment;
-    private LineListFragment lineListFragment;
+    private BusListFragment busListFragment;
     private StopListFragment stopListFragment;
 
     public MainNavigator(MainActivity activity) {
@@ -107,10 +107,10 @@ public class MainNavigator implements BaseActivityLifeCycle {
 
     public void displayLineListFragmentOverview() {
         if (currentFragmentOverview != FRAGMENT.LINE_LIST) {
-            if (lineListFragment == null) {
-                lineListFragment = lineListFragment.newInstance();
+            if (busListFragment == null) {
+                busListFragment = busListFragment.newInstance();
             }
-            fragmentTransactionReplaceOverview(lineListFragment);
+            fragmentTransactionReplaceOverview(busListFragment);
             currentFragmentOverview = FRAGMENT.LINE_LIST;
         }
     }

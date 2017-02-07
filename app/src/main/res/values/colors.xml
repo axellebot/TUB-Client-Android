@@ -24,4 +24,5 @@
     <color name="pink">#EC407A</color>
     <color name="orange">#F4A212</color>
     <color name="orangeDeep">#FF5722</color>
+    <color name="transparent">#00000000</color>
 </resources>

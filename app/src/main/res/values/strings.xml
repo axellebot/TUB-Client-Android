@@ -29,9 +29,15 @@
     <string name="dialog_connection_title">Connection</string>
     <string name="dialog_connection_positive_text">Connect</string>
     <string name="dialog_connection_negative_text">Close</string>
-    <string name="dialog_conection_email_hint">Email</string>
-    <string name="dialog_conection_password_hint">Password</string>
+    <string name="dialog_connection_email_hint">Email</string>
+    <string name="dialog_connection_password_hint">Password</string>
 
-    <!-- List Item Stop-->
+    <!-- List Bus-->
+    <string name="list_bus_title">Bus</string>
+
+    <!-- List Stop-->
+    <string name="list_stop_title">Stops</string>
     <string name="item_row_stop_tv_default">Stop Label</string>
+
+
 </resources>

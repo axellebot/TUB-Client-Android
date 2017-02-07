@@ -15,7 +15,7 @@
         android:gravity="left"
         android:text="@string/item_row_stop_tv_default"
         android:textColor="@color/black"
-        android:textSize="@dimen/item_row_stop_label_size" />
+        android:textSize="@dimen/list_item_stop_label_size" />
 </LinearLayout>
 
 

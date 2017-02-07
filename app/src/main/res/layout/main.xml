@@ -8,8 +8,17 @@
     android:fitsSystemWindows="true"
     design:context="fr.bourgmapper.tub.presentation.ui.activity.MainActivity">
 
-    <!-- include app bar -->
-    <include layout="@layout/app_bar" />
+    <!-- Menu FAB -->
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/activity_main_fab_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|start"
+        android:layout_margin="@dimen/default_material_fab_margin"
+        app:backgroundTint="@color/transparent"
+        app:elevation="2dp"
+        app:borderWidth="0dp"
+        app:srcCompat="@drawable/ic_menu_black_24dp" />
 
     <!-- include main content -->
     <include layout="@layout/content_main" />

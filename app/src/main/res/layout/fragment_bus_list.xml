@@ -8,5 +8,5 @@
     android:layout_marginTop="@dimen/fragment_vertical_margin"
     android:orientation="vertical">
 
-    <include layout="@layout/list_stop" />
+    <include layout="@layout/list_bus" />
 </LinearLayout>
