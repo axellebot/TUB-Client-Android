@@ -17,16 +17,15 @@
 
     <style name="bottomSheetRounded">
         <item name="android:background">@drawable/shape_bottom_sheet_top_rounded</item>
-        <item name="android:paddingTop">@dimen/default_material_padding_normal</item>
+        <item name="android:paddingTop">@dimen/default_material_padding_very_small</item>
     </style>
 
     <style name="bottomSheetSquared">
         <item name="android:background">@drawable/shape_bottom_sheet_squared</item>
-        <item name="android:paddingTop">@dimen/default_material_padding_normal</item>
     </style>
 
-    <style name="listContainerRounded">
-        <item name="android:background">@drawable/shape_list_container_rounded</item>
+    <style name="containerRounded">
+        <item name="android:background">@drawable/container_rounded</item>
     </style>
 
 </resources>
