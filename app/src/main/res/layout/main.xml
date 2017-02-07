@@ -14,10 +14,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|start"
-        android:layout_margin="@dimen/default_material_fab_margin"
+        android:layout_marginBottom="@dimen/default_material_fab_margin"
+        android:layout_marginEnd="@dimen/default_material_fab_margin"
+        android:layout_marginStart="@dimen/default_material_fab_margin"
+        android:layout_marginTop="@dimen/default_material_margin_huge"
         app:backgroundTint="@color/transparent"
-        app:elevation="2dp"
         app:borderWidth="0dp"
+        app:elevation="2dp"
         app:srcCompat="@drawable/ic_menu_black_24dp" />
 
     <!-- include main content -->
