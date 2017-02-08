@@ -32,7 +32,7 @@ public class StopListFragmentPresenter implements BaseActivityLifeCycle {
         this.dataRepository = TubApp.app().getDataRepository();
 
         this.dataRepository.getStopListCall()
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<StopModel>>() {
                     @Override
