@@ -1,4 +1,4 @@
-package fr.bourgmapper.tub;
+package fr.bourgmapper.tub.presentation;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

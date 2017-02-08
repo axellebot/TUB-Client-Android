@@ -2,7 +2,7 @@ package fr.bourgmapper.tub.presentation.presenter;
 
 import android.util.Log;
 
-import fr.bourgmapper.tub.TubApp;
+import fr.bourgmapper.tub.presentation.TubApp;
 import fr.bourgmapper.tub.data.repository.DataRepository;
 import fr.bourgmapper.tub.presentation.model.LineModel;
 import fr.bourgmapper.tub.presentation.ui.activity.BaseActivityLifeCycle;

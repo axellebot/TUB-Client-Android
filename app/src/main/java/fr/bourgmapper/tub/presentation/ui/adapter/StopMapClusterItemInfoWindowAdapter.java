@@ -16,7 +16,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.bourgmapper.tub.R;
-import fr.bourgmapper.tub.TubApp;
+import fr.bourgmapper.tub.presentation.TubApp;
 import fr.bourgmapper.tub.presentation.model.LineModel;
 import fr.bourgmapper.tub.presentation.ui.view.StopMapClusterItem;
 import rx.Observer;

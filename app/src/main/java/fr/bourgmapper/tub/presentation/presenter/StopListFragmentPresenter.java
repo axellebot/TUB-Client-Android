@@ -4,7 +4,7 @@ import android.util.Log;
 
 import java.util.List;
 
-import fr.bourgmapper.tub.TubApp;
+import fr.bourgmapper.tub.presentation.TubApp;
 import fr.bourgmapper.tub.data.repository.DataRepository;
 import fr.bourgmapper.tub.presentation.model.StopModel;
 import fr.bourgmapper.tub.presentation.ui.activity.BaseActivityLifeCycle;

@@ -3,7 +3,7 @@ package fr.bourgmapper.tub.data.repository;
 import java.io.InputStream;
 import java.util.List;
 
-import fr.bourgmapper.tub.TubApp;
+import fr.bourgmapper.tub.presentation.TubApp;
 import fr.bourgmapper.tub.data.entity.LineEntity;
 import fr.bourgmapper.tub.data.entity.StopEntity;
 import fr.bourgmapper.tub.data.entity.mapper.LineDataMapper;
