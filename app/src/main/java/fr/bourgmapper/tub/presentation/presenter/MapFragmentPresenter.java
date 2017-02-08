@@ -79,7 +79,7 @@ public class MapFragmentPresenter implements BaseActivityLifeCycle {
     private void addStopsClusterToMap() {
         //initMapWithStopsCLuster
         this.dataRepository.getStopListCall()
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<StopModel>>() {
                     @Override
@@ -100,7 +100,7 @@ public class MapFragmentPresenter implements BaseActivityLifeCycle {
 
     private void addLinesKMLToMap() {
         this.dataRepository.getLineListCall()
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<LineModel>>() {
                     @Override
@@ -124,7 +124,7 @@ public class MapFragmentPresenter implements BaseActivityLifeCycle {
 
     private void addLineKMLToMap(String id) {
         this.dataRepository.getLineKMLCall(id)
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<InputStream>() {
                     @Override

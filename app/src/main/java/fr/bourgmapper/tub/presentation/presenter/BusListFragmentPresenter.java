@@ -32,7 +32,7 @@ public class BusListFragmentPresenter implements BaseActivityLifeCycle {
         this.dataRepository = TubApp.app().getDataRepository();
 
         this.dataRepository.getLineListCall()
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<LineModel>>() {
                     @Override
