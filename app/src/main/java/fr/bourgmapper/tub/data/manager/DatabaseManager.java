@@ -4,22 +4,24 @@ import java.util.List;
 
 import fr.bourgmapper.tub.data.entity.LineEntity;
 import fr.bourgmapper.tub.data.entity.StopEntity;
+import io.realm.RealmResults;
+import rx.Observable;
 
 /**
  * Created by axell on 04/11/2016.
  */
 
-public interface DBFlowManager {
+public interface DatabaseManager {
     /***************************
      * SELECT
      **************************/
-    List<LineEntity> getLineEntityList();
+    Observable<RealmResults<LineEntity>> getLineEntityList();
 
-    LineEntity getLineEntity(String lineEntityId);
+    Observable<LineEntity> getLineEntity(String lineEntityId);
 
-    List<StopEntity> getStopEntityList();
+    Observable<RealmResults<StopEntity>> getStopEntityList();
 
-    StopEntity getStopEntity(String stopEntityId);
+    Observable<StopEntity> getStopEntity(String stopEntityId);
 
     /***************************
      * SAVE

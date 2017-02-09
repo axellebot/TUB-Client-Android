@@ -1,40 +1,80 @@
 package fr.bourgmapper.tub.data.entity;
 
 
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
-import com.raizlabs.android.dbflow.structure.BaseModel;
 import com.google.gson.annotations.SerializedName;
+
+import io.realm.RealmObject;
 
 /**
  * Created by axell on 04/11/2016.
  */
 
-@Table(database = MyDatabase.class)
-public class LineEntity extends BaseModel {
-    @SerializedName("id")
-    @Column
-    @PrimaryKey
-    public String id;
+public class LineEntity extends RealmObject {
+    public static final String KEY_ID ="id";
+
+    @SerializedName(KEY_ID)
+    private String id;
 
     @SerializedName("number")
-    @Column
-    public String number;
+    private String number;
 
     @SerializedName("label")
-    @Column
-    public String label;
+    private String label;
 
     @SerializedName("color")
-    @Column
-    public String color;
+    private String color;
 
     @SerializedName("order")
-    @Column
-    public String order;
+    private String order;
 
     @SerializedName("kml_path")
-    @Column
-    public String kmlPath;
+    private String kmlPath;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getOrder() {
+        return order;
+    }
+
+    public void setOrder(String order) {
+        this.order = order;
+    }
+
+    public String getKmlPath() {
+        return kmlPath;
+    }
+
+    public void setKmlPath(String kmlPath) {
+        this.kmlPath = kmlPath;
+    }
 }

@@ -13,10 +13,10 @@ import fr.bourgmapper.tub.presentation.model.StopModel;
 public class StopDataMapper {
     public StopModel transform(StopEntity stopEntity) {
         StopModel stopModel = new StopModel();
-        stopModel.setId(stopEntity.id);
-        stopModel.setLabel(stopEntity.label);
-        stopModel.setLatitude(stopEntity.latitude);
-        stopModel.setLongitude(stopEntity.longitude);
+        stopModel.setId(stopEntity.getId());
+        stopModel.setLabel(stopEntity.getLabel());
+        stopModel.setLatitude(stopEntity.getLatitude());
+        stopModel.setLongitude(stopEntity.getLongitude());
         return stopModel;
     }
 
