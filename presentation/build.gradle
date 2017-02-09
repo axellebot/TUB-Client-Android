@@ -88,7 +88,7 @@ dependencies {
     annotationProcessor dataDependencies.dbFlowProcessor
     compile dataDependencies.dbFlowCore
     compile dataDependencies.dbFlow
-    compile dataDependencies.multidex
+    compile presentationDependencies.multidex
 
     //Testing
     androidTestCompile presentationTestDependencies.mockito
