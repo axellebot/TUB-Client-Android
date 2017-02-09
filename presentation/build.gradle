@@ -85,9 +85,9 @@ dependencies {
     provided presentationDependencies.javaxAnnotation
     compile presentationDependencies.playServices
     compile presentationDependencies.androidMapUtils
-    annotationProcessor dataDependencies.dbFlowProcessor
-    compile dataDependencies.dbFlowCore
-    compile dataDependencies.dbFlow
+    annotationProcessor presentationDependencies.dbFlowProcessor
+    compile presentationDependencies.dbFlowCore
+    compile presentationDependencies.dbFlow
     compile presentationDependencies.multidex
 
     //Testing
