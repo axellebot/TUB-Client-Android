@@ -4,7 +4,7 @@ import android.util.Log;
 
 import java.util.List;
 
-import fr.bourgmapper.tub.presentation.TubApp;
+import fr.bourgmapper.tub.presentation.AndroidApplication;
 import fr.bourgmapper.tub.data.repository.DataRepository;
 import fr.bourgmapper.tub.presentation.model.LineModel;
 import fr.bourgmapper.tub.presentation.ui.activity.BaseActivityLifeCycle;
@@ -29,7 +29,7 @@ public class BusListFragmentPresenter implements BaseActivityLifeCycle {
 
     @Override
     public void start() {
-        this.dataRepository = TubApp.app().getDataRepository();
+        this.dataRepository = AndroidApplication.app().getDataRepository();
 
         this.dataRepository.getLineListCall()
                 .subscribeOn(Schedulers.io())

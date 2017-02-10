@@ -22,11 +22,11 @@ import fr.bourgmapper.tub.data.repository.DataRepositoryImpl;
 /**
  * Created by axell on 04/11/2016.
  */
-public class TubApp extends MultiDexApplication {
-    private static TubApp application;
+public class AndroidApplication extends MultiDexApplication {
+    private static AndroidApplication application;
     private DataRepository dataRepository;
 
-    public static TubApp app() {
+    public static AndroidApplication app() {
         return application;
     }
 

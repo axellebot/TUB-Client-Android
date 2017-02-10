@@ -1,4 +1,4 @@
-package fr.bourgmapper.tub.data;
+package fr.bourgmapper.tub.domain;
 
 import org.junit.Test;
 

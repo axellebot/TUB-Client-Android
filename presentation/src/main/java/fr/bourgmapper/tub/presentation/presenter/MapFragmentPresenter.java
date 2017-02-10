@@ -6,7 +6,7 @@ import com.google.android.gms.maps.model.LatLng;
 import java.io.InputStream;
 import java.util.List;
 
-import fr.bourgmapper.tub.presentation.TubApp;
+import fr.bourgmapper.tub.presentation.AndroidApplication;
 import fr.bourgmapper.tub.data.repository.DataRepository;
 import fr.bourgmapper.tub.presentation.model.LineModel;
 import fr.bourgmapper.tub.presentation.model.StopModel;
@@ -33,7 +33,7 @@ public class MapFragmentPresenter implements BaseActivityLifeCycle {
 
     @Override
     public void start() {
-        this.dataRepository = TubApp.app().getDataRepository();
+        this.dataRepository = AndroidApplication.app().getDataRepository();
 
         view.getGoogleMap().getUiSettings().setMyLocationButtonEnabled(true);
         view.getGoogleMap().setOnMapClickListener(new GoogleMap.OnMapClickListener() {

@@ -16,7 +16,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.bourgmapper.tub.R;
-import fr.bourgmapper.tub.presentation.TubApp;
+import fr.bourgmapper.tub.presentation.AndroidApplication;
 import fr.bourgmapper.tub.presentation.model.LineModel;
 import fr.bourgmapper.tub.presentation.ui.view.StopMapClusterItem;
 import rx.Observer;
@@ -56,7 +56,7 @@ public class StopMapClusterItemInfoWindowAdapter implements GoogleMap.InfoWindow
     public View getInfoContents(Marker marker) {
         this.windowTitle.setText(currentClusterItem.getTitle());
         ready = false;
-        TubApp.app().getDataRepository().getLineListFromStop(this.currentClusterItem.getId())
+        AndroidApplication.app().getDataRepository().getLineListFromStop(this.currentClusterItem.getId())
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<LineModel>>() {

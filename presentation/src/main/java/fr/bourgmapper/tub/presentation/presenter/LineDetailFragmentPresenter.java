@@ -2,7 +2,7 @@ package fr.bourgmapper.tub.presentation.presenter;
 
 import android.util.Log;
 
-import fr.bourgmapper.tub.presentation.TubApp;
+import fr.bourgmapper.tub.presentation.AndroidApplication;
 import fr.bourgmapper.tub.data.repository.DataRepository;
 import fr.bourgmapper.tub.presentation.model.LineModel;
 import fr.bourgmapper.tub.presentation.ui.activity.BaseActivityLifeCycle;
@@ -22,7 +22,7 @@ public class LineDetailFragmentPresenter implements BaseActivityLifeCycle {
     private DataRepository dataRepository;
 
     public LineDetailFragmentPresenter(final LineDetailFragment view) {
-        this.dataRepository = TubApp.app().getDataRepository();
+        this.dataRepository = AndroidApplication.app().getDataRepository();
         this.view = view;
     }
 
