@@ -4,8 +4,8 @@ import android.util.Log;
 
 import java.util.List;
 
-import fr.bourgmapper.tub.presentation.AndroidApplication;
 import fr.bourgmapper.tub.data.repository.DataRepository;
+import fr.bourgmapper.tub.presentation.AndroidApplication;
 import fr.bourgmapper.tub.presentation.model.LineModel;
 import fr.bourgmapper.tub.presentation.ui.activity.BaseActivityLifeCycle;
 import fr.bourgmapper.tub.presentation.ui.fragment.BusListFragment;

@@ -1,11 +1,11 @@
-package fr.bourgmapper.tub.presentation.model;
+package fr.bourgmapper.tub.domain;
 
 /**
- * Class that represents a line in the presentation layer.
+ * Class that represents a user in the domain layer.
  */
-public class LineModel {
+public class Line {
 
-    public LineModel(String id) {
+    public Line(String id) {
         this.id = id;
     }
 

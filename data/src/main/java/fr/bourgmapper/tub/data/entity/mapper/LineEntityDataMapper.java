@@ -4,16 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.bourgmapper.tub.data.entity.LineEntity;
-import fr.bourgmapper.tub.presentation.model.LineModel;
+import fr.bourgmapper.tub.domain.Line;
 
 /**
- * Created by axell on 04/11/2016.
+ * Mapper class used to transform {@link LineEntity} (in the data layer) to {@link Line} in the
+ * domain layer.
  */
-
-public class LineDataMapper {
-    public LineModel transform(LineEntity lineEntity) {
-        LineModel lineModel = new LineModel();
-        lineModel.setId(lineEntity.id);
+public class LineEntityDataMapper {
+    public Line transform(LineEntity lineEntity) {
+        Line lineModel = new Line(lineEntity.id);
         lineModel.setLabel(lineEntity.label);
         lineModel.setNumber(lineEntity.number);
         lineModel.setColor(lineEntity.color);
@@ -21,8 +20,8 @@ public class LineDataMapper {
         return lineModel;
     }
 
-    public List<LineModel> transform(List<LineEntity> lineEntities) {
-        List<LineModel> listModels = new ArrayList<>();
+    public List<Line> transform(List<LineEntity> lineEntities) {
+        List<Line> listModels = new ArrayList<>();
         for (LineEntity lineEntitie : lineEntities) {
             listModels.add(transform(lineEntitie));
         }

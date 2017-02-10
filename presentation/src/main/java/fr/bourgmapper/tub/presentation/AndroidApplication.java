@@ -8,8 +8,8 @@ import android.support.multidex.MultiDexApplication;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 
-import fr.bourgmapper.tub.data.entity.mapper.LineDataMapper;
-import fr.bourgmapper.tub.data.entity.mapper.StopDataMapper;
+import fr.bourgmapper.tub.data.entity.mapper.LineEntityDataMapper;
+import fr.bourgmapper.tub.data.entity.mapper.StopEntityDataMapper;
 import fr.bourgmapper.tub.data.manager.ApiManager;
 import fr.bourgmapper.tub.data.manager.ApiManagerImpl;
 import fr.bourgmapper.tub.data.manager.DBFlowManager;
@@ -45,10 +45,10 @@ public class AndroidApplication extends MultiDexApplication {
         ApiManager apiManager = new ApiManagerImpl();
         DBFlowManager dbFlowManager = new DBFlowManagerImpl();
         DownloadManager downloadManager = new DownloadManagerImpl();
-        LineDataMapper lineDataMapper = new LineDataMapper();
-        StopDataMapper stopDataMapper = new StopDataMapper();
+        LineEntityDataMapper lineEntityDataMapper = new LineEntityDataMapper();
+        StopEntityDataMapper stopEntityDataMapper = new StopEntityDataMapper();
 
-        dataRepository = new DataRepositoryImpl(apiManager, dbFlowManager, downloadManager, lineDataMapper, stopDataMapper);
+        dataRepository = new DataRepositoryImpl(apiManager, dbFlowManager, downloadManager, lineEntityDataMapper, stopEntityDataMapper);
     }
 
     private void initDBFlow() {

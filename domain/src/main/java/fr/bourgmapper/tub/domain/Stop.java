@@ -1,11 +1,11 @@
-package fr.bourgmapper.tub.presentation.model;
+package fr.bourgmapper.tub.domain;
 
 /**
- * Class that represents a stop in the presentation layer.
+ * Class that represents a user in the domain layer.
  */
-public class StopModel {
+public class Stop {
 
-    public StopModel(String id) {
+    public Stop(String id) {
         this.id = id;
     }
 

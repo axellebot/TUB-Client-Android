@@ -6,8 +6,8 @@ import com.google.android.gms.maps.model.LatLng;
 import java.io.InputStream;
 import java.util.List;
 
-import fr.bourgmapper.tub.presentation.AndroidApplication;
 import fr.bourgmapper.tub.data.repository.DataRepository;
+import fr.bourgmapper.tub.presentation.AndroidApplication;
 import fr.bourgmapper.tub.presentation.model.LineModel;
 import fr.bourgmapper.tub.presentation.model.StopModel;
 import fr.bourgmapper.tub.presentation.ui.activity.BaseActivityLifeCycle;

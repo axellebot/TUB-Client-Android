@@ -4,24 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.bourgmapper.tub.data.entity.StopEntity;
-import fr.bourgmapper.tub.presentation.model.StopModel;
+import fr.bourgmapper.tub.domain.Stop;
 
 /**
- * Created by axell on 04/11/2016.
+ * Mapper class used to transform {@link StopEntity} (in the data layer) to {@link Stop} in the
+ * domain layer.
  */
-
-public class StopDataMapper {
-    public StopModel transform(StopEntity stopEntity) {
-        StopModel stopModel = new StopModel();
-        stopModel.setId(stopEntity.id);
+public class StopEntityDataMapper {
+    public Stop transform(StopEntity stopEntity) {
+        Stop stopModel = new Stop(stopEntity.id);
         stopModel.setLabel(stopEntity.label);
         stopModel.setLatitude(stopEntity.latitude);
         stopModel.setLongitude(stopEntity.longitude);
         return stopModel;
     }
 
-    public List<StopModel> transform(List<StopEntity> stopEntities) {
-        List<StopModel> stopModels = new ArrayList<>();
+    public List<Stop> transform(List<StopEntity> stopEntities) {
+        List<Stop> stopModels = new ArrayList<>();
         for (StopEntity stopEntity : stopEntities) {
             stopModels.add(transform(stopEntity));
         }
