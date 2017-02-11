@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
+import javax.inject.Inject;
+
 import fr.bourgmapper.tub.domain.Line;
+import fr.bourgmapper.tub.presentation.internal.di.PerActivity;
 import fr.bourgmapper.tub.presentation.model.LineModel;
 
 
@@ -12,7 +15,14 @@ import fr.bourgmapper.tub.presentation.model.LineModel;
  * Mapper class used to transform {@link Line} (in the domain layer) to {@link LineModel} in the
  * presentation layer.
  */
+@PerActivity
 public class LineModelDataMapper {
+
+    @Inject
+    public LineModelDataMapper() {
+    }
+
+
 
     /**
      * Transform a {@link Line} into an {@link LineModel}.

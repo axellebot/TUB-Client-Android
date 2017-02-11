@@ -4,14 +4,22 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
+import javax.inject.Inject;
+
 import fr.bourgmapper.tub.domain.Stop;
+import fr.bourgmapper.tub.presentation.internal.di.PerActivity;
 import fr.bourgmapper.tub.presentation.model.StopModel;
 
 /**
  * Mapper class used to transform {@link Stop} (in the domain layer) to {@link StopModel} in the
  * presentation layer.
  */
+@PerActivity
 public class StopModelDataMapper {
+
+    @Inject
+    public StopModelDataMapper() {
+    }
 
     /**
      * Transform a {@link Stop} into an {@link StopModel}.
