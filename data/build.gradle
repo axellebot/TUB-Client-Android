@@ -74,3 +74,12 @@ dependencies {
     testCompile testDependencies.mockito
     testCompile testDependencies.robolectric
 }
+
+//DBFlow
+apt {
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+    arguments {
+        targetModuleName globalConfiguration.getAt("targetModuleName")
+    }
+}
