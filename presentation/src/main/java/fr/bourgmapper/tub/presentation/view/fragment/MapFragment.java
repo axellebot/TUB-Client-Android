@@ -27,9 +27,9 @@ import butterknife.ButterKnife;
 import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.presentation.model.StopModel;
 import fr.bourgmapper.tub.presentation.presenter.MapPresenter;
-import fr.bourgmapper.tub.presentation.renderer.StopClusterRenderer;
+import fr.bourgmapper.tub.presentation.view.renderer.StopClusterRenderer;
 import fr.bourgmapper.tub.presentation.view.adapter.StopMapClusterItemInfoWindowAdapter;
-import fr.bourgmapper.tub.presentation.view.view.StopMapClusterItem;
+import fr.bourgmapper.tub.presentation.view.StopMapClusterItem;
 
 public class MapFragment extends BaseFragment implements OnMapReadyCallback {
     @Inject

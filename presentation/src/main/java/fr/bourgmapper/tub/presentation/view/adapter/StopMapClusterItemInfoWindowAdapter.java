@@ -18,7 +18,7 @@ import butterknife.ButterKnife;
 import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.presentation.AndroidApplication;
 import fr.bourgmapper.tub.presentation.model.LineModel;
-import fr.bourgmapper.tub.presentation.view.view.StopMapClusterItem;
+import fr.bourgmapper.tub.presentation.view.StopMapClusterItem;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;

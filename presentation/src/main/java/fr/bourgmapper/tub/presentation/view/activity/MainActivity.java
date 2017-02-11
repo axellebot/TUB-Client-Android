@@ -20,12 +20,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.bourgmapper.tub.R;
-import fr.bourgmapper.tub.presentation.navigator.MainNavigator;
+import fr.bourgmapper.tub.presentation.navigation.MainNavigator;
 import fr.bourgmapper.tub.presentation.view.composition.ConnectionDialogModule;
 import fr.bourgmapper.tub.presentation.view.composition.ConnectionDialogModuleImpl;
 import fr.bourgmapper.tub.presentation.view.fragment.InfoFragment;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, InfoFragment.MainNavigationListener {
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, InfoFragment.MainNavigationListener {
     private static final String TAG = "MainActivity";
 
     @BindView(R.id.drawer_layout)

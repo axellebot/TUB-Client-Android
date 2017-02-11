@@ -20,7 +20,7 @@ import fr.bourgmapper.tub.presentation.model.StopModel;
 import fr.bourgmapper.tub.presentation.presenter.StopListPresenter;
 import fr.bourgmapper.tub.presentation.view.adapter.StopListAdapter;
 import fr.bourgmapper.tub.presentation.view.adapter.StopListLayoutManager;
-import fr.bourgmapper.tub.presentation.view.view.StopListView;
+import fr.bourgmapper.tub.presentation.view.StopListView;
 
 /**
  * Fragment that shows a list of Stops.
