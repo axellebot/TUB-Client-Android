@@ -1,7 +1,6 @@
 package fr.bourgmapper.tub.presentation.ui.fragment;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,22 +20,26 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.presentation.model.StopModel;
-import fr.bourgmapper.tub.presentation.presenter.MapFragmentPresenter;
+import fr.bourgmapper.tub.presentation.presenter.MapPresenter;
 import fr.bourgmapper.tub.presentation.renderer.StopClusterRenderer;
 import fr.bourgmapper.tub.presentation.ui.adapter.StopMapClusterItemInfoWindowAdapter;
 import fr.bourgmapper.tub.presentation.ui.view.StopMapClusterItem;
 
-public class MapFragment extends Fragment implements OnMapReadyCallback {
+public class MapFragment extends BaseFragment implements OnMapReadyCallback {
+    @Inject
+    MapPresenter mapPresenter;
 
     @BindView(R.id.fragment_map_map_view)
     MapView mMapView;
 
     private LayoutInflater inflater;
-    private MapFragmentPresenter presenter;
+    private MapPresenter presenter;
 
 
     //GoogleMap
@@ -58,7 +61,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         View view = inflater.inflate(R.layout.fragment_map, container, false);
         ButterKnife.bind(this, view);
 
-        presenter = new MapFragmentPresenter(this);
+        presenter = new MapPresenter(this);
 
         mMapView.onCreate(savedInstanceState);
         mMapView.getMapAsync(this);

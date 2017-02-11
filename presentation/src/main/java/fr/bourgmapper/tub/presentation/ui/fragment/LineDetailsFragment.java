@@ -3,7 +3,6 @@ package fr.bourgmapper.tub.presentation.ui.fragment;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +13,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.presentation.model.LineModel;
-import fr.bourgmapper.tub.presentation.presenter.LineDetailsFragmentPresenter;
+import fr.bourgmapper.tub.presentation.presenter.LineDetailsPresenter;
 
-public class LineDetailsFragment extends Fragment {
+public class LineDetailsFragment extends BaseFragment {
 
 
     @BindView(R.id.fragment_line_detail_layout)
@@ -30,7 +29,7 @@ public class LineDetailsFragment extends Fragment {
 
 
     private String lineId;
-    private LineDetailsFragmentPresenter presenter;
+    private LineDetailsPresenter presenter;
 
     public static LineDetailsFragment newInstance() {
         LineDetailsFragment fragment = new LineDetailsFragment();
@@ -43,7 +42,7 @@ public class LineDetailsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_line_detail, container, false);
         ButterKnife.bind(this, view);
 
-        presenter = new LineDetailsFragmentPresenter(this);
+        presenter = new LineDetailsPresenter(this);
         presenter.start();
         presenter.initView(this.lineId);
         return view;

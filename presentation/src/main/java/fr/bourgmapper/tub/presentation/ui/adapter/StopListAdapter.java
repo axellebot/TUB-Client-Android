@@ -7,8 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -16,66 +19,84 @@ import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.presentation.model.StopModel;
 
 /**
- * Created by axell on 05/11/2016.
+ * Adaptar that manages a collection of {@link StopModel}.
  */
+public class StopListAdapter extends RecyclerView.Adapter<StopListAdapter.StopViewHolder> {
 
-public class StopListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    public interface OnItemClickListener {
+        void onStopItemClicked(StopModel stopModel);
+    }
 
-    private LayoutInflater inflater;
-    private List<StopModel> stopModels;
+    private List<StopModel> stopCollection;
+    private final LayoutInflater layoutInflater;
 
-    public StopListAdapter(Context context, List<StopModel> stopModels) {
-        this.inflater = LayoutInflater.from(context);
-        if (stopModels == null) {
-            this.stopModels = new ArrayList<>();
-        } else {
-            this.stopModels = stopModels;
-        }
+    private OnItemClickListener onItemClickListener;
+
+    @Inject
+    StopListAdapter(Context context) {
+        this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.stopCollection = Collections.emptyList();
     }
 
     @Override
     public int getItemCount() {
-        return stopModels.size();
+        return (this.stopCollection != null) ? this.stopCollection.size() : 0;
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.list_item_stop, parent, false);
-        return new StopLineHolder(view);
+    public StopViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = layoutInflater.inflate(R.layout.list_item_stop, parent, false);
+        return new StopViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        StopModel stopModel = stopModels.get(position);
-        if (holder instanceof StopLineHolder) {
-            StopLineHolder stopLineHolder = (StopLineHolder) holder;
-            TextView tvLabel = stopLineHolder.getTvLabel();
-            tvLabel.setText(stopModel.getLabel());
+    public void onBindViewHolder(StopViewHolder holder, final int position) {
+        final StopModel stopModel = this.stopCollection.get(position);
+        if (holder instanceof StopViewHolder) {
+            StopViewHolder stopLineHolder = (StopViewHolder) holder;
+            stopLineHolder.tvLabel.setText(stopModel.getLabel());
+            stopLineHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (StopListAdapter.this.onItemClickListener != null) {
+                        StopListAdapter.this.onItemClickListener.onStopItemClicked(stopModel);
+                    }
+                }
+            });
         }
     }
 
-    public void swap(List<StopModel> stopModels) {
-        this.stopModels.clear();
-        this.stopModels.addAll(stopModels);
-        notifyDataSetChanged();
+    @Override
+    public long getItemId(int position) {
+        return position;
     }
 
-    public class StopLineHolder extends RecyclerView.ViewHolder {
+    public void setStopCollection(Collection<StopModel> stopCollection) {
+        this.validateUsersCollection(stopCollection);
+        this.stopCollection = (List<StopModel>) stopCollection;
+        this.notifyDataSetChanged();
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    private void validateUsersCollection(Collection<StopModel> stopCollection) {
+        if (stopCollection == null) {
+            throw new IllegalArgumentException("The list cannot be null");
+        }
+    }
+
+    static class StopViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.item_row_stop_label)
         TextView tvLabel;
-
         @BindView(R.id.item_row_stop)
         View itemContainer;
 
-        public StopLineHolder(View itemView) {
+        StopViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
-
-        public TextView getTvLabel() {
-            return tvLabel;
-        }
-
     }
 }

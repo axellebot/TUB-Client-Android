@@ -25,14 +25,14 @@ import rx.schedulers.Schedulers;
  * layer.
  */
 @PerActivity
-public class MapFragmentPresenter implements Presenter {
-    private static String TAG = "HomeFragmentPrstr";
+public class MapPresenter implements Presenter {
+    private static String TAG = "MapPresenter";
 
     private final MapFragment view;
     private DataRepository dataRepository;
 
     @Inject
-    public MapFragmentPresenter(final MapFragment view) {
+    public MapPresenter(final MapFragment view) {
         this.view = view;
     }
 
@@ -65,11 +65,6 @@ public class MapFragmentPresenter implements Presenter {
 
     @Override
     public void pause() {
-    }
-
-    @Override
-    public void stop() {
-
     }
 
     @Override

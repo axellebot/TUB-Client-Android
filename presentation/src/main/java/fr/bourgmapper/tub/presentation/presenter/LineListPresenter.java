@@ -9,25 +9,24 @@ import javax.inject.Inject;
 import fr.bourgmapper.tub.data.repository.DataRepository;
 import fr.bourgmapper.tub.presentation.AndroidApplication;
 import fr.bourgmapper.tub.presentation.internal.di.PerActivity;
-import fr.bourgmapper.tub.presentation.model.StopModel;
-import fr.bourgmapper.tub.presentation.ui.fragment.StopListFragment;
+import fr.bourgmapper.tub.presentation.model.LineModel;
+import fr.bourgmapper.tub.presentation.ui.activity.BaseLifeCycle;
+import fr.bourgmapper.tub.presentation.ui.fragment.LineListFragment;
 import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * {@link Presenter} that controls communication between views and models of the presentation
  * layer.
  */
 @PerActivity
-public class StopListFragmentPresenter implements Presenter {
-    private static String TAG = "StopListFragmentPrstr";
+public class LineListPresenter implements Presenter {
+    private static String TAG = "LineListPresenter";
 
-    private final StopListFragment view;
+    private final LineListFragment view;
     private DataRepository dataRepository;
 
     @Inject
-    public StopListFragmentPresenter(final StopListFragment view) {
+    public LineListPresenter(final LineListFragment view) {
         this.view = view;
     }
 
@@ -35,10 +34,10 @@ public class StopListFragmentPresenter implements Presenter {
     public void start() {
         this.dataRepository = AndroidApplication.app().getDataRepository();
 
-        this.dataRepository.getStopListCall()
+        this.dataRepository.getLineListCall()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<StopModel>>() {
+                .subscribe(new Observer<List<LineModel>>() {
                     @Override
                     public void onCompleted() {
                     }
@@ -49,9 +48,9 @@ public class StopListFragmentPresenter implements Presenter {
                     }
 
                     @Override
-                    public void onNext(List<StopModel> stopModels) {
-                        Log.i(TAG, stopModels.toString());
-                        view.initList(stopModels);
+                    public void onNext(List<LineModel> lineModels) {
+                        Log.i(TAG, lineModels.toString());
+                        view.initList(lineModels);
                     }
                 });
     }
@@ -74,5 +73,9 @@ public class StopListFragmentPresenter implements Presenter {
     @Override
     public void destroy() {
 
+    }
+
+    public void onLineItemClick(String lineId) {
+        //TODO display line detail
     }
 }

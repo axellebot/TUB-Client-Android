@@ -16,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.presentation.model.LineModel;
-import fr.bourgmapper.tub.presentation.presenter.LineListFragmentPresenter;
+import fr.bourgmapper.tub.presentation.presenter.LineListPresenter;
 import fr.bourgmapper.tub.presentation.ui.fragment.LineListFragment;
 
 /**
@@ -25,10 +25,10 @@ import fr.bourgmapper.tub.presentation.ui.fragment.LineListFragment;
 
 public class LineGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private LayoutInflater inflater;
-    private LineListFragmentPresenter presenter;
+    private LineListPresenter presenter;
     private List<LineModel> lineModels;
 
-    public LineGridAdapter(LineListFragment fragment, LineListFragmentPresenter presenter, List<LineModel> lineModels) {
+    public LineGridAdapter(LineListFragment fragment, LineListPresenter presenter, List<LineModel> lineModels) {
         this.inflater = LayoutInflater.from(fragment.getContext());
         this.presenter = presenter;
         if (lineModels == null) {

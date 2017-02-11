@@ -1,7 +1,6 @@
 package fr.bourgmapper.tub.presentation.ui.fragment;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,16 +12,19 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.presentation.model.LineModel;
-import fr.bourgmapper.tub.presentation.presenter.LineListFragmentPresenter;
+import fr.bourgmapper.tub.presentation.presenter.LineListPresenter;
 import fr.bourgmapper.tub.presentation.ui.adapter.LineGridAdapter;
 import fr.bourgmapper.tub.presentation.ui.manager.GridAutofitLayoutManager;
 
-public class LineListFragment extends Fragment {
+/**
+ * Fragment that shows a list of Lines.
+ */
+public class LineListFragment extends BaseFragment {
 
     @BindView(R.id.list_bus_recycler_view)
     RecyclerView recyclerView;
 
-    private LineListFragmentPresenter presenter;
+    private LineListPresenter presenter;
     private LineGridAdapter lineGridAdapter;
 
     public static LineListFragment newInstance() {
@@ -38,7 +40,7 @@ public class LineListFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         //Presenter
-        this.presenter = new LineListFragmentPresenter(this);
+        this.presenter = new LineListPresenter(this);
 
         //Adapter
         this.lineGridAdapter = new LineGridAdapter(this, presenter, null);

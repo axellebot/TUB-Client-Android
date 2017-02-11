@@ -19,14 +19,14 @@ import rx.schedulers.Schedulers;
  * layer.
  */
 @PerActivity
-public class LineDetailsFragmentPresenter implements Presenter {
+public class LineDetailsPresenter implements Presenter {
     private static String TAG = "LineDetailPresenter";
 
     private final LineDetailsFragment view;
     private DataRepository dataRepository;
 
     @Inject
-    public LineDetailsFragmentPresenter(final LineDetailsFragment view) {
+    public LineDetailsPresenter(final LineDetailsFragment view) {
         this.dataRepository = AndroidApplication.app().getDataRepository();
         this.view = view;
     }
