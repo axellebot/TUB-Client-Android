@@ -40,4 +40,9 @@
     <string name="item_row_stop_tv_default">Stop Label</string>
 
 
+    <!--Exception messages-->
+    <string name="exception_message_generic">There was an application error</string>
+    <string name="exception_message_no_connection">There is no internet connection</string>
+    <string name="exception_message_stop_not_found">Cannot retrieve stop data. Check your internet connection</string>
+    <string name="exception_message_line_not_found">Cannot retrieve line data. Check your internet connection</string>
 </resources>
