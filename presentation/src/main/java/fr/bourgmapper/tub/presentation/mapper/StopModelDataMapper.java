@@ -23,7 +23,7 @@ public class StopModelDataMapper {
         if (stop == null) {
             throw new IllegalArgumentException("Cannot transform a null value");
         }
-        final StopModel stopModel = new StopModel(stop.getId());
+        final StopModel stopModel = new StopModel(stop.getStopId());
         stopModel.setLabel(stop.getLabel());
         stopModel.setLatitude(stop.getLatitude());
         stopModel.setLongitude(stop.getLongitude());

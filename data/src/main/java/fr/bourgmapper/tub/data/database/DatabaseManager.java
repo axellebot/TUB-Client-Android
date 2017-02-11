@@ -36,7 +36,7 @@ public class DatabaseManager {
     }
 
     public LineEntity getLineEntityById(String id) {
-        Condition columnId = Condition.column(NameAlias.builder("id").build());
+        Condition columnId = Condition.column(NameAlias.builder("stopId").build());
         return
                 SQLite.select()
                         .from(LineEntity.class)
@@ -52,7 +52,7 @@ public class DatabaseManager {
     }
 
     public StopEntity getStopEntityById(String id) {
-        Condition columnId = Condition.column(NameAlias.builder("id").build());
+        Condition columnId = Condition.column(NameAlias.builder("stopId").build());
         return
                 SQLite.select()
                         .from(StopEntity.class)

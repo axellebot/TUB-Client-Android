@@ -16,9 +16,9 @@ public interface StopDataStore {
     Observable<List<StopEntity>> stopEntityList();
 
     /**
-     * Get an {@link Observable} which will emit a {@link StopEntity} by its id.
+     * Get an {@link Observable} which will emit a {@link StopEntity} by its stopId.
      *
-     * @param stopId The id to retrieve stop data.
+     * @param stopId The stopId to retrieve stop data.
      */
     Observable<StopEntity> stopEntityDetails(final String stopId);
 }

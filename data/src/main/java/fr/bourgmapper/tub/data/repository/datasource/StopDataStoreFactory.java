@@ -26,7 +26,7 @@ public class StopDataStoreFactory {
     }
 
     /**
-     * Create {@link StopDataStore} from a stop id.
+     * Create {@link StopDataStore} from a stop stopId.
      */
     public StopDataStore create(String stopId) {
         StopDataStore stopDataStore;

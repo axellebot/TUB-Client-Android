@@ -24,7 +24,7 @@ public class LineModelDataMapper {
         if (line == null) {
             throw new IllegalArgumentException("Cannot transform a null value");
         }
-        final LineModel lineModel = new LineModel(line.getId());
+        final LineModel lineModel = new LineModel(line.getLineId());
         lineModel.setNumber(line.getNumber());
         lineModel.setLabel(line.getLabel());
         lineModel.setColor(line.getColor());

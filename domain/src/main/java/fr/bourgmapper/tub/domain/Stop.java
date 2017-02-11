@@ -5,21 +5,17 @@ package fr.bourgmapper.tub.domain;
  */
 public class Stop {
 
-    public Stop(String id) {
-        this.id = id;
+    public Stop(String stopId) {
+        this.stopId = stopId;
     }
 
-    private String id;
+    private final String stopId;
     private String label;
     private String latitude;
     private String longitude;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public String getStopId() {
+        return stopId;
     }
 
     public String getLabel() {

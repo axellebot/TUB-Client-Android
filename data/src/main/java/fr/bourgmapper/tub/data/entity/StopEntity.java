@@ -11,10 +11,10 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
  */
 @Table(database = MyDatabase.class)
 public class StopEntity extends BaseModel {
-    @SerializedName("id")
+    @SerializedName("stopId")
     @Column
     @PrimaryKey
-    public String id;
+    public String stopId;
 
     @SerializedName("label")
     @Column

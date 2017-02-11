@@ -18,7 +18,7 @@ public interface RestApi {
      */
     String API_URL_GET_LINE_LIST = "lines";
     /**
-     * Api url for getting a line profile: Remember to concatenate id + 'json'
+     * Api url for getting a line profile: Remember to concatenate stopId + 'json'
      */
     String API_URL_GET_LINE_DETAILS = "lines/{line_id}";
 
@@ -27,7 +27,7 @@ public interface RestApi {
      */
     String API_URL_GET_STOP_LIST = "stops";
     /**
-     * Api url for getting a stop profile: Remember to concatenate id + 'json'
+     * Api url for getting a stop profile: Remember to concatenate stopId + 'json'
      */
     String API_URL_GET_STOP_DETAILS = "stops/{stop_id}";
 
@@ -39,7 +39,7 @@ public interface RestApi {
     /**
      * Retrieves an {@link Observable} which will emit a {@link LineEntity}.
      *
-     * @param lineId The line id used to get line data.
+     * @param lineId The line stopId used to get line data.
      */
     Observable<LineEntity> lineEntityById(final String lineId);
 
@@ -51,7 +51,7 @@ public interface RestApi {
     /**
      * Retrieves an {@link Observable} which will emit a {@link StopEntity}.
      *
-     * @param stopId The stop id used to get stop data.
+     * @param stopId The stop stopId used to get stop data.
      */
     Observable<StopEntity> stopEntityById(final String stopId);
 }

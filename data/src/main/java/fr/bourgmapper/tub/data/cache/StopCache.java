@@ -10,7 +10,7 @@ public interface StopCache {
     /**
      * Gets an {@link Observable} which will emit a {@link StopEntity}.
      *
-     * @param stopId The stop id to retrieve data.
+     * @param stopId The stop stopId to retrieve data.
      */
     Observable<StopEntity> get(final String stopId);
 
@@ -24,7 +24,7 @@ public interface StopCache {
     /**
      * Checks if an element (Stop) exists in the cache.
      *
-     * @param stopId The id used to look for inside the cache.
+     * @param stopId The stopId used to look for inside the cache.
      * @return true if the element is cached, otherwise false.
      */
     boolean isCached(final String stopId);

@@ -69,7 +69,7 @@ public class LineCacheImpl implements LineCache {
     @Override
     public void put(LineEntity lineEntity) {
         if (lineEntity != null) {
-            if (!isCached(lineEntity.id)) {
+            if (!isCached(lineEntity.lineId)) {
                 this.executeAsynchronously(new DataBaseWriter(this.databaseManager, lineEntity));
                 setLastCacheUpdateTimeMillis();
             }

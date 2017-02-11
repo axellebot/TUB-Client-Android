@@ -15,9 +15,9 @@ public interface LineDataStore {
     Observable<List<LineEntity>> lineEntityList();
 
     /**
-     * Get an {@link Observable} which will emit a {@link LineEntity} by its id.
+     * Get an {@link Observable} which will emit a {@link LineEntity} by its stopId.
      *
-     * @param lineId The id to retrieve line data.
+     * @param lineId The stopId to retrieve line data.
      */
     Observable<LineEntity> lineEntityDetails(final String lineId);
 }

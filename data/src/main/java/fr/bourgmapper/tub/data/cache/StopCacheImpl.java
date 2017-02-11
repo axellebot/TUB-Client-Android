@@ -69,7 +69,7 @@ public class StopCacheImpl implements StopCache {
     @Override
     public void put(StopEntity stopEntity) {
         if (stopEntity != null) {
-            if (!isCached(stopEntity.id)) {
+            if (!isCached(stopEntity.stopId)) {
                 this.executeAsynchronously(new DataBaseWriter(this.databaseManager, stopEntity));
                 setLastCacheUpdateTimeMillis();
             }

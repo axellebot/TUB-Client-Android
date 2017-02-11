@@ -20,7 +20,7 @@ public class StopEntityDataMapper {
     }
 
     public Stop transform(StopEntity stopEntity) {
-        Stop stopModel = new Stop(stopEntity.id);
+        Stop stopModel = new Stop(stopEntity.stopId);
         stopModel.setLabel(stopEntity.label);
         stopModel.setLatitude(stopEntity.latitude);
         stopModel.setLongitude(stopEntity.longitude);

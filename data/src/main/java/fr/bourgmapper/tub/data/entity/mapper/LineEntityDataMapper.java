@@ -20,7 +20,7 @@ public class LineEntityDataMapper {
     }
 
     public Line transform(LineEntity lineEntity) {
-        Line lineModel = new Line(lineEntity.id);
+        Line lineModel = new Line(lineEntity.lineId);
         lineModel.setLabel(lineEntity.label);
         lineModel.setNumber(lineEntity.number);
         lineModel.setColor(lineEntity.color);

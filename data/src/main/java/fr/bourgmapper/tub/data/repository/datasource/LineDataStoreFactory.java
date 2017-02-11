@@ -26,7 +26,7 @@ public class LineDataStoreFactory {
     }
 
     /**
-     * Create {@link LineDataStore} from a line id.
+     * Create {@link LineDataStore} from a line stopId.
      */
     public LineDataStore create(String lineId) {
         LineDataStore lineDataStore;

@@ -11,7 +11,7 @@ public interface LineCache {
     /**
      * Gets an {@link Observable} which will emit a {@link LineEntity}.
      *
-     * @param lineId The line id to retrieve data.
+     * @param lineId The line stopId to retrieve data.
      */
     Observable<LineEntity> get(final String lineId);
 
@@ -25,7 +25,7 @@ public interface LineCache {
     /**
      * Checks if an element (Line) exists in the cache.
      *
-     * @param lineId The id used to look for inside the cache.
+     * @param lineId The stopId used to look for inside the cache.
      * @return true if the element is cached, otherwise false.
      */
     boolean isCached(final String lineId);
