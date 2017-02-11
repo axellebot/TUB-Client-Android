@@ -2,12 +2,16 @@ package fr.bourgmapper.tub.data.cache;
 
 import android.content.Context;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import fr.bourgmapper.tub.data.cache.serializer.Serializer;
 import fr.bourgmapper.tub.data.database.DataBaseWriter;
 import fr.bourgmapper.tub.data.database.DatabaseEvictor;
 import fr.bourgmapper.tub.data.database.DatabaseManager;
 import fr.bourgmapper.tub.data.entity.LineEntity;
 import fr.bourgmapper.tub.data.exception.LineNotFoundException;
+import fr.bourgmapper.tub.data.file.FileManager;
 import fr.bourgmapper.tub.domain.executor.ThreadExecutor;
 import io.reactivex.Observable;
 
@@ -15,6 +19,7 @@ import io.reactivex.Observable;
 /**
  * {@link LineCache} implementation.
  */
+@Singleton
 public class LineCacheImpl implements LineCache {
 
     private static final String SETTINGS_FILE_NAME = "fr.bourgmapper.tub.SETTINGS";
@@ -35,7 +40,8 @@ public class LineCacheImpl implements LineCache {
      * @param fileManager     {@link FileManager} for saving serialized objects to the file system.
      * @param databaseManager {@link DatabaseManager} for saving objects to database.
      */
-    public LineCacheImpl(Context context, Serializer serializer,
+    @Inject
+    LineCacheImpl(Context context, Serializer serializer,
                   FileManager fileManager, DatabaseManager databaseManager, ThreadExecutor executor) {
         if (context == null || serializer == null || fileManager == null || databaseManager == null || executor == null) {
             throw new IllegalArgumentException("Invalid null parameter");

@@ -9,10 +9,22 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
 
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import fr.bourgmapper.tub.data.entity.LineEntity;
 import fr.bourgmapper.tub.data.entity.StopEntity;
 
+/**
+ * Helper class to do operations on database.
+ */
+@Singleton
 public class DatabaseManager {
+
+    @Inject
+    DatabaseManager() {
+    }
+
     /***************************
      * SELECT
      **************************/
@@ -23,7 +35,7 @@ public class DatabaseManager {
                         .queryList();
     }
 
-    public  LineEntity getLineEntityById(String id) {
+    public LineEntity getLineEntityById(String id) {
         Condition columnId = Condition.column(NameAlias.builder("id").build());
         return
                 SQLite.select()

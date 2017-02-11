@@ -1,4 +1,4 @@
-package fr.bourgmapper.tub.data.cache;
+package fr.bourgmapper.tub.data.file;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -9,11 +9,16 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 /**
  * Helper class to do operations on regular files/directories.
  */
+@Singleton
 public class FileManager {
 
+    @Inject
     FileManager() {
     }
 

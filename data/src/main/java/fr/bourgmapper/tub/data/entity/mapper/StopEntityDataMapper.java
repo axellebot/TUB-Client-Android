@@ -3,6 +3,9 @@ package fr.bourgmapper.tub.data.entity.mapper;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import fr.bourgmapper.tub.data.entity.StopEntity;
 import fr.bourgmapper.tub.domain.Stop;
 
@@ -10,7 +13,12 @@ import fr.bourgmapper.tub.domain.Stop;
  * Mapper class used to transform {@link StopEntity} (in the data layer) to {@link Stop} in the
  * domain layer.
  */
+@Singleton
 public class StopEntityDataMapper {
+    @Inject
+    StopEntityDataMapper() {
+    }
+
     public Stop transform(StopEntity stopEntity) {
         Stop stopModel = new Stop(stopEntity.id);
         stopModel.setLabel(stopEntity.label);

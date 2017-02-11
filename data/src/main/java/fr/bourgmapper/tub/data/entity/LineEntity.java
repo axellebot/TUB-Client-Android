@@ -6,6 +6,9 @@ import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
+/**
+ * Line Entity used in the data layer.
+ */
 @Table(database = MyDatabase.class)
 public class LineEntity extends BaseModel {
     @SerializedName("id")

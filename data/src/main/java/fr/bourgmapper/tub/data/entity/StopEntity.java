@@ -6,8 +6,11 @@ import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
+/**
+ * Stop Entity used in the data layer.
+ */
 @Table(database = MyDatabase.class)
-public class StopEntity extends BaseModel{
+public class StopEntity extends BaseModel {
     @SerializedName("id")
     @Column
     @PrimaryKey

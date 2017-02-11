@@ -2,6 +2,8 @@ package fr.bourgmapper.tub.data.cache;
 
 import java.io.File;
 
+import fr.bourgmapper.tub.data.file.FileManager;
+
 
 /**
  * {@link Runnable} class for writing to disk.

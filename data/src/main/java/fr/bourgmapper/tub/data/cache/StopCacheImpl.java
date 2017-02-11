@@ -2,12 +2,16 @@ package fr.bourgmapper.tub.data.cache;
 
 import android.content.Context;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import fr.bourgmapper.tub.data.cache.serializer.Serializer;
 import fr.bourgmapper.tub.data.database.DataBaseWriter;
 import fr.bourgmapper.tub.data.database.DatabaseEvictor;
 import fr.bourgmapper.tub.data.database.DatabaseManager;
 import fr.bourgmapper.tub.data.entity.StopEntity;
 import fr.bourgmapper.tub.data.exception.StopNotFoundException;
+import fr.bourgmapper.tub.data.file.FileManager;
 import fr.bourgmapper.tub.domain.executor.ThreadExecutor;
 import io.reactivex.Observable;
 
@@ -15,6 +19,7 @@ import io.reactivex.Observable;
 /**
  * {@link StopCache} implementation.
  */
+@Singleton
 public class StopCacheImpl implements StopCache {
 
     private static final String SETTINGS_FILE_NAME = "fr.bourgmapper.tub.SETTINGS";
@@ -35,8 +40,9 @@ public class StopCacheImpl implements StopCache {
      * @param fileManager     {@link FileManager} for saving serialized objects to the file system.
      * @param databaseManager {@link DatabaseManager} for saving objects to database.
      */
-    public StopCacheImpl(Context context, Serializer serializer,
-                         FileManager fileManager, DatabaseManager databaseManager, ThreadExecutor executor) {
+    @Inject
+    StopCacheImpl(Context context, Serializer serializer,
+                  FileManager fileManager, DatabaseManager databaseManager, ThreadExecutor executor) {
         if (context == null || serializer == null || fileManager == null || databaseManager == null || executor == null) {
             throw new IllegalArgumentException("Invalid null parameter");
         }

@@ -3,6 +3,9 @@ package fr.bourgmapper.tub.data.repository.datasource;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import fr.bourgmapper.tub.data.cache.StopCache;
 import fr.bourgmapper.tub.data.net.RestApi;
 import fr.bourgmapper.tub.data.net.RestApiImpl;
@@ -10,11 +13,13 @@ import fr.bourgmapper.tub.data.net.RestApiImpl;
 /**
  * Factory that creates different implementations of {@link StopDataStore}.
  */
+@Singleton
 public class StopDataStoreFactory {
 
     private final Context context;
     private final StopCache stopCache;
 
+    @Inject
     StopDataStoreFactory(@NonNull Context context, @NonNull StopCache stopCache) {
         this.context = context.getApplicationContext();
         this.stopCache = stopCache;

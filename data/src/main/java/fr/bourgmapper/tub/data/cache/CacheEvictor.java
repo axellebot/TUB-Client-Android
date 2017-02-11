@@ -2,7 +2,7 @@ package fr.bourgmapper.tub.data.cache;
 
 import java.io.File;
 
-import fr.bourgmapper.tub.data.cache.FileManager;
+import fr.bourgmapper.tub.data.file.FileManager;
 
 /**
  * {@link Runnable} class for evicting all the cached files
