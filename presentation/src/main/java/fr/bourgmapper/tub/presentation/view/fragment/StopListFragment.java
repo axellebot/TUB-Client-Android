@@ -111,22 +111,22 @@ public class StopListFragment extends BaseFragment implements StopListView {
     }
 
     @Override
-    public void showLoading() {
+    public void showLoadingStopList() {
 
     }
 
     @Override
-    public void hideLoading() {
+    public void hideLoadingStopList() {
 
     }
 
     @Override
-    public void showRetry() {
+    public void showRetryStopList() {
 
     }
 
     @Override
-    public void hideRetry() {
+    public void hideRetryStopList() {
 
     }
 
@@ -145,7 +145,7 @@ public class StopListFragment extends BaseFragment implements StopListView {
     }
 
     @Override
-    public void showError(String message) {
+    public void showErrorStopList(String message) {
         this.showToastMessage(message);
     }
 

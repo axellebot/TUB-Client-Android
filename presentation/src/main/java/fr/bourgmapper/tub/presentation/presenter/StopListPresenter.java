@@ -81,25 +81,25 @@ public class StopListPresenter implements Presenter {
 
 
     private void showViewLoading() {
-        this.stopListView.showLoading();
+        this.stopListView.showLoadingStopList();
     }
 
     private void hideViewLoading() {
-        this.stopListView.hideLoading();
+        this.stopListView.hideLoadingStopList();
     }
 
     private void showViewRetry() {
-        this.stopListView.showRetry();
+        this.stopListView.showRetryStopList();
     }
 
     private void hideViewRetry() {
-        this.stopListView.hideRetry();
+        this.stopListView.hideRetryStopList();
     }
 
     private void showErrorMessage(ErrorBundle errorBundle) {
         String errorMessage = ErrorMessageFactory.create(this.stopListView.context(),
                 errorBundle.getException());
-        this.stopListView.showError(errorMessage);
+        this.stopListView.showErrorStopList(errorMessage);
     }
 
     private void showStopsCollectionInView(Collection<Stop> stopCollection) {
