@@ -4,8 +4,6 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
 
 import java.util.List;
 
-import fr.bourgmapper.tub.data.cache.DatabaseManager;
-
 /**
  * {@link Runnable} class for evicting all the database data
  */

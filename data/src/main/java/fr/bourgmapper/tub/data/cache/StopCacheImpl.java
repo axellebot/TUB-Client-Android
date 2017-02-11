@@ -5,6 +5,7 @@ import android.content.Context;
 import fr.bourgmapper.tub.data.cache.serializer.Serializer;
 import fr.bourgmapper.tub.data.database.DataBaseWriter;
 import fr.bourgmapper.tub.data.database.DatabaseEvictor;
+import fr.bourgmapper.tub.data.database.DatabaseManager;
 import fr.bourgmapper.tub.data.entity.StopEntity;
 import fr.bourgmapper.tub.data.exception.StopNotFoundException;
 import fr.bourgmapper.tub.domain.executor.ThreadExecutor;
@@ -35,7 +36,7 @@ public class StopCacheImpl implements StopCache {
      * @param databaseManager {@link DatabaseManager} for saving objects to database.
      */
     public StopCacheImpl(Context context, Serializer serializer,
-                  FileManager fileManager, DatabaseManager databaseManager, ThreadExecutor executor) {
+                         FileManager fileManager, DatabaseManager databaseManager, ThreadExecutor executor) {
         if (context == null || serializer == null || fileManager == null || databaseManager == null || executor == null) {
             throw new IllegalArgumentException("Invalid null parameter");
         }
@@ -48,7 +49,7 @@ public class StopCacheImpl implements StopCache {
     @Override
     public Observable<StopEntity> get(final String stopId) {
         return Observable.create(emitter -> {
-            final StopEntity stopEntity = this.databaseManager.getEntityById(stopId, StopEntity.class);
+            final StopEntity stopEntity = this.databaseManager.getStopEntityById(stopId);
 
             if (stopEntity != null) {
                 emitter.onNext(stopEntity);
@@ -71,7 +72,7 @@ public class StopCacheImpl implements StopCache {
 
     @Override
     public boolean isCached(String stopId) {
-        return this.databaseManager.exists(stopId, StopEntity.class);
+        return this.databaseManager.stopEntityExists(stopId);
     }
 
     @Override

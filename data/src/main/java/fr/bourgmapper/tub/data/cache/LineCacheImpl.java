@@ -5,6 +5,7 @@ import android.content.Context;
 import fr.bourgmapper.tub.data.cache.serializer.Serializer;
 import fr.bourgmapper.tub.data.database.DataBaseWriter;
 import fr.bourgmapper.tub.data.database.DatabaseEvictor;
+import fr.bourgmapper.tub.data.database.DatabaseManager;
 import fr.bourgmapper.tub.data.entity.LineEntity;
 import fr.bourgmapper.tub.data.exception.LineNotFoundException;
 import fr.bourgmapper.tub.domain.executor.ThreadExecutor;
@@ -48,7 +49,7 @@ public class LineCacheImpl implements LineCache {
     @Override
     public Observable<LineEntity> get(final String lineId) {
         return Observable.create(emitter -> {
-            final LineEntity lineEntity = this.databaseManager.getEntityById(lineId, LineEntity.class);
+            final LineEntity lineEntity = this.databaseManager.getLineEntityById(lineId);
 
             if (lineEntity != null) {
                 emitter.onNext(lineEntity);
@@ -71,7 +72,7 @@ public class LineCacheImpl implements LineCache {
 
     @Override
     public boolean isCached(String lineId) {
-        return this.databaseManager.exists(lineId, LineEntity.class);
+        return this.databaseManager.lineEntityExists(lineId);
     }
 
     @Override

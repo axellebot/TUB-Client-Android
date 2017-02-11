@@ -10,14 +10,8 @@ import com.raizlabs.android.dbflow.config.FlowManager;
 
 import fr.bourgmapper.tub.data.entity.mapper.LineEntityDataMapper;
 import fr.bourgmapper.tub.data.entity.mapper.StopEntityDataMapper;
-import fr.bourgmapper.tub.data.manager.ApiManager;
-import fr.bourgmapper.tub.data.manager.ApiManagerImpl;
-import fr.bourgmapper.tub.data.manager.DBFlowManager;
-import fr.bourgmapper.tub.data.manager.DBFlowManagerImpl;
 import fr.bourgmapper.tub.data.manager.DownloadManager;
 import fr.bourgmapper.tub.data.manager.DownloadManagerImpl;
-import fr.bourgmapper.tub.data.repository.DataRepository;
-import fr.bourgmapper.tub.data.repository.DataRepositoryImpl;
 
 /**
  * Created by axell on 04/11/2016.

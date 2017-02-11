@@ -1,4 +1,4 @@
-package fr.bourgmapper.tub.data.cache;
+package fr.bourgmapper.tub.data.database;
 
 import android.support.annotation.NonNull;
 
@@ -9,24 +9,41 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
 
 import java.util.List;
 
-//TODO : Create actions in series like SQLITE
+import fr.bourgmapper.tub.data.entity.LineEntity;
+import fr.bourgmapper.tub.data.entity.StopEntity;
 
 public class DatabaseManager {
     /***************************
      * SELECT
      **************************/
-    public List<BaseModel> getEntityList(@NonNull String table) {
+    public List<LineEntity> getLineEntityList() {
         return
                 SQLite.select()
-                        .from(table)
+                        .from(LineEntity.class)
                         .queryList();
     }
 
-    public BaseModel getEntityById(@NonNull String id, @NonNull String table) {
+    public  LineEntity getLineEntityById(String id) {
         Condition columnId = Condition.column(NameAlias.builder("id").build());
         return
                 SQLite.select()
-                        .from(table)
+                        .from(LineEntity.class)
+                        .where(columnId.is(id))
+                        .querySingle();
+    }
+
+    public List<StopEntity> getStopEntityList() {
+        return
+                SQLite.select()
+                        .from(StopEntity.class)
+                        .queryList();
+    }
+
+    public StopEntity getStopEntityById(String id) {
+        Condition columnId = Condition.column(NameAlias.builder("id").build());
+        return
+                SQLite.select()
+                        .from(StopEntity.class)
                         .where(columnId.is(id))
                         .querySingle();
     }
@@ -61,20 +78,11 @@ public class DatabaseManager {
         //TODO: Add Clear Table
     }
 
-    public boolean exists(@NonNull String id, @NonNull Class<Object> objectClass) {
-        BaseModel baseModel = (BaseModel) getEntityById(id, objectClass);
-        return baseModel.exists();
+    public boolean lineEntityExists(String id) {
+        return getLineEntityById(id).exists();
     }
 
-    public Object getClassFromClassName(String entityClassName) {
-
-        Class<BaseModel> entityClass = null;
-
-        try {
-            entityClass = (Class<BaseModel>) Class.forName(entityClassName);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return entityClass;
+    public boolean stopEntityExists(String id) {
+        return getStopEntityById(id).exists();
     }
 }
