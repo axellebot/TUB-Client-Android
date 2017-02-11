@@ -3,7 +3,7 @@ package fr.bourgmapper.tub.presentation.presenter;
 import javax.inject.Inject;
 
 import fr.bourgmapper.tub.presentation.internal.di.PerActivity;
-import fr.bourgmapper.tub.presentation.ui.fragment.InfoFragment;
+import fr.bourgmapper.tub.presentation.view.fragment.InfoFragment;
 
 /**
  * {@link Presenter} that controls communication between views and models of the presentation

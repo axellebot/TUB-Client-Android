@@ -19,8 +19,8 @@ import dagger.Component;
 import fr.bourgmapper.tub.presentation.internal.di.PerActivity;
 import fr.bourgmapper.tub.presentation.internal.di.modules.ActivityModule;
 import fr.bourgmapper.tub.presentation.internal.di.modules.LineModule;
-import fr.bourgmapper.tub.presentation.ui.fragment.LineDetailsFragment;
-import fr.bourgmapper.tub.presentation.ui.fragment.LineListFragment;
+import fr.bourgmapper.tub.presentation.view.fragment.LineDetailsFragment;
+import fr.bourgmapper.tub.presentation.view.fragment.LineListFragment;
 
 /**
  * A scope {@link PerActivity} component.

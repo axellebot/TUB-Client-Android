@@ -10,6 +10,8 @@ import com.raizlabs.android.dbflow.config.FlowManager;
 import com.squareup.leakcanary.LeakCanary;
 
 import fr.bourgmapper.tub.presentation.internal.di.components.ApplicationComponent;
+import fr.bourgmapper.tub.presentation.internal.di.components.DaggerApplicationComponent;
+import fr.bourgmapper.tub.presentation.internal.di.modules.ApplicationModule;
 
 /**
  * Android Main Application
@@ -29,6 +31,11 @@ public class AndroidApplication extends MultiDexApplication {
         return this.applicationComponent;
     }
 
+    private void initializeInjector() {
+        this.applicationComponent = DaggerApplicationComponent.builder()
+                .applicationModule(new ApplicationModule(this))
+                .build();
+    }
 
     private void initializeDBFlow() {
         // This instantiates DBFlow
@@ -43,12 +50,5 @@ public class AndroidApplication extends MultiDexApplication {
         if (BuildConfig.DEBUG) {
             LeakCanary.install(this);
         }
-    }
-
-    public boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }

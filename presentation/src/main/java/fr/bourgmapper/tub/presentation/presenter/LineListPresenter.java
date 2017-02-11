@@ -10,8 +10,7 @@ import fr.bourgmapper.tub.data.repository.DataRepository;
 import fr.bourgmapper.tub.presentation.AndroidApplication;
 import fr.bourgmapper.tub.presentation.internal.di.PerActivity;
 import fr.bourgmapper.tub.presentation.model.LineModel;
-import fr.bourgmapper.tub.presentation.ui.activity.BaseLifeCycle;
-import fr.bourgmapper.tub.presentation.ui.fragment.LineListFragment;
+import fr.bourgmapper.tub.presentation.view.fragment.LineListFragment;
 import rx.Observer;
 
 /**

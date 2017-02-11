@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    design:context="fr.bourgmapper.tub.presentation.ui.activity.MainActivity">
+    design:context="fr.bourgmapper.tub.presentation.view.activity.MainActivity">
 
     <!-- Menu FAB -->
     <android.support.design.widget.FloatingActionButton

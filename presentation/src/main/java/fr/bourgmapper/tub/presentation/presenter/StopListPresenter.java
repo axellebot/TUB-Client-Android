@@ -15,8 +15,8 @@ import fr.bourgmapper.tub.domain.interactor.GetStopList;
 import fr.bourgmapper.tub.presentation.internal.di.PerActivity;
 import fr.bourgmapper.tub.presentation.mapper.StopModelDataMapper;
 import fr.bourgmapper.tub.presentation.model.StopModel;
-import fr.bourgmapper.tub.presentation.ui.exception.ErrorMessageFactory;
-import fr.bourgmapper.tub.presentation.ui.view.StopListView;
+import fr.bourgmapper.tub.presentation.exception.ErrorMessageFactory;
+import fr.bourgmapper.tub.presentation.view.StopListView;
 
 /**
  * {@link Presenter} that controls communication between views and models of the presentation
