@@ -23,9 +23,9 @@ import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.presentation.navigator.MainNavigator;
 import fr.bourgmapper.tub.presentation.ui.composition.ConnectionDialogModule;
 import fr.bourgmapper.tub.presentation.ui.composition.ConnectionDialogModuleImpl;
-import fr.bourgmapper.tub.presentation.ui.listener.NavigationListener;
+import fr.bourgmapper.tub.presentation.ui.fragment.InfoFragment;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, NavigationListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, InfoFragment.MainNavigationListener {
     private static final String TAG = "MainActivity";
 
     @BindView(R.id.drawer_layout)
@@ -175,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void onBusButtonSelected() {
+    public void onLinesButtonSelected() {
         navigator.displayLineListFragmentOverview();
     }
 

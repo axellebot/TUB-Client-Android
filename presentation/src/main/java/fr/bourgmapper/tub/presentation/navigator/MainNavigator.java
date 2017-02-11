@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 
 import fr.bourgmapper.tub.R;
-import fr.bourgmapper.tub.presentation.ui.activity.BaseActivityLifeCycle;
+import fr.bourgmapper.tub.presentation.ui.activity.BaseLifeCycle;
 import fr.bourgmapper.tub.presentation.ui.activity.MainActivity;
 import fr.bourgmapper.tub.presentation.ui.fragment.LineListFragment;
 import fr.bourgmapper.tub.presentation.ui.fragment.InfoFragment;
@@ -18,7 +18,7 @@ import fr.bourgmapper.tub.presentation.ui.fragment.StopListFragment;
  * Created by axell on 01/02/2017.
  */
 
-public class MainNavigator implements BaseActivityLifeCycle {
+public class MainNavigator implements BaseLifeCycle {
     private static String TAG = "MainNavigator";
 
     private FRAGMENT currentFragment;

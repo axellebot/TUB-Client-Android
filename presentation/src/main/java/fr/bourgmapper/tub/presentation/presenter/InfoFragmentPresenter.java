@@ -1,26 +1,26 @@
 package fr.bourgmapper.tub.presentation.presenter;
 
-import fr.bourgmapper.tub.presentation.ui.activity.BaseActivityLifeCycle;
+import javax.inject.Inject;
+
+import fr.bourgmapper.tub.presentation.internal.di.PerActivity;
 import fr.bourgmapper.tub.presentation.ui.fragment.InfoFragment;
-import fr.bourgmapper.tub.presentation.ui.listener.NavigationListener;
 
 /**
- * Created by axell on 05/11/2016.
+ * {@link Presenter} that controls communication between views and models of the presentation
+ * layer.
  */
-
-public class InfoFragmentPresenter implements BaseActivityLifeCycle {
+@PerActivity
+public class InfoFragmentPresenter implements Presenter {
     private static String TAG = "MapOverviewFragmentPrstr";
 
-    private final InfoFragment view;
-    private final NavigationListener navigationListener;
+    private InfoFragment infoFragment;
 
-    public InfoFragmentPresenter(final InfoFragment view, NavigationListener navigationListener) {
-        this.view = view;
-        this.navigationListener = navigationListener;
+    @Inject
+    public InfoFragmentPresenter() {
     }
 
-    @Override
-    public void start() {
+    public void setView(InfoFragment infoFragment) {
+        this.infoFragment = infoFragment;
     }
 
     @Override
@@ -32,21 +32,13 @@ public class InfoFragmentPresenter implements BaseActivityLifeCycle {
     }
 
     @Override
-    public void stop() {
-
-    }
-
-    @Override
     public void destroy() {
-
+        this.infoFragment = null;
     }
 
-    public void topBarBusClicked() {
-        navigationListener.onBusButtonSelected();
+    /**
+     * Initializes the presenter.
+     */
+    public void initialize() {
     }
-
-    public void topBarStopsClicked() {
-        navigationListener.onStopsButtonSelected();
-    }
-
 }

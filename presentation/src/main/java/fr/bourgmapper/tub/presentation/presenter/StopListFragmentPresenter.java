@@ -4,25 +4,29 @@ import android.util.Log;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import fr.bourgmapper.tub.data.repository.DataRepository;
 import fr.bourgmapper.tub.presentation.AndroidApplication;
+import fr.bourgmapper.tub.presentation.internal.di.PerActivity;
 import fr.bourgmapper.tub.presentation.model.StopModel;
-import fr.bourgmapper.tub.presentation.ui.activity.BaseActivityLifeCycle;
 import fr.bourgmapper.tub.presentation.ui.fragment.StopListFragment;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
- * Created by axell on 05/11/2016.
+ * {@link Presenter} that controls communication between views and models of the presentation
+ * layer.
  */
-
-public class StopListFragmentPresenter implements BaseActivityLifeCycle {
+@PerActivity
+public class StopListFragmentPresenter implements Presenter {
     private static String TAG = "StopListFragmentPrstr";
 
     private final StopListFragment view;
     private DataRepository dataRepository;
 
+    @Inject
     public StopListFragmentPresenter(final StopListFragment view) {
         this.view = view;
     }

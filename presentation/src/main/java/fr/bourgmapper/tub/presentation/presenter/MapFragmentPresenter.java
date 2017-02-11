@@ -6,11 +6,14 @@ import com.google.android.gms.maps.model.LatLng;
 import java.io.InputStream;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import fr.bourgmapper.tub.data.repository.DataRepository;
 import fr.bourgmapper.tub.presentation.AndroidApplication;
+import fr.bourgmapper.tub.presentation.internal.di.PerActivity;
 import fr.bourgmapper.tub.presentation.model.LineModel;
 import fr.bourgmapper.tub.presentation.model.StopModel;
-import fr.bourgmapper.tub.presentation.ui.activity.BaseActivityLifeCycle;
+import fr.bourgmapper.tub.presentation.ui.activity.BaseLifeCycle;
 import fr.bourgmapper.tub.presentation.ui.fragment.MapFragment;
 import fr.bourgmapper.tub.presentation.ui.view.StopMapClusterItem;
 import rx.Observer;
@@ -18,15 +21,17 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
- * Created by axell on 05/11/2016.
+ * {@link Presenter} that controls communication between views and models of the presentation
+ * layer.
  */
-
-public class MapFragmentPresenter implements BaseActivityLifeCycle {
+@PerActivity
+public class MapFragmentPresenter implements Presenter {
     private static String TAG = "HomeFragmentPrstr";
 
     private final MapFragment view;
     private DataRepository dataRepository;
 
+    @Inject
     public MapFragmentPresenter(final MapFragment view) {
         this.view = view;
     }
