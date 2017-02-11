@@ -33,7 +33,6 @@ public class StopDataRepository implements StopRepository {
         this.stopEntityDataMapper = stopEntityDataMapper;
     }
 
-
     @Override
     public Observable<List<Stop>> stops() {
         //we always get all stops from the cloud

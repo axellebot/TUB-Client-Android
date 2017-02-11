@@ -6,7 +6,7 @@ import fr.bourgmapper.tub.data.repository.DataRepository;
 import fr.bourgmapper.tub.presentation.AndroidApplication;
 import fr.bourgmapper.tub.presentation.model.LineModel;
 import fr.bourgmapper.tub.presentation.ui.activity.BaseActivityLifeCycle;
-import fr.bourgmapper.tub.presentation.ui.fragment.LineDetailFragment;
+import fr.bourgmapper.tub.presentation.ui.fragment.LineDetailsFragment;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -15,13 +15,13 @@ import rx.schedulers.Schedulers;
  * Created by axell on 05/11/2016.
  */
 
-public class LineDetailFragmentPresenter implements BaseActivityLifeCycle {
+public class LineDetailsFragmentPresenter implements BaseActivityLifeCycle {
     private static String TAG = "LineDetailPresenter";
 
-    private final LineDetailFragment view;
+    private final LineDetailsFragment view;
     private DataRepository dataRepository;
 
-    public LineDetailFragmentPresenter(final LineDetailFragment view) {
+    public LineDetailsFragmentPresenter(final LineDetailsFragment view) {
         this.dataRepository = AndroidApplication.app().getDataRepository();
         this.view = view;
     }

@@ -8,7 +8,7 @@ import fr.bourgmapper.tub.data.repository.DataRepository;
 import fr.bourgmapper.tub.presentation.AndroidApplication;
 import fr.bourgmapper.tub.presentation.model.LineModel;
 import fr.bourgmapper.tub.presentation.ui.activity.BaseActivityLifeCycle;
-import fr.bourgmapper.tub.presentation.ui.fragment.BusListFragment;
+import fr.bourgmapper.tub.presentation.ui.fragment.LineListFragment;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -17,13 +17,13 @@ import rx.schedulers.Schedulers;
  * Created by axell on 05/11/2016.
  */
 
-public class BusListFragmentPresenter implements BaseActivityLifeCycle {
+public class LineListFragmentPresenter implements BaseActivityLifeCycle {
     private static String TAG = "LineListFragmentPrstr";
 
-    private final BusListFragment view;
+    private final LineListFragment view;
     private DataRepository dataRepository;
 
-    public BusListFragmentPresenter(final BusListFragment view) {
+    public LineListFragmentPresenter(final LineListFragment view) {
         this.view = view;
     }
 

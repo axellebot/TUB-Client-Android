@@ -13,20 +13,20 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.presentation.model.LineModel;
-import fr.bourgmapper.tub.presentation.presenter.BusListFragmentPresenter;
+import fr.bourgmapper.tub.presentation.presenter.LineListFragmentPresenter;
 import fr.bourgmapper.tub.presentation.ui.adapter.LineGridAdapter;
 import fr.bourgmapper.tub.presentation.ui.manager.GridAutofitLayoutManager;
 
-public class BusListFragment extends Fragment {
+public class LineListFragment extends Fragment {
 
     @BindView(R.id.list_bus_recycler_view)
     RecyclerView recyclerView;
 
-    private BusListFragmentPresenter presenter;
+    private LineListFragmentPresenter presenter;
     private LineGridAdapter lineGridAdapter;
 
-    public static BusListFragment newInstance() {
-        BusListFragment fragment = new BusListFragment();
+    public static LineListFragment newInstance() {
+        LineListFragment fragment = new LineListFragment();
         return fragment;
     }
 
@@ -38,7 +38,7 @@ public class BusListFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         //Presenter
-        this.presenter = new BusListFragmentPresenter(this);
+        this.presenter = new LineListFragmentPresenter(this);
 
         //Adapter
         this.lineGridAdapter = new LineGridAdapter(this, presenter, null);

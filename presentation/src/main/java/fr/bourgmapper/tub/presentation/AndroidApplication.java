@@ -7,51 +7,42 @@ import android.support.multidex.MultiDexApplication;
 
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
+import com.squareup.leakcanary.LeakCanary;
 
-import fr.bourgmapper.tub.data.entity.mapper.LineEntityDataMapper;
-import fr.bourgmapper.tub.data.entity.mapper.StopEntityDataMapper;
-import fr.bourgmapper.tub.data.manager.DownloadManager;
-import fr.bourgmapper.tub.data.manager.DownloadManagerImpl;
+import fr.bourgmapper.tub.presentation.internal.di.components.ApplicationComponent;
 
 /**
- * Created by axell on 04/11/2016.
+ * Android Main Application
  */
 public class AndroidApplication extends MultiDexApplication {
-    private static AndroidApplication application;
-    private DataRepository dataRepository;
-
-    public static AndroidApplication app() {
-        return application;
-    }
+    private ApplicationComponent applicationComponent;
 
     @Override
     public void onCreate() {
-        application = this;
-        initInjection();
-        initDBFlow();
+        super.onCreate();
+        this.initializeInjector();
+        this.initializeDBFlow();
+        this.initializeLeakDetection();
     }
 
-    public DataRepository getDataRepository() {
-        return dataRepository;
+    public ApplicationComponent getApplicationComponent() {
+        return this.applicationComponent;
     }
 
-    private void initInjection() {
-        ApiManager apiManager = new ApiManagerImpl();
-        DBFlowManager dbFlowManager = new DBFlowManagerImpl();
-        DownloadManager downloadManager = new DownloadManagerImpl();
-        LineEntityDataMapper lineEntityDataMapper = new LineEntityDataMapper();
-        StopEntityDataMapper stopEntityDataMapper = new StopEntityDataMapper();
 
-        dataRepository = new DataRepositoryImpl(apiManager, dbFlowManager, downloadManager, lineEntityDataMapper, stopEntityDataMapper);
-    }
-
-    private void initDBFlow() {
+    private void initializeDBFlow() {
         // This instantiates DBFlow
         FlowManager.init(new FlowConfig.Builder(this)
-                .addDatabaseHolder(SomeUniqueModuleNameGeneratedDatabaseHolder.class)
+                .addDatabaseHolder(DBFlowModuleGeneratedDataBaseHolder.class)
                 .build());
         // add for verbose logging
         // FlowLog.setMinimumLoggingLevel(FlowLog.Level.V);
+    }
+
+    private void initializeLeakDetection() {
+        if (BuildConfig.DEBUG) {
+            LeakCanary.install(this);
+        }
     }
 
     public boolean isNetworkAvailable() {

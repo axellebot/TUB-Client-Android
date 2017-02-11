@@ -14,9 +14,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.presentation.model.LineModel;
-import fr.bourgmapper.tub.presentation.presenter.LineDetailFragmentPresenter;
+import fr.bourgmapper.tub.presentation.presenter.LineDetailsFragmentPresenter;
 
-public class LineDetailFragment extends Fragment {
+public class LineDetailsFragment extends Fragment {
 
 
     @BindView(R.id.fragment_line_detail_layout)
@@ -30,10 +30,10 @@ public class LineDetailFragment extends Fragment {
 
 
     private String lineId;
-    private LineDetailFragmentPresenter presenter;
+    private LineDetailsFragmentPresenter presenter;
 
-    public static LineDetailFragment newInstance() {
-        LineDetailFragment fragment = new LineDetailFragment();
+    public static LineDetailsFragment newInstance() {
+        LineDetailsFragment fragment = new LineDetailsFragment();
         return fragment;
     }
 
@@ -43,7 +43,7 @@ public class LineDetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_line_detail, container, false);
         ButterKnife.bind(this, view);
 
-        presenter = new LineDetailFragmentPresenter(this);
+        presenter = new LineDetailsFragmentPresenter(this);
         presenter.start();
         presenter.initView(this.lineId);
         return view;
