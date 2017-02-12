@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.bourgmapper.tub.R;
@@ -20,9 +22,18 @@ import fr.bourgmapper.tub.presentation.view.manager.GridAutofitLayoutManager;
  * Fragment that shows a list of Lines.
  */
 public class LineListFragment extends BaseFragment {
+    /**
+     * Interface for listening line list events.
+     */
+    public interface LineListListener {
+        void onLineClicked(final LineModel lineModel);
+    }
+    @Inject
+    LineListPresenter userListPresenter;
+    @Inject LineListAdapter usersAdapter;
 
     @BindView(R.id.list_bus_recycler_view)
-    RecyclerView recyclerView;
+    RecyclerView rc_lines;
 
     private LineListPresenter presenter;
     private LineGridAdapter lineGridAdapter;
@@ -46,9 +57,9 @@ public class LineListFragment extends BaseFragment {
         this.lineGridAdapter = new LineGridAdapter(this, presenter, null);
 
         //RecyclerView
-        this.recyclerView.setAdapter(lineGridAdapter);
+        this.rc_lines.setAdapter(lineGridAdapter);
         GridAutofitLayoutManager layoutManager = new GridAutofitLayoutManager(this.getContext(), (int) getResources().getDimension(R.dimen.item_grid_line_size));
-        this.recyclerView.setLayoutManager(layoutManager);
+        this.rc_lines.setLayoutManager(layoutManager);
 
         presenter.start();
         return view;
