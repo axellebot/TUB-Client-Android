@@ -12,10 +12,10 @@ import fr.bourgmapper.tub.domain.exception.DefaultErrorBundle;
 import fr.bourgmapper.tub.domain.exception.ErrorBundle;
 import fr.bourgmapper.tub.domain.interactor.DefaultObserver;
 import fr.bourgmapper.tub.domain.interactor.GetStopList;
+import fr.bourgmapper.tub.presentation.exception.ErrorMessageFactory;
 import fr.bourgmapper.tub.presentation.internal.di.PerActivity;
 import fr.bourgmapper.tub.presentation.mapper.StopModelDataMapper;
 import fr.bourgmapper.tub.presentation.model.StopModel;
-import fr.bourgmapper.tub.presentation.exception.ErrorMessageFactory;
 import fr.bourgmapper.tub.presentation.view.StopListView;
 
 /**
@@ -70,8 +70,8 @@ public class StopListPresenter implements Presenter {
      * Loads all stops.
      */
     private void loadStopList() {
-        this.hideViewRetry();
-        this.showViewLoading();
+        this.hideViewRetryStopList();
+        this.showViewLoadingStopList();
         this.getStopList();
     }
 
@@ -79,20 +79,19 @@ public class StopListPresenter implements Presenter {
         this.stopListView.viewStop(stopModel);
     }
 
-
-    private void showViewLoading() {
+    private void showViewLoadingStopList() {
         this.stopListView.showLoadingStopList();
     }
 
-    private void hideViewLoading() {
+    private void hideViewLoadingStopList() {
         this.stopListView.hideLoadingStopList();
     }
 
-    private void showViewRetry() {
+    private void showViewRetryStopList() {
         this.stopListView.showRetryStopList();
     }
 
-    private void hideViewRetry() {
+    private void hideViewRetryStopList() {
         this.stopListView.hideRetryStopList();
     }
 
@@ -116,14 +115,14 @@ public class StopListPresenter implements Presenter {
 
         @Override
         public void onComplete() {
-            StopListPresenter.this.hideViewLoading();
+            StopListPresenter.this.hideViewLoadingStopList();
         }
 
         @Override
         public void onError(Throwable e) {
-            StopListPresenter.this.hideViewLoading();
+            StopListPresenter.this.hideViewLoadingStopList();
             StopListPresenter.this.showErrorMessage(new DefaultErrorBundle((Exception) e));
-            StopListPresenter.this.showViewRetry();
+            StopListPresenter.this.showViewRetryStopList();
         }
 
         @Override

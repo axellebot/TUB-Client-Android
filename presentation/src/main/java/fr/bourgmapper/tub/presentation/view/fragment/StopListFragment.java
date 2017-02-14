@@ -18,9 +18,9 @@ import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.presentation.internal.di.components.StopComponent;
 import fr.bourgmapper.tub.presentation.model.StopModel;
 import fr.bourgmapper.tub.presentation.presenter.StopListPresenter;
+import fr.bourgmapper.tub.presentation.view.StopListView;
 import fr.bourgmapper.tub.presentation.view.adapter.StopListAdapter;
 import fr.bourgmapper.tub.presentation.view.adapter.StopListLayoutManager;
-import fr.bourgmapper.tub.presentation.view.StopListView;
 
 /**
  * Fragment that shows a list of Stops.
@@ -37,7 +37,6 @@ public class StopListFragment extends BaseFragment implements StopListView {
     StopListPresenter stopListPresenter;
     @Inject
     StopListAdapter stopListAdapter;
-
 
     @BindView(R.id.list_stop_recycler_view)
     RecyclerView rv_stops;
@@ -67,7 +66,7 @@ public class StopListFragment extends BaseFragment implements StopListView {
                              Bundle savedInstanceState) {
         final View fragmentView = inflater.inflate(R.layout.fragment_stop_list, container, false);
         ButterKnife.bind(this, fragmentView);
-        setupRecyclerView();
+        setupStopList();
         return fragmentView;
     }
 
@@ -154,7 +153,7 @@ public class StopListFragment extends BaseFragment implements StopListView {
         return this.getActivity().getApplicationContext();
     }
 
-    private void setupRecyclerView() {
+    private void setupStopList() {
         this.stopListAdapter.setOnItemClickListener(onItemClickListener);
         this.rv_stops.setLayoutManager(new StopListLayoutManager(context()));
         this.rv_stops.setAdapter(stopListAdapter);

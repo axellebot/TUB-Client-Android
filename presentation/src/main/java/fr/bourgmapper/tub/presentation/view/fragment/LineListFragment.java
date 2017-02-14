@@ -1,83 +1,186 @@
 package fr.bourgmapper.tub.presentation.view.fragment;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.List;
+import java.util.Collection;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.bourgmapper.tub.R;
+import fr.bourgmapper.tub.presentation.internal.di.components.LineComponent;
 import fr.bourgmapper.tub.presentation.model.LineModel;
 import fr.bourgmapper.tub.presentation.presenter.LineListPresenter;
-import fr.bourgmapper.tub.presentation.view.adapter.LineGridAdapter;
-import fr.bourgmapper.tub.presentation.view.manager.GridAutofitLayoutManager;
+import fr.bourgmapper.tub.presentation.view.LineListView;
+import fr.bourgmapper.tub.presentation.view.adapter.LineListAdapter;
+import fr.bourgmapper.tub.presentation.view.adapter.LineListLayoutManager;
 
 /**
  * Fragment that shows a list of Lines.
  */
-public class LineListFragment extends BaseFragment {
+public class LineListFragment extends BaseFragment implements LineListView {
     /**
      * Interface for listening line list events.
      */
     public interface LineListListener {
         void onLineClicked(final LineModel lineModel);
     }
+
     @Inject
-    LineListPresenter userListPresenter;
-    @Inject LineListAdapter usersAdapter;
+    LineListPresenter lineListPresenter;
+    @Inject
+    LineListAdapter lineListAdapter;
 
     @BindView(R.id.list_bus_recycler_view)
-    RecyclerView rc_lines;
+    RecyclerView rv_lines;
 
-    private LineListPresenter presenter;
-    private LineGridAdapter lineGridAdapter;
+    private LineListListener lineListListener;
 
-    public static LineListFragment newInstance() {
-        LineListFragment fragment = new LineListFragment();
-        return fragment;
+    public LineListFragment() {
+        setRetainInstance(true);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof LineListListener) {
+            this.lineListListener = (LineListListener) activity;
+        }
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.getComponent(LineComponent.class).inject(this);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.fragment_line_list, container, false);
-        ButterKnife.bind(this, view);
-
-        //Presenter
-        this.presenter = new LineListPresenter(this);
-
-        //Adapter
-        this.lineGridAdapter = new LineGridAdapter(this, presenter, null);
-
-        //RecyclerView
-        this.rc_lines.setAdapter(lineGridAdapter);
-        GridAutofitLayoutManager layoutManager = new GridAutofitLayoutManager(this.getContext(), (int) getResources().getDimension(R.dimen.item_grid_line_size));
-        this.rc_lines.setLayoutManager(layoutManager);
-
-        presenter.start();
-        return view;
+        final View fragmentView = inflater.inflate(R.layout.fragment_line_list, container, false);
+        ButterKnife.bind(this, fragmentView);
+        setupLineList();
+        return fragmentView;
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        this.presenter.pause();
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        this.lineListPresenter.setView(this);
+        if (savedInstanceState == null) {
+            this.loadLineList();
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        this.presenter.resume();
+        this.lineListPresenter.resume();
     }
 
-    public void initList(List<LineModel> lineModels) {
-        lineGridAdapter.swap(lineModels);
+    @Override
+    public void onPause() {
+        super.onPause();
+        this.lineListPresenter.pause();
     }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        rv_lines.setAdapter(null);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        this.lineListPresenter.destroy();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        this.lineListListener = null;
+    }
+
+    @Override
+    public void showLoadingLineList() {
+
+    }
+
+    @Override
+    public void hideLoadingLineList() {
+
+    }
+
+    @Override
+    public void showRetryLineList() {
+
+    }
+
+    @Override
+    public void hideRetryLineList() {
+
+    }
+
+    @Override
+    public void renderLineList(Collection<LineModel> lineModelCollection) {
+        if (lineModelCollection != null) {
+            this.lineListAdapter.setLineCollection(lineModelCollection);
+        }
+    }
+
+    @Override
+    public void viewLine(LineModel lineModel) {
+        if (this.lineListListener != null) {
+            this.lineListListener.onLineClicked(lineModel);
+        }
+    }
+
+    @Override
+    public void showErrorLineList(String message) {
+        this.showToastMessage(message);
+    }
+
+    @Override
+    public Context context() {
+        return this.getActivity().getApplicationContext();
+    }
+
+    private void setupLineList() {
+        this.lineListAdapter.setOnItemClickListener(onItemClickListener);
+        this.rv_lines.setLayoutManager(new LineListLayoutManager(context()));
+        this.rv_lines.setAdapter(lineListAdapter);
+    }
+
+    /**
+     * Loads all lines.
+     */
+    private void loadLineList() {
+        this.lineListPresenter.initialize();
+    }
+
+    //TODO : Bind retry Button
+    void onButtonRetryClick() {
+        LineListFragment.this.loadLineList();
+    }
+
+    private LineListAdapter.OnItemClickListener onItemClickListener =
+            new LineListAdapter.OnItemClickListener() {
+                @Override
+                public void onLineItemClicked(LineModel lineModel) {
+                    if (LineListFragment.this.lineListPresenter != null && lineModel != null) {
+                        LineListFragment.this.lineListPresenter.onLineClicked(lineModel);
+                    }
+                }
+            };
+
 }
