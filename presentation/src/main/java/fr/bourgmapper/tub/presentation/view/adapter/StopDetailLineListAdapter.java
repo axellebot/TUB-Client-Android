@@ -17,10 +17,6 @@ import butterknife.ButterKnife;
 import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.presentation.model.LineModel;
 
-/**
- * Created by axell on 05/11/2016.
- */
-
 public class StopDetailLineListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private LayoutInflater inflater;

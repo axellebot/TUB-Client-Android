@@ -5,15 +5,15 @@ package fr.bourgmapper.tub.domain;
  */
 public class Line {
 
-    public Line(String lineId) {
-        this.lineId = lineId;
-    }
-
     private final String lineId;
     private String number;
     private String label;
     private String color;
     private String kmlPath;
+
+    public Line(String lineId) {
+        this.lineId = lineId;
+    }
 
     public String getLineId() {
         return lineId;

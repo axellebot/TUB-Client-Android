@@ -16,30 +16,31 @@ import io.reactivex.Observable;
  */
 public class GetStopDetails extends UseCase<Stop, GetStopDetails.Params> {
 
-  private final StopRepository stopRepository;
+    private final StopRepository stopRepository;
 
-  @Inject
-  GetStopDetails(StopRepository stopRepository, ThreadExecutor threadExecutor,
-                 PostExecutionThread postExecutionThread) {
-    super(threadExecutor, postExecutionThread);
-    this.stopRepository = stopRepository;
-  }
-
-  @Override Observable<Stop> buildUseCaseObservable(Params params) {
-    Preconditions.checkNotNull(params);
-    return this.stopRepository.stop(params.stopId);
-  }
-
-  public static final class Params {
-
-    private final String stopId;
-
-    private Params(String stopId) {
-      this.stopId = stopId;
+    @Inject
+    GetStopDetails(StopRepository stopRepository, ThreadExecutor threadExecutor,
+                   PostExecutionThread postExecutionThread) {
+        super(threadExecutor, postExecutionThread);
+        this.stopRepository = stopRepository;
     }
 
-    public static Params forStop(String stopId) {
-      return new Params(stopId);
+    @Override
+    Observable<Stop> buildUseCaseObservable(Params params) {
+        Preconditions.checkNotNull(params);
+        return this.stopRepository.stop(params.stopId);
     }
-  }
+
+    public static final class Params {
+
+        private final String stopId;
+
+        private Params(String stopId) {
+            this.stopId = stopId;
+        }
+
+        public static Params forStop(String stopId) {
+            return new Params(stopId);
+        }
+    }
 }

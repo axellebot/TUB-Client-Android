@@ -8,5 +8,5 @@ import io.reactivex.Scheduler;
  * implementation of this interface will change context and update the UI.
  */
 public interface PostExecutionThread {
-  Scheduler getScheduler();
+    Scheduler getScheduler();
 }
