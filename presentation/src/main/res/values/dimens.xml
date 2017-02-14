@@ -56,6 +56,7 @@
     <dimen name="item_grid_line_circle_size">70dp</dimen>
     <dimen name="item_grid_line_label_size">50sp</dimen>
     <dimen name="item_grid_line_padding">5dp</dimen>
+    <dimen name="list_item_line_label_size">20sp</dimen>
 
     <!-- Stop List -->
     <dimen name="list_item_stop_label_size">20sp</dimen>

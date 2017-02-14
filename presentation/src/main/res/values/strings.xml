@@ -32,12 +32,13 @@
     <string name="dialog_connection_email_hint">Email</string>
     <string name="dialog_connection_password_hint">Password</string>
 
-    <!-- List Bus-->
-    <string name="list_bus_title">Bus</string>
+    <!-- List Line-->
+    <string name="list_bus_line">Lines</string>
+    <string name="item_row_line_tv_default">Unknow Line</string>
 
     <!-- List Stop-->
     <string name="list_stop_title">Stops</string>
-    <string name="item_row_stop_tv_default">Stop Label</string>
+    <string name="item_row_stop_tv_default">Unknow Stop</string>
 
 
     <!--Exception messages-->

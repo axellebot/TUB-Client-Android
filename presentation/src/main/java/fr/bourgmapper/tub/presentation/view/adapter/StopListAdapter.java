@@ -91,8 +91,6 @@ public class StopListAdapter extends RecyclerView.Adapter<StopListAdapter.StopVi
 
         @BindView(R.id.item_row_stop_label)
         TextView tvLabel;
-        @BindView(R.id.item_row_stop)
-        View itemContainer;
 
         StopViewHolder(View itemView) {
             super(itemView);

@@ -47,7 +47,7 @@ public class LineListFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_bus_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_line_list, container, false);
         ButterKnife.bind(this, view);
 
         //Presenter
