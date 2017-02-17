@@ -93,7 +93,7 @@ public class LineListPresenter implements Presenter {
         this.lineListView.hideRetryLineList();
     }
 
-    private void showErrorMessage(ErrorBundle errorBundle) {
+    private void showErrorLineListMessage(ErrorBundle errorBundle) {
         String errorMessage = ErrorMessageFactory.create(this.lineListView.context(),
                 errorBundle.getException());
         this.lineListView.showErrorLineList(errorMessage);
@@ -119,7 +119,7 @@ public class LineListPresenter implements Presenter {
         @Override
         public void onError(Throwable e) {
             LineListPresenter.this.hideViewLoadingLineList();
-            LineListPresenter.this.showErrorMessage(new DefaultErrorBundle((Exception) e));
+            LineListPresenter.this.showErrorLineListMessage(new DefaultErrorBundle((Exception) e));
             LineListPresenter.this.showViewRetryLineList();
         }
 
