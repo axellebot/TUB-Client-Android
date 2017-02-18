@@ -204,12 +204,6 @@ public class AutoLoadImageView extends ImageView {
      * Class used to download images from the internet
      */
     private static class ImageDownloader {
-        interface Callback {
-            void onImageDownloaded(Bitmap bitmap);
-
-            void onError();
-        }
-
         ImageDownloader() {
         }
 
@@ -241,6 +235,12 @@ public class AutoLoadImageView extends ImageView {
             if (callback != null) {
                 callback.onError();
             }
+        }
+
+        interface Callback {
+            void onImageDownloaded(Bitmap bitmap);
+
+            void onError();
         }
     }
 
@@ -305,6 +305,16 @@ public class AutoLoadImageView extends ImageView {
     }
 
     private static class SavedState extends BaseSavedState {
+        public static final Parcelable.Creator<SavedState> CREATOR =
+                new Parcelable.Creator<SavedState>() {
+                    public SavedState createFromParcel(Parcel in) {
+                        return new SavedState(in);
+                    }
+
+                    public SavedState[] newArray(int size) {
+                        return new SavedState[size];
+                    }
+                };
         int imagePlaceHolderResId;
         String imageUrl;
 
@@ -324,16 +334,5 @@ public class AutoLoadImageView extends ImageView {
             out.writeInt(this.imagePlaceHolderResId);
             out.writeString(this.imageUrl);
         }
-
-        public static final Parcelable.Creator<SavedState> CREATOR =
-                new Parcelable.Creator<SavedState>() {
-                    public SavedState createFromParcel(Parcel in) {
-                        return new SavedState(in);
-                    }
-
-                    public SavedState[] newArray(int size) {
-                        return new SavedState[size];
-                    }
-                };
     }
 }

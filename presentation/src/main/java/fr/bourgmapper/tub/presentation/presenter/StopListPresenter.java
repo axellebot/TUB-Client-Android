@@ -25,11 +25,9 @@ import fr.bourgmapper.tub.presentation.view.StopListView;
 @PerActivity
 public class StopListPresenter implements Presenter {
     private static String TAG = "StopListPresenter";
-
-    private StopListView stopListView;
-
     private final GetStopList getStopListUseCase;
     private final StopModelDataMapper stopModelDataMapper;
+    private StopListView stopListView;
 
     @Inject
     StopListPresenter(GetStopList getStopListUseCase,

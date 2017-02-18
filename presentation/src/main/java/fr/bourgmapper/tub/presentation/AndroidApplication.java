@@ -1,8 +1,5 @@
 package fr.bourgmapper.tub.presentation;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.support.multidex.MultiDexApplication;
 
 import com.raizlabs.android.dbflow.config.FlowConfig;

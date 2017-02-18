@@ -23,13 +23,8 @@ import fr.bourgmapper.tub.presentation.model.StopModel;
  */
 public class StopListAdapter extends RecyclerView.Adapter<StopListAdapter.StopViewHolder> {
 
-    public interface OnItemClickListener {
-        void onStopItemClicked(StopModel stopModel);
-    }
-
-    private List<StopModel> stopCollection;
     private final LayoutInflater layoutInflater;
-
+    private List<StopModel> stopCollection;
     private OnItemClickListener onItemClickListener;
 
     @Inject
@@ -85,6 +80,10 @@ public class StopListAdapter extends RecyclerView.Adapter<StopListAdapter.StopVi
         if (stopCollection == null) {
             throw new IllegalArgumentException("The list cannot be null");
         }
+    }
+
+    public interface OnItemClickListener {
+        void onStopItemClicked(StopModel stopModel);
     }
 
     static class StopViewHolder extends RecyclerView.ViewHolder {

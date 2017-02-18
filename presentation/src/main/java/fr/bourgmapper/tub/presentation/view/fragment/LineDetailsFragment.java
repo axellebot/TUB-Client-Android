@@ -37,16 +37,16 @@ public class LineDetailsFragment extends BaseFragment implements LineDetailsView
     @BindView(R.id.fragment_line_detail_label)
     TextView tvLabel;
 
+    public LineDetailsFragment() {
+        setRetainInstance(true);
+    }
+
     public static LineDetailsFragment forLine(int lineId) {
         final LineDetailsFragment lineDetailsFragment = new LineDetailsFragment();
         final Bundle arguments = new Bundle();
         arguments.putInt(PARAM_LINE_ID, lineId);
         lineDetailsFragment.setArguments(arguments);
         return lineDetailsFragment;
-    }
-
-    public LineDetailsFragment() {
-        setRetainInstance(true);
     }
 
     @Override

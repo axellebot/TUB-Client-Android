@@ -23,7 +23,6 @@ public class LineModelDataMapper {
     }
 
 
-
     /**
      * Transform a {@link Line} into an {@link LineModel}.
      *

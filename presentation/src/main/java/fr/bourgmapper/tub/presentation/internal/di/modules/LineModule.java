@@ -8,5 +8,6 @@ import dagger.Module;
 @Module
 public class LineModule {
 
-  public LineModule() {}
+    public LineModule() {
+    }
 }

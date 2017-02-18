@@ -13,25 +13,14 @@ import javax.inject.Inject;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.bourgmapper.tub.R;
+import fr.bourgmapper.tub.presentation.listener.MainNavigationListener;
 import fr.bourgmapper.tub.presentation.presenter.InfoFragmentPresenter;
-
-/**
- * Created by axell on 01/02/2017.
- */
 
 /**
  * Fragment that shows Info.
  */
 public class InfoFragment extends Fragment {
 
-    /**
-     * Interface for listening navigation bar events.
-     */
-    public interface MainNavigationListener {
-        void onStopsButtonSelected();
-
-        void onLinesButtonSelected();
-    }
 
     @Inject
     InfoFragmentPresenter infoFragmentPresenter;

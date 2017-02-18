@@ -23,11 +23,9 @@ import fr.bourgmapper.tub.presentation.view.LineDetailsView;
 @PerActivity
 public class LineDetailsPresenter implements Presenter {
     private static String TAG = "LineDetailPresenter";
-
-    private LineDetailsView viewDetailsView;
-
     private final GetLineDetails getLineDetailsUseCase;
     private final LineModelDataMapper lineModelDataMapper;
+    private LineDetailsView viewDetailsView;
 
     @Inject
     public LineDetailsPresenter(GetLineDetails getLineDetailsUseCase,

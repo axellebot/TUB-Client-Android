@@ -17,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.presentation.internal.di.components.LineComponent;
+import fr.bourgmapper.tub.presentation.listener.LineListListener;
 import fr.bourgmapper.tub.presentation.model.LineModel;
 import fr.bourgmapper.tub.presentation.presenter.LineListPresenter;
 import fr.bourgmapper.tub.presentation.view.LineListView;
@@ -27,13 +28,6 @@ import fr.bourgmapper.tub.presentation.view.adapter.LineListLayoutManager;
  * Fragment that shows a list of Lines.
  */
 public class LineListFragment extends BaseFragment implements LineListView {
-    /**
-     * Interface for listening line list events.
-     */
-    public interface LineListListener {
-        void onLineClicked(final LineModel lineModel);
-    }
-
     @Inject
     LineListPresenter lineListPresenter;
     @Inject
@@ -43,6 +37,15 @@ public class LineListFragment extends BaseFragment implements LineListView {
     RecyclerView rv_lines;
 
     private LineListListener lineListListener;
+    private LineListAdapter.OnItemClickListener onItemClickListener =
+            new LineListAdapter.OnItemClickListener() {
+                @Override
+                public void onLineItemClicked(LineModel lineModel) {
+                    if (LineListFragment.this.lineListPresenter != null && lineModel != null) {
+                        LineListFragment.this.lineListPresenter.onLineClicked(lineModel);
+                    }
+                }
+            };
 
     public LineListFragment() {
         setRetainInstance(true);
@@ -91,7 +94,6 @@ public class LineListFragment extends BaseFragment implements LineListView {
         super.onPause();
         this.lineListPresenter.pause();
     }
-
 
     @Override
     public void onDestroyView() {
@@ -172,15 +174,5 @@ public class LineListFragment extends BaseFragment implements LineListView {
     void onButtonRetryClick() {
         LineListFragment.this.loadLineList();
     }
-
-    private LineListAdapter.OnItemClickListener onItemClickListener =
-            new LineListAdapter.OnItemClickListener() {
-                @Override
-                public void onLineItemClicked(LineModel lineModel) {
-                    if (LineListFragment.this.lineListPresenter != null && lineModel != null) {
-                        LineListFragment.this.lineListPresenter.onLineClicked(lineModel);
-                    }
-                }
-            };
 
 }

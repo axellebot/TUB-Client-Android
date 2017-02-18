@@ -8,5 +8,6 @@ import dagger.Module;
 @Module
 public class StopModule {
 
-  public StopModule() {}
+    public StopModule() {
+    }
 }

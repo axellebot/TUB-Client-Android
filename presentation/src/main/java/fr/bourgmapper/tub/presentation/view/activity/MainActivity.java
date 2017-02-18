@@ -12,7 +12,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -20,12 +19,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.bourgmapper.tub.R;
+import fr.bourgmapper.tub.presentation.listener.MainNavigationListener;
 import fr.bourgmapper.tub.presentation.navigation.MainNavigator;
 import fr.bourgmapper.tub.presentation.view.composition.ConnectionDialogModule;
 import fr.bourgmapper.tub.presentation.view.composition.ConnectionDialogModuleImpl;
-import fr.bourgmapper.tub.presentation.view.fragment.InfoFragment;
 
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, InfoFragment.MainNavigationListener {
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, MainNavigationListener {
     private static final String TAG = "MainActivity";
 
     @BindView(R.id.drawer_layout)

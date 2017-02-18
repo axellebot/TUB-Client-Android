@@ -23,13 +23,8 @@ import fr.bourgmapper.tub.presentation.model.LineModel;
  */
 public class LineListAdapter extends RecyclerView.Adapter<LineListAdapter.LineViewHolder> {
 
-    public interface OnItemClickListener {
-        void onLineItemClicked(LineModel LineModel);
-    }
-
-    private List<LineModel> LineCollection;
     private final LayoutInflater layoutInflater;
-
+    private List<LineModel> LineCollection;
     private OnItemClickListener onItemClickListener;
 
     @Inject
@@ -85,6 +80,10 @@ public class LineListAdapter extends RecyclerView.Adapter<LineListAdapter.LineVi
         if (LineCollection == null) {
             throw new IllegalArgumentException("The list cannot be null");
         }
+    }
+
+    public interface OnItemClickListener {
+        void onLineItemClicked(LineModel LineModel);
     }
 
     static class LineViewHolder extends RecyclerView.ViewHolder {

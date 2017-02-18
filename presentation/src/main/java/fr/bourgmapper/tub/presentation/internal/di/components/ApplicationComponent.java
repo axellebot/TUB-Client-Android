@@ -18,12 +18,16 @@ import fr.bourgmapper.tub.presentation.view.activity.BaseActivity;
 @Singleton // Constraints this component to one-per-application or unscoped bindings.
 @Component(modules = ApplicationModule.class)
 public interface ApplicationComponent {
-  void inject(BaseActivity baseActivity);
+    void inject(BaseActivity baseActivity);
 
-  //Exposed to sub-graphs.
-  Context context();
-  ThreadExecutor threadExecutor();
-  PostExecutionThread postExecutionThread();
-  LineRepository lineRepository();
-  StopRepository stopRepository();
+    //Exposed to sub-graphs.
+    Context context();
+
+    ThreadExecutor threadExecutor();
+
+    PostExecutionThread postExecutionThread();
+
+    LineRepository lineRepository();
+
+    StopRepository stopRepository();
 }

@@ -9,8 +9,8 @@ import android.util.Log;
 import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.presentation.BaseLifeCycle;
 import fr.bourgmapper.tub.presentation.view.activity.MainActivity;
-import fr.bourgmapper.tub.presentation.view.fragment.LineListFragment;
 import fr.bourgmapper.tub.presentation.view.fragment.InfoFragment;
+import fr.bourgmapper.tub.presentation.view.fragment.LineListFragment;
 import fr.bourgmapper.tub.presentation.view.fragment.MapFragment;
 import fr.bourgmapper.tub.presentation.view.fragment.StopListFragment;
 

@@ -16,6 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.presentation.internal.di.components.StopComponent;
+import fr.bourgmapper.tub.presentation.listener.StopListListener;
 import fr.bourgmapper.tub.presentation.model.StopModel;
 import fr.bourgmapper.tub.presentation.presenter.StopListPresenter;
 import fr.bourgmapper.tub.presentation.view.StopListView;
@@ -26,13 +27,6 @@ import fr.bourgmapper.tub.presentation.view.adapter.StopListLayoutManager;
  * Fragment that shows a list of Stops.
  */
 public class StopListFragment extends BaseFragment implements StopListView {
-    /**
-     * Interface for listening Stop list events.
-     */
-    public interface StopListListener {
-        void onStopClicked(final StopModel userModel);
-    }
-
     @Inject
     StopListPresenter stopListPresenter;
     @Inject
@@ -42,6 +36,15 @@ public class StopListFragment extends BaseFragment implements StopListView {
     RecyclerView rv_stops;
 
     private StopListListener stopListListener;
+    private StopListAdapter.OnItemClickListener onItemClickListener =
+            new StopListAdapter.OnItemClickListener() {
+                @Override
+                public void onStopItemClicked(StopModel stopModel) {
+                    if (StopListFragment.this.stopListPresenter != null && stopModel != null) {
+                        StopListFragment.this.stopListPresenter.onStopClicked(stopModel);
+                    }
+                }
+            };
 
     public StopListFragment() {
         setRetainInstance(true);
@@ -170,15 +173,5 @@ public class StopListFragment extends BaseFragment implements StopListView {
     void onButtonRetryClick() {
         StopListFragment.this.loadStopList();
     }
-
-    private StopListAdapter.OnItemClickListener onItemClickListener =
-            new StopListAdapter.OnItemClickListener() {
-                @Override
-                public void onStopItemClicked(StopModel stopModel) {
-                    if (StopListFragment.this.stopListPresenter != null && stopModel != null) {
-                        StopListFragment.this.stopListPresenter.onStopClicked(stopModel);
-                    }
-                }
-            };
 
 }
