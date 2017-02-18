@@ -15,7 +15,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.bourgmapper.tub.R;
-import fr.bourgmapper.tub.presentation.internal.di.components.StopComponent;
 import fr.bourgmapper.tub.presentation.listener.StopListListener;
 import fr.bourgmapper.tub.presentation.model.StopModel;
 import fr.bourgmapper.tub.presentation.presenter.StopListPresenter;

@@ -16,7 +16,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.bourgmapper.tub.R;
-import fr.bourgmapper.tub.presentation.internal.di.components.LineComponent;
 import fr.bourgmapper.tub.presentation.listener.LineListListener;
 import fr.bourgmapper.tub.presentation.model.LineModel;
 import fr.bourgmapper.tub.presentation.presenter.LineListPresenter;

@@ -1,6 +1,9 @@
 package fr.bourgmapper.tub.presentation.view.fragment;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,125 +13,211 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.maps.android.clustering.Cluster;
-import com.google.maps.android.clustering.ClusterManager;
 import com.google.maps.android.kml.KmlLayer;
 
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
+import java.util.Collection;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.bourgmapper.tub.R;
+import fr.bourgmapper.tub.presentation.internal.di.components.MapComponent;
+import fr.bourgmapper.tub.presentation.listener.LineListListener;
+import fr.bourgmapper.tub.presentation.listener.StopListListener;
+import fr.bourgmapper.tub.presentation.model.LineModel;
 import fr.bourgmapper.tub.presentation.model.StopModel;
 import fr.bourgmapper.tub.presentation.presenter.MapPresenter;
-import fr.bourgmapper.tub.presentation.view.StopMapClusterItem;
-import fr.bourgmapper.tub.presentation.view.adapter.StopMapClusterItemInfoWindowAdapter;
-import fr.bourgmapper.tub.presentation.view.renderer.StopClusterRenderer;
+import fr.bourgmapper.tub.presentation.view.MainMapView;
 
-public class MapFragment extends BaseFragment implements OnMapReadyCallback {
+public class MapFragment extends BaseFragment implements OnMapReadyCallback, MainMapView {
     @Inject
     MapPresenter mapPresenter;
 
     @BindView(R.id.fragment_map_map_view)
     MapView mMapView;
 
-    private LayoutInflater inflater;
-    private MapPresenter presenter;
+    private StopListListener stopListListener;
+    private LineListListener lineListListener;
 
+    private Bundle savedInstanceState;
 
     //GoogleMap
     private GoogleMap googleMap;
-    private ClusterManager<StopMapClusterItem> mClusterManager;
-    private StopMapClusterItemInfoWindowAdapter mClusterAdapter;
-    private StopClusterRenderer mClusterRenderer;
 
+    public MapFragment() {
+        setRetainInstance(true);
+    }
 
-    public static MapFragment newInstance() {
-        MapFragment fragment = new MapFragment();
-        return fragment;
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof StopListListener) {
+            this.stopListListener = (StopListListener) activity;
+        }
+        if (activity instanceof LineListListener) {
+            this.lineListListener = (LineListListener) activity;
+        }
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.getComponent(MapComponent.class).inject(this);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        this.inflater = inflater;
         View view = inflater.inflate(R.layout.fragment_map, container, false);
         ButterKnife.bind(this, view);
 
-        presenter = new MapPresenter(this);
-
-        mMapView.onCreate(savedInstanceState);
-        mMapView.getMapAsync(this);
+        this.savedInstanceState = savedInstanceState;
+        setupMap();
 
         return view;
     }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        this.mapPresenter.setView(this);
+        if (savedInstanceState == null) {
+            this.loadMap();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        this.mapPresenter.resume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        this.mapPresenter.pause();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        //TODO : removed map adapter
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        this.mapPresenter.destroy();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        this.lineListListener = null;
+    }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
 
         mMapView.onResume();
-        presenter.start();
+        mapPresenter.initialize();
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        presenter.pause();
+    public void renderStopList(Collection<StopModel> stopModelCollection) {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        presenter.resume();
+    public void renderLineList(Collection<LineModel> lineModelCollection) {
     }
 
+    @Override
+    public void viewStop(StopModel stopModel) {
+        this.stopListListener.onStopClicked(stopModel);
+    }
+
+    @Override
+    public void showLoadingStopList() {
+
+    }
+
+    @Override
+    public void hideLoadingStopList() {
+
+    }
+
+    @Override
+    public void showRetryStopList() {
+
+    }
+
+    @Override
+    public void hideRetryStopList() {
+
+    }
+
+    @Override
+    public void showErrorStopList(String message) {
+
+    }
+
+    @Override
+    public void showLoadingLineList() {
+
+    }
+
+    @Override
+    public void hideLoadingLineList() {
+
+    }
+
+    @Override
+    public void showRetryLineList() {
+
+    }
+
+    @Override
+    public void hideRetryLineList() {
+
+    }
+
+    @Override
+    public void showErrorLineList(String message) {
+
+    }
+
+
+    @Override
+    public Context context() {
+        return this.getContext();
+    }
+
+    private void setupMap() {
+        mMapView.onCreate(this.savedInstanceState);
+        mMapView.getMapAsync(this);
+
+        this.googleMap.getUiSettings().setMyLocationButtonEnabled(true);
+        this.googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        this.moveCamera(new LatLng(46.205539, 5.227177), 13f);
+    }
+
+    /**
+     * Loads map.
+     */
+    private void loadMap() {
+        this.mapPresenter.initialize();
+    }
+
+    //-----------------------------------------------
     public void moveCamera(LatLng latLng, float zoom) {
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
-    }
-
-    public void setMapType(int type) {
-        googleMap.setMapType(type);
-    }
-
-    public void addStopsToMapWithCluster(List<StopModel> stopModels) {
-        this.mClusterManager = new ClusterManager<>(this.getContext(), googleMap);
-        this.mClusterAdapter = new StopMapClusterItemInfoWindowAdapter(this.getContext());
-        this.mClusterRenderer = new StopClusterRenderer(this.getContext(), googleMap, mClusterManager);
-
-        mClusterManager.setRenderer(mClusterRenderer);
-        mClusterManager.getMarkerCollection().setOnInfoWindowAdapter(mClusterAdapter);
-        mClusterManager.setOnClusterItemClickListener(new ClusterManager.OnClusterItemClickListener<StopMapClusterItem>() {
-            @Override
-            public boolean onClusterItemClick(StopMapClusterItem stopMapClusterItem) {
-                presenter.onStopClusterItemClicked(stopMapClusterItem);
-                return false;
-            }
-        });
-        mClusterManager.setOnClusterClickListener(new ClusterManager.OnClusterClickListener<StopMapClusterItem>() {
-            @Override
-            public boolean onClusterClick(Cluster<StopMapClusterItem> cluster) {
-                return true;
-            }
-        });
-
-        for (StopModel stopModel : stopModels) {
-            mClusterManager.addItem(new StopMapClusterItem(
-                    new LatLng(Double.parseDouble(stopModel.getLatitude()), Double.parseDouble(stopModel.getLongitude())),
-                    stopModel.getId(),
-                    stopModel.getLabel()
-            ));
-        }
-
-        googleMap.setInfoWindowAdapter(mClusterAdapter);
-        googleMap.setOnCameraIdleListener(mClusterManager);
-        googleMap.setOnMarkerClickListener(mClusterManager);
     }
 
     public void addLineKMLToMap(InputStream inputStream) {
@@ -138,13 +227,5 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback {
         } catch (IOException | XmlPullParserException e) {
             e.printStackTrace();
         }
-    }
-
-    public StopMapClusterItemInfoWindowAdapter getmClusterAdapter() {
-        return mClusterAdapter;
-    }
-
-    public GoogleMap getGoogleMap() {
-        return googleMap;
     }
 }

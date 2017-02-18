@@ -147,10 +147,10 @@ public class LineDetailsFragment extends BaseFragment implements LineDetailsView
     /**
      * Get current line id from fragments arguments.
      */
-    private int currentLineId() {
+    private String currentLineId() {
         final Bundle arguments = getArguments();
         Preconditions.checkNotNull(arguments, "Fragment arguments cannot be null");
-        return arguments.getInt(PARAM_LINE_ID);
+        return arguments.getString(PARAM_LINE_ID);
     }
 
     //TODO : Add retry btn

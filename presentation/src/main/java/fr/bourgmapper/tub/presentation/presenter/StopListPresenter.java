@@ -63,7 +63,6 @@ public class StopListPresenter implements Presenter {
         this.loadStopList();
     }
 
-
     /**
      * Loads all stops.
      */
@@ -93,7 +92,7 @@ public class StopListPresenter implements Presenter {
         this.stopListView.hideRetryStopList();
     }
 
-    private void showErrorMessage(ErrorBundle errorBundle) {
+    private void showErrorMessageStopList(ErrorBundle errorBundle) {
         String errorMessage = ErrorMessageFactory.create(this.stopListView.context(),
                 errorBundle.getException());
         this.stopListView.showErrorStopList(errorMessage);
@@ -119,7 +118,7 @@ public class StopListPresenter implements Presenter {
         @Override
         public void onError(Throwable e) {
             StopListPresenter.this.hideViewLoadingStopList();
-            StopListPresenter.this.showErrorMessage(new DefaultErrorBundle((Exception) e));
+            StopListPresenter.this.showErrorMessageStopList(new DefaultErrorBundle((Exception) e));
             StopListPresenter.this.showViewRetryStopList();
         }
 
