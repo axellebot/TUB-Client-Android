@@ -26,7 +26,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.bourgmapper.tub.R;
-import fr.bourgmapper.tub.presentation.internal.di.components.MapComponent;
+import fr.bourgmapper.tub.presentation.internal.di.components.CoreComponent;
 import fr.bourgmapper.tub.presentation.listener.LineListListener;
 import fr.bourgmapper.tub.presentation.listener.StopListListener;
 import fr.bourgmapper.tub.presentation.model.LineModel;
@@ -34,7 +34,7 @@ import fr.bourgmapper.tub.presentation.model.StopModel;
 import fr.bourgmapper.tub.presentation.presenter.MapPresenter;
 import fr.bourgmapper.tub.presentation.view.MainMapView;
 
-public class MapFragment extends BaseFragment implements OnMapReadyCallback, MainMapView {
+public class  MapFragment extends BaseFragment implements OnMapReadyCallback, MainMapView {
     @Inject
     MapPresenter mapPresenter;
 
@@ -67,7 +67,7 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, Mai
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.getComponent(MapComponent.class).inject(this);
+        this.getComponent(CoreComponent.class).inject(this);
     }
 
     @Override

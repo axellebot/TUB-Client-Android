@@ -29,7 +29,7 @@ public class LineDetailsPresenter implements Presenter {
     private LineDetailsView viewDetailsView;
 
     @Inject
-    public LineDetailsPresenter(GetLineDetails getLineDetailsUseCase,
+    LineDetailsPresenter(GetLineDetails getLineDetailsUseCase,
                                 LineModelDataMapper lineModelDataMapper) {
         this.getLineDetailsUseCase = getLineDetailsUseCase;
         this.lineModelDataMapper = lineModelDataMapper;

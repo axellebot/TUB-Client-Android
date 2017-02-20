@@ -37,22 +37,12 @@ public class MainNavigator implements BaseLifeCycle {
     }
 
     @Override
-    public void start() {
-
-    }
-
-    @Override
     public void resume() {
 
     }
 
     @Override
     public void pause() {
-
-    }
-
-    @Override
-    public void stop() {
 
     }
 
@@ -84,7 +74,7 @@ public class MainNavigator implements BaseLifeCycle {
     public void displayHomeMapFragment() {
         if (currentFragment != FRAGMENT.HOME_MAP) {
             if (this.mapFragment == null) {
-                this.mapFragment = MapFragment.newInstance();
+                this.mapFragment = new MapFragment();
             }
             MapFragment mapFragment = new MapFragment();
             fragmentTransactionReplace(mapFragment);
@@ -97,7 +87,7 @@ public class MainNavigator implements BaseLifeCycle {
     public void displayInfoFragmentOverview() {
         if (currentFragmentOverview != FRAGMENT.INFO) {
             if (infoFragment == null) {
-                infoFragment = InfoFragment.newInstance();
+                infoFragment = new InfoFragment();
             }
             fragmentTransactionReplaceOverview(infoFragment);
             currentFragmentOverview = FRAGMENT.INFO;
@@ -108,7 +98,7 @@ public class MainNavigator implements BaseLifeCycle {
     public void displayLineListFragmentOverview() {
         if (currentFragmentOverview != FRAGMENT.LINE_LIST) {
             if (lineListFragment == null) {
-                lineListFragment = lineListFragment.newInstance();
+                lineListFragment = new LineListFragment();
             }
             fragmentTransactionReplaceOverview(lineListFragment);
             currentFragmentOverview = FRAGMENT.LINE_LIST;
@@ -118,7 +108,7 @@ public class MainNavigator implements BaseLifeCycle {
     public void displayStopListFragmentOverview() {
         if (currentFragmentOverview != FRAGMENT.STOP_LIST) {
             if (stopListFragment == null) {
-                stopListFragment = StopListFragment.newInstance();
+                stopListFragment = new StopListFragment();
             }
             StopListFragment stopListFragment = new StopListFragment();
             fragmentTransactionReplaceOverview(stopListFragment);

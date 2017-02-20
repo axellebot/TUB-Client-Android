@@ -6,8 +6,8 @@ import dagger.Module;
  * Dagger module that provides user related collaborators.
  */
 @Module
-public class LineModule {
+public class CoreModule {
 
-    public LineModule() {
+    public CoreModule() {
     }
 }

@@ -19,13 +19,17 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.bourgmapper.tub.R;
+import fr.bourgmapper.tub.presentation.internal.di.HasComponent;
+import fr.bourgmapper.tub.presentation.internal.di.components.CoreComponent;
 import fr.bourgmapper.tub.presentation.listener.MainNavigationListener;
 import fr.bourgmapper.tub.presentation.navigation.MainNavigator;
 import fr.bourgmapper.tub.presentation.view.composition.ConnectionDialogModule;
 import fr.bourgmapper.tub.presentation.view.composition.ConnectionDialogModuleImpl;
 
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, MainNavigationListener {
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, MainNavigationListener, HasComponent<CoreComponent> {
     private static final String TAG = "MainActivity";
+
+    private CoreComponent coreComponent;
 
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
@@ -52,8 +56,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         ButterKnife.bind(this);
         navigator = new MainNavigator(this);
 
-        initNavigationDrawer();
-        initBottomSheet();
+        this.initializeInjector();
+        this.initNavigationDrawer();
+        this.initBottomSheet();
 
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -178,5 +183,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         navigator.displayLineListFragmentOverview();
     }
 
+    private void initializeInjector() {
+        this.coreComponent = DaggerCoreComponent.builder()
+                .applicationComponent(getApplicationComponent())
+                .activityModule(getActivityModule())
+                .build();
+    }
 
+    @Override
+    public CoreComponent getComponent() {
+        return coreComponent;
+    }
 }

@@ -16,7 +16,7 @@ public class InfoFragmentPresenter implements Presenter {
     private InfoFragment infoFragment;
 
     @Inject
-    public InfoFragmentPresenter() {
+    InfoFragmentPresenter() {
     }
 
     public void setView(InfoFragment infoFragment) {

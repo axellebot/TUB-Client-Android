@@ -17,7 +17,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.bourgmapper.tub.R;
-import fr.bourgmapper.tub.presentation.internal.di.components.LineComponent;
+import fr.bourgmapper.tub.presentation.internal.di.components.CoreComponent;
 import fr.bourgmapper.tub.presentation.model.LineModel;
 import fr.bourgmapper.tub.presentation.presenter.LineDetailsPresenter;
 import fr.bourgmapper.tub.presentation.view.LineDetailsView;
@@ -52,7 +52,7 @@ public class LineDetailsFragment extends BaseFragment implements LineDetailsView
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.getComponent(LineComponent.class).inject(this);
+        this.getComponent(CoreComponent.class).inject(this);
     }
 
     @Override

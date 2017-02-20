@@ -25,12 +25,14 @@ import fr.bourgmapper.tub.presentation.view.LineListView;
 @PerActivity
 public class LineListPresenter implements Presenter {
     private static String TAG = "LineListPresenter";
+
     private final GetLineList getLineListUseCase;
     private final LineModelDataMapper lineModelDataMapper;
+
     private LineListView lineListView;
 
     @Inject
-    public LineListPresenter(GetLineList getLineListUseCase, LineModelDataMapper lineModelDataMapper) {
+    LineListPresenter(GetLineList getLineListUseCase, LineModelDataMapper lineModelDataMapper) {
         this.getLineListUseCase = getLineListUseCase;
         this.lineModelDataMapper = lineModelDataMapper;
     }

@@ -43,7 +43,7 @@ public class MapPresenter implements Presenter {
     private MainMapView mainMapView;
 
     @Inject
-    public MapPresenter(GetLineList getLineListUseCase, GetLineDetails getLineDetailsUseCase,
+    MapPresenter(GetLineList getLineListUseCase, GetLineDetails getLineDetailsUseCase,
                         GetStopList getStopListUseCase, GetStopDetails getStopDetailsUseCase,
                         LineModelDataMapper lineModelDataMapper, StopModelDataMapper stopModelDataMapper) {
         this.getLineListUseCase = getLineListUseCase;
