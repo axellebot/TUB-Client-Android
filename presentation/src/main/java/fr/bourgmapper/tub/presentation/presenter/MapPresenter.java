@@ -44,8 +44,8 @@ public class MapPresenter implements Presenter {
 
     @Inject
     MapPresenter(GetLineList getLineListUseCase, GetLineDetails getLineDetailsUseCase,
-                        GetStopList getStopListUseCase, GetStopDetails getStopDetailsUseCase,
-                        LineModelDataMapper lineModelDataMapper, StopModelDataMapper stopModelDataMapper) {
+                 GetStopList getStopListUseCase, GetStopDetails getStopDetailsUseCase,
+                 LineModelDataMapper lineModelDataMapper, StopModelDataMapper stopModelDataMapper) {
         this.getLineListUseCase = getLineListUseCase;
         this.getLineDetailsUseCase = getLineDetailsUseCase;
         this.lineModelDataMapper = lineModelDataMapper;
@@ -166,6 +166,10 @@ public class MapPresenter implements Presenter {
         this.getStopListUseCase.execute(new StopListObserver(), null);
     }
 
+    private void getLineList() {
+        this.getLineListUseCase.execute(new LineListObserver(), null);
+    }
+
     private final class StopListObserver extends DefaultObserver<List<Stop>> {
 
         @Override
@@ -184,11 +188,6 @@ public class MapPresenter implements Presenter {
         public void onNext(List<Stop> stops) {
             MapPresenter.this.showStopsCollectionInView(stops);
         }
-    }
-
-
-    private void getLineList() {
-        this.getLineListUseCase.execute(new LineListObserver(), null);
     }
 
     private final class LineListObserver extends DefaultObserver<List<Line>> {

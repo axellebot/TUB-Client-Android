@@ -9,6 +9,7 @@ public class StopModel {
     private String label;
     private String latitude;
     private String longitude;
+
     public StopModel(String id) {
         this.id = id;
     }

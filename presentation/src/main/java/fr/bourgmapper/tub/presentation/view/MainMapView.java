@@ -2,7 +2,6 @@ package fr.bourgmapper.tub.presentation.view;
 
 import android.content.Context;
 
-import java.io.InputStream;
 import java.util.Collection;
 
 import fr.bourgmapper.tub.presentation.model.LineModel;
@@ -29,6 +28,7 @@ public interface MainMapView {
      * @param stopModel The stop that will be shown.
      */
     void viewStop(StopModel stopModel);
+
     /**
      * Show a view with a progress bar indicating a loading process.
      */

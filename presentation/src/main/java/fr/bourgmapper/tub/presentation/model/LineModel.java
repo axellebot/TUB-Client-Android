@@ -10,6 +10,7 @@ public class LineModel {
     private String label;
     private String color;
     private String kmlPath;
+
     public LineModel(String id) {
         this.id = id;
     }

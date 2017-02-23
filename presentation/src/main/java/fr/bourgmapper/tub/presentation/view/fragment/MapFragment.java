@@ -34,7 +34,7 @@ import fr.bourgmapper.tub.presentation.model.StopModel;
 import fr.bourgmapper.tub.presentation.presenter.MapPresenter;
 import fr.bourgmapper.tub.presentation.view.MainMapView;
 
-public class  MapFragment extends BaseFragment implements OnMapReadyCallback, MainMapView {
+public class MapFragment extends BaseFragment implements OnMapReadyCallback, MainMapView {
     @Inject
     MapPresenter mapPresenter;
 

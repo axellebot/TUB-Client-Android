@@ -21,6 +21,7 @@ import butterknife.OnClick;
 import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.presentation.internal.di.HasComponent;
 import fr.bourgmapper.tub.presentation.internal.di.components.CoreComponent;
+import fr.bourgmapper.tub.presentation.internal.di.components.DaggerCoreComponent;
 import fr.bourgmapper.tub.presentation.listener.MainNavigationListener;
 import fr.bourgmapper.tub.presentation.navigation.MainNavigator;
 import fr.bourgmapper.tub.presentation.view.composition.ConnectionDialogModule;
@@ -28,22 +29,16 @@ import fr.bourgmapper.tub.presentation.view.composition.ConnectionDialogModuleIm
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, MainNavigationListener, HasComponent<CoreComponent> {
     private static final String TAG = "MainActivity";
-
-    private CoreComponent coreComponent;
-
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
-
     @BindView(R.id.activity_main_navigation_drawer)
     NavigationView navigationView;
-
     //BottomSheet
     @BindView(R.id.bottom_sheet_main)
     View bottomSheet;
-
     @BindView(R.id.activity_main_fab_menu)
     FloatingActionButton menuFloatingActionButton;
-
+    private CoreComponent coreComponent;
     private MainNavigator navigator;
     private ActionBarDrawerToggle drawerToggle;
     private BottomSheetBehavior bottomSheetBehavior;
