@@ -2,6 +2,8 @@ package fr.bourgmapper.tub.domain.interactor;
 
 import com.fernandocejas.arrow.checks.Preconditions;
 
+import javax.inject.Inject;
+
 import fr.bourgmapper.tub.domain.Line;
 import fr.bourgmapper.tub.domain.executor.PostExecutionThread;
 import fr.bourgmapper.tub.domain.executor.ThreadExecutor;
@@ -16,6 +18,7 @@ public class GetLineDetails extends UseCase<Line, GetLineDetails.Params> {
 
     private final LineRepository lineRepository;
 
+    @Inject
     GetLineDetails(LineRepository lineRepository, ThreadExecutor threadExecutor,
                    PostExecutionThread postExecutionThread) {
         super(threadExecutor, postExecutionThread);
