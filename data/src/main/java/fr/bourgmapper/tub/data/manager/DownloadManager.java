@@ -1,7 +1,7 @@
 package fr.bourgmapper.tub.data.manager;
 
+import io.reactivex.Observable;
 import okhttp3.ResponseBody;
-import rx.Observable;
 
 /**
  * Created by axell on 12/11/2016.
