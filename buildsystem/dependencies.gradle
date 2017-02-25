@@ -12,9 +12,6 @@ ext {
     androidCompileSdkVersion = 25
     multiDexEnabled = true
 
-    //DBFlow
-    targetModuleName = "DBFlowModule"
-
     //Libraries
     daggerVersion = '2.8'
     butterKnifeVersion = '8.4.0'

@@ -2,7 +2,6 @@ package fr.bourgmapper.tub.presentation;
 
 import android.support.multidex.MultiDexApplication;
 
-import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.squareup.leakcanary.LeakCanary;
 
@@ -20,8 +19,8 @@ public class AndroidApplication extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        this.initializeInjector();
         this.initializeDBFlow();
+        this.initializeInjector();
         this.initializeLeakDetection();
     }
 
@@ -37,9 +36,7 @@ public class AndroidApplication extends MultiDexApplication {
 
     private void initializeDBFlow() {
         // This instantiates DBFlow
-        FlowManager.init(new FlowConfig.Builder(this)
-                .addDatabaseHolder(DBFlowModuleGeneratedDataBaseHolder.class)
-                .build());
+        FlowManager.init(this);
         // add for verbose logging
         // FlowLog.setMinimumLoggingLevel(FlowLog.Level.V);
     }
@@ -48,5 +45,11 @@ public class AndroidApplication extends MultiDexApplication {
         if (BuildConfig.DEBUG) {
             LeakCanary.install(this);
         }
+    }
+
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+        FlowManager.destroy();
     }
 }
