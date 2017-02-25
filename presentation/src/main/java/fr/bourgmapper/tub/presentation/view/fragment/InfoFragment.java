@@ -2,7 +2,6 @@ package fr.bourgmapper.tub.presentation.view.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +12,14 @@ import javax.inject.Inject;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.bourgmapper.tub.R;
+import fr.bourgmapper.tub.presentation.internal.di.components.CoreComponent;
 import fr.bourgmapper.tub.presentation.listener.MainNavigationListener;
 import fr.bourgmapper.tub.presentation.presenter.InfoFragmentPresenter;
 
 /**
  * Fragment that shows Info.
  */
-public class InfoFragment extends Fragment {
-
+public class InfoFragment extends BaseFragment {
 
     @Inject
     InfoFragmentPresenter infoFragmentPresenter;
@@ -37,6 +36,12 @@ public class InfoFragment extends Fragment {
         if (activity instanceof MainNavigationListener) {
             this.mainNavigationListener = (MainNavigationListener) activity;
         }
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.getComponent(CoreComponent.class).inject(this);
     }
 
     @Override

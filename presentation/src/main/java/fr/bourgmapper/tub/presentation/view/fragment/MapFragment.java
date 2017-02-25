@@ -125,6 +125,9 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, Mai
     @Override
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
+        this.googleMap.getUiSettings().setMyLocationButtonEnabled(true);
+        this.googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        this.moveCamera(new LatLng(46.205539, 5.227177), 13f);
 
         mMapView.onResume();
         mapPresenter.initialize();
@@ -202,10 +205,6 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, Mai
     private void setupMap() {
         mMapView.onCreate(this.savedInstanceState);
         mMapView.getMapAsync(this);
-
-        this.googleMap.getUiSettings().setMyLocationButtonEnabled(true);
-        this.googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        this.moveCamera(new LatLng(46.205539, 5.227177), 13f);
     }
 
     /**

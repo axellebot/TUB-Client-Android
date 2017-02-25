@@ -4,6 +4,7 @@ import dagger.Component;
 import fr.bourgmapper.tub.presentation.internal.di.PerActivity;
 import fr.bourgmapper.tub.presentation.internal.di.modules.ActivityModule;
 import fr.bourgmapper.tub.presentation.internal.di.modules.CoreModule;
+import fr.bourgmapper.tub.presentation.view.fragment.InfoFragment;
 import fr.bourgmapper.tub.presentation.view.fragment.LineDetailsFragment;
 import fr.bourgmapper.tub.presentation.view.fragment.LineListFragment;
 import fr.bourgmapper.tub.presentation.view.fragment.MapFragment;
@@ -16,6 +17,8 @@ import fr.bourgmapper.tub.presentation.view.fragment.StopListFragment;
 @PerActivity
 @Component(dependencies = ApplicationComponent.class, modules = {ActivityModule.class, CoreModule.class})
 public interface CoreComponent extends ActivityComponent {
+    void inject(InfoFragment infoFragment);
+
     void inject(MapFragment mapFragment);
 
     void inject(StopListFragment stopListFragment);
