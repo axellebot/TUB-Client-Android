@@ -24,18 +24,18 @@ import fr.bourgmapper.tub.presentation.model.LineModel;
 public class LineListAdapter extends RecyclerView.Adapter<LineListAdapter.LineViewHolder> {
 
     private final LayoutInflater layoutInflater;
-    private List<LineModel> LineCollection;
+    private List<LineModel> lineCollection;
     private OnItemClickListener onItemClickListener;
 
     @Inject
     LineListAdapter(Context context) {
         this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.LineCollection = Collections.emptyList();
+        this.lineCollection = Collections.emptyList();
     }
 
     @Override
     public int getItemCount() {
-        return (this.LineCollection != null) ? this.LineCollection.size() : 0;
+        return (this.lineCollection != null) ? this.lineCollection.size() : 0;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class LineListAdapter extends RecyclerView.Adapter<LineListAdapter.LineVi
 
     @Override
     public void onBindViewHolder(LineViewHolder holder, final int position) {
-        final LineModel LineModel = this.LineCollection.get(position);
+        final LineModel LineModel = this.lineCollection.get(position);
         if (holder instanceof LineViewHolder) {
             LineViewHolder LineLineHolder = (LineViewHolder) holder;
             LineLineHolder.tvLabel.setText(LineModel.getLabel());
@@ -68,7 +68,7 @@ public class LineListAdapter extends RecyclerView.Adapter<LineListAdapter.LineVi
 
     public void setLineCollection(Collection<LineModel> LineCollection) {
         this.validateUsersCollection(LineCollection);
-        this.LineCollection = (List<LineModel>) LineCollection;
+        this.lineCollection = (List<LineModel>) LineCollection;
         this.notifyDataSetChanged();
     }
 

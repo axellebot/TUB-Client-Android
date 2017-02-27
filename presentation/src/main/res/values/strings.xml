@@ -33,7 +33,7 @@
     <string name="dialog_connection_password_hint">Password</string>
 
     <!-- List Line-->
-    <string name="list_bus_line">Lines</string>
+    <string name="list_line_title">Lines</string>
     <string name="item_row_line_tv_default">Unknow Line</string>
 
     <!-- List Stop-->

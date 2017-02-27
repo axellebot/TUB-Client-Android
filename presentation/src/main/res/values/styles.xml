@@ -24,8 +24,8 @@
         <item name="android:background">@drawable/shape_bottom_sheet_squared</item>
     </style>
 
-    <style name="containerRounded">
-        <item name="android:background">@drawable/container_rounded</item>
+    <style name="layoutRounded">
+        <item name="android:background">@drawable/shape_layout_rounded</item>
     </style>
 
     <style name="FloatingActionButton" parent="Widget.Design.FloatingActionButton">
