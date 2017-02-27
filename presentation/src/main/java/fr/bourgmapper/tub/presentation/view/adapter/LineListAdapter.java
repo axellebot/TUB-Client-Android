@@ -29,7 +29,7 @@ public class LineListAdapter extends RecyclerView.Adapter<LineListAdapter.LineVi
 
     @Inject
     LineListAdapter(Context context) {
-        this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.layoutInflater = LayoutInflater.from(context);
         this.lineCollection = Collections.emptyList();
     }
 
@@ -67,7 +67,7 @@ public class LineListAdapter extends RecyclerView.Adapter<LineListAdapter.LineVi
     }
 
     public void setLineCollection(Collection<LineModel> LineCollection) {
-        this.validateUsersCollection(LineCollection);
+        this.validateLinesCollection(LineCollection);
         this.lineCollection = (List<LineModel>) LineCollection;
         this.notifyDataSetChanged();
     }
@@ -76,7 +76,7 @@ public class LineListAdapter extends RecyclerView.Adapter<LineListAdapter.LineVi
         this.onItemClickListener = onItemClickListener;
     }
 
-    private void validateUsersCollection(Collection<LineModel> LineCollection) {
+    private void validateLinesCollection(Collection<LineModel> LineCollection) {
         if (LineCollection == null) {
             throw new IllegalArgumentException("The list cannot be null");
         }

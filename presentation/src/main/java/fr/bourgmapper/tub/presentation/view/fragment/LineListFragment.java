@@ -33,7 +33,7 @@ public class LineListFragment extends BaseFragment implements LineListView {
     @Inject
     LineListAdapter lineListAdapter;
 
-    @BindView(R.id.list_bus_recycler_view)
+    @BindView(R.id.list_line_recycler_view)
     RecyclerView rv_lines;
 
     private LineListListener lineListListener;

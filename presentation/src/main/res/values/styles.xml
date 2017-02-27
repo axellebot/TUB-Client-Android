@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="buttonRounded" parent="@android:style/Widget.Button">
+    <style name="ButtonRounded" parent="@android:style/Widget.Button">
         <item name="android:gravity">center_vertical|center_horizontal</item>
         <item name="android:textColor">#FFFFFFFF</item>
         <item name="android:shadowColor">#FF000000</item>
@@ -15,17 +15,17 @@
         <item name="android:clickable">true</item>
     </style>
 
-    <style name="bottomSheetRounded">
+    <style name="BottomSheetRounded" parent="Theme.Design.BottomSheetDialog">
         <item name="android:background">@drawable/shape_bottom_sheet_top_rounded</item>
         <item name="android:paddingTop">@dimen/default_material_padding_very_small</item>
     </style>
 
-    <style name="bottomSheetSquared">
+    <style name="BottomSheetSquared" parent="Theme.Design.BottomSheetDialog">
         <item name="android:background">@drawable/shape_bottom_sheet_squared</item>
     </style>
 
-    <style name="layoutRounded">
-        <item name="android:background">@drawable/shape_layout_rounded</item>
+    <style name="ListWrapperRounded">
+        <item name="android:background">@drawable/shape_list_wrapper_rounded</item>
     </style>
 
     <style name="FloatingActionButton" parent="Widget.Design.FloatingActionButton">

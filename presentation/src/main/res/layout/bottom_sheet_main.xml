@@ -11,7 +11,7 @@
     app:behavior_hideable="false"
     app:behavior_peekHeight="@dimen/bottom_sheet_main_peek_height_default"
     app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
-    style="@style/bottomSheetRounded">
+    style="@style/BottomSheetRounded">
 
     <FrameLayout
         android:id="@+id/bottom_sheet_main_fragment_container"

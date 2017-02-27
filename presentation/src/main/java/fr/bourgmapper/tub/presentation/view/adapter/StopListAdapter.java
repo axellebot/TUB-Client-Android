@@ -29,7 +29,7 @@ public class StopListAdapter extends RecyclerView.Adapter<StopListAdapter.StopVi
 
     @Inject
     StopListAdapter(Context context) {
-        this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.layoutInflater = LayoutInflater.from(context);
         this.stopCollection = Collections.emptyList();
     }
 
@@ -67,7 +67,7 @@ public class StopListAdapter extends RecyclerView.Adapter<StopListAdapter.StopVi
     }
 
     public void setStopCollection(Collection<StopModel> stopCollection) {
-        this.validateUsersCollection(stopCollection);
+        this.validateStopsCollection(stopCollection);
         this.stopCollection = (List<StopModel>) stopCollection;
         this.notifyDataSetChanged();
     }
@@ -76,7 +76,7 @@ public class StopListAdapter extends RecyclerView.Adapter<StopListAdapter.StopVi
         this.onItemClickListener = onItemClickListener;
     }
 
-    private void validateUsersCollection(Collection<StopModel> stopCollection) {
+    private void validateStopsCollection(Collection<StopModel> stopCollection) {
         if (stopCollection == null) {
             throw new IllegalArgumentException("The list cannot be null");
         }
