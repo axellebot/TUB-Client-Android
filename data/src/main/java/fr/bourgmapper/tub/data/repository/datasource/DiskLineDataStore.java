@@ -13,25 +13,25 @@ import io.reactivex.Observable;
  */
 class DiskLineDataStore implements LineDataStore {
 
-  private final LineCache lineCache;
+    private final LineCache lineCache;
 
-  /**
-   * Construct a {@link LineDataStore} based file system data store.
-   *
-   * @param lineCache A {@link LineCache} to cache data retrieved from the api.
-   */
-  DiskLineDataStore(LineCache lineCache) {
-    this.lineCache = lineCache;
-  }
+    /**
+     * Construct a {@link LineDataStore} based file system data store.
+     *
+     * @param lineCache A {@link LineCache} to cache data retrieved from the api.
+     */
+    DiskLineDataStore(LineCache lineCache) {
+        this.lineCache = lineCache;
+    }
 
-  @Override
-  public Observable<List<LineEntity>> lineEntityList() {
-    //TODO: implement simple cache for storing/retrieving collections of lines.
-    throw new UnsupportedOperationException("Operation is not available!!!");
-  }
+    @Override
+    public Observable<List<LineEntity>> lineEntityList() {
+        //TODO: implement simple cache for storing/retrieving collections of lines.
+        throw new UnsupportedOperationException("Operation is not available!!!");
+    }
 
-  @Override
-  public Observable<LineEntity> lineEntityDetails(final String lineId) {
-     return this.lineCache.get(lineId);
-  }
+    @Override
+    public Observable<LineEntity> lineEntityDetails(final String lineId) {
+        return this.lineCache.get(lineId);
+    }
 }

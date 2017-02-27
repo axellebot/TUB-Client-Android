@@ -33,7 +33,6 @@ public class LineDataRepository implements LineRepository {
         this.lineEntityDataMapper = lineEntityDataMapper;
     }
 
-
     @Override
     public Observable<List<Line>> lines() {
         //we always get all lines from the cloud

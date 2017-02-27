@@ -9,7 +9,7 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
 /**
  * Stop Entity used in the data layer.
  */
-@Table(database = MyDatabase.class)
+@Table(database = CacheDatabase.class)
 public class StopEntity extends BaseModel {
     @SerializedName("stopId")
     @Column

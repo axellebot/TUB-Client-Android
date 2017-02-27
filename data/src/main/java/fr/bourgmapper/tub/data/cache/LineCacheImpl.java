@@ -22,7 +22,7 @@ import io.reactivex.Observable;
 @Singleton
 public class LineCacheImpl implements LineCache {
 
-    private static final String SETTINGS_FILE_NAME = "fr.bourgmapper.tub.SETTINGS";
+    private static final String SETTINGS_FILE_NAME = "fr.bourgmapper.tub.presentation.SETTINGS";
     private static final String SETTINGS_KEY_LAST_CACHE_UPDATE_LINE = "last_cache_update_line";
 
     private static final long EXPIRATION_TIME = 60 * 10 * 1000;

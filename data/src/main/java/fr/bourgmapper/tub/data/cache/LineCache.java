@@ -1,7 +1,6 @@
 package fr.bourgmapper.tub.data.cache;
 
 import fr.bourgmapper.tub.data.entity.LineEntity;
-
 import io.reactivex.Observable;
 
 /**
