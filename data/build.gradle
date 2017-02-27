@@ -23,6 +23,8 @@ android {
         minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
         targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
         versionCode globalConfiguration.getAt("androidVersionCode")
+
+        multiDexEnabled globalConfiguration.getAt("multiDexEnabled")
     }
 
     compileOptions {

@@ -42,7 +42,7 @@ ext {
     assertJVersion = '1.7.1'
     mockitoVersion = '1.9.5'
     dexmakerVersion = '1.0'
-    espressoVersion = '2.0'
+    espressoVersion = '2.2.2'
     testingSupportLibVersion = '0.1'
 
     //Development
@@ -72,11 +72,12 @@ ext {
     ]
 
     presentationTestDependencies = [
-            mockito          : "org.mockito:mockito-core:${mockitoVersion}",
-            dexmaker         : "com.google.dexmaker:dexmaker:${dexmakerVersion}",
-            dexmakerMockito  : "com.google.dexmaker:dexmaker-mockito:${dexmakerVersion}",
-            espresso         : "com.android.support.test.espresso:espresso-core:${espressoVersion}",
-            testingSupportLib: "com.android.support.test:testing-support-lib:${testingSupportLibVersion}",
+            mockito                : "org.mockito:mockito-core:${mockitoVersion}",
+            dexmaker               : "com.google.dexmaker:dexmaker:${dexmakerVersion}",
+            dexmakerMockito        : "com.google.dexmaker:dexmaker-mockito:${dexmakerVersion}",
+            espressoCore           : "com.android.support.test.espresso:espresso-core:${espressoVersion}",
+            expressoIdlingRessource: "com.android.support.test.espresso:espresso-idling-resource:${espressoVersion}",
+            testingSupportLib      : "com.android.support.test:testing-support-lib:${testingSupportLibVersion}",
     ]
 
     domainDependencies = [

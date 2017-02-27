@@ -94,10 +94,10 @@ dependencies {
     androidTestCompile presentationTestDependencies.mockito
     androidTestCompile presentationTestDependencies.dexmaker
     androidTestCompile presentationTestDependencies.dexmakerMockito
-    androidTestCompile presentationTestDependencies.espresso
+    androidTestCompile presentationTestDependencies.espressoCore
+    androidTestCompile presentationTestDependencies.expressoIdlingRessource
     androidTestCompile presentationTestDependencies.testingSupportLib
 
     //Development
     compile developmentDependencies.leakCanary
-    compile 'com.android.support.test.espresso:espresso-idling-resource:2.0'
 }

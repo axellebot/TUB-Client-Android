@@ -1,5 +1,7 @@
 package fr.bourgmapper.tub.presentation;
 
+import android.content.Context;
+import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 
 import com.raizlabs.android.dbflow.config.FlowManager;
@@ -15,6 +17,12 @@ import fr.bourgmapper.tub.presentation.internal.di.modules.ApplicationModule;
  */
 public class AndroidApplication extends MultiDexApplication {
     private ApplicationComponent applicationComponent;
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
 
     @Override
     public void onCreate() {
