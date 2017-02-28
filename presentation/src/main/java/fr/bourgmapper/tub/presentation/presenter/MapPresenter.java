@@ -73,10 +73,11 @@ public class MapPresenter implements Presenter {
 
     @Override
     public void destroy() {
-        this.getStopListUseCase.dispose();
+        //TODO Dispose from Activity
+        /*this.getStopListUseCase.dispose();
         this.getStopDetailsUseCase.dispose();
         this.getLineListUseCase.dispose();
-        this.getLineDetailsUseCase.dispose();
+        this.getLineDetailsUseCase.dispose();*/
         this.mainMapView = null;
     }
 

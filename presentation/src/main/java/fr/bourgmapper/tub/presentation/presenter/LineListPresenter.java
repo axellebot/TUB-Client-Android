@@ -53,7 +53,7 @@ public class LineListPresenter implements Presenter {
 
     @Override
     public void destroy() {
-        this.getLineListUseCase.dispose();
+        //this.getLineListUseCase.dispose(); //TODO Dispose from Activity
         this.lineListView = null;
     }
 

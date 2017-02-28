@@ -53,7 +53,7 @@ public class StopListPresenter implements Presenter {
 
     @Override
     public void destroy() {
-        this.getStopListUseCase.dispose();
+        //this.getStopListUseCase.dispose();//TODO Dispose from Activity
         this.stopListView = null;
     }
 
