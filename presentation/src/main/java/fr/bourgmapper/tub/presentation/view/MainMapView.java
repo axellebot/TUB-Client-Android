@@ -2,6 +2,8 @@ package fr.bourgmapper.tub.presentation.view;
 
 import android.content.Context;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.Collection;
 
 import fr.bourgmapper.tub.presentation.model.LineModel;
@@ -82,6 +84,14 @@ public interface MainMapView {
      * @param message A string representing an error.
      */
     void showErrorLineList(String message);
+
+    /**
+     * Move Map camera
+     *
+     * @param latLng a {@link LatLng} of the position.
+     * @param zoom a float representing a zoom.
+     */
+    void moveCamera(LatLng latLng, float zoom);
 
     /**
      * Get a {@link Context}.

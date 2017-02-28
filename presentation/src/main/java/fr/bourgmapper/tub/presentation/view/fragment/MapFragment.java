@@ -87,7 +87,7 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, Mai
         super.onViewCreated(view, savedInstanceState);
         this.mapPresenter.setView(this);
         if (savedInstanceState == null) {
-            this.loadMap();
+            //load things
         }
     }
 
@@ -127,10 +127,9 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, Mai
         this.googleMap = googleMap;
         this.googleMap.getUiSettings().setMyLocationButtonEnabled(true);
         this.googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        this.moveCamera(new LatLng(46.205539, 5.227177), 13f);
 
         mMapView.onResume();
-        mapPresenter.initialize();
+        this.loadMap();
     }
 
     @Override
@@ -196,6 +195,10 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, Mai
 
     }
 
+    @Override
+    public void moveCamera(LatLng latLng, float zoom) {
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
+    }
 
     @Override
     public Context context() {
@@ -207,6 +210,7 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, Mai
         mMapView.getMapAsync(this);
     }
 
+
     /**
      * Loads map.
      */
@@ -215,9 +219,7 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, Mai
     }
 
     //-----------------------------------------------
-    public void moveCamera(LatLng latLng, float zoom) {
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
-    }
+
 
     public void addLineKMLToMap(InputStream inputStream) {
         try {

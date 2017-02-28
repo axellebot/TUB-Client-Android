@@ -2,6 +2,8 @@ package fr.bourgmapper.tub.presentation.presenter;
 
 import android.support.annotation.NonNull;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.Collection;
 import java.util.List;
 
@@ -85,6 +87,7 @@ public class MapPresenter implements Presenter {
     public void initialize() {
         loadStopList();
         loadLineList();
+        mainMapView.moveCamera(new LatLng(46.205539, 5.227177), 13f);
     }
 
     /**
