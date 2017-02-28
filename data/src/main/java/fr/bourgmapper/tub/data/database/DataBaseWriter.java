@@ -4,6 +4,7 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
 
 import java.util.List;
 
+
 /**
  * {@link Runnable} class for evicting all the database data
  */

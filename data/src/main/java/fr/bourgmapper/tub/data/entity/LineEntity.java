@@ -9,9 +9,11 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
 /**
  * Line Entity used in the data layer.
  */
-@Table(database = CacheDatabase.class)
+@Table(name = LineEntity.TABLE_NAME, database = CacheDatabase.class)
 public class LineEntity extends BaseModel {
-    @SerializedName("stopId")
+    public static final String TABLE_NAME = "Lines";
+
+    @SerializedName("id")
     @Column
     @PrimaryKey
     public String lineId;

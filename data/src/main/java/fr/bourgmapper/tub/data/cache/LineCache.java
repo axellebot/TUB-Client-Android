@@ -1,5 +1,7 @@
 package fr.bourgmapper.tub.data.cache;
 
+import java.util.Collection;
+
 import fr.bourgmapper.tub.data.entity.LineEntity;
 import io.reactivex.Observable;
 
@@ -20,6 +22,13 @@ public interface LineCache {
      * @param lineEntity Element to insert in the cache.
      */
     void put(LineEntity lineEntity);
+
+    /**
+     * Puts and elements into the cache.
+     *
+     * @param lineEntityList Elements to insert in the cache.
+     */
+    void put(Collection<LineEntity> lineEntityList);
 
     /**
      * Checks if an element (Line) exists in the cache.

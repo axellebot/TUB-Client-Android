@@ -2,6 +2,8 @@ package fr.bourgmapper.tub.data.cache;
 
 import android.content.Context;
 
+import java.util.Collection;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -55,7 +57,7 @@ public class LineCacheImpl implements LineCache {
     @Override
     public Observable<LineEntity> get(final String lineId) {
         return Observable.create(emitter -> {
-            final LineEntity lineEntity = this.databaseManager.getLineEntityById(lineId);
+            final LineEntity lineEntity = this.databaseManager.getEntityById(LineEntity.class,lineId);
 
             if (lineEntity != null) {
                 emitter.onNext(lineEntity);
@@ -77,8 +79,17 @@ public class LineCacheImpl implements LineCache {
     }
 
     @Override
+    public void put(Collection<LineEntity> lineEntityList) {
+       if(lineEntityList!= null) {
+           for (LineEntity lineEntity : lineEntityList) {
+               this.put(lineEntity);
+           }
+       }
+    }
+
+    @Override
     public boolean isCached(String lineId) {
-        return this.databaseManager.lineEntityExists(lineId);
+        return this.databaseManager.entityExists(LineEntity.class,lineId);
     }
 
     @Override
@@ -97,7 +108,7 @@ public class LineCacheImpl implements LineCache {
 
     @Override
     public void evictAll() {
-        this.executeAsynchronously(new DatabaseEvictor(databaseManager));
+        this.executeAsynchronously(new DatabaseEvictor(databaseManager, LineEntity.class));
     }
 
     /**

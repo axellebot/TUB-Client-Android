@@ -2,6 +2,8 @@ package fr.bourgmapper.tub.data.cache;
 
 import android.content.Context;
 
+import java.util.Collection;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -21,6 +23,7 @@ import io.reactivex.Observable;
  */
 @Singleton
 public class StopCacheImpl implements StopCache {
+    Class<?> ENTITY_CLASS = StopEntity.class;
 
     private static final String SETTINGS_FILE_NAME = "fr.bourgmapper.tub.presentation.SETTINGS";
     private static final String SETTINGS_KEY_LAST_CACHE_UPDATE_STOP = "last_cache_update_stop";
@@ -55,7 +58,7 @@ public class StopCacheImpl implements StopCache {
     @Override
     public Observable<StopEntity> get(final String stopId) {
         return Observable.create(emitter -> {
-            final StopEntity stopEntity = this.databaseManager.getStopEntityById(stopId);
+            final StopEntity stopEntity = this.databaseManager.getEntityById(StopEntity.class, stopId);
 
             if (stopEntity != null) {
                 emitter.onNext(stopEntity);
@@ -77,8 +80,17 @@ public class StopCacheImpl implements StopCache {
     }
 
     @Override
+    public void put(Collection<StopEntity> stopEntityList) {
+        if (stopEntityList != null) {
+            for (StopEntity stopEntity : stopEntityList) {
+                this.put(stopEntity);
+            }
+        }
+    }
+
+    @Override
     public boolean isCached(String stopId) {
-        return this.databaseManager.stopEntityExists(stopId);
+        return this.databaseManager.entityExists(StopEntity.class, stopId);
     }
 
     @Override
@@ -97,7 +109,7 @@ public class StopCacheImpl implements StopCache {
 
     @Override
     public void evictAll() {
-        this.executeAsynchronously(new DatabaseEvictor(databaseManager));
+        this.executeAsynchronously(new DatabaseEvictor(databaseManager, StopEntity.class));
     }
 
     /**
