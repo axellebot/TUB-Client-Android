@@ -8,19 +8,19 @@ import java.util.List;
 /**
  * {@link Runnable} class for evicting all the database data
  */
-public class DataBaseWriter implements Runnable {
+public class DatabaseWriter implements Runnable {
 
     private final DatabaseManager databaseManager;
     private final List<BaseModel> entityList;
     private final BaseModel entity;
 
-    public DataBaseWriter(DatabaseManager databaseManager, BaseModel entity) {
+    public DatabaseWriter(DatabaseManager databaseManager, BaseModel entity) {
         this.databaseManager = databaseManager;
         this.entity = entity;
         this.entityList = null;
     }
 
-    public DataBaseWriter(DatabaseManager databaseManager, List<BaseModel> entityList) {
+    public DatabaseWriter(DatabaseManager databaseManager, List<BaseModel> entityList) {
         this.databaseManager = databaseManager;
         this.entity = null;
         this.entityList = entityList;

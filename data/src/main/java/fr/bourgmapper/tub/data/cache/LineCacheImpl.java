@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import fr.bourgmapper.tub.data.cache.serializer.Serializer;
-import fr.bourgmapper.tub.data.database.DataBaseWriter;
+import fr.bourgmapper.tub.data.database.DatabaseWriter;
 import fr.bourgmapper.tub.data.database.DatabaseEvictor;
 import fr.bourgmapper.tub.data.database.DatabaseManager;
 import fr.bourgmapper.tub.data.entity.LineEntity;
@@ -72,7 +72,7 @@ public class LineCacheImpl implements LineCache {
     public void put(LineEntity lineEntity) {
         if (lineEntity != null) {
             if (!isCached(lineEntity.lineId)) {
-                this.executeAsynchronously(new DataBaseWriter(this.databaseManager, lineEntity));
+                this.executeAsynchronously(new DatabaseWriter(this.databaseManager, lineEntity));
                 setLastCacheUpdateTimeMillis();
             }
         }

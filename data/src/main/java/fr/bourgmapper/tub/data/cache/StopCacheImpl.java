@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import fr.bourgmapper.tub.data.cache.serializer.Serializer;
-import fr.bourgmapper.tub.data.database.DataBaseWriter;
+import fr.bourgmapper.tub.data.database.DatabaseWriter;
 import fr.bourgmapper.tub.data.database.DatabaseEvictor;
 import fr.bourgmapper.tub.data.database.DatabaseManager;
 import fr.bourgmapper.tub.data.entity.StopEntity;
@@ -73,7 +73,7 @@ public class StopCacheImpl implements StopCache {
     public void put(StopEntity stopEntity) {
         if (stopEntity != null) {
             if (!isCached(stopEntity.stopId)) {
-                this.executeAsynchronously(new DataBaseWriter(this.databaseManager, stopEntity));
+                this.executeAsynchronously(new DatabaseWriter(this.databaseManager, stopEntity));
                 setLastCacheUpdateTimeMillis();
             }
         }
