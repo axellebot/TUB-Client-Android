@@ -15,6 +15,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 import android.view.View;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -24,11 +26,16 @@ import fr.bourgmapper.tub.presentation.internal.di.components.CoreComponent;
 import fr.bourgmapper.tub.presentation.internal.di.components.DaggerCoreComponent;
 import fr.bourgmapper.tub.presentation.listener.MainNavigationListener;
 import fr.bourgmapper.tub.presentation.navigation.MainNavigator;
+import fr.bourgmapper.tub.presentation.presenter.MainActivityPresenter;
 import fr.bourgmapper.tub.presentation.view.composition.ConnectionDialogModule;
 import fr.bourgmapper.tub.presentation.view.composition.ConnectionDialogModuleImpl;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, MainNavigationListener, HasComponent<CoreComponent> {
     private static final String TAG = "MainActivity";
+
+    @Inject
+    MainActivityPresenter mainActivityPresenter;
+
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
     @BindView(R.id.activity_main_navigation_drawer)
@@ -58,6 +65,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         navigationView.setNavigationItemSelectedListener(this);
 
         navigator.displayHomeMapFragment();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mainActivityPresenter.destroy();
     }
 
     private void initNavigationDrawer() {
@@ -95,9 +108,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         int diff = getStatusBarHeight() - getBottomSheetPosition();
 
         if (diff >= 0) {
-            setStatusBarDim(false);
+            dimStatusBar(false);
         } else {
-            setStatusBarDim(true);
+            dimStatusBar(true);
         }
     }
 
@@ -133,7 +146,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         return menuFloatingActionButtonPositionY;
     }
 
-    private void setStatusBarDim(boolean dim) {
+    private void dimStatusBar(boolean dim) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(
                     dim ? Color.TRANSPARENT : ContextCompat.getColor(this, R.color.colorPrimary)

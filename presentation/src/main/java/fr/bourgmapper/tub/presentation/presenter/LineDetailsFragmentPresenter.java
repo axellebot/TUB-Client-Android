@@ -49,7 +49,6 @@ public class LineDetailsFragmentPresenter implements Presenter {
 
     @Override
     public void destroy() {
-        //this.getLineDetailsUseCase.dispose();//TODO Dispose from Activity
         this.viewDetailsView = null;
     }
 
