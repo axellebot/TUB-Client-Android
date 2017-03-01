@@ -1,7 +1,7 @@
 package fr.bourgmapper.tub.domain;
 
 /**
- * Class that represents a user in the domain layer.
+ * Class that represents a line in the domain layer.
  */
 public class Line {
 

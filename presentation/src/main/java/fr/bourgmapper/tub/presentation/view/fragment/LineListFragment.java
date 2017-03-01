@@ -28,8 +28,10 @@ import fr.bourgmapper.tub.presentation.view.adapter.LineListLayoutManager;
  * Fragment that shows a list of Lines.
  */
 public class LineListFragment extends BaseFragment implements LineListView {
+
     @Inject
     LineListFragmentPresenter lineListFragmentPresenter;
+
     @Inject
     LineListAdapter lineListAdapter;
 

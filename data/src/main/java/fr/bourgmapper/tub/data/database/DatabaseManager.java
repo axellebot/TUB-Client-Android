@@ -3,9 +3,6 @@ package fr.bourgmapper.tub.data.database;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.raizlabs.android.dbflow.config.FlowConfig;
-import com.raizlabs.android.dbflow.config.FlowLog;
-import com.raizlabs.android.dbflow.config.FlowManager;
 import com.raizlabs.android.dbflow.sql.language.Condition;
 import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.raizlabs.android.dbflow.sql.language.NameAlias;
@@ -16,12 +13,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-
-import fr.bourgmapper.tub.data.BuildConfig;
-import fr.bourgmapper.tub.data.entity.CacheDatabase;
-import fr.bourgmapper.tub.data.entity.LineEntity;
-import fr.bourgmapper.tub.data.entity.StopEntity;
-import fr.bourgmapper.tub.domain.Line;
 
 /**
  * Helper class to do operations on database.

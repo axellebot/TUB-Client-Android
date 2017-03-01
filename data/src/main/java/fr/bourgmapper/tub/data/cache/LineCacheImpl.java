@@ -8,9 +8,9 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import fr.bourgmapper.tub.data.cache.serializer.Serializer;
-import fr.bourgmapper.tub.data.database.DatabaseWriter;
 import fr.bourgmapper.tub.data.database.DatabaseEvictor;
 import fr.bourgmapper.tub.data.database.DatabaseManager;
+import fr.bourgmapper.tub.data.database.DatabaseWriter;
 import fr.bourgmapper.tub.data.entity.LineEntity;
 import fr.bourgmapper.tub.data.exception.LineNotFoundException;
 import fr.bourgmapper.tub.data.file.FileManager;
@@ -57,7 +57,7 @@ public class LineCacheImpl implements LineCache {
     @Override
     public Observable<LineEntity> get(final String lineId) {
         return Observable.create(emitter -> {
-            final LineEntity lineEntity = this.databaseManager.getEntityById(LineEntity.class,lineId);
+            final LineEntity lineEntity = this.databaseManager.getEntityById(LineEntity.class, lineId);
 
             if (lineEntity != null) {
                 emitter.onNext(lineEntity);
@@ -80,16 +80,16 @@ public class LineCacheImpl implements LineCache {
 
     @Override
     public void put(Collection<LineEntity> lineEntityList) {
-       if(lineEntityList!= null) {
-           for (LineEntity lineEntity : lineEntityList) {
-               this.put(lineEntity);
-           }
-       }
+        if (lineEntityList != null) {
+            for (LineEntity lineEntity : lineEntityList) {
+                this.put(lineEntity);
+            }
+        }
     }
 
     @Override
     public boolean isCached(String lineId) {
-        return this.databaseManager.entityExists(LineEntity.class,lineId);
+        return this.databaseManager.entityExists(LineEntity.class, lineId);
     }
 
     @Override

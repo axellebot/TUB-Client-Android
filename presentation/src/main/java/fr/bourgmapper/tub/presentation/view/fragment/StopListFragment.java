@@ -27,8 +27,10 @@ import fr.bourgmapper.tub.presentation.view.adapter.StopListLayoutManager;
  * Fragment that shows a list of Stops.
  */
 public class StopListFragment extends BaseFragment implements StopListView {
+
     @Inject
     StopListFragmentPresenter stopListFragmentPresenter;
+
     @Inject
     StopListAdapter stopListAdapter;
 

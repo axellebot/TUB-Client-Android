@@ -1,7 +1,7 @@
 package fr.bourgmapper.tub.domain;
 
 /**
- * Class that represents a user in the domain layer.
+ * Class that represents a stop in the domain layer.
  */
 public class Stop {
 

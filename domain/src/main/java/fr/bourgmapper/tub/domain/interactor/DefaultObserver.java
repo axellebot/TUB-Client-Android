@@ -1,6 +1,5 @@
 package fr.bourgmapper.tub.domain.interactor;
 
-
 import io.reactivex.observers.DisposableObserver;
 
 /**

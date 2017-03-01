@@ -8,9 +8,9 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import fr.bourgmapper.tub.data.cache.serializer.Serializer;
-import fr.bourgmapper.tub.data.database.DatabaseWriter;
 import fr.bourgmapper.tub.data.database.DatabaseEvictor;
 import fr.bourgmapper.tub.data.database.DatabaseManager;
+import fr.bourgmapper.tub.data.database.DatabaseWriter;
 import fr.bourgmapper.tub.data.entity.StopEntity;
 import fr.bourgmapper.tub.data.exception.StopNotFoundException;
 import fr.bourgmapper.tub.data.file.FileManager;
@@ -23,17 +23,14 @@ import io.reactivex.Observable;
  */
 @Singleton
 public class StopCacheImpl implements StopCache {
-    Class<?> ENTITY_CLASS = StopEntity.class;
-
     private static final String SETTINGS_FILE_NAME = "fr.bourgmapper.tub.presentation.SETTINGS";
     private static final String SETTINGS_KEY_LAST_CACHE_UPDATE_STOP = "last_cache_update_stop";
-
     private static final long EXPIRATION_TIME = 60 * 10 * 1000;
-
     private final Context context;
     private final FileManager fileManager;
     private final DatabaseManager databaseManager;
     private final ThreadExecutor threadExecutor;
+    Class<?> ENTITY_CLASS = StopEntity.class;
 
     /**
      * Constructor of the class {@link StopCacheImpl}.

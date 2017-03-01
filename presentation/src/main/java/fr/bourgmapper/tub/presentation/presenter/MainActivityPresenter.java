@@ -7,10 +7,6 @@ import fr.bourgmapper.tub.domain.interactor.GetLineList;
 import fr.bourgmapper.tub.domain.interactor.GetStopDetails;
 import fr.bourgmapper.tub.domain.interactor.GetStopList;
 
-/**
- * Created by axell on 01/03/2017.
- */
-
 public class MainActivityPresenter implements Presenter {
 
     private final GetLineList getLineListUseCase;
