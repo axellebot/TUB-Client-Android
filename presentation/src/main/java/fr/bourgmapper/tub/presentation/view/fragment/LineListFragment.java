@@ -19,7 +19,7 @@ import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.presentation.internal.di.components.CoreComponent;
 import fr.bourgmapper.tub.presentation.listener.LineListListener;
 import fr.bourgmapper.tub.presentation.model.LineModel;
-import fr.bourgmapper.tub.presentation.presenter.LineListPresenter;
+import fr.bourgmapper.tub.presentation.presenter.LineListFragmentPresenter;
 import fr.bourgmapper.tub.presentation.view.LineListView;
 import fr.bourgmapper.tub.presentation.view.adapter.LineListAdapter;
 import fr.bourgmapper.tub.presentation.view.adapter.LineListLayoutManager;
@@ -29,7 +29,7 @@ import fr.bourgmapper.tub.presentation.view.adapter.LineListLayoutManager;
  */
 public class LineListFragment extends BaseFragment implements LineListView {
     @Inject
-    LineListPresenter lineListPresenter;
+    LineListFragmentPresenter lineListFragmentPresenter;
     @Inject
     LineListAdapter lineListAdapter;
 
@@ -41,8 +41,8 @@ public class LineListFragment extends BaseFragment implements LineListView {
             new LineListAdapter.OnItemClickListener() {
                 @Override
                 public void onLineItemClicked(LineModel lineModel) {
-                    if (LineListFragment.this.lineListPresenter != null && lineModel != null) {
-                        LineListFragment.this.lineListPresenter.onLineClicked(lineModel);
+                    if (LineListFragment.this.lineListFragmentPresenter != null && lineModel != null) {
+                        LineListFragment.this.lineListFragmentPresenter.onLineClicked(lineModel);
                     }
                 }
             };
@@ -77,7 +77,7 @@ public class LineListFragment extends BaseFragment implements LineListView {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        this.lineListPresenter.setView(this);
+        this.lineListFragmentPresenter.setView(this);
         if (savedInstanceState == null) {
             this.loadLineList();
         }
@@ -86,13 +86,13 @@ public class LineListFragment extends BaseFragment implements LineListView {
     @Override
     public void onResume() {
         super.onResume();
-        this.lineListPresenter.resume();
+        this.lineListFragmentPresenter.resume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        this.lineListPresenter.pause();
+        this.lineListFragmentPresenter.pause();
     }
 
     @Override
@@ -104,7 +104,7 @@ public class LineListFragment extends BaseFragment implements LineListView {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        this.lineListPresenter.destroy();
+        this.lineListFragmentPresenter.destroy();
     }
 
     @Override
@@ -167,7 +167,7 @@ public class LineListFragment extends BaseFragment implements LineListView {
      * Loads all lines.
      */
     private void loadLineList() {
-        this.lineListPresenter.initialize();
+        this.lineListFragmentPresenter.initialize();
     }
 
     //TODO : Bind retry Button

@@ -18,7 +18,7 @@ import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.presentation.internal.di.components.CoreComponent;
 import fr.bourgmapper.tub.presentation.listener.StopListListener;
 import fr.bourgmapper.tub.presentation.model.StopModel;
-import fr.bourgmapper.tub.presentation.presenter.StopListPresenter;
+import fr.bourgmapper.tub.presentation.presenter.StopListFragmentPresenter;
 import fr.bourgmapper.tub.presentation.view.StopListView;
 import fr.bourgmapper.tub.presentation.view.adapter.StopListAdapter;
 import fr.bourgmapper.tub.presentation.view.adapter.StopListLayoutManager;
@@ -28,7 +28,7 @@ import fr.bourgmapper.tub.presentation.view.adapter.StopListLayoutManager;
  */
 public class StopListFragment extends BaseFragment implements StopListView {
     @Inject
-    StopListPresenter stopListPresenter;
+    StopListFragmentPresenter stopListFragmentPresenter;
     @Inject
     StopListAdapter stopListAdapter;
 
@@ -40,8 +40,8 @@ public class StopListFragment extends BaseFragment implements StopListView {
             new StopListAdapter.OnItemClickListener() {
                 @Override
                 public void onStopItemClicked(StopModel stopModel) {
-                    if (StopListFragment.this.stopListPresenter != null && stopModel != null) {
-                        StopListFragment.this.stopListPresenter.onStopClicked(stopModel);
+                    if (StopListFragment.this.stopListFragmentPresenter != null && stopModel != null) {
+                        StopListFragment.this.stopListFragmentPresenter.onStopClicked(stopModel);
                     }
                 }
             };
@@ -76,7 +76,7 @@ public class StopListFragment extends BaseFragment implements StopListView {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        this.stopListPresenter.setView(this);
+        this.stopListFragmentPresenter.setView(this);
         if (savedInstanceState == null) {
             this.loadStopList();
         }
@@ -85,13 +85,13 @@ public class StopListFragment extends BaseFragment implements StopListView {
     @Override
     public void onResume() {
         super.onResume();
-        this.stopListPresenter.resume();
+        this.stopListFragmentPresenter.resume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        this.stopListPresenter.pause();
+        this.stopListFragmentPresenter.pause();
     }
 
     @Override
@@ -103,7 +103,7 @@ public class StopListFragment extends BaseFragment implements StopListView {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        this.stopListPresenter.destroy();
+        this.stopListFragmentPresenter.destroy();
     }
 
     @Override
@@ -166,7 +166,7 @@ public class StopListFragment extends BaseFragment implements StopListView {
      * Loads all stops.
      */
     private void loadStopList() {
-        this.stopListPresenter.initialize();
+        this.stopListFragmentPresenter.initialize();
     }
 
     //TODO : Bind retry Button

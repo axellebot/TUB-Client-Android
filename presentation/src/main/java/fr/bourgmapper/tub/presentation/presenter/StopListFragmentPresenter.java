@@ -23,8 +23,8 @@ import fr.bourgmapper.tub.presentation.view.StopListView;
  * layer.
  */
 @PerActivity
-public class StopListPresenter implements Presenter {
-    private static String TAG = "StopListPresenter";
+public class StopListFragmentPresenter implements Presenter {
+    private static String TAG = "StopListFragmentPresenter";
 
     private final GetStopList getStopListUseCase;
     private final StopModelDataMapper stopModelDataMapper;
@@ -32,7 +32,7 @@ public class StopListPresenter implements Presenter {
     private StopListView stopListView;
 
     @Inject
-    StopListPresenter(GetStopList getStopListUseCase, StopModelDataMapper stopModelDataMapper) {
+    StopListFragmentPresenter(GetStopList getStopListUseCase, StopModelDataMapper stopModelDataMapper) {
         this.getStopListUseCase = getStopListUseCase;
         this.stopModelDataMapper = stopModelDataMapper;
     }
@@ -113,19 +113,19 @@ public class StopListPresenter implements Presenter {
 
         @Override
         public void onComplete() {
-            StopListPresenter.this.hideViewLoadingStopList();
+            StopListFragmentPresenter.this.hideViewLoadingStopList();
         }
 
         @Override
         public void onError(Throwable e) {
-            StopListPresenter.this.hideViewLoadingStopList();
-            StopListPresenter.this.showErrorMessageStopList(new DefaultErrorBundle((Exception) e));
-            StopListPresenter.this.showViewRetryStopList();
+            StopListFragmentPresenter.this.hideViewLoadingStopList();
+            StopListFragmentPresenter.this.showErrorMessageStopList(new DefaultErrorBundle((Exception) e));
+            StopListFragmentPresenter.this.showViewRetryStopList();
         }
 
         @Override
         public void onNext(List<Stop> stops) {
-            StopListPresenter.this.showStopsCollectionInView(stops);
+            StopListFragmentPresenter.this.showStopsCollectionInView(stops);
         }
     }
 }

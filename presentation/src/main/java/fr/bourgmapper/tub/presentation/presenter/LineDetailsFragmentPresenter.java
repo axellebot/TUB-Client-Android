@@ -21,7 +21,7 @@ import fr.bourgmapper.tub.presentation.view.LineDetailsView;
  * layer.
  */
 @PerActivity
-public class LineDetailsPresenter implements Presenter {
+public class LineDetailsFragmentPresenter implements Presenter {
     private static String TAG = "LineDetailPresenter";
 
     private final GetLineDetails getLineDetailsUseCase;
@@ -29,8 +29,8 @@ public class LineDetailsPresenter implements Presenter {
     private LineDetailsView viewDetailsView;
 
     @Inject
-    LineDetailsPresenter(GetLineDetails getLineDetailsUseCase,
-                         LineModelDataMapper lineModelDataMapper) {
+    LineDetailsFragmentPresenter(GetLineDetails getLineDetailsUseCase,
+                                 LineModelDataMapper lineModelDataMapper) {
         this.getLineDetailsUseCase = getLineDetailsUseCase;
         this.lineModelDataMapper = lineModelDataMapper;
     }
@@ -98,19 +98,19 @@ public class LineDetailsPresenter implements Presenter {
 
         @Override
         public void onComplete() {
-            LineDetailsPresenter.this.hideViewLoadingLineDetails();
+            LineDetailsFragmentPresenter.this.hideViewLoadingLineDetails();
         }
 
         @Override
         public void onError(Throwable e) {
-            LineDetailsPresenter.this.hideViewLoadingLineDetails();
-            LineDetailsPresenter.this.showErrorLineDetailsMessage(new DefaultErrorBundle((Exception) e));
-            LineDetailsPresenter.this.showViewRetryLineDetails();
+            LineDetailsFragmentPresenter.this.hideViewLoadingLineDetails();
+            LineDetailsFragmentPresenter.this.showErrorLineDetailsMessage(new DefaultErrorBundle((Exception) e));
+            LineDetailsFragmentPresenter.this.showViewRetryLineDetails();
         }
 
         @Override
         public void onNext(Line line) {
-            LineDetailsPresenter.this.showLineDetailsInView(line);
+            LineDetailsFragmentPresenter.this.showLineDetailsInView(line);
         }
     }
 }

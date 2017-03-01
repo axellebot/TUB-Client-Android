@@ -31,12 +31,12 @@ import fr.bourgmapper.tub.presentation.listener.LineListListener;
 import fr.bourgmapper.tub.presentation.listener.StopListListener;
 import fr.bourgmapper.tub.presentation.model.LineModel;
 import fr.bourgmapper.tub.presentation.model.StopModel;
-import fr.bourgmapper.tub.presentation.presenter.MapPresenter;
+import fr.bourgmapper.tub.presentation.presenter.MapFragmentPresenter;
 import fr.bourgmapper.tub.presentation.view.MainMapView;
 
 public class MapFragment extends BaseFragment implements OnMapReadyCallback, MainMapView {
     @Inject
-    MapPresenter mapPresenter;
+    MapFragmentPresenter mapFragmentPresenter;
 
     @BindView(R.id.fragment_map_map_view)
     MapView mMapView;
@@ -85,7 +85,7 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, Mai
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        this.mapPresenter.setView(this);
+        this.mapFragmentPresenter.setView(this);
         if (savedInstanceState == null) {
             //load things
         }
@@ -94,13 +94,13 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, Mai
     @Override
     public void onResume() {
         super.onResume();
-        this.mapPresenter.resume();
+        this.mapFragmentPresenter.resume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        this.mapPresenter.pause();
+        this.mapFragmentPresenter.pause();
     }
 
     @Override
@@ -112,7 +112,7 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, Mai
     @Override
     public void onDestroy() {
         super.onDestroy();
-        this.mapPresenter.destroy();
+        this.mapFragmentPresenter.destroy();
     }
 
     @Override
@@ -215,7 +215,7 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, Mai
      * Loads map.
      */
     private void loadMap() {
-        this.mapPresenter.initialize();
+        this.mapFragmentPresenter.initialize();
     }
 
     //-----------------------------------------------

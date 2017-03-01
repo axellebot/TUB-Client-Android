@@ -31,8 +31,8 @@ import fr.bourgmapper.tub.presentation.view.MainMapView;
  * layer.
  */
 @PerActivity
-public class MapPresenter implements Presenter {
-    private static String TAG = "MapPresenter";
+public class MapFragmentPresenter implements Presenter {
+    private static String TAG = "MapFragmentPresenter";
 
     private final GetLineList getLineListUseCase;
     private final GetLineDetails getLineDetailsUseCase;
@@ -45,9 +45,9 @@ public class MapPresenter implements Presenter {
     private MainMapView mainMapView;
 
     @Inject
-    MapPresenter(GetLineList getLineListUseCase, GetLineDetails getLineDetailsUseCase,
-                 GetStopList getStopListUseCase, GetStopDetails getStopDetailsUseCase,
-                 LineModelDataMapper lineModelDataMapper, StopModelDataMapper stopModelDataMapper) {
+    MapFragmentPresenter(GetLineList getLineListUseCase, GetLineDetails getLineDetailsUseCase,
+                         GetStopList getStopListUseCase, GetStopDetails getStopDetailsUseCase,
+                         LineModelDataMapper lineModelDataMapper, StopModelDataMapper stopModelDataMapper) {
         this.getLineListUseCase = getLineListUseCase;
         this.getLineDetailsUseCase = getLineDetailsUseCase;
         this.lineModelDataMapper = lineModelDataMapper;
@@ -178,19 +178,19 @@ public class MapPresenter implements Presenter {
 
         @Override
         public void onComplete() {
-            MapPresenter.this.hideViewLoadingStopList();
+            MapFragmentPresenter.this.hideViewLoadingStopList();
         }
 
         @Override
         public void onError(Throwable e) {
-            MapPresenter.this.hideViewLoadingStopList();
-            MapPresenter.this.showErrorMessageStopList(new DefaultErrorBundle((Exception) e));
-            MapPresenter.this.showViewRetryStopList();
+            MapFragmentPresenter.this.hideViewLoadingStopList();
+            MapFragmentPresenter.this.showErrorMessageStopList(new DefaultErrorBundle((Exception) e));
+            MapFragmentPresenter.this.showViewRetryStopList();
         }
 
         @Override
         public void onNext(List<Stop> stops) {
-            MapPresenter.this.showStopsCollectionInView(stops);
+            MapFragmentPresenter.this.showStopsCollectionInView(stops);
         }
     }
 
@@ -198,19 +198,19 @@ public class MapPresenter implements Presenter {
 
         @Override
         public void onComplete() {
-            MapPresenter.this.hideViewLoadingLineList();
+            MapFragmentPresenter.this.hideViewLoadingLineList();
         }
 
         @Override
         public void onError(Throwable e) {
-            MapPresenter.this.hideViewLoadingLineList();
-            MapPresenter.this.showErrorMessageLineList(new DefaultErrorBundle((Exception) e));
-            MapPresenter.this.showViewRetryLineList();
+            MapFragmentPresenter.this.hideViewLoadingLineList();
+            MapFragmentPresenter.this.showErrorMessageLineList(new DefaultErrorBundle((Exception) e));
+            MapFragmentPresenter.this.showViewRetryLineList();
         }
 
         @Override
         public void onNext(List<Line> lines) {
-            MapPresenter.this.showLinesCollectionInView(lines);
+            MapFragmentPresenter.this.showLinesCollectionInView(lines);
         }
     }
 }

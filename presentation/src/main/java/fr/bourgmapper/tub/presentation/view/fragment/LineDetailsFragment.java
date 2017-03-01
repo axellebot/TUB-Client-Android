@@ -19,14 +19,14 @@ import butterknife.ButterKnife;
 import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.presentation.internal.di.components.CoreComponent;
 import fr.bourgmapper.tub.presentation.model.LineModel;
-import fr.bourgmapper.tub.presentation.presenter.LineDetailsPresenter;
+import fr.bourgmapper.tub.presentation.presenter.LineDetailsFragmentPresenter;
 import fr.bourgmapper.tub.presentation.view.LineDetailsView;
 
 public class LineDetailsFragment extends BaseFragment implements LineDetailsView {
     private static final String PARAM_LINE_ID = "param_line_id";
 
     @Inject
-    LineDetailsPresenter lineDetailsPresenter;
+    LineDetailsFragmentPresenter lineDetailsFragmentPresenter;
 
     @BindView(R.id.fragment_line_detail_layout)
     LinearLayoutCompat linearLayout;
@@ -66,7 +66,7 @@ public class LineDetailsFragment extends BaseFragment implements LineDetailsView
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        this.lineDetailsPresenter.setView(this);
+        this.lineDetailsFragmentPresenter.setView(this);
         if (savedInstanceState == null) {
             this.loadLineDetails();
         }
@@ -75,13 +75,13 @@ public class LineDetailsFragment extends BaseFragment implements LineDetailsView
     @Override
     public void onResume() {
         super.onResume();
-        this.lineDetailsPresenter.resume();
+        this.lineDetailsFragmentPresenter.resume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        this.lineDetailsPresenter.pause();
+        this.lineDetailsFragmentPresenter.pause();
     }
 
     @Override
@@ -92,7 +92,7 @@ public class LineDetailsFragment extends BaseFragment implements LineDetailsView
     @Override
     public void onDestroy() {
         super.onDestroy();
-        this.lineDetailsPresenter.destroy();
+        this.lineDetailsFragmentPresenter.destroy();
     }
 
     public void renderLine(LineModel line) {
@@ -139,8 +139,8 @@ public class LineDetailsFragment extends BaseFragment implements LineDetailsView
      * Load line details.
      */
     private void loadLineDetails() {
-        if (this.lineDetailsPresenter != null) {
-            this.lineDetailsPresenter.initialize(currentLineId());
+        if (this.lineDetailsFragmentPresenter != null) {
+            this.lineDetailsFragmentPresenter.initialize(currentLineId());
         }
     }
 

@@ -23,8 +23,8 @@ import fr.bourgmapper.tub.presentation.view.LineListView;
  * layer.
  */
 @PerActivity
-public class LineListPresenter implements Presenter {
-    private static String TAG = "LineListPresenter";
+public class LineListFragmentPresenter implements Presenter {
+    private static String TAG = "LineListFragmentPresenter";
 
     private final GetLineList getLineListUseCase;
     private final LineModelDataMapper lineModelDataMapper;
@@ -32,7 +32,7 @@ public class LineListPresenter implements Presenter {
     private LineListView lineListView;
 
     @Inject
-    LineListPresenter(GetLineList getLineListUseCase, LineModelDataMapper lineModelDataMapper) {
+    LineListFragmentPresenter(GetLineList getLineListUseCase, LineModelDataMapper lineModelDataMapper) {
         this.getLineListUseCase = getLineListUseCase;
         this.lineModelDataMapper = lineModelDataMapper;
     }
@@ -113,19 +113,19 @@ public class LineListPresenter implements Presenter {
 
         @Override
         public void onComplete() {
-            LineListPresenter.this.hideViewLoadingLineList();
+            LineListFragmentPresenter.this.hideViewLoadingLineList();
         }
 
         @Override
         public void onError(Throwable e) {
-            LineListPresenter.this.hideViewLoadingLineList();
-            LineListPresenter.this.showErrorLineListMessage(new DefaultErrorBundle((Exception) e));
-            LineListPresenter.this.showViewRetryLineList();
+            LineListFragmentPresenter.this.hideViewLoadingLineList();
+            LineListFragmentPresenter.this.showErrorLineListMessage(new DefaultErrorBundle((Exception) e));
+            LineListFragmentPresenter.this.showViewRetryLineList();
         }
 
         @Override
         public void onNext(List<Line> lines) {
-            LineListPresenter.this.showLinesCollectionInView(lines);
+            LineListFragmentPresenter.this.showLinesCollectionInView(lines);
         }
     }
 }
