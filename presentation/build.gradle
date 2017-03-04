@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")
@@ -68,10 +67,10 @@ dependencies {
     compile project(':data')
 
     //Libraries
-    apt presentationDependencies.daggerCompiler
+    annotationProcessor presentationDependencies.daggerCompiler
     compile presentationDependencies.dagger
     annotationProcessor presentationDependencies.butterKnifeCompiler
-    apt presentationDependencies.butterKnifeCompiler
+    annotationProcessor presentationDependencies.butterKnifeCompiler
     compile presentationDependencies.butterKnife
     compile presentationDependencies.cardView
     compile presentationDependencies.recyclerView
@@ -85,9 +84,6 @@ dependencies {
     provided presentationDependencies.javaxAnnotation
     compile presentationDependencies.playServices
     compile presentationDependencies.androidMapUtils
-    annotationProcessor presentationDependencies.dbFlowProcessor
-    compile presentationDependencies.dbFlowCore
-    compile presentationDependencies.dbFlow
     compile presentationDependencies.multidex
 
     //Testing

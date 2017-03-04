@@ -3,90 +3,82 @@ package fr.bourgmapper.tub.data.database;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.raizlabs.android.dbflow.sql.language.Condition;
-import com.raizlabs.android.dbflow.sql.language.Delete;
-import com.raizlabs.android.dbflow.sql.language.NameAlias;
-import com.raizlabs.android.dbflow.sql.language.SQLite;
-import com.raizlabs.android.dbflow.structure.BaseModel;
+import org.greenrobot.greendao.AbstractDao;
+import org.greenrobot.greendao.database.Database;
 
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import fr.bourgmapper.tub.data.entity.DaoMaster;
+import fr.bourgmapper.tub.data.entity.DaoMaster.DevOpenHelper;
+import fr.bourgmapper.tub.data.entity.DaoSession;
+
 /**
  * Helper class to do operations on database.
  */
 @Singleton
 public class DatabaseManager {
+    private DaoSession daoSession;
 
     @Inject
     DatabaseManager(Context context) {
+        DevOpenHelper helper = new DevOpenHelper(context, "tub-db");
+        Database db = helper.getWritableDb();
+        DaoSession daoSession = new DaoMaster(db).newSession();
     }
 
     /***************************
      * SELECT
      **************************/
 
-    public <TModel> TModel getEntityById(Class<TModel> table, String id) {
-        Condition columnId = Condition.column(NameAlias.builder("id").build());
-        return
-                SQLite.select()
-                        .from(table)
-                        .where(columnId.is(id))
-                        .querySingle();
+    public <T> List<?> getEntityList(Class<T> entityClass) {
+        return this.getDao(entityClass).loadAll();
     }
 
-    public <TModel> List<TModel> getEntityList(Class<TModel> table) {
-        return
-                SQLite.select()
-                        .from(table)
-                        .queryList();
+    public <T> Object getEntityById(Class<T> entityClass, int id) {
+        return this.getDao(entityClass).loadByRowId(id);
     }
 
     /***************************
      * SAVE
      **************************/
-    public void saveEntityList(@NonNull List<BaseModel> entityList) {
-        for (BaseModel entity : entityList) {
-            saveEntity(entity);
+    public void saveEntityList(@NonNull List<Object> entityList) {
+        for (Object entity : entityList) {
+            this.saveEntity(entity);
         }
     }
 
-    public void saveEntity(@NonNull BaseModel entity) {
-        entity.save();
+    public  <?> void saveEntity(<? extends Object> entity) {
+        getDao(entity. getClass()).save(entity);
     }
 
     /***************************
      * DELETE
      **************************/
-    public void deleteEntityList(@NonNull List<BaseModel> entityList) {
-        for (BaseModel entity : entityList) {
+    public void deleteEntityList(@NonNull List<Object> entityList) {
+        for (Object entity : entityList) {
             this.deleteEntity(entity);
         }
     }
 
-    public void deleteEntity(@NonNull BaseModel baseEntity) {
-        baseEntity.delete();
+    public void deleteEntity(@NonNull Object entity) {
+        this.getDao(entity.getClass()).delete(entity);
     }
 
     /**
      * Deletes the specified table
      *
-     * @param table    The table to delete
-     * @param <TModel> The class that implements {@link BaseModel}
+     * @param entityClass The entity to delete
+     * @param <T>         The class that implements
      */
-    public <TModel> void clearTable(Class<TModel> table) {
-        Delete.table(table);
+    public <T> void clearTable(Class<T> entityClass) {
+        .thisgetDao(entityClass).deleteAll();
     }
 
-    /**
-     * @param table
-     * @param id
-     * @return
-     */
-    public <TModel> boolean entityExists(Class<TModel> table, String id) {
-        BaseModel baseEntity = (BaseModel) getEntityById(table, id);
-        return baseEntity.exists();
+
+    private AbstractDao<?, ?> getDao(Class<? extends Object> entityClass) {
+        return daoSession.getDao(entityClass);
     }
 }

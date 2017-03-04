@@ -8,8 +8,8 @@ buildscript {
 }
 
 apply plugin: 'com.android.library'
-apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'org.greenrobot.greendao'
 
 android {
     defaultPublishConfig "debug"
@@ -66,9 +66,7 @@ dependencies {
     compile dataDependencies.retrofit
     compile dataDependencies.retrofitRx
     compile dataDependencies.retrofitGson
-    annotationProcessor dataDependencies.dbFlowProcessor
-    compile dataDependencies.dbFlowCore
-    compile dataDependencies.dbFlow
+    compile dataDependencies.greenDao
 
     //Testing
     testCompile testDependencies.junit

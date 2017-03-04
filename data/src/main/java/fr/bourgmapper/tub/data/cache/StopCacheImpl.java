@@ -86,7 +86,7 @@ public class StopCacheImpl implements StopCache {
     }
 
     @Override
-    public boolean isCached(String stopId) {
+    public boolean isCached(long stopId) {
         return this.databaseManager.entityExists(StopEntity.class, stopId);
     }
 

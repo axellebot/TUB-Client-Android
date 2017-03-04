@@ -36,7 +36,7 @@ public interface LineCache {
      * @param lineId The stopId used to look for inside the cache.
      * @return true if the element is cached, otherwise false.
      */
-    boolean isCached(final String lineId);
+    boolean isCached(final long lineId);
 
     /**
      * Checks if the cache is expired.

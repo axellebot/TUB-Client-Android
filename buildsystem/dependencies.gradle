@@ -11,6 +11,7 @@ ext {
     androidTargetSdkVersion = 25
     androidCompileSdkVersion = 25
     multiDexEnabled = true
+    targetModuleName = "DBFlowModule"
 
     //Libraries
     daggerVersion = '2.8'
@@ -33,7 +34,7 @@ ext {
     playServicesVersion = '9.6.0'
     androidMapsUtilsVersion = '0.4+'
     retrofitVersion = '2.2.0'
-    dbFlowVersion = '4.0.0-beta5'
+    greenDaoVersion = '3.2.0'
     multidexVersion = '1.0.1'
 
     //Testing
@@ -65,9 +66,6 @@ ext {
             javaxAnnotation    : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
             playServices       : "com.google.android.gms:play-services:${playServicesVersion}",
             androidMapUtils    : "com.google.maps.android:android-maps-utils:${androidMapsUtilsVersion}",
-            dbFlowProcessor    : "com.github.Raizlabs.DBFlow:dbflow-processor:${dbFlowVersion}",
-            dbFlowCore         : "com.github.Raizlabs.DBFlow:dbflow-core:${dbFlowVersion}",
-            dbFlow             : "com.github.Raizlabs.DBFlow:dbflow:${dbFlowVersion}",
             multidex           : "com.android.support:multidex:${multidexVersion}"
     ]
 
@@ -106,9 +104,7 @@ ext {
             retrofit          : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
             retrofitRx        : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
             retrofitGson      : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
-            dbFlowProcessor   : "com.github.Raizlabs.DBFlow:dbflow-processor:${dbFlowVersion}",
-            dbFlowCore        : "com.github.Raizlabs.DBFlow:dbflow-core:${dbFlowVersion}",
-            dbFlow            : "com.github.Raizlabs.DBFlow:dbflow:${dbFlowVersion}"
+            greenDao          : "org.greenrobot:greendao:${greenDaoVersion}",
     ]
 
     dataTestDependencies = [

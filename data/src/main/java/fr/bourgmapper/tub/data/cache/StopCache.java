@@ -37,7 +37,7 @@ public interface StopCache {
      * @param stopId The stopId used to look for inside the cache.
      * @return true if the element is cached, otherwise false.
      */
-    boolean isCached(final String stopId);
+    boolean isCached(final long stopId);
 
     /**
      * Checks if the cache is expired.

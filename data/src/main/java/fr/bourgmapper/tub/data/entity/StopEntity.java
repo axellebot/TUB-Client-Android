@@ -1,32 +1,76 @@
 package fr.bourgmapper.tub.data.entity;
 
 import com.google.gson.annotations.SerializedName;
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
-import com.raizlabs.android.dbflow.structure.BaseModel;
 
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.NotNull;
+import org.greenrobot.greendao.annotation.Generated;
 /**
  * Stop Entity used in the data layer.
  */
-@Table(name = StopEntity.TABLE_NAME, database = CacheDatabase.class)
-public class StopEntity extends BaseModel {
+@Entity
+public class StopEntity {
     public static final String TABLE_NAME = "Stops";
 
     @SerializedName("id")
-    @Column
-    @PrimaryKey
-    public String stopId;
+    @Id
+    public long stopId;
 
     @SerializedName("label")
-    @Column
+    @NotNull
     public String label;
 
     @SerializedName("latitude")
-    @Column
+    @NotNull
     public String latitude;
 
     @SerializedName("longitude")
-    @Column
+    @NotNull
     public String longitude;
+
+    @Generated(hash = 1062982251)
+    public StopEntity(int stopId, @NotNull String label,
+                      @NotNull String latitude, @NotNull String longitude) {
+        this.stopId = stopId;
+        this.label = label;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    @Generated(hash = 779355278)
+    public StopEntity() {
+    }
+
+    public long getStopId() {
+        return this.stopId;
+    }
+
+    public void setStopId(long stopId) {
+        this.stopId = stopId;
+    }
+
+    public String getLabel() {
+        return this.label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public String getLatitude() {
+        return this.latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return this.longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
 }

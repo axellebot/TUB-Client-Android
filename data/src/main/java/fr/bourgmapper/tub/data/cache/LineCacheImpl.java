@@ -88,7 +88,7 @@ public class LineCacheImpl implements LineCache {
     }
 
     @Override
-    public boolean isCached(String lineId) {
+    public boolean isCached(long lineId) {
         return this.databaseManager.entityExists(LineEntity.class, lineId);
     }
 
