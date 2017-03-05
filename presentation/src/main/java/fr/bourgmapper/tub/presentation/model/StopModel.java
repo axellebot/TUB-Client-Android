@@ -5,20 +5,20 @@ package fr.bourgmapper.tub.presentation.model;
  */
 public class StopModel {
 
-    private String id;
+    private long id;
     private String label;
     private String latitude;
     private String longitude;
 
-    public StopModel(String id) {
+    public StopModel(long id) {
         this.id = id;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 

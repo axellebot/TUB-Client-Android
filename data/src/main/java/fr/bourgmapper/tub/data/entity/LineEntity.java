@@ -38,9 +38,9 @@ public class LineEntity {
     @NotNull
     public String kmlPath;
 
-    @Generated(hash = 1886063558)
-    public LineEntity(int lineId, @NotNull String number, @NotNull String label,
-                      @NotNull String color, @NotNull String order, @NotNull String kmlPath) {
+    @Generated(hash = 563371638)
+    public LineEntity(long lineId, @NotNull String number, @NotNull String label,
+            @NotNull String color, @NotNull String order, @NotNull String kmlPath) {
         this.lineId = lineId;
         this.number = number;
         this.label = label;

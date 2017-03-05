@@ -29,9 +29,9 @@ public class StopEntity {
     @NotNull
     public String longitude;
 
-    @Generated(hash = 1062982251)
-    public StopEntity(int stopId, @NotNull String label,
-                      @NotNull String latitude, @NotNull String longitude) {
+    @Generated(hash = 3792568)
+    public StopEntity(long stopId, @NotNull String label, @NotNull String latitude,
+            @NotNull String longitude) {
         this.stopId = stopId;
         this.label = label;
         this.latitude = latitude;

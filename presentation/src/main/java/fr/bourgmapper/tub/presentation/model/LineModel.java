@@ -5,21 +5,21 @@ package fr.bourgmapper.tub.presentation.model;
  */
 public class LineModel {
 
-    private String id;
+    private long id;
     private String number;
     private String label;
     private String color;
     private String kmlPath;
 
-    public LineModel(String id) {
+    public LineModel(long id) {
         this.id = id;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 

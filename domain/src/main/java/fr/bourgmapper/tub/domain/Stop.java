@@ -5,16 +5,16 @@ package fr.bourgmapper.tub.domain;
  */
 public class Stop {
 
-    private final String stopId;
+    private final long stopId;
     private String label;
     private String latitude;
     private String longitude;
 
-    public Stop(String stopId) {
+    public Stop(long stopId) {
         this.stopId = stopId;
     }
 
-    public String getStopId() {
+    public long getStopId() {
         return stopId;
     }
 

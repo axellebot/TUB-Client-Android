@@ -14,6 +14,8 @@ import javax.inject.Singleton;
 import fr.bourgmapper.tub.data.entity.DaoMaster;
 import fr.bourgmapper.tub.data.entity.DaoMaster.DevOpenHelper;
 import fr.bourgmapper.tub.data.entity.DaoSession;
+import fr.bourgmapper.tub.data.entity.LineEntity;
+import fr.bourgmapper.tub.data.entity.StopEntity;
 
 /**
  * Helper class to do operations on database.
@@ -26,7 +28,7 @@ public class DatabaseManager {
     DatabaseManager(Context context) {
         DevOpenHelper helper = new DevOpenHelper(context, "tub-db");
         Database db = helper.getWritableDb();
-        DaoSession daoSession = new DaoMaster(db).newSession();
+        this.daoSession = new DaoMaster(db).newSession();
     }
 
     /***************************
@@ -50,8 +52,12 @@ public class DatabaseManager {
         }
     }
 
-    public  <?> void saveEntity(<? extends Object> entity) {
-        getDao(entity. getClass()).save(entity);
+    public void saveEntity(@NonNull Object entity) {
+        if (entity instanceof LineEntity) {
+            this.daoSession.getLineEntityDao().delete((LineEntity) entity);
+        } else if (entity instanceof StopEntity) {
+            this.daoSession.getStopEntityDao().delete((StopEntity) entity);
+        }
     }
 
     /***************************
@@ -64,7 +70,11 @@ public class DatabaseManager {
     }
 
     public void deleteEntity(@NonNull Object entity) {
-        this.getDao(entity.getClass()).delete(entity);
+        if (entity instanceof LineEntity) {
+            this.daoSession.getLineEntityDao().delete((LineEntity) entity);
+        } else if (entity instanceof StopEntity) {
+            this.daoSession.getStopEntityDao().delete((StopEntity) entity);
+        }
     }
 
     /**
@@ -74,7 +84,7 @@ public class DatabaseManager {
      * @param <T>         The class that implements
      */
     public <T> void clearTable(Class<T> entityClass) {
-        .thisgetDao(entityClass).deleteAll();
+        this.getDao(entityClass).deleteAll();
     }
 
 
