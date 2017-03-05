@@ -141,4 +141,4 @@ hs_err_pid*
 
 ### Custom ###
 .idea
-/app/src/main/res/values/secrets.xml
+!/gradle
