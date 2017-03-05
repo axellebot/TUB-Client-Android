@@ -48,7 +48,7 @@ public class RestApiImpl implements RestApi {
     }
 
     @Override
-    public Observable<LineEntity> lineEntityById(String lineId) {
+    public Observable<LineEntity> lineEntityById(long lineId) {
         return apiService.getLine(lineId).map(new Function<LineEnveloppe, LineEntity>() {
             @Override
             public LineEntity apply(LineEnveloppe lineEnveloppe) {
@@ -68,7 +68,7 @@ public class RestApiImpl implements RestApi {
     }
 
     @Override
-    public Observable<StopEntity> stopEntityById(String stopId) {
+    public Observable<StopEntity> stopEntityById(long stopId) {
         return apiService.getStop(stopId).map(new Function<StopEnveloppe, StopEntity>() {
             @Override
             public StopEntity apply(StopEnveloppe stopEnveloppe) {
@@ -83,13 +83,13 @@ public class RestApiImpl implements RestApi {
         Observable<LineListEnveloppe> getAllLines();
 
         @GET(API_URL_GET_LINE_DETAILS)
-        Observable<LineEnveloppe> getLine(@Path("line_id") String line_id);
+        Observable<LineEnveloppe> getLine(@Path("line_id") long line_id);
 
         @GET(API_URL_GET_STOP_LIST)
         Observable<StopListEnveloppe> getAllStops();
 
         @GET(API_URL_GET_STOP_DETAILS)
-        Observable<StopEnveloppe> getStop(@Path("stop_id") String stop_id);
+        Observable<StopEnveloppe> getStop(@Path("stop_id") long stop_id);
     }
 
     private class LineListEnveloppe {

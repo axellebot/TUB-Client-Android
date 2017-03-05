@@ -19,5 +19,5 @@ public interface LineRepository {
      *
      * @param lineId The user id used to retrieve user data.
      */
-    Observable<Line> line(final String lineId);
+    Observable<Line> line(final long lineId);
 }

@@ -41,7 +41,7 @@ public class LineDataRepository implements LineRepository {
     }
 
     @Override
-    public Observable<Line> line(String lineId) {
+    public Observable<Line> line(long lineId) {
         //TODO : Enable LineDataStore cache after fixing DBFlow
         // final LineDataStore lineDataStore = this.lineDataStoreFactory.create(lineId);
         final LineDataStore lineDataStore = this.lineDataStoreFactory.createCloudDataStore();

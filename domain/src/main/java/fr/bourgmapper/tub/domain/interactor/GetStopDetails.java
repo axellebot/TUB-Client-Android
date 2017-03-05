@@ -33,13 +33,13 @@ public class GetStopDetails extends UseCase<Stop, GetStopDetails.Params> {
 
     public static final class Params {
 
-        private final String stopId;
+        private final long stopId;
 
-        private Params(String stopId) {
+        private Params(long stopId) {
             this.stopId = stopId;
         }
 
-        public static Params forStop(String stopId) {
+        public static Params forStop(long stopId) {
             return new Params(stopId);
         }
     }

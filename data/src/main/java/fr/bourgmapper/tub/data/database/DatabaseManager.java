@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 
 import org.greenrobot.greendao.AbstractDao;
 import org.greenrobot.greendao.database.Database;
+import org.greenrobot.greendao.query.WhereCondition;
 
 import java.util.List;
 
@@ -35,12 +36,12 @@ public class DatabaseManager {
      * SELECT
      **************************/
 
-    public <T> List<?> getEntityList(Class<T> entityClass) {
-        return this.getDao(entityClass).loadAll();
+    public <T> List<T> getEntityList(Class<T> entityClass) {
+        return (List<T>) this.getDao(entityClass).loadAll();
     }
 
-    public <T> Object getEntityById(Class<T> entityClass, int id) {
-        return this.getDao(entityClass).loadByRowId(id);
+    public <T> T getEntityById(Class<T> entityClass, long id) {
+        return (T) this.getDao(entityClass).loadByRowId(id);
     }
 
     /***************************
@@ -75,6 +76,15 @@ public class DatabaseManager {
         } else if (entity instanceof StopEntity) {
             this.daoSession.getStopEntityDao().delete((StopEntity) entity);
         }
+    }
+
+    /***************************
+     * EXIST
+     **************************/
+
+    public <T> boolean exist(T entity, long id) {
+        WhereCondition condition = getDao(entity.getClass()).getPkProperty().eq(id); //TODO : find better condition with ID
+        return this.getDao(entity.getClass()).queryBuilder().where(condition).unique() != null;
     }
 
     /**

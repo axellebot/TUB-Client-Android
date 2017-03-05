@@ -15,7 +15,7 @@ public interface StopCache {
      *
      * @param stopId The stop stopId to retrieve data.
      */
-    Observable<StopEntity> get(final String stopId);
+    Observable<StopEntity> get(final long stopId);
 
     /**
      * Puts and element into the cache.

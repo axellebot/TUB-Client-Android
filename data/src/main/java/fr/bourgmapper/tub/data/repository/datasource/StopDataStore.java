@@ -20,5 +20,5 @@ public interface StopDataStore {
      *
      * @param stopId The stopId to retrieve stop data.
      */
-    Observable<StopEntity> stopEntityDetails(final String stopId);
+    Observable<StopEntity> stopEntityDetails(final long stopId);
 }

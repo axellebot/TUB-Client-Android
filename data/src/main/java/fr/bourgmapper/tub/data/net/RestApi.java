@@ -41,7 +41,7 @@ public interface RestApi {
      *
      * @param lineId The line stopId used to get line data.
      */
-    Observable<LineEntity> lineEntityById(final String lineId);
+    Observable<LineEntity> lineEntityById(final long lineId);
 
     /**
      * Retrieves an {@link Observable} which will emit a List of {@link StopEntity}.
@@ -53,5 +53,5 @@ public interface RestApi {
      *
      * @param stopId The stop stopId used to get stop data.
      */
-    Observable<StopEntity> stopEntityById(final String stopId);
+    Observable<StopEntity> stopEntityById(final long stopId);
 }

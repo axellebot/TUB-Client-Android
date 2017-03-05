@@ -53,7 +53,7 @@ public class StopCacheImpl implements StopCache {
     }
 
     @Override
-    public Observable<StopEntity> get(final String stopId) {
+    public Observable<StopEntity> get(final long stopId) {
         return Observable.create(emitter -> {
             final StopEntity stopEntity = this.databaseManager.getEntityById(StopEntity.class, stopId);
 
@@ -87,7 +87,7 @@ public class StopCacheImpl implements StopCache {
 
     @Override
     public boolean isCached(long stopId) {
-        return this.databaseManager.entityExists(StopEntity.class, stopId);
+        return this.databaseManager.exist(StopEntity.class, stopId);
     }
 
     @Override

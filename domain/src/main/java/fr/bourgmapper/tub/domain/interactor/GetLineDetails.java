@@ -33,13 +33,13 @@ public class GetLineDetails extends UseCase<Line, GetLineDetails.Params> {
 
     public static final class Params {
 
-        private final String lineId;
+        private final long lineId;
 
-        private Params(String lineId) {
+        private Params(long lineId) {
             this.lineId = lineId;
         }
 
-        public static Params forLine(String lineId) {
+        public static Params forLine(long lineId) {
             return new Params(lineId);
         }
     }

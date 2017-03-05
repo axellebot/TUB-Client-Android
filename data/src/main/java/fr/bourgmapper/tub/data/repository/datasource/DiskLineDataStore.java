@@ -31,7 +31,7 @@ class DiskLineDataStore implements LineDataStore {
     }
 
     @Override
-    public Observable<LineEntity> lineEntityDetails(final String lineId) {
+    public Observable<LineEntity> lineEntityDetails(final long lineId) {
         return this.lineCache.get(lineId);
     }
 }

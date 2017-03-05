@@ -34,7 +34,7 @@ class CloudLineDataStore implements LineDataStore {
     }
 
     @Override
-    public Observable<LineEntity> lineEntityDetails(final String lineId) {
+    public Observable<LineEntity> lineEntityDetails(final long lineId) {
         //TODO : Enable LineEntity cache after fixing DBFlow
         //return this.restApi.lineEntityById(lineId).doOnNext(CloudLineDataStore.this.lineCache::put);
         return this.restApi.lineEntityById(lineId);

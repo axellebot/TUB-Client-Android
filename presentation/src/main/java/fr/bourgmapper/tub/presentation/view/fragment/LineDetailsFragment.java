@@ -41,10 +41,10 @@ public class LineDetailsFragment extends BaseFragment implements LineDetailsView
         setRetainInstance(true);
     }
 
-    public static LineDetailsFragment forLine(int lineId) {
+    public static LineDetailsFragment forLine(long lineId) {
         final LineDetailsFragment lineDetailsFragment = new LineDetailsFragment();
         final Bundle arguments = new Bundle();
-        arguments.putInt(PARAM_LINE_ID, lineId);
+        arguments.putLong(PARAM_LINE_ID, lineId);
         lineDetailsFragment.setArguments(arguments);
         return lineDetailsFragment;
     }
@@ -147,10 +147,10 @@ public class LineDetailsFragment extends BaseFragment implements LineDetailsView
     /**
      * Get current line id from fragments arguments.
      */
-    private String currentLineId() {
+    private long currentLineId() {
         final Bundle arguments = getArguments();
         Preconditions.checkNotNull(arguments, "Fragment arguments cannot be null");
-        return arguments.getString(PARAM_LINE_ID);
+        return arguments.getLong(PARAM_LINE_ID);
     }
 
     //TODO : Add retry btn

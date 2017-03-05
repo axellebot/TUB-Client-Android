@@ -30,7 +30,7 @@ class DiskStopDataStore implements StopDataStore {
     }
 
     @Override
-    public Observable<StopEntity> stopEntityDetails(final String stopId) {
+    public Observable<StopEntity> stopEntityDetails(final long stopId) {
         return this.stopCache.get(stopId);
     }
 }

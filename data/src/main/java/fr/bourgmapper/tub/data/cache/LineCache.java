@@ -14,7 +14,7 @@ public interface LineCache {
      *
      * @param lineId The line stopId to retrieve data.
      */
-    Observable<LineEntity> get(final String lineId);
+    Observable<LineEntity> get(final long lineId);
 
     /**
      * Puts and element into the cache.

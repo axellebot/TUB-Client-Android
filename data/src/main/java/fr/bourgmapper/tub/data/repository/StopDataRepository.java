@@ -41,7 +41,7 @@ public class StopDataRepository implements StopRepository {
     }
 
     @Override
-    public Observable<Stop> stop(String stopId) {
+    public Observable<Stop> stop(long stopId) {
         //TODO : Enable LineDataStore cache after fixing DBFlow
         //final StopDataStore stopDataStore = this.stopDataStoreFactory.create(stopId);
         final StopDataStore stopDataStore = this.stopDataStoreFactory.createCloudDataStore();

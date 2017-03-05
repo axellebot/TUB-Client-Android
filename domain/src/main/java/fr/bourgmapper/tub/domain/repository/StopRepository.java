@@ -19,5 +19,5 @@ public interface StopRepository {
      *
      * @param stopId The user id used to retrieve user data.
      */
-    Observable<Stop> stop(final String stopId);
+    Observable<Stop> stop(final long stopId);
 }

@@ -55,7 +55,7 @@ public class LineCacheImpl implements LineCache {
     }
 
     @Override
-    public Observable<LineEntity> get(final String lineId) {
+    public Observable<LineEntity> get(final long lineId) {
         return Observable.create(emitter -> {
             final LineEntity lineEntity = this.databaseManager.getEntityById(LineEntity.class, lineId);
 
@@ -89,7 +89,7 @@ public class LineCacheImpl implements LineCache {
 
     @Override
     public boolean isCached(long lineId) {
-        return this.databaseManager.entityExists(LineEntity.class, lineId);
+        return this.databaseManager.exist(LineEntity.class, lineId);
     }
 
     @Override

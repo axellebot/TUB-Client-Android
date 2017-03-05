@@ -34,7 +34,7 @@ class CloudStopDataStore implements StopDataStore {
     }
 
     @Override
-    public Observable<StopEntity> stopEntityDetails(final String stopId) {
+    public Observable<StopEntity> stopEntityDetails(final long stopId) {
         //TODO : Enable StopEntity cache after fixing DBFlow
         //return this.restApi.stopEntityById(stopId).doOnNext(CloudStopDataStore.this.stopCache::put);
         return this.restApi.stopEntityById(stopId);

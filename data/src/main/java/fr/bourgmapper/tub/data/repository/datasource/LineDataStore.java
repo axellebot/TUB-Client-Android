@@ -19,5 +19,5 @@ public interface LineDataStore {
      *
      * @param lineId The stopId to retrieve line data.
      */
-    Observable<LineEntity> lineEntityDetails(final String lineId);
+    Observable<LineEntity> lineEntityDetails(final long lineId);
 }

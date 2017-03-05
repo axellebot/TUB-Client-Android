@@ -1,7 +1,5 @@
 package fr.bourgmapper.tub.data.database;
 
-import com.raizlabs.android.dbflow.structure.BaseModel;
-
 import java.util.List;
 
 
@@ -11,16 +9,16 @@ import java.util.List;
 public class DatabaseWriter implements Runnable {
 
     private final DatabaseManager databaseManager;
-    private final List<BaseModel> entityList;
-    private final BaseModel entity;
+    private final List<Object> entityList;
+    private final Object entity;
 
-    public DatabaseWriter(DatabaseManager databaseManager, BaseModel entity) {
+    public DatabaseWriter(DatabaseManager databaseManager, Object entity) {
         this.databaseManager = databaseManager;
         this.entity = entity;
         this.entityList = null;
     }
 
-    public DatabaseWriter(DatabaseManager databaseManager, List<BaseModel> entityList) {
+    public DatabaseWriter(DatabaseManager databaseManager, List<Object> entityList) {
         this.databaseManager = databaseManager;
         this.entity = null;
         this.entityList = entityList;

@@ -56,13 +56,13 @@ public class LineDetailsFragmentPresenter implements Presenter {
      * Initializes the presenter by showing/hiding proper views
      * and retrieving line details.
      */
-    public void initialize(String lineId) {
+    public void initialize(long lineId) {
         this.hideViewRetryLineDetails();
         this.showViewLoadingLineDetails();
         this.getLineDetails(lineId);
     }
 
-    private void getLineDetails(String lineId) {
+    private void getLineDetails(long lineId) {
         this.getLineDetailsUseCase.execute(new LineDetailsObserver(), Params.forLine(lineId));
     }
 
