@@ -16,7 +16,9 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.bourgmapper.tub.R;
+import fr.bourgmapper.tub.presentation.internal.di.HasComponent;
 import fr.bourgmapper.tub.presentation.internal.di.components.CoreComponent;
+import fr.bourgmapper.tub.presentation.internal.di.components.DaggerCoreComponent;
 import fr.bourgmapper.tub.presentation.listener.LineListListener;
 import fr.bourgmapper.tub.presentation.model.LineModel;
 import fr.bourgmapper.tub.presentation.presenter.LineListFragmentPresenter;
@@ -27,7 +29,7 @@ import fr.bourgmapper.tub.presentation.view.adapter.LineListLayoutManager;
 /**
  * Fragment that shows a list of Lines.
  */
-public class LineListFragment extends BaseFragment implements LineListView {
+public class LineListFragment extends BaseFragment implements LineListView, HasComponent<CoreComponent> {
 
     @Inject
     LineListFragmentPresenter lineListFragmentPresenter;
@@ -37,6 +39,8 @@ public class LineListFragment extends BaseFragment implements LineListView {
 
     @BindView(R.id.list_line_recycler_view)
     RecyclerView rv_lines;
+
+    private CoreComponent coreComponent;
 
     private LineListListener lineListListener;
     private LineListAdapter.OnItemClickListener onItemClickListener =
@@ -64,7 +68,8 @@ public class LineListFragment extends BaseFragment implements LineListView {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.getComponent(CoreComponent.class).inject(this);
+        this.initializeInjector();
+        this.coreComponent.inject(this);
     }
 
     @Override
@@ -175,6 +180,18 @@ public class LineListFragment extends BaseFragment implements LineListView {
     //TODO : Bind retry Button
     void onButtonRetryClick() {
         LineListFragment.this.loadLineList();
+    }
+
+    private void initializeInjector() {
+        this.coreComponent = DaggerCoreComponent.builder()
+                .applicationComponent(getApplicationComponent())
+                .fragmentModule(getFragmentModule())
+                .build();
+    }
+
+    @Override
+    public CoreComponent getComponent() {
+        return coreComponent;
     }
 
 }

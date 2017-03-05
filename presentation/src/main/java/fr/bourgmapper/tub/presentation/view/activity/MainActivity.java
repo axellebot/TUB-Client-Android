@@ -30,7 +30,7 @@ import fr.bourgmapper.tub.presentation.presenter.MainActivityPresenter;
 import fr.bourgmapper.tub.presentation.view.composition.ConnectionDialogModule;
 import fr.bourgmapper.tub.presentation.view.composition.ConnectionDialogModuleImpl;
 
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, MainNavigationListener, HasComponent<CoreComponent> {
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, MainNavigationListener{
     private static final String TAG = "MainActivity";
 
     @Inject
@@ -58,7 +58,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         ButterKnife.bind(this);
         navigator = new MainNavigator(this);
 
-        this.initializeInjector();
         this.initNavigationDrawer();
         this.initBottomSheet();
 
@@ -189,17 +188,5 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     public void onLinesButtonSelected() {
         navigator.displayLineListFragmentOverview();
-    }
-
-    private void initializeInjector() {
-        this.coreComponent = DaggerCoreComponent.builder()
-                .applicationComponent(getApplicationComponent())
-                .activityModule(getActivityModule())
-                .build();
-    }
-
-    @Override
-    public CoreComponent getComponent() {
-        return coreComponent;
     }
 }

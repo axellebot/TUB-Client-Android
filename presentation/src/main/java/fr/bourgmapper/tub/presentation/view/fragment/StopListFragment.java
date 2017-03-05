@@ -15,7 +15,9 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.bourgmapper.tub.R;
+import fr.bourgmapper.tub.presentation.internal.di.HasComponent;
 import fr.bourgmapper.tub.presentation.internal.di.components.CoreComponent;
+import fr.bourgmapper.tub.presentation.internal.di.components.DaggerCoreComponent;
 import fr.bourgmapper.tub.presentation.listener.StopListListener;
 import fr.bourgmapper.tub.presentation.model.StopModel;
 import fr.bourgmapper.tub.presentation.presenter.StopListFragmentPresenter;
@@ -26,7 +28,7 @@ import fr.bourgmapper.tub.presentation.view.adapter.StopListLayoutManager;
 /**
  * Fragment that shows a list of Stops.
  */
-public class StopListFragment extends BaseFragment implements StopListView {
+public class StopListFragment extends BaseFragment implements StopListView, HasComponent<CoreComponent> {
 
     @Inject
     StopListFragmentPresenter stopListFragmentPresenter;
@@ -36,6 +38,8 @@ public class StopListFragment extends BaseFragment implements StopListView {
 
     @BindView(R.id.list_stop_recycler_view)
     RecyclerView rv_stops;
+
+    private CoreComponent coreComponent;
 
     private StopListListener stopListListener;
     private StopListAdapter.OnItemClickListener onItemClickListener =
@@ -63,7 +67,8 @@ public class StopListFragment extends BaseFragment implements StopListView {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.getComponent(CoreComponent.class).inject(this);
+        this.initializeInjector();
+        this.coreComponent.inject(this);
     }
 
     @Override
@@ -174,6 +179,18 @@ public class StopListFragment extends BaseFragment implements StopListView {
     //TODO : Bind retry Button
     void onButtonRetryClick() {
         StopListFragment.this.loadStopList();
+    }
+
+    private void initializeInjector() {
+        this.coreComponent = DaggerCoreComponent.builder()
+                .applicationComponent(getApplicationComponent())
+                .fragmentModule(getFragmentModule())
+                .build();
+    }
+
+    @Override
+    public CoreComponent getComponent() {
+        return coreComponent;
     }
 
 }

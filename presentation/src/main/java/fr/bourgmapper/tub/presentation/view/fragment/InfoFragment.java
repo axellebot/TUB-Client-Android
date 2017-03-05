@@ -12,18 +12,21 @@ import javax.inject.Inject;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.bourgmapper.tub.R;
+import fr.bourgmapper.tub.presentation.internal.di.HasComponent;
 import fr.bourgmapper.tub.presentation.internal.di.components.CoreComponent;
+import fr.bourgmapper.tub.presentation.internal.di.components.DaggerCoreComponent;
 import fr.bourgmapper.tub.presentation.listener.MainNavigationListener;
 import fr.bourgmapper.tub.presentation.presenter.InfoFragmentPresenter;
 
 /**
  * Fragment that shows Info.
  */
-public class InfoFragment extends BaseFragment {
+public class InfoFragment extends BaseFragment implements HasComponent<CoreComponent> {
 
     @Inject
     InfoFragmentPresenter infoFragmentPresenter;
 
+    private CoreComponent coreComponent;
     private MainNavigationListener mainNavigationListener;
 
     public InfoFragment() {
@@ -41,7 +44,8 @@ public class InfoFragment extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.getComponent(CoreComponent.class).inject(this);
+        this.initializeInjector();
+        this.coreComponent.inject(this);
     }
 
     @Override
@@ -101,4 +105,17 @@ public class InfoFragment extends BaseFragment {
                 break;
         }
     }
+
+    private void initializeInjector() {
+        this.coreComponent = DaggerCoreComponent.builder()
+                .applicationComponent(getApplicationComponent())
+                .fragmentModule(getFragmentModule())
+                .build();
+    }
+
+    @Override
+    public CoreComponent getComponent() {
+        return coreComponent;
+    }
+
 }

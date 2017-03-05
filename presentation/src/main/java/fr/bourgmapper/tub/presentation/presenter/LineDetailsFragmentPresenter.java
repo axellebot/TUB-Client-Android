@@ -11,7 +11,7 @@ import fr.bourgmapper.tub.domain.interactor.DefaultObserver;
 import fr.bourgmapper.tub.domain.interactor.GetLineDetails;
 import fr.bourgmapper.tub.domain.interactor.GetLineDetails.Params;
 import fr.bourgmapper.tub.presentation.exception.ErrorMessageFactory;
-import fr.bourgmapper.tub.presentation.internal.di.PerActivity;
+import fr.bourgmapper.tub.presentation.internal.di.PerFragment;
 import fr.bourgmapper.tub.presentation.mapper.LineModelDataMapper;
 import fr.bourgmapper.tub.presentation.model.LineModel;
 import fr.bourgmapper.tub.presentation.view.LineDetailsView;
@@ -20,7 +20,7 @@ import fr.bourgmapper.tub.presentation.view.LineDetailsView;
  * {@link Presenter} that controls communication between views and models of the presentation
  * layer.
  */
-@PerActivity
+@PerFragment
 public class LineDetailsFragmentPresenter implements Presenter {
     private static String TAG = "LineDetailPresenter";
 
@@ -50,6 +50,7 @@ public class LineDetailsFragmentPresenter implements Presenter {
     @Override
     public void destroy() {
         this.viewDetailsView = null;
+        this.getLineDetailsUseCase.dispose();
     }
 
     /**

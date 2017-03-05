@@ -1,8 +1,8 @@
 package fr.bourgmapper.tub.presentation.internal.di.components;
 
 import dagger.Component;
-import fr.bourgmapper.tub.presentation.internal.di.PerActivity;
-import fr.bourgmapper.tub.presentation.internal.di.modules.ActivityModule;
+import fr.bourgmapper.tub.presentation.internal.di.PerFragment;
+import fr.bourgmapper.tub.presentation.internal.di.modules.FragmentModule;
 import fr.bourgmapper.tub.presentation.internal.di.modules.CoreModule;
 import fr.bourgmapper.tub.presentation.view.fragment.InfoFragment;
 import fr.bourgmapper.tub.presentation.view.fragment.LineDetailsFragment;
@@ -11,12 +11,12 @@ import fr.bourgmapper.tub.presentation.view.fragment.MapFragment;
 import fr.bourgmapper.tub.presentation.view.fragment.StopListFragment;
 
 /**
- * A scope {@link PerActivity} component.
+ * A scope {@link PerFragment} component.
  * Injects line specific Fragments.
  */
-@PerActivity
-@Component(dependencies = ApplicationComponent.class, modules = {ActivityModule.class, CoreModule.class})
-public interface CoreComponent extends ActivityComponent {
+@PerFragment
+@Component(dependencies = ApplicationComponent.class, modules = {FragmentModule.class, CoreModule.class})
+public interface CoreComponent extends FragmentComponent {
     void inject(InfoFragment infoFragment);
 
     void inject(MapFragment mapFragment);

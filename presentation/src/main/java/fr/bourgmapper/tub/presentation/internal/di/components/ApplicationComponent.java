@@ -10,7 +10,7 @@ import fr.bourgmapper.tub.domain.executor.ThreadExecutor;
 import fr.bourgmapper.tub.domain.repository.LineRepository;
 import fr.bourgmapper.tub.domain.repository.StopRepository;
 import fr.bourgmapper.tub.presentation.internal.di.modules.ApplicationModule;
-import fr.bourgmapper.tub.presentation.view.activity.BaseActivity;
+import fr.bourgmapper.tub.presentation.view.fragment.BaseFragment;
 
 /**
  * A component whose lifetime is the life of the application.
@@ -18,7 +18,7 @@ import fr.bourgmapper.tub.presentation.view.activity.BaseActivity;
 @Singleton // Constraints this component to one-per-application or unscoped bindings.
 @Component(modules = ApplicationModule.class)
 public interface ApplicationComponent {
-    void inject(BaseActivity baseActivity);
+    void inject(BaseFragment baseFragment);
 
     //Exposed to sub-graphs.
     Context context();

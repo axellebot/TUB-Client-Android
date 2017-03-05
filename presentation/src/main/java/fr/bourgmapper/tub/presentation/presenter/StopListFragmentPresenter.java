@@ -13,7 +13,7 @@ import fr.bourgmapper.tub.domain.exception.ErrorBundle;
 import fr.bourgmapper.tub.domain.interactor.DefaultObserver;
 import fr.bourgmapper.tub.domain.interactor.GetStopList;
 import fr.bourgmapper.tub.presentation.exception.ErrorMessageFactory;
-import fr.bourgmapper.tub.presentation.internal.di.PerActivity;
+import fr.bourgmapper.tub.presentation.internal.di.PerFragment;
 import fr.bourgmapper.tub.presentation.mapper.StopModelDataMapper;
 import fr.bourgmapper.tub.presentation.model.StopModel;
 import fr.bourgmapper.tub.presentation.view.StopListView;
@@ -22,7 +22,7 @@ import fr.bourgmapper.tub.presentation.view.StopListView;
  * {@link Presenter} that controls communication between views and models of the presentation
  * layer.
  */
-@PerActivity
+@PerFragment
 public class StopListFragmentPresenter implements Presenter {
     private static String TAG = "StopListFragmentPresenter";
 
@@ -54,6 +54,7 @@ public class StopListFragmentPresenter implements Presenter {
     @Override
     public void destroy() {
         this.stopListView = null;
+        this.getStopListUseCase.dispose();
     }
 
     /**

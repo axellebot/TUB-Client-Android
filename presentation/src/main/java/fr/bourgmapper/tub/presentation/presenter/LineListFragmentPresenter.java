@@ -13,7 +13,7 @@ import fr.bourgmapper.tub.domain.exception.ErrorBundle;
 import fr.bourgmapper.tub.domain.interactor.DefaultObserver;
 import fr.bourgmapper.tub.domain.interactor.GetLineList;
 import fr.bourgmapper.tub.presentation.exception.ErrorMessageFactory;
-import fr.bourgmapper.tub.presentation.internal.di.PerActivity;
+import fr.bourgmapper.tub.presentation.internal.di.PerFragment;
 import fr.bourgmapper.tub.presentation.mapper.LineModelDataMapper;
 import fr.bourgmapper.tub.presentation.model.LineModel;
 import fr.bourgmapper.tub.presentation.view.LineListView;
@@ -22,7 +22,7 @@ import fr.bourgmapper.tub.presentation.view.LineListView;
  * {@link Presenter} that controls communication between views and models of the presentation
  * layer.
  */
-@PerActivity
+@PerFragment
 public class LineListFragmentPresenter implements Presenter {
     private static String TAG = "LineListFragmentPresenter";
 
@@ -54,6 +54,7 @@ public class LineListFragmentPresenter implements Presenter {
     @Override
     public void destroy() {
         this.lineListView = null;
+        this.getLineListUseCase.dispose();
     }
 
     /**

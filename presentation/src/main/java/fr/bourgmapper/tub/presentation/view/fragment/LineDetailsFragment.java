@@ -17,12 +17,14 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.bourgmapper.tub.R;
+import fr.bourgmapper.tub.presentation.internal.di.HasComponent;
 import fr.bourgmapper.tub.presentation.internal.di.components.CoreComponent;
+import fr.bourgmapper.tub.presentation.internal.di.components.DaggerCoreComponent;
 import fr.bourgmapper.tub.presentation.model.LineModel;
 import fr.bourgmapper.tub.presentation.presenter.LineDetailsFragmentPresenter;
 import fr.bourgmapper.tub.presentation.view.LineDetailsView;
 
-public class LineDetailsFragment extends BaseFragment implements LineDetailsView {
+public class LineDetailsFragment extends BaseFragment implements LineDetailsView, HasComponent<CoreComponent> {
     private static final String PARAM_LINE_ID = "param_line_id";
 
     @Inject
@@ -36,6 +38,8 @@ public class LineDetailsFragment extends BaseFragment implements LineDetailsView
 
     @BindView(R.id.fragment_line_detail_label)
     TextView tvLabel;
+
+    private CoreComponent coreComponent;
 
     public LineDetailsFragment() {
         setRetainInstance(true);
@@ -52,7 +56,8 @@ public class LineDetailsFragment extends BaseFragment implements LineDetailsView
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.getComponent(CoreComponent.class).inject(this);
+        this.initializeInjector();
+        this.coreComponent.inject(this);
     }
 
     @Override
@@ -156,6 +161,18 @@ public class LineDetailsFragment extends BaseFragment implements LineDetailsView
     //TODO : Add retry btn
     void onButtonRetryClick() {
         LineDetailsFragment.this.loadLineDetails();
+    }
+
+    private void initializeInjector() {
+        this.coreComponent = DaggerCoreComponent.builder()
+                .applicationComponent(getApplicationComponent())
+                .fragmentModule(getFragmentModule())
+                .build();
+    }
+
+    @Override
+    public CoreComponent getComponent() {
+        return coreComponent;
     }
 }
 

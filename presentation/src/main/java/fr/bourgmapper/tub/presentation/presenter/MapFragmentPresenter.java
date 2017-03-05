@@ -19,7 +19,7 @@ import fr.bourgmapper.tub.domain.interactor.GetLineList;
 import fr.bourgmapper.tub.domain.interactor.GetStopDetails;
 import fr.bourgmapper.tub.domain.interactor.GetStopList;
 import fr.bourgmapper.tub.presentation.exception.ErrorMessageFactory;
-import fr.bourgmapper.tub.presentation.internal.di.PerActivity;
+import fr.bourgmapper.tub.presentation.internal.di.PerFragment;
 import fr.bourgmapper.tub.presentation.mapper.LineModelDataMapper;
 import fr.bourgmapper.tub.presentation.mapper.StopModelDataMapper;
 import fr.bourgmapper.tub.presentation.model.LineModel;
@@ -30,7 +30,7 @@ import fr.bourgmapper.tub.presentation.view.MainMapView;
  * {@link Presenter} that controls communication between views and models of the presentation
  * layer.
  */
-@PerActivity
+@PerFragment
 public class MapFragmentPresenter implements Presenter {
     private static String TAG = "MapFragmentPresenter";
 
@@ -74,6 +74,10 @@ public class MapFragmentPresenter implements Presenter {
     @Override
     public void destroy() {
         this.mainMapView = null;
+        this.getLineListUseCase.dispose();
+        this.getLineDetailsUseCase.dispose();
+        this.getStopListUseCase.dispose();
+        this.getStopDetailsUseCase.dispose();
     }
 
     /**
