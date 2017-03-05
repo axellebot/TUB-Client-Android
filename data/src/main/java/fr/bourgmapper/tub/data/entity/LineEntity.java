@@ -3,9 +3,9 @@ package fr.bourgmapper.tub.data.entity;
 import com.google.gson.annotations.SerializedName;
 
 import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.NotNull;
-import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Line Entity used in the data layer.
@@ -40,7 +40,7 @@ public class LineEntity {
 
     @Generated(hash = 563371638)
     public LineEntity(long lineId, @NotNull String number, @NotNull String label,
-            @NotNull String color, @NotNull String order, @NotNull String kmlPath) {
+                      @NotNull String color, @NotNull String order, @NotNull String kmlPath) {
         this.lineId = lineId;
         this.number = number;
         this.label = label;

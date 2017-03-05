@@ -226,7 +226,6 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, Mai
 
     //-----------------------------------------------
 
-
     public void addLineKMLToMap(InputStream inputStream) {
         try {
             KmlLayer layer = new KmlLayer(googleMap, inputStream, getContext().getApplicationContext());

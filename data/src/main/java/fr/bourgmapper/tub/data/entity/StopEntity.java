@@ -3,9 +3,10 @@ package fr.bourgmapper.tub.data.entity;
 import com.google.gson.annotations.SerializedName;
 
 import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.NotNull;
-import org.greenrobot.greendao.annotation.Generated;
+
 /**
  * Stop Entity used in the data layer.
  */
@@ -31,7 +32,7 @@ public class StopEntity {
 
     @Generated(hash = 3792568)
     public StopEntity(long stopId, @NotNull String label, @NotNull String latitude,
-            @NotNull String longitude) {
+                      @NotNull String longitude) {
         this.stopId = stopId;
         this.label = label;
         this.latitude = latitude;
