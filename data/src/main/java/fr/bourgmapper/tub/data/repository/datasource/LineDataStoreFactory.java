@@ -28,7 +28,7 @@ public class LineDataStoreFactory {
     /**
      * Create {@link LineDataStore} from a line stopId.
      */
-    public LineDataStore create(int lineId) {
+    public LineDataStore create(long lineId) {
         LineDataStore lineDataStore;
 
         if (!this.lineCache.isExpired() && this.lineCache.isCached(lineId)) {

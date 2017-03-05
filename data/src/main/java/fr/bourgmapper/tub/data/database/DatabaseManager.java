@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 
 import org.greenrobot.greendao.AbstractDao;
 import org.greenrobot.greendao.database.Database;
-import org.greenrobot.greendao.query.WhereCondition;
 
 import java.util.List;
 
@@ -83,8 +82,8 @@ public class DatabaseManager {
      **************************/
 
     public <T> boolean exist(T entity, long id) {
-        WhereCondition condition = getDao(entity.getClass()).getPkProperty().eq(id); //TODO : find better condition with ID
-        return this.getDao(entity.getClass()).queryBuilder().where(condition).unique() != null;
+        //TODO : Add real check
+        return false;
     }
 
     /**

@@ -28,7 +28,7 @@ public class StopDataStoreFactory {
     /**
      * Create {@link StopDataStore} from a stop stopId.
      */
-    public StopDataStore create(int stopId) {
+    public StopDataStore create(long stopId) {
         StopDataStore stopDataStore;
 
         if (!this.stopCache.isExpired() && this.stopCache.isCached(stopId)) {
