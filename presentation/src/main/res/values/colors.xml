@@ -13,6 +13,12 @@
     <color name="colorNavigationDrawer">@color/orangeDeep</color>
     <color name="colorNavigationDrawerItem">@color/white</color>
 
+    <!-- List -->
+    <color name="colorListHeader">@color/colorPrimaryDark</color>
+
+    <!--Bottom Sheet-->
+    <color name="colorBottomSheet">@color/colorPrimary</color>
+
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="greyDark">#7f7f7f</color>

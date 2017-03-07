@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Tub</string>
 
+    <string name="default_retry">Retry</string>
+    <string name="default_no_content">No Content</string>
+
     <!--Action Bar-->
     <string name="action_bar_settings">Settings</string>
 
@@ -39,7 +42,6 @@
     <!-- List Stop-->
     <string name="list_stop_title">Stops</string>
     <string name="item_row_stop_tv_default">Unknow Stop</string>
-
 
     <!--Exception messages-->
     <string name="exception_message_generic">There was an application error</string>

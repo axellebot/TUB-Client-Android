@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ProgressBar;
 
 import java.util.Collection;
 
@@ -15,6 +17,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.presentation.internal.di.HasComponent;
 import fr.bourgmapper.tub.presentation.internal.di.components.CoreComponent;
@@ -39,6 +42,15 @@ public class LineListFragment extends BaseFragment implements LineListView, HasC
 
     @BindView(R.id.list_line_recycler_view)
     RecyclerView rv_lines;
+
+    @BindView(R.id.list_line_progress_bar)
+    View list_line_progress_bar;
+
+    @BindView(R.id.line_list_retry_btn)
+    View list_line_retry_btn;
+
+    @BindView(R.id.list_line_message)
+    View list_line_message;
 
     private CoreComponent coreComponent;
 
@@ -122,22 +134,23 @@ public class LineListFragment extends BaseFragment implements LineListView, HasC
 
     @Override
     public void showLoadingLineList() {
-
+        this.list_line_progress_bar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoadingLineList() {
-
+        this.list_line_progress_bar.setVisibility(View.GONE);
     }
 
     @Override
     public void showRetryLineList() {
-
+        this.list_line_retry_btn.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideRetryLineList() {
-
+        this.list_line_retry_btn.setVisibility(View.GONE);
+        list_line_message.setVisibility(View.GONE);
     }
 
     @Override
@@ -157,6 +170,7 @@ public class LineListFragment extends BaseFragment implements LineListView, HasC
     @Override
     public void showErrorLineList(String message) {
         this.showToastMessage(message);
+        list_line_message.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -177,7 +191,7 @@ public class LineListFragment extends BaseFragment implements LineListView, HasC
         this.lineListFragmentPresenter.initialize();
     }
 
-    //TODO : Bind retry Button
+    @OnClick(R.id.line_list_retry_btn)
     void onButtonRetryClick() {
         LineListFragment.this.loadLineList();
     }

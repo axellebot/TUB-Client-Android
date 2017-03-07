@@ -7,10 +7,10 @@
         android:color="@color/colorPrimaryDark" />
 
     <padding
-        android:bottom="1dp"
-        android:left="1dp"
-        android:right="1dp"
-        android:top="1dp" />
+        android:bottom="0dp"
+        android:left="0dp"
+        android:right="0dp"
+        android:top="0dp" />
 
     <corners android:radius="@dimen/default_corner_radius" />
 </shape>

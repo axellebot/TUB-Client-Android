@@ -30,6 +30,8 @@
     <dimen name="default_corner_radius">7dp</dimen>
     <dimen name="default_material_fab_margin">@dimen/default_material_margin_normal</dimen>
 
+    <dimen name="default_progress_bar_size">32dp</dimen>
+    <dimen name="default_refresh_button_size">32dp</dimen>
 
     <!--Activity Main-->
     <dimen name="fab_margin_top_from_status">@dimen/default_material_margin_huge</dimen>
