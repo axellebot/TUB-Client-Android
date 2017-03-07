@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/ListWrapperRounded"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <LinearLayout
         style="@style/ListHeaderTopRounded"
         android:orientation="horizontal">
 
@@ -18,18 +19,14 @@
             android:id="@+id/line_list_retry_btn"
             style="@style/ListHeaderRefreshImageButton"
             android:visibility="gone" />
-    </RelativeLayout>
+    </LinearLayout>
 
-
-    <ProgressBar
+    <me.zhanghai.android.materialprogressbar.MaterialProgressBar
         android:id="@+id/list_line_progress_bar"
-        style="@style/ProgressBar"
-        android:visibility="gone" />
-
-    <TextView
-        android:id="@+id/list_line_message"
-        style="@style/ListNoContent"
-        android:visibility="gone" />
+        style="@style/MaterialProgressBar"
+        android:visibility="gone"
+        app:mpb_progressStyle="horizontal"
+        app:mpb_useIntrinsicPadding="false" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list_line_recycler_view"

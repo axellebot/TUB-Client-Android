@@ -66,11 +66,10 @@
         <item name="android:contentDescription">@string/default_retry</item>
     </style>
 
-    <style name="ProgressBar" parent="Widget.MaterialProgressBar.ProgressBar.Large">
-        <item name="android:layout_width">@dimen/default_progress_bar_size</item>
-        <item name="android:layout_height">@dimen/default_progress_bar_size</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:indeterminateDrawable">@drawable/progress</item>
+    <style name="MaterialProgressBar" parent="Widget.MaterialProgressBar.ProgressBar.Horizontal">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/default_progress_bar_height</item>
+        <item name="android:indeterminate">true</item>
     </style>
 
     <style name="ListNoContent">
