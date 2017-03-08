@@ -70,13 +70,7 @@ dependencies {
     annotationProcessor presentationDependencies.daggerCompiler
     compile presentationDependencies.dagger
     annotationProcessor presentationDependencies.butterKnifeCompiler
-    annotationProcessor presentationDependencies.butterKnifeCompiler
     compile presentationDependencies.butterKnife
-    compile presentationDependencies.cardView
-    compile presentationDependencies.recyclerView
-    compile presentationDependencies.appCompat
-    compile presentationDependencies.support
-    compile presentationDependencies.design
     compile presentationDependencies.autoFitTextView
     compile presentationDependencies.materialDialogs
     compile presentationDependencies.rxJava
@@ -84,6 +78,19 @@ dependencies {
     provided presentationDependencies.javaxAnnotation
     compile presentationDependencies.playServices
     compile presentationDependencies.androidMapUtils
+
+    // Support Libraries
+    compile presentationDependencies.appCompat
+    compile presentationDependencies.cardView
+    compile presentationDependencies.design
+    compile presentationDependencies.gridLayout
+    compile presentationDependencies.leanback
+    compile presentationDependencies.mediarouter
+    compile presentationDependencies.palette
+    compile presentationDependencies.recyclerView
+    compile presentationDependencies.supportAnnotation
+    compile presentationDependencies.supportV13
+    compile presentationDependencies.supportV4
     compile presentationDependencies.multidex
 
     //Testing
