@@ -1,16 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/ListWrapperRounded"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/stop_list_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/list_line_title"
-        android:textAllCaps="true" />
+    <RelativeLayout
+        style="@style/ListHeaderTopRounded"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/line_list_title"
+            style="@style/ListHeaderTextView"
+            android:text="@string/list_line_title" />
+
+        <ImageButton
+            android:id="@+id/line_list_retry_btn"
+            style="@style/ListHeaderRefreshImageButton"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <me.zhanghai.android.materialprogressbar.MaterialProgressBar
+        android:id="@+id/list_line_progress_bar"
+        style="@style/MaterialProgressBar"
+        android:visibility="gone"
+        app:mpb_progressStyle="horizontal"
+        app:mpb_useIntrinsicPadding="false" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list_line_recycler_view"

@@ -78,6 +78,7 @@ dependencies {
     provided presentationDependencies.javaxAnnotation
     compile presentationDependencies.playServices
     compile presentationDependencies.androidMapUtils
+    compile presentationDependencies.materialProgressBar
 
     // Support Libraries
     compile presentationDependencies.appCompat

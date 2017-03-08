@@ -10,7 +10,7 @@
     <dimen name="fragment_vertical_margin">@dimen/default_material_margin_normal</dimen>
     <dimen name="fragment_horizontal_margin">@dimen/default_material_margin_normal</dimen>
 
-    <!--Default-->
+    <!--Default/Magin-->
     <dimen name="default_material_margin_very_small">8dp</dimen>
     <dimen name="default_material_margin_small">12dp</dimen>
     <dimen name="default_material_margin_normal">16dp</dimen>
@@ -19,6 +19,7 @@
     <dimen name="default_material_margin_huge">32dp</dimen>
     <dimen name="default_material_margin_very_huge">64dp</dimen>
 
+    <!--Default/Padding-->
     <dimen name="default_material_padding_very_small">8dp</dimen>
     <dimen name="default_material_padding_small">12dp</dimen>
     <dimen name="default_material_padding_normal">16dp</dimen>
@@ -27,13 +28,14 @@
     <dimen name="default_material_padding_huge">32dp</dimen>
     <dimen name="default_material_padding_very_huge">64dp</dimen>
 
+    <!--Default-->
     <dimen name="default_corner_radius">7dp</dimen>
     <dimen name="default_material_fab_margin">@dimen/default_material_margin_normal</dimen>
-
+    <dimen name="default_progress_bar_height">7dp</dimen>
+    <dimen name="default_refresh_button_size">32dp</dimen>
 
     <!--Activity Main-->
     <dimen name="fab_margin_top_from_status">@dimen/default_material_margin_huge</dimen>
-
 
     <!--Bottom Sheet Main -->
     <dimen name="bottom_sheet_main_peek_height_default">90dp</dimen>
@@ -50,6 +52,10 @@
     <dimen name="fragment_line_circle_size">70dp</dimen>
     <dimen name="fragment_line_padding">10dp</dimen>
     <dimen name="fragment_line_margin">10dp</dimen>
+
+    <dimen name="list_header_text_size">17sp</dimen>
+    <dimen name="list_header_text_padding_vertical">5dp</dimen>
+    <dimen name="list_header_text_padding_horizontal">10dp</dimen>
 
     <!-- Line List -->
     <dimen name="item_grid_line_size">110dp</dimen>
