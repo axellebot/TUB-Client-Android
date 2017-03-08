@@ -78,7 +78,8 @@ ext {
             dexmakerMockito        : "com.google.dexmaker:dexmaker-mockito:${dexmakerVersion}",
             espressoCore           : "com.android.support.test.espresso:espresso-core:${espressoVersion}",
             expressoIdlingRessource: "com.android.support.test.espresso:espresso-idling-resource:${espressoVersion}",
-            testingSupportLib      : "com.android.support.test:testing-support-lib:${testingSupportLibVersion}"
+            testingSupportLib      : "com.android.support.test:testing-support-lib:${testingSupportLibVersion}",
+            supportAnnotation      : "com.android.support:support-annotations:${supportVersion}"
     ]
 
     domainDependencies = [
