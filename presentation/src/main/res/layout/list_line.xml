@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         style="@style/ListHeaderTopRounded"
         android:orientation="horizontal">
 
@@ -19,7 +19,7 @@
             android:id="@+id/line_list_retry_btn"
             style="@style/ListHeaderRefreshImageButton"
             android:visibility="gone" />
-    </LinearLayout>
+    </RelativeLayout>
 
     <me.zhanghai.android.materialprogressbar.MaterialProgressBar
         android:id="@+id/list_line_progress_bar"

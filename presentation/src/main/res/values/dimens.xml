@@ -53,6 +53,10 @@
     <dimen name="fragment_line_padding">10dp</dimen>
     <dimen name="fragment_line_margin">10dp</dimen>
 
+    <dimen name="list_header_text_size">17sp</dimen>
+    <dimen name="list_header_text_padding_vertical">5dp</dimen>
+    <dimen name="list_header_text_padding_horizontal">10dp</dimen>
+
     <!-- Line List -->
     <dimen name="item_grid_line_size">110dp</dimen>
     <dimen name="item_grid_line_circle_size">70dp</dimen>

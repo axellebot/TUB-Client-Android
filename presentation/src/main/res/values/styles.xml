@@ -51,12 +51,18 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="ListHeaderTextView">
+    <style name="ListHeaderTextView" parent="Base.TextAppearance.AppCompat">
+        <item name="android:text">@string/default_list_header_text</item>
+        <item name="android:paddingTop">@dimen/list_header_text_padding_vertical</item>
+        <item name="android:paddingBottom">@dimen/list_header_text_padding_vertical</item>
+        <item name="android:paddingStart">@dimen/list_header_text_padding_horizontal</item>
+        <item name="android:paddingEnd">@dimen/list_header_text_padding_horizontal</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">@dimen/list_header_text_size</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-
+        <item name="android:layout_alignParentStart">true</item>
     </style>
 
     <style name="ListHeaderRefreshImageButton" parent="Widget.AppCompat.ImageButton">
@@ -64,6 +70,9 @@
         <item name="android:layout_height">@dimen/default_refresh_button_size</item>
         <item name="android:src">@drawable/ic_refresh_white_24dp</item>
         <item name="android:contentDescription">@string/default_retry</item>
+        <item name="android:background">@color/transparent</item>
+        <item name="android:layout_alignParentEnd">true</item>
+        <item name="android:clickable">true</item>
     </style>
 
     <style name="MaterialProgressBar" parent="Widget.MaterialProgressBar.ProgressBar.Horizontal">

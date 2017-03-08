@@ -3,6 +3,7 @@
 
     <string name="default_retry">Retry</string>
     <string name="default_no_content">No Content</string>
+    <string name="default_list_header_text">Default Header Text</string>
 
     <!--Action Bar-->
     <string name="action_bar_settings">Settings</string>
