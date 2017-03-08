@@ -3,7 +3,6 @@ package fr.bourgmapper.tub.presentation.navigation;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 
 import fr.bourgmapper.tub.R;
@@ -16,8 +15,8 @@ import fr.bourgmapper.tub.presentation.view.fragment.StopListFragment;
 public class MainNavigator {
     private static String TAG = "MainNavigator";
 
-    private FRAGMENT currentFragment;
     private FRAGMENT currentFragmentOverview;
+
     private FragmentManager fragmentManager;
     private MainActivity activity;
 
@@ -28,46 +27,39 @@ public class MainNavigator {
 
     public MainNavigator(MainActivity activity) {
         this.activity = activity;
-        this.fragmentManager = ((MainActivity) activity).getSupportFragmentManager();
+        this.fragmentManager = activity.getSupportFragmentManager();
     }
 
     public void onBackPressed() {
         Log.i(TAG, "Back pressed");
-        switch (currentFragment) {
-            case HOME_MAP:
-                switch (currentFragmentOverview) {
-                    case INFO:
-                        activity.getBottomSheetBehavior().setState(BottomSheetBehavior.STATE_COLLAPSED);
-                        break;
-                    case LINE_LIST:
-                        displayInfoFragmentOverview();
-                        break;
-                    case STOP_LIST:
-                        displayInfoFragmentOverview();
-                        break;
-                }
-                break;
+        if (currentFragmentOverview == FRAGMENT.INFO && activity.getBottomSheetBehavior().getState() == BottomSheetBehavior.STATE_COLLAPSED) {
+            activity.finish();
+        } else {
+            switch (currentFragmentOverview) {
+                case INFO:
+                    activity.getBottomSheetBehavior().setState(BottomSheetBehavior.STATE_COLLAPSED);
+                    break;
+                case LINE_LIST:
+                    displayInfoFragmentOverview();
+                    break;
+                case STOP_LIST:
+                    displayInfoFragmentOverview();
+                    break;
+            }
         }
     }
 
-
-    public void displayHomeMapFragment() {
-        if (currentFragment != FRAGMENT.HOME_MAP) {
-            if (this.mapFragment == null) {
-                this.mapFragment = new MapFragment();
-            }
-            MapFragment mapFragment = new MapFragment();
-            fragmentTransactionReplace(mapFragment);
-            currentFragment = FRAGMENT.HOME_MAP;
+    public void displayMapFragment() {
+        if (this.mapFragment == null) {
+            this.mapFragment = MapFragment.newInstance();
         }
-
-        displayInfoFragmentOverview();
+        fragmentTransactionReplace(mapFragment);
     }
 
     public void displayInfoFragmentOverview() {
         if (currentFragmentOverview != FRAGMENT.INFO) {
             if (infoFragment == null) {
-                infoFragment = new InfoFragment();
+                infoFragment = InfoFragment.newInstance();
             }
             fragmentTransactionReplaceOverview(infoFragment);
             currentFragmentOverview = FRAGMENT.INFO;
@@ -75,75 +67,39 @@ public class MainNavigator {
         activity.getBottomSheetBehavior().setState(BottomSheetBehavior.STATE_EXPANDED);
     }
 
-    public void displayLineListFragmentOverview() {
+    public void navigateToLineList() {
         if (currentFragmentOverview != FRAGMENT.LINE_LIST) {
             if (lineListFragment == null) {
-                lineListFragment = new LineListFragment();
+                lineListFragment = LineListFragment.newInstance();
             }
             fragmentTransactionReplaceOverview(lineListFragment);
             currentFragmentOverview = FRAGMENT.LINE_LIST;
         }
     }
 
-    public void displayStopListFragmentOverview() {
+    public void navigateToStopList() {
         if (currentFragmentOverview != FRAGMENT.STOP_LIST) {
             if (stopListFragment == null) {
-                stopListFragment = new StopListFragment();
+                stopListFragment = StopListFragment.newInstance();
             }
-            StopListFragment stopListFragment = new StopListFragment();
             fragmentTransactionReplaceOverview(stopListFragment);
             currentFragmentOverview = FRAGMENT.STOP_LIST;
         }
     }
 
-    private Fragment getCurrentFragment() {
-        return fragmentManager.findFragmentById(R.id.content_main_fragment_container);
-    }
-
     private void fragmentTransactionReplace(Fragment fragment) {
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.content_main_fragment_container, fragment, fragment.getClass().getName());
-        fragmentTransaction.commit();
-    }
-
-    private void fragmentTransactionAdd(Fragment fragment) {
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.content_main_fragment_container, fragment, fragment.getClass().getName());
-        fragmentTransaction.addToBackStack(fragment.getClass().getName());
-        fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
-        fragmentTransaction.commit();
-    }
-
-    private void fragmentTransactionPop() {
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentManager.popBackStack();
-        fragmentTransaction.setCustomAnimations(android.R.anim.fade_out, android.R.anim.fade_in);
-        fragmentTransaction.commit();
+        this.fragmentManager.beginTransaction()
+                .replace(R.id.content_main_fragment_container, fragment, fragment.getClass().getName())
+                .commit();
     }
 
     private void fragmentTransactionReplaceOverview(Fragment fragment) {
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.bottom_sheet_main_fragment_container, fragment, fragment.getClass().getName());
-        fragmentTransaction.commit();
+        this.fragmentManager.beginTransaction()
+                .replace(R.id.bottom_sheet_main_fragment_container, fragment, fragment.getClass().getName())
+                .commit();
     }
 
-    private void fragmentTransactionAddOverview(Fragment fragment) {
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.bottom_sheet_main_fragment_container, fragment, fragment.getClass().getName());
-        fragmentTransaction.addToBackStack(fragment.getClass().getName());
-        fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
-        fragmentTransaction.commit();
-    }
-
-    private void fragmentTransactionPopOverview() {
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentManager.popBackStack();
-        fragmentTransaction.setCustomAnimations(android.R.anim.fade_out, android.R.anim.fade_in);
-        fragmentTransaction.commit();
-    }
-
-    public static enum FRAGMENT {
-        HOME_MAP,
+    private enum FRAGMENT {
         INFO,
         LINE_LIST,
         STOP_LIST
