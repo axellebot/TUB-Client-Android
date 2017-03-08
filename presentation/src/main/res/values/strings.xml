@@ -41,7 +41,7 @@
     <string name="item_row_line_tv_default">Unknow Line</string>
 
     <!-- List Stop-->
-    <string name="list_stop_title">Stops</string>
+    <string name="list_stop_header_title">Stops</string>
     <string name="item_row_stop_tv_default">Unknow Stop</string>
 
     <!--Exception messages-->

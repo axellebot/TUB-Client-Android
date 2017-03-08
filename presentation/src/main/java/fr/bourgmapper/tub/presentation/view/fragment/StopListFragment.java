@@ -14,6 +14,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.presentation.internal.di.HasComponent;
 import fr.bourgmapper.tub.presentation.internal.di.components.CoreComponent;
@@ -22,6 +23,7 @@ import fr.bourgmapper.tub.presentation.listener.StopListListener;
 import fr.bourgmapper.tub.presentation.model.StopModel;
 import fr.bourgmapper.tub.presentation.presenter.StopListFragmentPresenter;
 import fr.bourgmapper.tub.presentation.view.StopListView;
+import fr.bourgmapper.tub.presentation.view.adapter.SimpleDividerItemDecoration;
 import fr.bourgmapper.tub.presentation.view.adapter.StopListAdapter;
 import fr.bourgmapper.tub.presentation.view.adapter.StopListLayoutManager;
 
@@ -37,7 +39,13 @@ public class StopListFragment extends BaseFragment implements StopListView, HasC
     StopListAdapter stopListAdapter;
 
     @BindView(R.id.list_stop_recycler_view)
-    RecyclerView rv_stops;
+    RecyclerView list_stop;
+
+    @BindView(R.id.list_stop_progress_bar)
+    View list_stop_progress_bar;
+
+    @BindView(R.id.list_stop_retry_btn)
+    View list_stop_retry_button;
 
     private CoreComponent coreComponent;
 
@@ -104,7 +112,7 @@ public class StopListFragment extends BaseFragment implements StopListView, HasC
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        rv_stops.setAdapter(null);
+        list_stop.setAdapter(null);
     }
 
     @Override
@@ -121,22 +129,22 @@ public class StopListFragment extends BaseFragment implements StopListView, HasC
 
     @Override
     public void showLoadingStopList() {
-
+        this.list_stop_progress_bar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoadingStopList() {
-
+        this.list_stop_progress_bar.setVisibility(View.GONE);
     }
 
     @Override
     public void showRetryStopList() {
-
+        this.list_stop_retry_button.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideRetryStopList() {
-
+        this.list_stop_retry_button.setVisibility(View.GONE);
     }
 
     @Override
@@ -165,8 +173,9 @@ public class StopListFragment extends BaseFragment implements StopListView, HasC
 
     private void setupStopList() {
         this.stopListAdapter.setOnItemClickListener(onItemClickListener);
-        this.rv_stops.setLayoutManager(new StopListLayoutManager(context()));
-        this.rv_stops.setAdapter(stopListAdapter);
+        this.list_stop.setLayoutManager(new StopListLayoutManager(context()));
+        this.list_stop.setAdapter(stopListAdapter);
+        this.list_stop.addItemDecoration(new SimpleDividerItemDecoration(context()));
     }
 
     /**
@@ -176,7 +185,7 @@ public class StopListFragment extends BaseFragment implements StopListView, HasC
         this.stopListFragmentPresenter.initialize();
     }
 
-    //TODO : Bind retry Button
+    @OnClick(R.id.list_stop_retry_btn)
     void onButtonRetryClick() {
         StopListFragment.this.loadStopList();
     }
