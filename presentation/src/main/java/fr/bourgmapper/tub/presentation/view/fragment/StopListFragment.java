@@ -64,6 +64,15 @@ public class StopListFragment extends BaseFragment implements StopListView, HasC
         setRetainInstance(true);
     }
 
+    public static StopListFragment newInstance() {
+
+        Bundle args = new Bundle();
+
+        StopListFragment fragment = new StopListFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);

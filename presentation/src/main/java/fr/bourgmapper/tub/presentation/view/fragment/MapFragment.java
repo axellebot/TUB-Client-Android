@@ -58,6 +58,15 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, Mai
         setRetainInstance(true);
     }
 
+    public static MapFragment newInstance() {
+        
+        Bundle args = new Bundle();
+        
+        MapFragment fragment = new MapFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);

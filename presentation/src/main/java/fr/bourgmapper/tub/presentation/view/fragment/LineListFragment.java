@@ -66,6 +66,15 @@ public class LineListFragment extends BaseFragment implements LineListView, HasC
         setRetainInstance(true);
     }
 
+    public static LineListFragment newInstance() {
+
+        Bundle args = new Bundle();
+
+        LineListFragment fragment = new LineListFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);

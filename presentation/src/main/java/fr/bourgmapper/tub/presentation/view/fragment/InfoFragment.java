@@ -32,6 +32,15 @@ public class InfoFragment extends BaseFragment implements HasComponent<CoreCompo
     public InfoFragment() {
         setRetainInstance(true);
     }
+    
+    public static InfoFragment newInstance() {
+
+        Bundle args = new Bundle();
+        
+        InfoFragment fragment = new InfoFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public void onAttach(Activity activity) {
