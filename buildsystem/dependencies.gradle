@@ -11,16 +11,11 @@ ext {
     androidTargetSdkVersion = 25
     androidCompileSdkVersion = 25
     multiDexEnabled = true
-    targetModuleName = "DBFlowModule"
 
     //Libraries
     daggerVersion = '2.8'
     butterKnifeVersion = '8.4.0'
-    cardViewVersion = "25.1.1"
-    recyclerViewVersion = '25.1.1'
-    appCompatVersion = '25.1.1'
-    supportVersion = '25.1.1'
-    designVersion = '25.1.1'
+    supportVersion = '25.2.0'
     autoFitTextViewVersion = '0.2.1'
     materialDifalogsVersion = '0.9.0.2'
     rxJavaVersion = '2.0.1'
@@ -54,11 +49,6 @@ ext {
             dagger             : "com.google.dagger:dagger:${daggerVersion}",
             butterKnifeCompiler: "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
             butterKnife        : "com.jakewharton:butterknife:${butterKnifeVersion}",
-            cardView           : "com.android.support:cardview-v7:${cardViewVersion}",
-            recyclerView       : "com.android.support:recyclerview-v7:${recyclerViewVersion}",
-            appCompat          : "com.android.support:appcompat-v7:${appCompatVersion}",
-            support            : "com.android.support:support-v4:${supportVersion}",
-            design             : "com.android.support:design:${designVersion}",
             autoFitTextView    : "me.grantland:autofittextview:${autoFitTextViewVersion}",
             materialDialogs    : "com.afollestad.material-dialogs:core:${materialDifalogsVersion}",
             rxJava             : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
@@ -66,6 +56,19 @@ ext {
             javaxAnnotation    : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
             playServices       : "com.google.android.gms:play-services:${playServicesVersion}",
             androidMapUtils    : "com.google.maps.android:android-maps-utils:${androidMapsUtilsVersion}",
+
+            // Support Libraries
+            appCompat          : "com.android.support:appcompat-v7:${supportVersion}",
+            cardView           : "com.android.support:cardview-v7:${supportVersion}",
+            design             : "com.android.support:design:${supportVersion}",
+            gridLayout         : "com.android.support:gridlayout-v7:${supportVersion}",
+            leanback           : "com.android.support:leanback-v17:${supportVersion}",
+            mediarouter        : "com.android.support:mediarouter-v7:${supportVersion}",
+            palette            : "com.android.support:palette-v7:${supportVersion}",
+            recyclerView       : "com.android.support:recyclerview-v7:${supportVersion}",
+            supportAnnotation  : "com.android.support:support-annotations:${supportVersion}",
+            supportV13         : "com.android.support:support-v13:${supportVersion}",
+            supportV4          : "com.android.support:support-v4:${supportVersion}",
             multidex           : "com.android.support:multidex:${multidexVersion}"
     ]
 
@@ -76,6 +79,7 @@ ext {
             espressoCore           : "com.android.support.test.espresso:espresso-core:${espressoVersion}",
             expressoIdlingRessource: "com.android.support.test.espresso:espresso-idling-resource:${espressoVersion}",
             testingSupportLib      : "com.android.support.test:testing-support-lib:${testingSupportLibVersion}",
+            supportAnnotation      : "com.android.support:support-annotations:${supportVersion}"
     ]
 
     domainDependencies = [
@@ -104,17 +108,17 @@ ext {
             retrofit          : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
             retrofitRx        : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
             retrofitGson      : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
-            greenDao          : "org.greenrobot:greendao:${greenDaoVersion}",
+            greenDao          : "org.greenrobot:greendao:${greenDaoVersion}"
     ]
 
     dataTestDependencies = [
             junit      : "junit:junit:${jUnitVersion}",
             assertj    : "org.assertj:assertj-core:${assertJVersion}",
             mockito    : "org.mockito:mockito-core:${mockitoVersion}",
-            robolectric: "org.robolectric:robolectric:${robolectricVersion}",
+            robolectric: "org.robolectric:robolectric:${robolectricVersion}"
     ]
 
     developmentDependencies = [
-            leakCanary: "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}",
+            leakCanary: "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}"
     ]
 }
