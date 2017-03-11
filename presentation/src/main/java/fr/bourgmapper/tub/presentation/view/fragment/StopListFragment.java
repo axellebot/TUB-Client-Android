@@ -17,8 +17,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.presentation.internal.di.HasComponent;
-import fr.bourgmapper.tub.presentation.internal.di.components.CoreComponent;
-import fr.bourgmapper.tub.presentation.internal.di.components.DaggerCoreComponent;
+import fr.bourgmapper.tub.presentation.internal.di.components.CoreFragmentComponent;
+import fr.bourgmapper.tub.presentation.internal.di.components.DaggerCoreFragmentComponent;
 import fr.bourgmapper.tub.presentation.listener.StopListListener;
 import fr.bourgmapper.tub.presentation.model.StopModel;
 import fr.bourgmapper.tub.presentation.presenter.StopListFragmentPresenter;
@@ -30,7 +30,7 @@ import fr.bourgmapper.tub.presentation.view.adapter.StopListLayoutManager;
 /**
  * Fragment that shows a list of Stops.
  */
-public class StopListFragment extends BaseFragment implements StopListView, HasComponent<CoreComponent> {
+public class StopListFragment extends BaseFragment implements StopListView, HasComponent<CoreFragmentComponent> {
 
     @Inject
     StopListFragmentPresenter stopListFragmentPresenter;
@@ -47,7 +47,7 @@ public class StopListFragment extends BaseFragment implements StopListView, HasC
     @BindView(R.id.list_stop_retry_btn)
     View list_stop_retry_button;
 
-    private CoreComponent coreComponent;
+    private CoreFragmentComponent coreFragmentComponent;
 
     private StopListListener stopListListener;
     private StopListAdapter.OnItemClickListener onItemClickListener =
@@ -85,7 +85,7 @@ public class StopListFragment extends BaseFragment implements StopListView, HasC
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.initializeInjector();
-        this.coreComponent.inject(this);
+        this.coreFragmentComponent.inject(this);
     }
 
     @Override
@@ -200,15 +200,15 @@ public class StopListFragment extends BaseFragment implements StopListView, HasC
     }
 
     private void initializeInjector() {
-        this.coreComponent = DaggerCoreComponent.builder()
+        this.coreFragmentComponent = DaggerCoreFragmentComponent.builder()
                 .applicationComponent(getApplicationComponent())
                 .fragmentModule(getFragmentModule())
                 .build();
     }
 
     @Override
-    public CoreComponent getComponent() {
-        return coreComponent;
+    public CoreFragmentComponent getComponent() {
+        return coreFragmentComponent;
     }
 
 }

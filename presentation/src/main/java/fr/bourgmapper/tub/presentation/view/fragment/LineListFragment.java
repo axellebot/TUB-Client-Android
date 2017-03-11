@@ -19,8 +19,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.presentation.internal.di.HasComponent;
-import fr.bourgmapper.tub.presentation.internal.di.components.CoreComponent;
-import fr.bourgmapper.tub.presentation.internal.di.components.DaggerCoreComponent;
+import fr.bourgmapper.tub.presentation.internal.di.components.CoreFragmentComponent;
+import fr.bourgmapper.tub.presentation.internal.di.components.DaggerCoreFragmentComponent;
 import fr.bourgmapper.tub.presentation.listener.LineListListener;
 import fr.bourgmapper.tub.presentation.model.LineModel;
 import fr.bourgmapper.tub.presentation.presenter.LineListFragmentPresenter;
@@ -32,7 +32,7 @@ import fr.bourgmapper.tub.presentation.view.adapter.SimpleDividerItemDecoration;
 /**
  * Fragment that shows a list of Lines.
  */
-public class LineListFragment extends BaseFragment implements LineListView, HasComponent<CoreComponent> {
+public class LineListFragment extends BaseFragment implements LineListView, HasComponent<CoreFragmentComponent> {
 
     @Inject
     LineListFragmentPresenter lineListFragmentPresenter;
@@ -49,7 +49,7 @@ public class LineListFragment extends BaseFragment implements LineListView, HasC
     @BindView(R.id.line_list_retry_btn)
     ImageView list_line_retry_btn;
 
-    private CoreComponent coreComponent;
+    private CoreFragmentComponent coreFragmentComponent;
 
     private LineListListener lineListListener;
     private LineListAdapter.OnItemClickListener onItemClickListener =
@@ -87,7 +87,7 @@ public class LineListFragment extends BaseFragment implements LineListView, HasC
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.initializeInjector();
-        this.coreComponent.inject(this);
+        this.coreFragmentComponent.inject(this);
     }
 
     @Override
@@ -202,15 +202,15 @@ public class LineListFragment extends BaseFragment implements LineListView, HasC
     }
 
     private void initializeInjector() {
-        this.coreComponent = DaggerCoreComponent.builder()
+        this.coreFragmentComponent = DaggerCoreFragmentComponent.builder()
                 .applicationComponent(getApplicationComponent())
                 .fragmentModule(getFragmentModule())
                 .build();
     }
 
     @Override
-    public CoreComponent getComponent() {
-        return coreComponent;
+    public CoreFragmentComponent getComponent() {
+        return coreFragmentComponent;
     }
 
 }

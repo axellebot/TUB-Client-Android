@@ -18,13 +18,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.presentation.internal.di.HasComponent;
-import fr.bourgmapper.tub.presentation.internal.di.components.CoreComponent;
-import fr.bourgmapper.tub.presentation.internal.di.components.DaggerCoreComponent;
+import fr.bourgmapper.tub.presentation.internal.di.components.CoreFragmentComponent;
+import fr.bourgmapper.tub.presentation.internal.di.components.DaggerCoreFragmentComponent;
 import fr.bourgmapper.tub.presentation.model.LineModel;
 import fr.bourgmapper.tub.presentation.presenter.LineDetailsFragmentPresenter;
 import fr.bourgmapper.tub.presentation.view.LineDetailsView;
 
-public class LineDetailsFragment extends BaseFragment implements LineDetailsView, HasComponent<CoreComponent> {
+public class LineDetailsFragment extends BaseFragment implements LineDetailsView, HasComponent<CoreFragmentComponent> {
     private static final String PARAM_LINE_ID = "param_line_id";
 
     @Inject
@@ -39,7 +39,7 @@ public class LineDetailsFragment extends BaseFragment implements LineDetailsView
     @BindView(R.id.fragment_line_detail_label)
     TextView tvLabel;
 
-    private CoreComponent coreComponent;
+    private CoreFragmentComponent coreFragmentComponent;
 
     public LineDetailsFragment() {
         setRetainInstance(true);
@@ -57,7 +57,7 @@ public class LineDetailsFragment extends BaseFragment implements LineDetailsView
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.initializeInjector();
-        this.coreComponent.inject(this);
+        this.coreFragmentComponent.inject(this);
     }
 
     @Override
@@ -164,15 +164,15 @@ public class LineDetailsFragment extends BaseFragment implements LineDetailsView
     }
 
     private void initializeInjector() {
-        this.coreComponent = DaggerCoreComponent.builder()
+        this.coreFragmentComponent = DaggerCoreFragmentComponent.builder()
                 .applicationComponent(getApplicationComponent())
                 .fragmentModule(getFragmentModule())
                 .build();
     }
 
     @Override
-    public CoreComponent getComponent() {
-        return coreComponent;
+    public CoreFragmentComponent getComponent() {
+        return coreFragmentComponent;
     }
 }
 

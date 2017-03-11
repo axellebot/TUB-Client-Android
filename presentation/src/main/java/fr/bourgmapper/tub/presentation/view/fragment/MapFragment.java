@@ -27,8 +27,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.presentation.internal.di.HasComponent;
-import fr.bourgmapper.tub.presentation.internal.di.components.CoreComponent;
-import fr.bourgmapper.tub.presentation.internal.di.components.DaggerCoreComponent;
+import fr.bourgmapper.tub.presentation.internal.di.components.CoreFragmentComponent;
+import fr.bourgmapper.tub.presentation.internal.di.components.DaggerCoreFragmentComponent;
 import fr.bourgmapper.tub.presentation.listener.LineListListener;
 import fr.bourgmapper.tub.presentation.listener.StopListListener;
 import fr.bourgmapper.tub.presentation.model.LineModel;
@@ -36,7 +36,7 @@ import fr.bourgmapper.tub.presentation.model.StopModel;
 import fr.bourgmapper.tub.presentation.presenter.MapFragmentPresenter;
 import fr.bourgmapper.tub.presentation.view.MainMapView;
 
-public class MapFragment extends BaseFragment implements OnMapReadyCallback, MainMapView, HasComponent<CoreComponent> {
+public class MapFragment extends BaseFragment implements OnMapReadyCallback, MainMapView, HasComponent<CoreFragmentComponent> {
 
     @Inject
     MapFragmentPresenter mapFragmentPresenter;
@@ -44,7 +44,7 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, Mai
     @BindView(R.id.fragment_map_map_view)
     MapView mMapView;
 
-    private CoreComponent coreComponent;
+    private CoreFragmentComponent coreFragmentComponent;
 
     private StopListListener stopListListener;
     private LineListListener lineListListener;
@@ -82,7 +82,7 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, Mai
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.initializeInjector();
-        this.coreComponent.inject(this);
+        this.coreFragmentComponent.inject(this);
     }
 
     @Override
@@ -245,13 +245,13 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, Mai
     }
 
     private void initializeInjector() {
-        this.coreComponent = DaggerCoreComponent.builder()
+        this.coreFragmentComponent = DaggerCoreFragmentComponent.builder()
                 .applicationComponent(getApplicationComponent())
                 .fragmentModule(getFragmentModule())
                 .build();
     }
 
-    public CoreComponent getComponent() {
-        return coreComponent;
+    public CoreFragmentComponent getComponent() {
+        return coreFragmentComponent;
     }
 }

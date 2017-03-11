@@ -21,7 +21,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.bourgmapper.tub.R;
-import fr.bourgmapper.tub.presentation.internal.di.components.CoreComponent;
+import fr.bourgmapper.tub.presentation.internal.di.components.DaggerUserActivityComponent;
+import fr.bourgmapper.tub.presentation.internal.di.components.UserActivityComponent;
 import fr.bourgmapper.tub.presentation.listener.MainNavigationListener;
 import fr.bourgmapper.tub.presentation.navigation.MainNavigator;
 import fr.bourgmapper.tub.presentation.presenter.MainActivityPresenter;
@@ -47,6 +48,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @BindView(R.id.activity_main_fab_menu)
     FloatingActionButton menuFloatingActionButton;
 
+    private UserActivityComponent userActivityComponent;
+
     private MainNavigator navigator;
     private ActionBarDrawerToggle drawerToggle;
     private BottomSheetBehavior bottomSheetBehavior;
@@ -54,6 +57,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //injection
+        this.initializeInjector();
+        this.userActivityComponent.inject(this);
 
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
@@ -67,6 +73,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         navigator.displayMapFragment();
         navigator.displayInfoFragmentOverview();
     }
+
+    on
 
     @Override
     protected void onDestroy() {
@@ -190,5 +198,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     public void onLinesButtonSelected() {
         navigator.navigateToLineList();
+    }
+
+    public void initializeInjector() {
+        this.userActivityComponent = DaggerUserActivityComponent.builder()
+                .applicationComponent(getApplicationComponent())
+                .activityModule(getActivityModule())
+                .build();
     }
 }
