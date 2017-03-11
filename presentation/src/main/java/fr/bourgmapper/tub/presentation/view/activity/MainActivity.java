@@ -74,8 +74,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         navigator.displayInfoFragmentOverview();
     }
 
-    on
-
     @Override
     protected void onDestroy() {
         this.mainActivityPresenter.destroy();
