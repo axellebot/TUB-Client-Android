@@ -9,6 +9,8 @@ import android.util.Log;
 
 import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.presentation.view.activity.MainActivity;
+import fr.bourgmapper.tub.presentation.view.composition.ConnectionDialogModule;
+import fr.bourgmapper.tub.presentation.view.composition.ConnectionDialogModuleImpl;
 import fr.bourgmapper.tub.presentation.view.fragment.InfoFragment;
 import fr.bourgmapper.tub.presentation.view.fragment.LineListFragment;
 import fr.bourgmapper.tub.presentation.view.fragment.MapFragment;
@@ -28,6 +30,7 @@ public class MainNavigator {
     private LineListFragment lineListFragment;
     private StopListFragment stopListFragment;
 
+    private ConnectionDialogModule connectionDialogModule;
     private Intent shareIntent;
     private Intent contactIntent;
 
@@ -36,6 +39,7 @@ public class MainNavigator {
         this.context = activity;
         this.fragmentManager = activity.getSupportFragmentManager();
 
+        this.setupConnectionDialog();
         this.setupContactIntent();
         this.setupShareIntent();
     }
@@ -97,12 +101,20 @@ public class MainNavigator {
         }
     }
 
+    public void navigateToConnectionDialog() {
+        this.connectionDialogModule.display();
+    }
+
     public void navigateToShareIntent() {
-        context.startActivity(this.shareIntent);
+        this.context.startActivity(this.shareIntent);
     }
 
     public void navigateToContactIntent() {
-        context.startActivity(Intent.createChooser(this.contactIntent, "Send Email"));
+        this.context.startActivity(Intent.createChooser(this.contactIntent, "Send Email"));
+    }
+
+    private void setupConnectionDialog() {
+        this.connectionDialogModule = new ConnectionDialogModuleImpl(context);
     }
 
     private void setupContactIntent() {

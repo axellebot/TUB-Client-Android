@@ -16,6 +16,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -28,10 +31,8 @@ import fr.bourgmapper.tub.presentation.listener.MainNavigationListener;
 import fr.bourgmapper.tub.presentation.navigation.MainNavigator;
 import fr.bourgmapper.tub.presentation.presenter.MainActivityPresenter;
 import fr.bourgmapper.tub.presentation.view.MenuView;
-import fr.bourgmapper.tub.presentation.view.composition.ConnectionDialogModule;
-import fr.bourgmapper.tub.presentation.view.composition.ConnectionDialogModuleImpl;
 
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, MainNavigationListener, MenuView {
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, MainNavigationListener, MaterialDialog.SingleButtonCallback,MenuView {
     private static final String TAG = "MainActivity";
 
     @Inject
@@ -201,8 +202,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.navigation_drawer_log_in:
-                ConnectionDialogModule connectionDialogModule = new ConnectionDialogModuleImpl(this);
-                connectionDialogModule.display();
+                navigator.navigateToConnectionDialog();
                 break;
             case R.id.nav_drawer_contact_us:
                 navigator.navigateToContactIntent();
@@ -212,6 +212,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 break;
         }
         return false;
+    }
+
+    @Override
+    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+
     }
 
     @Override
@@ -230,4 +235,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 .activityModule(getActivityModule())
                 .build();
     }
+
+
 }
