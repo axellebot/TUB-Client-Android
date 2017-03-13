@@ -34,11 +34,10 @@ import fr.bourgmapper.tub.presentation.view.composition.ConnectionDialogModuleIm
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, MainNavigationListener, MenuView {
     private static final String TAG = "MainActivity";
 
-    //TODO Inject Presenter by creating annotation and component
     @Inject
     MainActivityPresenter mainActivityPresenter;
 
-    @BindView(R.id.drawer_layout)
+    @BindView(R.id.activity_main_drawer_layout)
     DrawerLayout drawerLayout;
 
     @BindView(R.id.activity_main_navigation_drawer)
@@ -52,9 +51,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     private UserActivityComponent userActivityComponent;
 
-    private MainNavigator navigator;
+
     private ActionBarDrawerToggle drawerToggle;
     private BottomSheetBehavior bottomSheetBehavior;
+    private MainNavigator navigator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +65,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
         navigator = new MainNavigator(this);
 
         this.initNavigationDrawer();
@@ -78,11 +79,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     protected void onDestroy() {
-        this.mainActivityPresenter.destroy();
         super.onDestroy();
+        this.mainActivityPresenter.destroy();
     }
-
-
+    
     @Override
     public void onBackPressed() {
         navigator.onBackPressed();
@@ -204,10 +204,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 ConnectionDialogModule connectionDialogModule = new ConnectionDialogModuleImpl(this);
                 connectionDialogModule.display();
                 break;
+            case R.id.nav_drawer_share:
+                navigator.navigateToShareIntent();
+                break;
         }
         return false;
     }
-
 
     @Override
     public void onStopsButtonSelected() {

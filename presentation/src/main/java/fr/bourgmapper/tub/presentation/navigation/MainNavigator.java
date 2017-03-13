@@ -1,5 +1,6 @@
 package fr.bourgmapper.tub.presentation.navigation;
 
+import android.content.Intent;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -25,9 +26,13 @@ public class MainNavigator {
     private LineListFragment lineListFragment;
     private StopListFragment stopListFragment;
 
+    private Intent shareIntent;
+
     public MainNavigator(MainActivity activity) {
         this.activity = activity;
         this.fragmentManager = activity.getSupportFragmentManager();
+
+        this.setupShareIntent();
     }
 
     public void onBackPressed() {
@@ -85,6 +90,17 @@ public class MainNavigator {
             fragmentTransactionReplaceOverview(stopListFragment);
             currentFragmentOverview = FRAGMENT.STOP_LIST;
         }
+    }
+
+    public void navigateToShareIntent() {
+        activity.startActivity(this.shareIntent);
+    }
+
+    private void setupShareIntent() {
+        this.shareIntent = new Intent()
+                .setAction(Intent.ACTION_SEND)
+                .putExtra(Intent.EXTRA_TEXT, activity.getString(R.string.intent_share_text_content))
+                .setType("text/plain");
     }
 
     private void fragmentTransactionReplace(Fragment fragment) {

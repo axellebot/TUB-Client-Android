@@ -32,6 +32,6 @@ public class MainActivityPresenter implements Presenter {
 
     @Override
     public void destroy() {
-
+        setView(null);
     }
 }

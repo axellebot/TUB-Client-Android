@@ -11,7 +11,10 @@
     <!--Window-->
     <string name="window_map_stop_info_default_title">Stop Label</string>
     <string name="window_map_stop_info_default_description">Description</string>
-
+    
+    <!--Intent Share-->
+    <string name="intent_share_text_content">Look out this new application I just found : "Tub"</string>
+    
     <!--Fragment Info-->
     <string name="fragment_info_btn_fav_default">0 Stops</string>
     <string name="fragment_info_btn_bus_default">Bus</string>
