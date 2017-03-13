@@ -82,7 +82,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         super.onDestroy();
         this.mainActivityPresenter.destroy();
     }
-    
+
     @Override
     public void onBackPressed() {
         navigator.onBackPressed();
@@ -203,6 +203,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             case R.id.navigation_drawer_log_in:
                 ConnectionDialogModule connectionDialogModule = new ConnectionDialogModuleImpl(this);
                 connectionDialogModule.display();
+                break;
+            case R.id.nav_drawer_contact_us:
+                navigator.navigateToContactIntent();
                 break;
             case R.id.nav_drawer_share:
                 navigator.navigateToShareIntent();

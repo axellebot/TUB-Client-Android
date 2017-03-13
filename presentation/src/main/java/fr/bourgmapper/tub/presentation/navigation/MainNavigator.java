@@ -1,5 +1,6 @@
 package fr.bourgmapper.tub.presentation.navigation;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
@@ -20,6 +21,7 @@ public class MainNavigator {
 
     private FragmentManager fragmentManager;
     private MainActivity activity;
+    private Context context;
 
     private MapFragment mapFragment;
     private InfoFragment infoFragment;
@@ -27,11 +29,14 @@ public class MainNavigator {
     private StopListFragment stopListFragment;
 
     private Intent shareIntent;
+    private Intent contactIntent;
 
     public MainNavigator(MainActivity activity) {
         this.activity = activity;
+        this.context = activity;
         this.fragmentManager = activity.getSupportFragmentManager();
 
+        this.setupContactIntent();
         this.setupShareIntent();
     }
 
@@ -93,13 +98,25 @@ public class MainNavigator {
     }
 
     public void navigateToShareIntent() {
-        activity.startActivity(this.shareIntent);
+        context.startActivity(this.shareIntent);
+    }
+
+    public void navigateToContactIntent() {
+        context.startActivity(Intent.createChooser(this.contactIntent, "Send Email"));
+    }
+
+    private void setupContactIntent() {
+        this.contactIntent = new Intent(Intent.ACTION_SEND)
+                .setType("text/plain")
+                .putExtra(Intent.EXTRA_EMAIL, this.context.getString(R.string.intent_contact_receiver))
+                .putExtra(Intent.EXTRA_SUBJECT, this.context.getString(R.string.intent_contact_subject))
+                .putExtra(Intent.EXTRA_TEXT, this.context.getString(R.string.intent_contact_text_content));
     }
 
     private void setupShareIntent() {
         this.shareIntent = new Intent()
                 .setAction(Intent.ACTION_SEND)
-                .putExtra(Intent.EXTRA_TEXT, activity.getString(R.string.intent_share_text_content))
+                .putExtra(Intent.EXTRA_TEXT, this.context.getString(R.string.intent_share_text_content))
                 .setType("text/plain");
     }
 
