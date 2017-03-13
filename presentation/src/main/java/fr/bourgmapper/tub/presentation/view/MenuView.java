@@ -7,6 +7,15 @@ import android.content.Context;
  * In this case is used as a view representing a navigation drawer.
  */
 public interface MenuView {
+    /**
+     * Open the menu.
+     */
+    void openMenu();
+
+    /**
+     * Close the menu.
+     */
+    void closeMenu();
 
     /**
      * Get a {@link Context}.

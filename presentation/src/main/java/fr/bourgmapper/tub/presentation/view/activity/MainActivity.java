@@ -1,5 +1,6 @@
 package fr.bourgmapper.tub.presentation.view.activity;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Build;
@@ -26,10 +27,11 @@ import fr.bourgmapper.tub.presentation.internal.di.components.UserActivityCompon
 import fr.bourgmapper.tub.presentation.listener.MainNavigationListener;
 import fr.bourgmapper.tub.presentation.navigation.MainNavigator;
 import fr.bourgmapper.tub.presentation.presenter.MainActivityPresenter;
+import fr.bourgmapper.tub.presentation.view.MenuView;
 import fr.bourgmapper.tub.presentation.view.composition.ConnectionDialogModule;
 import fr.bourgmapper.tub.presentation.view.composition.ConnectionDialogModuleImpl;
 
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, MainNavigationListener {
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, MainNavigationListener, MenuView {
     private static final String TAG = "MainActivity";
 
     //TODO Inject Presenter by creating annotation and component
@@ -80,11 +82,36 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         super.onDestroy();
     }
 
+
+    @Override
+    public void onBackPressed() {
+        navigator.onBackPressed();
+    }
+
+    @Override
+    public void openMenu() {
+        this.drawerLayout.openDrawer(GravityCompat.START);
+    }
+
+    @Override
+    public void closeMenu() {
+        this.drawerLayout.closeDrawer(GravityCompat.START, true);
+    }
+
+    @Override
+    public Context context() {
+        return getApplicationContext();
+    }
+
     private void initNavigationDrawer() {
         this.menuFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                drawerLayout.openDrawer(GravityCompat.START);
+                if (MainActivity.this.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    MainActivity.this.closeMenu();
+                } else {
+                    MainActivity.this.openMenu();
+                }
             }
         });
 
@@ -168,12 +195,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     public BottomSheetBehavior getBottomSheetBehavior() {
         return bottomSheetBehavior;
-    }
-
-
-    @Override
-    public void onBackPressed() {
-        navigator.onBackPressed();
     }
 
     @Override
