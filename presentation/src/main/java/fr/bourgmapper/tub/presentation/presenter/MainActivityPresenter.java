@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import javax.inject.Inject;
 
+import fr.bourgmapper.tub.presentation.model.UserModel;
 import fr.bourgmapper.tub.presentation.navigation.Navigator;
 import fr.bourgmapper.tub.presentation.view.HomeView;
 
@@ -40,6 +41,11 @@ public class MainActivityPresenter implements Presenter {
 
     public void onConnectClicked(){
         this.navigator.navigateToConnectionDialog(homeView.context());
+        UserModel user = new UserModel();
+        user.setEmail("test@test.fr");
+        user.setFname("Fname");
+        user.setLname("Lname");
+        this.homeView.renderUser(user);
     }
 
     public void onContactUsClicked(){

@@ -16,6 +16,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -29,11 +31,9 @@ import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.presentation.internal.di.components.DaggerUserActivityComponent;
 import fr.bourgmapper.tub.presentation.internal.di.components.UserActivityComponent;
 import fr.bourgmapper.tub.presentation.listener.MainNavigationListener;
-import fr.bourgmapper.tub.presentation.navigation.Navigator;
+import fr.bourgmapper.tub.presentation.model.UserModel;
 import fr.bourgmapper.tub.presentation.presenter.MainActivityPresenter;
 import fr.bourgmapper.tub.presentation.view.HomeView;
-import fr.bourgmapper.tub.presentation.view.composition.ConnectionDialogModule;
-import fr.bourgmapper.tub.presentation.view.composition.ConnectionDialogModuleImpl;
 import fr.bourgmapper.tub.presentation.view.fragment.InfoFragment;
 import fr.bourgmapper.tub.presentation.view.fragment.LineListFragment;
 import fr.bourgmapper.tub.presentation.view.fragment.MapFragment;
@@ -48,7 +48,7 @@ public class MainActivity extends BaseActivity implements HomeView, NavigationVi
     @BindView(R.id.activity_main_drawer_layout)
     DrawerLayout drawerLayout;
 
-    @BindView(R.id.activity_main_navigation_drawer)
+    @BindView(R.id.activity_main_navigation_view)
     NavigationView navigationView;
 
     @BindView(R.id.bottom_sheet_main)
@@ -56,6 +56,11 @@ public class MainActivity extends BaseActivity implements HomeView, NavigationVi
 
     @BindView(R.id.activity_main_fab_menu)
     FloatingActionButton menuFloatingActionButton;
+
+    MenuItem loginItemView;
+    ImageView avatar_img;
+    TextView email_tv;
+    TextView nickname_tv;
 
     private UserActivityComponent userActivityComponent;
 
@@ -86,6 +91,7 @@ public class MainActivity extends BaseActivity implements HomeView, NavigationVi
 
         this.setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        this.bindNavigationView();
 
         this.initNavigationDrawer();
         this.initBottomSheet();
@@ -95,6 +101,14 @@ public class MainActivity extends BaseActivity implements HomeView, NavigationVi
         this.displayMap();
         this.displayInfo();
 
+    }
+
+    private void bindNavigationView(){
+        this.loginItemView = navigationView.getMenu().findItem(R.id.navigation_drawer_log_in);
+        View headerView = navigationView.getHeaderView(0);
+        this.avatar_img = (ImageView) headerView.findViewById(R.id.navigation_drawer_avatar);
+        this.nickname_tv = (TextView) headerView.findViewById(R.id.navigation_drawer_nickname);
+        this.email_tv = (TextView) headerView.findViewById(R.id.navigation_drawer_email);
     }
 
     @Override
@@ -152,6 +166,16 @@ public class MainActivity extends BaseActivity implements HomeView, NavigationVi
         });
     }
 
+    @Override
+    public void renderUser(UserModel user) {
+        avatar_img.setImageDrawable(ContextCompat.getDrawable(context(),R.drawable.ic_account_circle_black_24dp));
+
+        nickname_tv.setText(user.getFname()+" "+user.getLname());
+        email_tv.setText(user.getEmail());
+
+        loginItemView.setTitle(R.string.navigation_drawer_user_log_out);
+        loginItemView.setIcon(R.drawable.ic_exit_to_app_black_24dp);
+    }
 
     @Override
     public void openMenu() {

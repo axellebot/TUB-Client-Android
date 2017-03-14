@@ -35,6 +35,7 @@
     <string name="navigation_drawer_navigation_submenu_communication_title">Communication</string>
     <string name="navigation_drawer_share">Share</string>
     <string name="navigation_drawer_user_log_in">Log in</string>
+    <string name="navigation_drawer_user_log_out">Log out</string>
     <string name="default_username">android.studio@android.com</string>
 
     <!-- Dialog Connection -->
