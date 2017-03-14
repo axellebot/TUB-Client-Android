@@ -1,6 +1,7 @@
 package fr.bourgmapper.tub.presentation.view.activity;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
 import fr.bourgmapper.tub.presentation.AndroidApplication;
@@ -18,6 +19,18 @@ public abstract class BaseActivity extends AppCompatActivity {
         getApplicationComponent().inject(this);
     }
 
+    /**
+     * Replaces a {@link Fragment} to this activity's layout.
+     *
+     * @param containerViewId The container view to where add the fragment.
+     * @param fragment        The fragment to be added.
+     */
+    protected void replaceFragment(int containerViewId, Fragment fragment) {
+        this.getSupportFragmentManager()
+                .beginTransaction()
+                .replace(containerViewId, fragment, fragment.getClass().getName())
+                .commit();
+    }
 
     /**
      * Get the Main Application component for dependency injection.

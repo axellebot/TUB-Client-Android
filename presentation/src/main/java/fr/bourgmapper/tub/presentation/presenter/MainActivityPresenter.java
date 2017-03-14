@@ -4,20 +4,23 @@ import android.support.annotation.NonNull;
 
 import javax.inject.Inject;
 
-import fr.bourgmapper.tub.presentation.view.MenuView;
+import fr.bourgmapper.tub.presentation.navigation.Navigator;
+import fr.bourgmapper.tub.presentation.view.HomeView;
 
 public class MainActivityPresenter implements Presenter {
     private static String TAG = "MainActivityPresenter";
 
-    private MenuView menuView;
+    private Navigator navigator;
+
+    private HomeView homeView;
 
     @Inject
-    public MainActivityPresenter() {
-
+    public MainActivityPresenter(Navigator navigator) {
+        this.navigator = navigator;
     }
 
-    public void setView(@NonNull MenuView view) {
-        this.menuView = view;
+    public void setView(@NonNull HomeView view) {
+        this.homeView = view;
     }
 
     @Override
@@ -33,5 +36,17 @@ public class MainActivityPresenter implements Presenter {
     @Override
     public void destroy() {
         setView(null);
+    }
+
+    public void onConnectClicked(){
+        this.navigator.navigateToConnectionDialog(homeView.context());
+    }
+
+    public void onContactUsClicked(){
+        this.navigator.navigateToContactIntent(homeView.context());
+    }
+
+    public void onShareClicked(){
+        this.navigator.navigateToShareIntent(homeView.context());
     }
 }
