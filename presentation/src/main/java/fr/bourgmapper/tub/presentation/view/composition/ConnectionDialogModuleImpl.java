@@ -7,10 +7,6 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import butterknife.ButterKnife;
 import fr.bourgmapper.tub.R;
 
-/**
- * Created by axell on 24/11/2016.
- */
-
 public class ConnectionDialogModuleImpl implements ConnectionDialogModule {
 
     private MaterialDialog.Builder materialDialogBuilder;
@@ -27,7 +23,6 @@ public class ConnectionDialogModuleImpl implements ConnectionDialogModule {
     @Override
     public void display() {
         MaterialDialog dialog = materialDialogBuilder.show();
-
         ButterKnife.bind(dialog.getView());
     }
 }

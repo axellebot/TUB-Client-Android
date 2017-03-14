@@ -1,19 +1,18 @@
 package fr.bourgmapper.tub.presentation.internal.di.modules;
 
-import android.support.v4.app.Fragment;
-
 import dagger.Module;
 import dagger.Provides;
 import fr.bourgmapper.tub.presentation.internal.di.PerFragment;
+import fr.bourgmapper.tub.presentation.view.fragment.BaseFragment;
 
 /**
  * A module to wrap the Fragment state and expose it to the graph.
  */
 @Module
 public class FragmentModule {
-    private final Fragment fragment;
+    private final BaseFragment fragment;
 
-    public FragmentModule(Fragment fragment) {
+    public FragmentModule(BaseFragment fragment) {
         this.fragment = fragment;
     }
 
@@ -22,7 +21,7 @@ public class FragmentModule {
      */
     @Provides
     @PerFragment
-    Fragment fragment() {
+    BaseFragment fragment() {
         return this.fragment;
     }
 }

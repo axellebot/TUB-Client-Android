@@ -1,5 +1,6 @@
 package fr.bourgmapper.tub.presentation.view.activity;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Build;
@@ -12,8 +13,12 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 
 import javax.inject.Inject;
 
@@ -21,62 +26,106 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.bourgmapper.tub.R;
-import fr.bourgmapper.tub.presentation.internal.di.HasComponent;
-import fr.bourgmapper.tub.presentation.internal.di.components.CoreComponent;
-import fr.bourgmapper.tub.presentation.internal.di.components.DaggerCoreComponent;
+import fr.bourgmapper.tub.presentation.internal.di.components.DaggerUserActivityComponent;
+import fr.bourgmapper.tub.presentation.internal.di.components.UserActivityComponent;
 import fr.bourgmapper.tub.presentation.listener.MainNavigationListener;
-import fr.bourgmapper.tub.presentation.navigation.MainNavigator;
+import fr.bourgmapper.tub.presentation.navigation.Navigator;
 import fr.bourgmapper.tub.presentation.presenter.MainActivityPresenter;
+import fr.bourgmapper.tub.presentation.view.HomeView;
 import fr.bourgmapper.tub.presentation.view.composition.ConnectionDialogModule;
 import fr.bourgmapper.tub.presentation.view.composition.ConnectionDialogModuleImpl;
+import fr.bourgmapper.tub.presentation.view.fragment.InfoFragment;
+import fr.bourgmapper.tub.presentation.view.fragment.LineListFragment;
+import fr.bourgmapper.tub.presentation.view.fragment.MapFragment;
+import fr.bourgmapper.tub.presentation.view.fragment.StopListFragment;
 
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, MainNavigationListener{
+public class MainActivity extends BaseActivity implements HomeView, NavigationView.OnNavigationItemSelectedListener, MainNavigationListener, MaterialDialog.SingleButtonCallback {
     private static final String TAG = "MainActivity";
 
     @Inject
     MainActivityPresenter mainActivityPresenter;
 
-    @BindView(R.id.drawer_layout)
+    @BindView(R.id.activity_main_drawer_layout)
     DrawerLayout drawerLayout;
+
     @BindView(R.id.activity_main_navigation_drawer)
     NavigationView navigationView;
-    //BottomSheet
+
     @BindView(R.id.bottom_sheet_main)
     View bottomSheet;
+
     @BindView(R.id.activity_main_fab_menu)
     FloatingActionButton menuFloatingActionButton;
-    private CoreComponent coreComponent;
-    private MainNavigator navigator;
+
+    private UserActivityComponent userActivityComponent;
+
     private ActionBarDrawerToggle drawerToggle;
     private BottomSheetBehavior bottomSheetBehavior;
+
+
+    public enum FRAGMENT {
+        INFO,
+        LINE_LIST,
+        STOP_LIST
+    }
+
+    private FRAGMENT currentFragmentOverview;
+
+    private MapFragment mapFragment;
+    private InfoFragment infoFragment;
+    private LineListFragment lineListFragment;
+    private StopListFragment stopListFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //injection
+        this.initializeInjector();
+        this.userActivityComponent.inject(this);
+        this.mainActivityPresenter.setView(this);
 
-        setContentView(R.layout.activity_main);
+        this.setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        navigator = new MainNavigator(this);
 
         this.initNavigationDrawer();
         this.initBottomSheet();
 
         navigationView.setNavigationItemSelectedListener(this);
 
-        navigator.displayHomeMapFragment();
+        this.displayMap();
+        this.displayInfo();
+
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mainActivityPresenter.destroy();
+    public void onBackPressed() {
+        Log.i(TAG, "Back pressed");
+        if (currentFragmentOverview == FRAGMENT.INFO && this.bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
+            this.finish();
+        } else {
+            switch (currentFragmentOverview) {
+                case INFO:
+                    this.bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                    break;
+                case LINE_LIST:
+                    this.displayInfo();
+                    break;
+                case STOP_LIST:
+                    this.displayInfo();
+                    break;
+            }
+        }
     }
 
     private void initNavigationDrawer() {
         this.menuFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                drawerLayout.openDrawer(GravityCompat.START);
+                if (MainActivity.this.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    MainActivity.this.closeMenu();
+                } else {
+                    MainActivity.this.openMenu();
+                }
             }
         });
 
@@ -101,6 +150,65 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 checkStatusBarDim();
             }
         });
+    }
+
+
+    @Override
+    public void openMenu() {
+        this.drawerLayout.openDrawer(GravityCompat.START);
+    }
+
+    @Override
+    public void closeMenu() {
+        this.drawerLayout.closeDrawer(GravityCompat.START, true);
+    }
+
+    @Override
+    public void displayMap() {
+        if (this.mapFragment == null) {
+            this.mapFragment = MapFragment.newInstance();
+        }
+        this.replaceFragment(R.id.content_main_fragment_container, this.mapFragment);
+    }
+
+
+    @Override
+    public void displayInfo() {
+        if (currentFragmentOverview != FRAGMENT.INFO) {
+            if (infoFragment == null) {
+                infoFragment = InfoFragment.newInstance();
+            }
+            this.replaceFragment(R.id.bottom_sheet_main_fragment_container, this.infoFragment);
+            currentFragmentOverview = FRAGMENT.INFO;
+        }
+        this.bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+    }
+
+    @Override
+    public void displayLineList() {
+        if (currentFragmentOverview != FRAGMENT.LINE_LIST) {
+            if (lineListFragment == null) {
+                lineListFragment = LineListFragment.newInstance();
+            }
+            this.replaceFragment(R.id.bottom_sheet_main_fragment_container, this.lineListFragment);
+            currentFragmentOverview = FRAGMENT.LINE_LIST;
+        }
+    }
+
+    @Override
+    public void displayStopList() {
+        if (currentFragmentOverview != FRAGMENT.STOP_LIST) {
+            if (stopListFragment == null) {
+                stopListFragment = StopListFragment.newInstance();
+            }
+            this.replaceFragment(R.id.bottom_sheet_main_fragment_container, this.stopListFragment);
+            currentFragmentOverview = FRAGMENT.STOP_LIST;
+        }
+    }
+
+    @Override
+    public Context context() {
+        return this;
     }
 
     private void checkStatusBarDim() {
@@ -155,38 +263,48 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @OnClick(R.id.activity_main_fab_close)
     public void onCloseFABClicked(View view) {
-        navigator.onBackPressed();
-    }
-
-    public BottomSheetBehavior getBottomSheetBehavior() {
-        return bottomSheetBehavior;
-    }
-
-
-    @Override
-    public void onBackPressed() {
-        navigator.onBackPressed();
+        this.onBackPressed();
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.navigation_drawer_log_in:
-                ConnectionDialogModule connectionDialogModule = new ConnectionDialogModuleImpl(this);
-                connectionDialogModule.display();
+                this.mainActivityPresenter.onConnectClicked();
+                break;
+            case R.id.nav_drawer_contact_us:
+                this.mainActivityPresenter.onContactUsClicked();
+                break;
+            case R.id.nav_drawer_share:
+                this.mainActivityPresenter.onShareClicked();
                 break;
         }
         return false;
     }
 
+    @Override
+    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+
+    }
 
     @Override
     public void onStopsButtonSelected() {
-        navigator.displayStopListFragmentOverview();
+        if(currentFragmentOverview != FRAGMENT.LINE_LIST) {
+            this.displayLineList();
+        }
     }
 
     @Override
     public void onLinesButtonSelected() {
-        navigator.displayLineListFragmentOverview();
+        if(currentFragmentOverview != FRAGMENT.STOP_LIST) {
+            this.displayStopList();
+        }
+    }
+
+    public void initializeInjector() {
+        this.userActivityComponent = DaggerUserActivityComponent.builder()
+                .applicationComponent(getApplicationComponent())
+                .activityModule(getActivityModule())
+                .build();
     }
 }

@@ -13,24 +13,33 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.bourgmapper.tub.R;
 import fr.bourgmapper.tub.presentation.internal.di.HasComponent;
-import fr.bourgmapper.tub.presentation.internal.di.components.CoreComponent;
-import fr.bourgmapper.tub.presentation.internal.di.components.DaggerCoreComponent;
+import fr.bourgmapper.tub.presentation.internal.di.components.CoreFragmentComponent;
+import fr.bourgmapper.tub.presentation.internal.di.components.DaggerCoreFragmentComponent;
 import fr.bourgmapper.tub.presentation.listener.MainNavigationListener;
 import fr.bourgmapper.tub.presentation.presenter.InfoFragmentPresenter;
 
 /**
  * Fragment that shows Info.
  */
-public class InfoFragment extends BaseFragment implements HasComponent<CoreComponent> {
+public class InfoFragment extends BaseFragment implements HasComponent<CoreFragmentComponent> {
 
     @Inject
     InfoFragmentPresenter infoFragmentPresenter;
 
-    private CoreComponent coreComponent;
+    private CoreFragmentComponent coreFragmentComponent;
     private MainNavigationListener mainNavigationListener;
 
     public InfoFragment() {
         setRetainInstance(true);
+    }
+    
+    public static InfoFragment newInstance() {
+
+        Bundle args = new Bundle();
+        
+        InfoFragment fragment = new InfoFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
@@ -45,7 +54,7 @@ public class InfoFragment extends BaseFragment implements HasComponent<CoreCompo
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.initializeInjector();
-        this.coreComponent.inject(this);
+        this.coreFragmentComponent.inject(this);
     }
 
     @Override
@@ -107,15 +116,15 @@ public class InfoFragment extends BaseFragment implements HasComponent<CoreCompo
     }
 
     private void initializeInjector() {
-        this.coreComponent = DaggerCoreComponent.builder()
+        this.coreFragmentComponent = DaggerCoreFragmentComponent.builder()
                 .applicationComponent(getApplicationComponent())
                 .fragmentModule(getFragmentModule())
                 .build();
     }
 
     @Override
-    public CoreComponent getComponent() {
-        return coreComponent;
+    public CoreFragmentComponent getComponent() {
+        return coreFragmentComponent;
     }
 
 }

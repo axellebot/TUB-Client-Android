@@ -6,8 +6,8 @@ import dagger.Module;
  * Dagger module that provides user related collaborators.
  */
 @Module
-public class CoreModule {
+public class CoreFragmentModule {
 
-    public CoreModule() {
+    public CoreFragmentModule() {
     }
 }

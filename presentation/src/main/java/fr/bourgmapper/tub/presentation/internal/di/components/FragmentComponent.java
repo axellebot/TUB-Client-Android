@@ -1,10 +1,9 @@
 package fr.bourgmapper.tub.presentation.internal.di.components;
 
-import android.support.v4.app.Fragment;
-
 import dagger.Component;
 import fr.bourgmapper.tub.presentation.internal.di.PerFragment;
 import fr.bourgmapper.tub.presentation.internal.di.modules.FragmentModule;
+import fr.bourgmapper.tub.presentation.view.fragment.BaseFragment;
 
 /**
  * Fragment-level components should extend this component.
@@ -16,5 +15,5 @@ import fr.bourgmapper.tub.presentation.internal.di.modules.FragmentModule;
 @Component(dependencies = ApplicationComponent.class, modules = FragmentModule.class)
 interface FragmentComponent {
     //Exposed to sub-graphs.
-    Fragment fragment();
+    BaseFragment fragment();
 }

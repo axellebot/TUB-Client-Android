@@ -27,7 +27,6 @@ public class AndroidApplication extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
         this.initializeInjector();
-        this.initializeDBFlow();
         this.initializeLeakDetection();
     }
 
@@ -39,10 +38,6 @@ public class AndroidApplication extends MultiDexApplication {
         this.applicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this))
                 .build();
-    }
-
-    private void initializeDBFlow() {
-
     }
 
     private void initializeLeakDetection() {

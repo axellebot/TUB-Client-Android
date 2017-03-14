@@ -72,7 +72,8 @@ dependencies {
     annotationProcessor presentationDependencies.butterKnifeCompiler
     compile presentationDependencies.butterKnife
     compile presentationDependencies.autoFitTextView
-    compile presentationDependencies.materialDialogs
+    compile presentationDependencies.materialDialogsCore
+    compile presentationDependencies.materialDialogsCommons
     compile presentationDependencies.rxJava
     compile presentationDependencies.rxAndroid
     provided presentationDependencies.javaxAnnotation
