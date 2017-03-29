@@ -95,6 +95,10 @@ dependencies {
     compile presentationDependencies.supportV4
     compile presentationDependencies.multidex
 
+    // Firebase Libraries
+    compile presentationDependencies.firebaseCore
+    compile presentationDependencies.firebaseMessaging
+
     //Testing
     androidTestCompile presentationTestDependencies.mockito
     androidTestCompile presentationTestDependencies.dexmaker

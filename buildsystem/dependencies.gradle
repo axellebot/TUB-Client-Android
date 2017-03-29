@@ -26,7 +26,7 @@ ext {
     okHttpVersion = '2.5.0'
     androidAnnotationsVersion = '21.0.3'
     arrowVersion = '1.0.0'
-    playServicesVersion = '9.6.0'
+    googleServicesVersion = '10.2.1'
     androidMapsUtilsVersion = '0.4+'
     retrofitVersion = '2.2.0'
     greenDaoVersion = '3.2.0'
@@ -56,7 +56,7 @@ ext {
             rxJava                : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
             rxAndroid             : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
             javaxAnnotation       : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
-            playServices          : "com.google.android.gms:play-services:${playServicesVersion}",
+            playServices          : "com.google.android.gms:play-services:${googleServicesVersion}",
             androidMapUtils       : "com.google.maps.android:android-maps-utils:${androidMapsUtilsVersion}",
             materialProgressBar   : "me.zhanghai.android.materialprogressbar:library:${materialProgressBarVersion}",
 
@@ -72,7 +72,11 @@ ext {
             supportAnnotation     : "com.android.support:support-annotations:${supportVersion}",
             supportV13            : "com.android.support:support-v13:${supportVersion}",
             supportV4             : "com.android.support:support-v4:${supportVersion}",
-            multidex              : "com.android.support:multidex:${multidexVersion}"
+            multidex              : "com.android.support:multidex:${multidexVersion}",
+
+            // Firebase Libraries
+            firebaseCore          : "com.google.firebase:firebase-core:${googleServicesVersion}",
+            firebaseMessaging     : "com.google.firebase:firebase-messaging:${googleServicesVersion}"
     ]
 
     presentationTestDependencies = [
