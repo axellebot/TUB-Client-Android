@@ -6,7 +6,6 @@ import android.support.multidex.MultiDexApplication;
 
 import com.squareup.leakcanary.LeakCanary;
 
-import fr.bourgmapper.tub.BuildConfig;
 import fr.bourgmapper.tub.presentation.internal.di.components.ApplicationComponent;
 import fr.bourgmapper.tub.presentation.internal.di.components.DaggerApplicationComponent;
 import fr.bourgmapper.tub.presentation.internal.di.modules.ApplicationModule;

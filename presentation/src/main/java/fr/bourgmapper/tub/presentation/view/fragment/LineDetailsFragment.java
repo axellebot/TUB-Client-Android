@@ -16,7 +16,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import fr.bourgmapper.tub.R;
+import fr.bourgmapper.tub.presentation.R;
 import fr.bourgmapper.tub.presentation.internal.di.HasComponent;
 import fr.bourgmapper.tub.presentation.internal.di.components.CoreFragmentComponent;
 import fr.bourgmapper.tub.presentation.internal.di.components.DaggerCoreFragmentComponent;

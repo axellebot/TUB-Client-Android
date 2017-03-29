@@ -9,7 +9,7 @@ import android.util.Log;
 
 import javax.inject.Inject;
 
-import fr.bourgmapper.tub.R;
+import fr.bourgmapper.tub.presentation.R;
 import fr.bourgmapper.tub.presentation.view.activity.MainActivity;
 import fr.bourgmapper.tub.presentation.view.composition.ConnectionDialogModule;
 import fr.bourgmapper.tub.presentation.view.composition.ConnectionDialogModuleImpl;

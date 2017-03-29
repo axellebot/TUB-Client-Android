@@ -5,7 +5,7 @@ import android.content.Context;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import butterknife.ButterKnife;
-import fr.bourgmapper.tub.R;
+import fr.bourgmapper.tub.presentation.R;
 
 public class ConnectionDialogModuleImpl implements ConnectionDialogModule {
 

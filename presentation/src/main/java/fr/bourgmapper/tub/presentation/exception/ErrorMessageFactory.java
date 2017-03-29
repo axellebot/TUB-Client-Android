@@ -2,7 +2,7 @@ package fr.bourgmapper.tub.presentation.exception;
 
 import android.content.Context;
 
-import fr.bourgmapper.tub.R;
+import fr.bourgmapper.tub.presentation.R;
 import fr.bourgmapper.tub.data.exception.LineNotFoundException;
 import fr.bourgmapper.tub.data.exception.NetworkConnectionException;
 import fr.bourgmapper.tub.data.exception.StopNotFoundException;

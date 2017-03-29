@@ -25,7 +25,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import fr.bourgmapper.tub.R;
+import fr.bourgmapper.tub.presentation.R;
 import fr.bourgmapper.tub.presentation.internal.di.components.DaggerUserActivityComponent;
 import fr.bourgmapper.tub.presentation.internal.di.components.UserActivityComponent;
 import fr.bourgmapper.tub.presentation.listener.MainNavigationListener;
