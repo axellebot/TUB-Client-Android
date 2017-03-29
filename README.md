@@ -1,12 +1,18 @@
-#Tub by BourgMapper
+# Tub by BourgMapper
 
 The purpose of this project is to create an application to navigate in Bourg-en-Bresse's public transportation
 
-##Clean architecture
+## Clean architecture
 
 The development is based on [Android-CleanArchitecture](https://github.com/android10/Android-CleanArchitecture)
 
-##License
+## Instructions
+### Secrets Data
+-  Add `secrets.xml` from `secret.xml.dist`
+-  Add `google-services.json` from Firebase
+
+
+## License
 
 ```
     Copyright 2016 Axel LE BOT
